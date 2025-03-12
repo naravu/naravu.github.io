@@ -1,68 +1,86 @@
-<html>
-<head><title>My</title>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Website</title>
 
     <style>
-    body {
-        margin: 0;
-        padding: 0;
-    }
-    .navbar {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        background-color: #008000;
-        padding: 10px;
-    }
-    .nav-links {
-        list-style-type: none;
-        margin: 0;
-        padding: 0;
-        display: flex;
-    }
-    .nav-links li {
-        margin: 0 15px;
-    }
-    .nav-links a {
-        color: white;
-        text-decoration: none;
-    }
-    .search-container {
-        display: flex;
-    }
-    .search-container input {
-        padding: 5px;
-        border: none;
-        border-radius: 3px;
-    }
-    .search-container button {
-        padding: 5px;
-        background-color: #555;
-        color: white;
-        border: none;
-        border-radius: 3px;
-        cursor: pointer;
-    }
-</style>
-    
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif; /* Added a default font */
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #008000;
+            padding: 10px 20px; /* Improved padding */
+        }
+
+        .nav-links {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+
+        .nav-links li {
+            margin: 0 15px;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold; /* Added emphasis to links */
+        }
+
+        .nav-links a:hover {
+            text-decoration: underline; /* Added hover effect for better UX */
+        }
+
+        .search-container {
+            display: flex;
+            align-items: center; /* Ensures alignment with input and button */
+        }
+
+        .search-container input {
+            padding: 5px 10px;
+            border: 1px solid #ddd; /* Added a border */
+            border-radius: 3px 0 0 3px; /* Rounded corners for input */
+        }
+
+        .search-container button {
+            padding: 5px 10px;
+            background-color: #555;
+            color: white;
+            border: none;
+            border-radius: 0 3px 3px 0; /* Matches input corners */
+            cursor: pointer;
+        }
+
+        .search-container button:hover {
+            background-color: #333; /* Added hover effect for button */
+        }
+    </style>
 </head>
 <body>
-<nav>
-    <div class="navbar">
-        <ul class="nav-links">
-            <li><a href="#home">Home</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#services">Services</a></li>
-            <li><a href="#contact">Contact</a></li>
-        </ul>
-        <div class="search-container">
-            <input type="text" placeholder="Search..." name="search">
-            <button type="submit">Go</button>
+    <nav>
+        <div class="navbar">
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <div class="search-container">
+                <input type="text" placeholder="Search..." name="search">
+                <button type="submit">Go</button>
+            </div>
         </div>
-    </div>
-</nav>
-
-    https://zzzcode.ai/html/code-generator
-
+    </nav>
+    https://zzzcode.ai/html/code-generator 
 </body>
-
 </html>
