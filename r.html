@@ -13,7 +13,7 @@
             padding: 20px;
         }
         .container {
-            max-width: 800px;
+            max-width: 1200px;
             margin: auto;
             background: #fff;
             padding: 20px;
@@ -25,15 +25,22 @@
             color: #007BFF;
         }
         .radio-station {
-            margin: 15px 0;
+            margin: 15px;
             padding: 10px;
             border: 1px solid #ddd;
             border-radius: 5px;
             background-color: #f9f9f9;
+            flex: 1 1 calc(33.333% - 30px); /* Three columns with space */
+            box-sizing: border-box; /* Include padding and border in width */
         }
-        audio {
+        .radio-station audio {
             width: 100%;
             margin-top: 5px;
+        }
+        .radio-station-container {
+            display: flex;
+            flex-wrap: wrap; /* Allow wrapping to the next line */
+            justify-content: space-between; /* Space between items */
         }
     </style>
 </head>
@@ -41,41 +48,43 @@
 
 <div class="container">
     <h1>Radio Stations</h1>
-    <div class="radio-station">
-        <strong>Ilayamaan</strong>
-        <audio src="https://southradios.net/play/ilayamaanradio" controls="true" crossorigin="anonymous"></audio>
-    </div>
-    <div class="radio-station">
-        <strong>Puradsi</strong>
-        <audio src="https://southradios.net/play/puradsifm" controls="true" crossorigin="anonymous"></audio>
-    </div>
-    <div class="radio-station">
-        <strong>Mohan</strong>
-        <audio src="https://southradios.net/play/mohanradio" controls="true" crossorigin="anonymous"></audio>
-    </div>
-    <div class="radio-station">
-        <strong>SPB Radio</strong>
-        <audio src="https://southradios.net/play/spbradio" controls="true" crossorigin="anonymous"></audio>
-    </div>
-    <div class="radio-station">
-        <strong>D.Imman Radio</strong>
-        <audio src="https://southradios.net/play/immanradio" controls="true" crossorigin="anonymous"></audio>
-    </div>
-    <div class="radio-station">
-        <strong>Puthupaadal Radio</strong>
-        <audio src="https://southradios.net/play/puthupaadalradio" controls="true" crossorigin="anonymous"></audio>
-    </div>
-    <div class="radio-station">
-        <strong>ARR Radio</strong>
-        <audio src="https://southradios.net/play/arrahmanradio" controls="true" crossorigin="anonymous"></audio>
-    </div>
-    <div class="radio-station">
-        <strong>KJ Yesudas Radio</strong>
-        <audio src="https://southradios.net/play/kjyesudasradio" controls="true" crossorigin="anonymous"></audio>
-    </div>
-    <div class="radio-station">
-        <strong>Harris Jayaraj Radio</strong>
-        <audio src="https://southradios.net/play/harrisradio" controls="true" crossorigin="anonymous"></audio>
+    <div class="radio-station-container">
+        <div class="radio-station">
+            <strong>Ilayamaan</strong>
+            <audio src="https://southradios.net/play/ilayamaanradio" controls="true" crossorigin="anonymous"></audio>
+        </div>
+        <div class="radio-station">
+            <strong>Puradsi</strong>
+            <audio src="https://southradios.net/play/puradsifm" controls="true" crossorigin="anonymous"></audio>
+        </div>
+        <div class="radio-station">
+            <strong>Mohan</strong>
+            <audio src="https://southradios.net/play/mohanradio" controls="true" crossorigin="anonymous"></audio>
+        </div>
+        <div class="radio-station">
+            <strong>SPB Radio</strong>
+            <audio src="https://southradios.net/play/spbradio" controls="true" crossorigin="anonymous"></audio>
+        </div>
+        <div class="radio-station">
+            <strong>D.Imman Radio</strong>
+            <audio src="https://southradios.net/play/immanradio" controls="true" crossorigin="anonymous"></audio>
+        </div>
+        <div class="radio-station">
+            <strong>Puthupaadal Radio</strong>
+            <audio src="https://southradios.net/play/puthupaadalradio" controls="true" crossorigin="anonymous"></audio>
+        </div>
+        <div class="radio-station">
+            <strong>ARR Radio</strong>
+            <audio src="https://southradios.net/play/arrahmanradio" controls="true" crossorigin="anonymous"></audio>
+        </div>
+        <div class="radio-station">
+            <strong>KJ Yesudas Radio</strong>
+            <audio src="https://southradios.net/play/kjyesudasradio" controls="true" crossorigin="anonymous"></audio>
+        </div>
+        <div class="radio-station">
+            <strong>Harris Jayaraj Radio</strong>
+            <audio src="https://southradios.net/play/harrisradio" controls="true" crossorigin="anonymous"></audio>
+        </div>
     </div>
 </div>
 
