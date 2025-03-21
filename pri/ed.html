@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Simple HTML Editor</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    /* Basic Reset */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: sans-serif;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    .container {
+      display: flex;
+      flex: 1;
+    }
+    /* Editor Styling */
+    #editor {
+      width: 50%;
+      height: 100%;
+      padding: 10px;
+      font-family: monospace;
+      font-size: 14px;
+      border: none;
+      border-right: 1px solid #ccc;
+      outline: none;
+      resize: none;
+    }
+    /* Preview Styling */
+    #preview {
+      width: 50%;
+      height: 100%;
+      border: none;
+    }
+    header {
+      background: #0275d8;
+      color: #fff;
+      padding: 10px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+   <div class="container">
+    <textarea id="editor"></textarea>
+    <iframe id="preview" sandbox="allow-same-origin"></iframe>
+  </div>
+
+  <script>
+    const editor = document.getElementById('editor');
+    const preview = document.getElementById('preview');
+
+    // Default content for the editor.
+    const defaultContent = `<!DOCTYPE html>
+<html>
+  <head>
+    <title>Live Preview</title>
+    <style>
+      body { font-family: sans-serif; padding: 20px; }
+      h1 { color: #0275d8; }
+      p { font-size: 16px; }
+    </style>
+  </head>
+  <body>
+    <h1>Hello World</h1>
+    <p>This is a live preview panel. Start editing the HTML on the left!</p>
+  </body>
+</html>`;
+
+    // Load the default content in the editor and preview.
+    editor.value = defaultContent;
+    preview.srcdoc = defaultContent;
+
+    // Refresh the preview every time the content in the editor changes.
+    editor.addEventListener('input', () => {
+      preview.srcdoc = editor.value;
+    });
+  </script>
+</body>
+</html>
