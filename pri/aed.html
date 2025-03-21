@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced HTML Code Editor</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 0;
+            padding: 20px;
+        }
+        #editor {
+            width: 100%;
+            height: 250px;
+            border: 1px solid #ccc;
+            padding: 0px;
+            font-family: monospace;
+            resize: none;
+        }
+        #preview {
+            width: 100%;
+            height: 300px;
+            border: 1px solid #ccc;
+            margin-top: 20px;
+            padding: 10px;
+            overflow: auto;
+        }
+        button {
+            margin: 5px;
+        }
+    </style>
+</head>
+<body>
+    <textarea id="editor" placeholder="Write your HTML code here..."></textarea>
+    <div>
+        <button onclick="openFile()">Open</button>
+        <button onclick="saveFile()">Save</button>
+        <button onclick="resetEditor()">Clear</button>
+        <button onclick="beautifyCode()">Beautify</button>
+    </div>
+    <iframe id="preview"></iframe>
+
+    <script>
+        const editor = document.getElementById('editor');
+        const preview = document.getElementById('preview');
+
+        editor.addEventListener('input', updatePreview);
+
+        function updatePreview() {
+            const content = editor.value;
+            preview.srcdoc = content;
+        }
+
+        function openFile() {
+            const input = document.createElement('input');
+            input.type = 'file';
+            input.accept = '.html';
+            input.onchange = e => {
+                const file = e.target.files[0];
+                const reader = new FileReader();
+                reader.onload = function(event) {
+                    editor.value = event.target.result;
+                    updatePreview();
+                };
+                reader.onerror = function() {
+                    alert('Error reading file');
+                };
+                reader.readAsText(file);
+            };
+            input.click();
+        }
+
+        function saveFile() {
+            const blob = new Blob([editor.value], { type: 'text/html' });
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(blob);
+            link.download = 'code.html';
+            link.click();
+        }
+
+        function resetEditor() {
+            if (confirm('Are you sure you want to reset the editor?')) {
+                editor.value = '';
+                updatePreview();
+            }
+        }
+
+        function beautifyCode() {
+            try {
+                const beautified = editor.value.replace(/>\s+</g, '>\n<').trim();
+                editor.value = beautified;
+                updatePreview();
+            } catch (error) {
+                alert('Error beautifying code: ' + error.message);
+            }
+        }
+    </script>
+
+</body>
+</html>
