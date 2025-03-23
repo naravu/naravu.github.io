@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Richy</title>
+  <style>
+    /* Reset margins, paddings and set box-sizing */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    /* Full-screen layout for html, body */
+    html, body {
+      height: 100%;
+    }
+    /* Use a column flex layout for the page */
+    body {
+      display: flex;
+      flex-direction: column;
+      font-family: Arial, sans-serif;
+      background-color: #f5f5f5;
+    }
+    /* Toolbar styling */
+    .toolbar {
+      background-color: #333;
+      padding: 0px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: left;
+      align-items: left;
+    }
+    .toolbar button,
+    .toolbar select,
+    .toolbar input[type="color"] {
+      margin: 3px;
+      padding: 8px 12px;
+      border: none;
+      border-radius: 4px;
+      font-size: 14px;
+      cursor: pointer;
+      background: linear-gradient(45deg, #3498db, #9b59b6);
+      color: #fff;
+      transition: background 0.3s ease;
+    }
+    .toolbar button:hover,
+    .toolbar select:hover,
+    .toolbar input[type="color"]:hover {
+      background: linear-gradient(45deg, #9b59b6, #3498db);
+    }
+    .toolbar label {
+      color: #fff;
+      margin: 5px;
+      font-size: 14px;
+    }
+    /* The editor area takes the remaining space */
+    .editor {
+      flex: 1;
+      padding: 15px;
+      background-color: #fff;
+      overflow-y: auto;
+      border-top: 1px solid #ccc;
+    }
+    /* Remove default outline from contenteditable */
+    .editor[contenteditable="true"]:focus {
+      outline: none;
+    }
+  </style>
+</head>
+<body>
+  <!-- Toolbar with advanced formatting options and tooltips -->
+  <div class="toolbar">
+    <!-- Basic formatting -->
+    <button onclick="execCmd('bold')" title="Bold (Ctrl+B)"><b>B</b></button>
+    <button onclick="execCmd('italic')" title="Italic (Ctrl+I)"><i>I</i></button>
+    <button onclick="execCmd('underline')" title="Underline (Ctrl+U)"><u>U</u></button>
+    <button onclick="execCmd('strikeThrough')" title="Strikethrough"><s>S</s></button>
+    <button onclick="execCmd('insertOrderedList')" title="Ordered List">OL</button>
+    <button onclick="execCmd('insertUnorderedList')" title="Unordered List">UL</button>
+    <button onclick="execCmd('justifyLeft')" title="Align Left">Left</button>
+    <button onclick="execCmd('justifyCenter')" title="Align Center">Center</button>
+    <button onclick="execCmd('justifyRight')" title="Align Right">Right</button>
+    <button onclick="execCmd('undo')" title="Undo (Ctrl+Z)">Undo</button>
+    <button onclick="execCmd('redo')" title="Redo (Ctrl+Y)">Redo</button>
+    <button onclick="execCmd('removeFormat')" title="Clear Formatting">Clear</button>
+    
+    <!-- Advanced options -->
+    
+    <input type="color" id="textColor" onchange="setTextColor(this.value)" title="Set text color">
+    
+    
+    <input type="color" id="bgColor" onchange="setBgColor(this.value)" title="Set background highlight color">
+    
+    
+    <select id="fontFamily" onchange="setFontFamily(this.value)" title="Choose font family">
+      <option value="Arial" selected>Arial</option>
+      <option value="Times New Roman">Times New Roman</option>
+      <option value="Courier New">Courier New</option>
+      <option value="Georgia">Georgia</option>
+    </select>
+    
+    
+    <select id="fontSize" onchange="setFontSize(this.value)" title="Change font size">
+      <!-- execCommand fontSize accepts 1-7; these represent relative sizes -->
+      <option value="3">Small</option>
+      <option value="4" selected>Normal</option>
+      <option value="5">Large</option>
+      <option value="6">Extra Large</option>
+    </select>
+    
+    <!-- Save as DOC button -->
+    <button onclick="saveAsDoc()" title="Save document as DOC file">Save</button>
+  </div>
+  
+  <!-- Rich Text Editor Area -->
+  <div class="editor" contenteditable="true">
+    <p>Welcome to the Advanced Rich Text Editor. Start typing here...</p>
+  </div>
+  
+  <script>
+    // Executes a document command using document.execCommand.
+    function execCmd(command) {
+      document.execCommand(command, false, null);
+    }
+    
+    // Set the text (foreground) color.
+    function setTextColor(color) {
+      document.execCommand('foreColor', false, color);
+    }
+    
+    // Set the background (highlight) color; fallback to "backColor" if needed.
+    function setBgColor(color) {
+      if (!document.execCommand('hiliteColor', false, color)) {
+        document.execCommand('backColor', false, color);
+      }
+    }
+    
+    // Set the font family.
+    function setFontFamily(font) {
+      document.execCommand('fontName', false, font);
+    }
+    
+    // Set the font size (value between 1-7).
+    function setFontSize(size) {
+      document.execCommand('fontSize', false, size);
+    }
+    
+    // Save the editor content as a DOC file.
+    function saveAsDoc() {
+      var editorContent = document.querySelector('.editor').innerHTML;
+      // Minimal Word-compatible HTML wrapper
+      var header = "<html xmlns:o='urn:schemas-microsoft-com:office:office' " + 
+                   "xmlns:w='urn:schemas-microsoft-com:office:word' " +
+                   "xmlns='http://www.w3.org/TR/REC-html40'>" +
+                   "<head><meta charset='utf-8'><title>Document</title></head><body>";
+      var footer = "</body></html>";
+      var sourceHTML = header + editorContent + footer;
+      
+      // Create a Blob with the proper MIME type.
+      var blob = new Blob(['\ufeff', sourceHTML], { type: 'application/msword' });
+      
+      // Create a URL for the Blob and trigger a download.
+      var url = URL.createObjectURL(blob);
+      var link = document.createElement('a');
+      link.href = url;
+      link.download = 'document.doc';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
+  </script>
+</body>
+</html>
