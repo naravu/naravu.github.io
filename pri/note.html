@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Advanced Notepad</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    .menu-bar {
+      display: flex;
+      background-color: #333;
+      color: white;
+      padding: 10px;
+    }
+
+    .menu button {
+      margin: 0 5px;
+      padding: 10px;
+      cursor: pointer;
+      background-color: #555;
+      border: none;
+      color: white;
+    }
+
+    .menu button:hover {
+      background-color: #777;
+    }
+
+    textarea {
+      width: 100%;
+      height: calc(100vh - 50px);
+      resize: none;
+      font-size: 16px;
+      padding: 10px;
+      border: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="menu-bar">
+    <div class="menu">
+      <button onclick="newFile()">New</button>
+      <button onclick="saveFile()">Save</button>
+      <button onclick="openFile()">Open</button>
+    </div>
+    <div class="menu">
+      <button onclick="changeFontSize('increase')">Increase Font</button>
+      <button onclick="changeFontSize('decrease')">Decrease Font</button>
+    </div>
+    <div class="menu">
+      <button onclick="changeTheme('light')">Light Theme</button>
+      <button onclick="changeTheme('dark')">Dark Theme</button>
+    </div>
+  </div>
+  <textarea id="editor"></textarea>
+  <script>
+    // File operations
+    function newFile() {
+      document.getElementById('editor').value = ''; // Clear the text area
+    }
+
+    function saveFile() {
+      const content = document.getElementById('editor').value;
+      const blob = new Blob([content], { type: 'text/plain' });
+      const link = document.createElement('a');
+      link.href = URL.createObjectURL(blob);
+      link.download = 'notepad.txt';
+      link.click();
+    }
+
+    function openFile() {
+      const input = document.createElement('input');
+      input.type = 'file';
+      input.accept = '.txt';
+      input.onchange = (event) => {
+        const file = event.target.files[0];
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          document.getElementById('editor').value = e.target.result;
+        };
+        reader.readAsText(file);
+      };
+      input.click();
+    }
+
+    // Font size operations
+    function changeFontSize(action) {
+      const editor = document.getElementById('editor');
+      const currentSize = parseFloat(window.getComputedStyle(editor).fontSize);
+      if (action === 'increase') {
+        editor.style.fontSize = `${currentSize + 2}px`;
+      } else if (action === 'decrease') {
+        editor.style.fontSize = `${currentSize - 2}px`;
+      }
+    }
+
+    // Theme operations
+    function changeTheme(theme) {
+      if (theme === 'light') {
+        document.body.style.backgroundColor = '#fff';
+        document.body.style.color = '#000';
+      } else if (theme === 'dark') {
+        document.body.style.backgroundColor = '#333';
+        document.body.style.color = '#fff';
+      }
+    }
+  </script>
+</body>
+</html>
