@@ -43,14 +43,14 @@
 <body>
   <div class="menu-bar">
     <div class="menu">
-      <button onclick="newFile()">New</button>
-      <button onclick="saveFile()">💾</button>
-      <button onclick="openFile()">📂</button>
-      <button onclick="saveAsPDF()">Save as PDF</button>
+      <button onclick="newFile()" title="Open new file">New</button>
+      <button onclick="saveFile()" title="Save the file">💾</button>
+      <button onclick="openFile()" title="Open new file">📂</button>
+      <button onclick="saveAsPDF()" title="Export as a PDF file">Save as PDF</button>
     </div>
     <div class="menu">
-      <button onclick="changeFontSize('increase')">++ Font</button>
-      <button onclick="changeFontSize('decrease')">-- Font</button>
+      <button onclick="changeFontSize('increase')" title="Increase the fontsize">++</button>
+      <button onclick="changeFontSize('decrease')" title="Decrease the fontsize">--</button>
     </div>
     
   </div>
