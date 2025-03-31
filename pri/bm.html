@@ -1,18 +1,99 @@
-
 <html>
     <head>
         <title>Noorkuri</title>
         <base target="_blank">
+        <style>
+            #searchBox {
+                margin-bottom: 10px;
+                padding: 5px;
+                width: 30%;
+                font-size: 16px;
+            }
+            #countLabel {
+                margin-left: 10px;
+                font-size: 10px;
+                font-weight: bold;
+            }
+            table {
+                width: 100%;
+                border-collapse: collapse;
+            }
+            th, td {
+                border: 1px solid #ddd;
+                padding: 8px;
+                text-align: left;
+                cursor: pointer;
+            }
+            th {
+                background-color: #FFD700;
+            }
+        </style>
+        <script>
+            function filterTable() {
+                const input = document.getElementById('searchBox');
+                const filter = input.value.toLowerCase();
+                const table = document.getElementById('dataTable');
+                const rows = table.getElementsByTagName('tr');
+                let matchCount = 0;
+
+                for (let i = 1; i < rows.length; i++) {
+                    const cells = rows[i].getElementsByTagName('td');
+                    let match = false;
+
+                    for (let j = 0; j < cells.length; j++) {
+                        const cell = cells[j];
+                        if (cell && cell.textContent.toLowerCase().includes(filter)) {
+                            match = true;
+                            break;
+                        }
+                    }
+                    rows[i].style.display = match ? '' : 'none';
+                    if (match) matchCount++;
+                }
+
+                // Update the count label
+                document.getElementById('countLabel').textContent = `Filtered Entries: ${matchCount}`;
+            }
+
+            function sortTable(columnIndex) {
+                const table = document.getElementById('dataTable');
+                const rows = Array.from(table.rows).slice(1);
+                const isAscending = table.getAttribute('data-sort-order') !== 'asc';
+                const direction = isAscending ? 1 : -1;
+
+                rows.sort((a, b) => {
+                    const cellA = a.cells[columnIndex].textContent.trim().toLowerCase();
+                    const cellB = b.cells[columnIndex].textContent.trim().toLowerCase();
+                    
+                    if (cellA < cellB) return -1 * direction;
+                    if (cellA > cellB) return 1 * direction;
+                    return 0;
+                });
+
+                rows.forEach(row => table.appendChild(row));
+                table.setAttribute('data-sort-order', isAscending ? 'asc' : 'desc');
+            }
+        </script>
     </head>
     <body>
-                
-        <table border=0 cellpadding=0 cellspacing=0 width=100% align=left>
-            <tr align=left bgcolor="#FFD700"><th>URL</th><th>Description</th><th>Tag</th></tr>
-            <tr><td><a href=https://google.com>Google</a></td><td>Google</td><td>Search Engine</td></tr>
-            <tr><td><a href=https://uiverse.io/elements>Uiverse</a></td><td>Uiverse</td><td>CSS Templates free code</td></tr>
-            
-            
-            </table>
+       <input type="text" id="searchBox" onkeyup="filterTable()" placeholder="Search...">
+        <span id="countLabel">Count: 0</span>
+        <table id="dataTable" data-sort-order="asc">
+            <tr>
+                <th onclick="sortTable(0)">URL</th>
+                <th onclick="sortTable(1)">Description</th>
+                <th onclick="sortTable(2)">Tag</th>
+            </tr>
+            <tr>
+                <td><a href="https://google.com">Google</a></td>
+                <td>Google</td>
+                <td>Search Engine</td>
+            </tr>
+            <tr>
+                <td><a href="https://uiverse.io/elements">Uiverse</a></td>
+                <td>Uiverse</td>
+                <td>CSS Templates free code</td>
+            </tr>
+        </table>
     </body>
 </html>
-
