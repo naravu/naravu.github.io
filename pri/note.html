@@ -46,6 +46,7 @@
       <button onclick="newFile()">New</button>
       <button onclick="saveFile()">Save</button>
       <button onclick="openFile()">Open</button>
+      <button onclick="saveAsPDF()">Save as PDF</button>
     </div>
     <div class="menu">
       <button onclick="changeFontSize('increase')">Increase Font</button>
@@ -107,6 +108,15 @@
         document.body.style.backgroundColor = '#333';
         document.body.style.color = '#fff';
       }
+    }
+
+    // Save the content as PDF
+    function saveAsPDF() {
+      const content = document.getElementById('editor').value;
+      const printWindow = window.open('', '', 'height=600,width=800');
+      printWindow.document.write('<pre>' + content + '</pre>');
+      printWindow.document.close();
+      printWindow.print();
     }
   </script>
 </body>
