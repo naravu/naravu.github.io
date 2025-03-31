@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Urai</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
   <style>
     body {
       margin: 0;
@@ -18,16 +19,24 @@
     }
 
     .menu button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
       margin: 0 5px;
       padding: 10px;
       cursor: pointer;
       background-color: #555;
       border: none;
       color: white;
+      font-size: 14px;
     }
 
     .menu button:hover {
       background-color: #777;
+    }
+
+    .menu button i {
+      margin-right: 5px;
     }
 
     textarea {
@@ -43,18 +52,14 @@
 <body>
   <div class="menu-bar">
     <div class="menu">
-      <button onclick="newFile()">New</button>
-      <button onclick="saveFile()">Save</button>
-      <button onclick="openFile()">Open</button>
-      <button onclick="saveAsPDF()">Save as PDF</button>
+      <button onclick="newFile()" title="New File"><i class="fas fa-file"></i></button>
+      <button onclick="saveFile()" title="Save File"><i class="fas fa-save"></i></button>
+      <button onclick="openFile()" title="Open File"><i class="fas fa-folder-open"></i></button>
+      <button onclick="saveAsPDF()" title="Save as PDF"><i class="fas fa-file-pdf"></i></button>
     </div>
     <div class="menu">
-      <button onclick="changeFontSize('increase')">Increase Font</button>
-      <button onclick="changeFontSize('decrease')">Decrease Font</button>
-    </div>
-    <div class="menu">
-      <button onclick="changeTheme('light')">Light Theme</button>
-      <button onclick="changeTheme('dark')">Dark Theme</button>
+      <button onclick="changeFontSize('increase')" title="Increase Font Size"><i class="fas fa-plus"></i></button>
+      <button onclick="changeFontSize('decrease')" title="Decrease Font Size"><i class="fas fa-minus"></i></button>
     </div>
   </div>
   <textarea id="editor"></textarea>
@@ -96,17 +101,6 @@
         editor.style.fontSize = `${currentSize + 2}px`;
       } else if (action === 'decrease') {
         editor.style.fontSize = `${currentSize - 2}px`;
-      }
-    }
-
-    // Theme operations
-    function changeTheme(theme) {
-      if (theme === 'light') {
-        document.body.style.backgroundColor = '#fff';
-        document.body.style.color = '#000';
-      } else if (theme === 'dark') {
-        document.body.style.backgroundColor = '#333';
-        document.body.style.color = '#fff';
       }
     }
 
