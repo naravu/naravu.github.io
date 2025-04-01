@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thadam</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #1e1e2f;
+            color: #ffffff;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            background: #2a2a3c;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #ffcc00;
+        }
+        #info p {
+            font-size: 18px;
+            margin: 10px 0;
+            padding: 10px;
+            background: #3a3a4f;
+            border-radius: 5px;
+        }
+        strong {
+            color: #ff6600;
+        }
+        span {
+            color: #00ff99;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+
+        <div id="info">
+            <p><strong>IP Address:</strong> <span id="ip"></span></p>
+            <p><strong>Location:</strong> <span id="location"></span></p>
+            <p><strong>Last Document Update:</strong> <span id="lastUpdate"></span></p>
+            <p><strong>Browser Details:</strong> <span id="browser"></span></p>
+            <p><strong>App Name:</strong> <span id="appName"></span></p>
+            <p><strong>App Version:</strong> <span id="appVersion"></span></p>
+            <p><strong>User Agent:</strong> <span id="userAgent"></span></p>
+            <p><strong>Platform:</strong> <span id="platform"></span></p>
+            <p><strong>Language:</strong> <span id="language"></span></p>
+            <p><strong>Cookies Enabled:</strong> <span id="cookieEnabled"></span></p>
+            <p><strong>Online Status:</strong> <span id="onLine"></span></p>
+        </div>
+    </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", async () => {
+            // Fetch IP address and location using an API
+            try {
+                const response = await fetch("https://ipapi.co/json/");
+                const data = await response.json();
+                document.getElementById("ip").textContent = data.ip;
+                document.getElementById("location").textContent = `${data.city}, ${data.country}`;
+            } catch (error) {
+                document.getElementById("ip").textContent = "Could not fetch IP";
+                document.getElementById("location").textContent = "Could not fetch location";
+            }
+
+            // Get last document update
+            document.getElementById("lastUpdate").textContent = document.lastModified;
+
+            // Get browser details
+            document.getElementById("browser").textContent = `${navigator.appName} - ${navigator.userAgent}`;
+
+            // Additional browser details
+            document.getElementById("appName").textContent = navigator.appName;
+            document.getElementById("appVersion").textContent = navigator.appVersion;
+            document.getElementById("userAgent").textContent = navigator.userAgent;
+            document.getElementById("platform").textContent = navigator.platform;
+            document.getElementById("language").textContent = navigator.language;
+            document.getElementById("cookieEnabled").textContent = navigator.cookieEnabled;
+            document.getElementById("onLine").textContent = navigator.onLine;
+        });
+    </script>
+</body>
+</html>
