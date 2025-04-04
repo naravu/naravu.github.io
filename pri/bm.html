@@ -119,6 +119,34 @@
                 body.classList.toggle('dark');
                 body.classList.toggle('light');
             }
+
+            function exportToExcel() {
+            var table = document.getElementById("dataTable");
+            var rows = table.rows;
+            var excelContent = "<table>";
+
+            for (var i = 0; i < rows.length; i++) {
+                excelContent += "<tr>";
+                var cells = rows[i].cells;
+                for (var j = 0; j < cells.length; j++) {
+                    excelContent += "<td>" + cells[j].innerText + "</td>";
+                }
+                excelContent += "</tr>";
+            }
+
+            excelContent += "</table>";
+
+            var excelBlob = new Blob(["<html><head><meta charset='UTF-8'></head><body>" + excelContent + "</body></html>"], 
+                                     { type: "application/vnd.ms-excel" });
+
+            var link = document.createElement("a");
+            link.href = URL.createObjectURL(excelBlob);
+            link.download = "table_data.xls";
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+
         </script>
     </head>
     <body class="dark">
@@ -127,6 +155,7 @@
         <span id="countLabel">Count: 0</span>
 <button id="themeToggle" onclick="toggleTheme()">🌙</button>
 <a onclick="this.href='data:text/html;charset=UTF-8,'+encodeURIComponent(document.documentElement.outerHTML)" href="#" download="linuxtoolbox.americas.wwt.corp-report.xls">Download</a>
+<a onclick="exportToExcel()" href='#'>Download Table</a>
         <table id="dataTable" data-sort-order="asc">
             <tr>
                 <th onclick="sortTable(0)">URL</th>
