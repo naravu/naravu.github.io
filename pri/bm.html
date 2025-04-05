@@ -148,6 +148,33 @@
             document.body.removeChild(link);
         }
 
+              // Function to download table as CSV
+              document.getElementById("downloadCsvLink").addEventListener("click", function (e) {
+            e.preventDefault(); // Prevent default hyperlink action
+            const table = document.getElementById("dataTable");
+            let csvContent = "";
+            for (let i = 0; i < table.rows.length; i++) {
+                const row = table.rows[i];
+                const rowData = [];
+                for (let j = 0; j < row.cells.length; j++) {
+                    rowData.push(row.cells[j].innerText);
+                }
+                csvContent += rowData.join(",") + "\n";
+            }
+            
+            const blob = new Blob([csvContent], { type: "text/csv" });
+            const link = document.createElement("a");
+            link.href = URL.createObjectURL(blob);
+            link.download = "table.csv";
+            link.click();
+        });
+
+        // Function to download table as PDF
+        document.getElementById("downloadPdfLink").addEventListener("click", function (e) {
+            e.preventDefault(); // Prevent default hyperlink action
+            window.print();
+        });
+
         </script>
     </head>
     <body class="dark">
@@ -157,6 +184,8 @@
 <button id="themeToggle" onclick="toggleTheme()">🌙</button>
 <a onclick="this.href='data:text/html;charset=UTF-8,'+encodeURIComponent(document.documentElement.outerHTML)" href="#" download="linuxtoolbox.americas.wwt.corp-report.xls" title="Download full webpage as xls"><i style="font-size:20px" class="fa">&#xf019;</i></a>
 <a onclick="exportToExcel()" href='#' title="Download the bookmarks table">Download All</a>
+<a href="#" id="downloadCsvLink">CSV</a><a href="#" id="downloadPdfLink">PDF</a>
+
         <table id="dataTable" data-sort-order="asc">
             <tr>
                 <th onclick="sortTable(0)">URL</th>
