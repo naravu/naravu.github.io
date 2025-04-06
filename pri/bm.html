@@ -207,16 +207,22 @@
             const headers = [];
             const jsonData = [];
 
-            // Get headers from the table's thead
-            table.querySelectorAll("thead th").forEach(header => {
+            // Extract headers from the table's <tr> (first row)
+            table.querySelectorAll("tr:first-child th").forEach(header => {
                 headers.push(header.textContent.trim());
             });
 
-            // Get all rows from the table's tbody
-            table.querySelectorAll("tbody tr").forEach(row => {
+            // Extract rows and cells, including <a> href and text
+            table.querySelectorAll("tr:not(:first-child)").forEach(row => {
                 const rowData = {};
                 row.querySelectorAll("td").forEach((cell, index) => {
-                    rowData[headers[index]] = cell.textContent.trim();
+                    const link = cell.querySelector("a");
+                    // If cell contains a link, add both href and text
+                    if (link) {
+                        rowData[headers[index]] = { text: link.textContent.trim(), href: link.href };
+                    } else {
+                        rowData[headers[index]] = cell.textContent.trim();
+                    }
                 });
                 jsonData.push(rowData);
             });
@@ -235,9 +241,8 @@
         }
 
         document.getElementById("downloadJson").addEventListener("click", () => {
-            downloadTableAsJson("dataTable", "full-table.json"); // Customize filename as needed
+            downloadTableAsJson("dataTable", "table-data.json"); // Replace with your table ID and desired file name
         });
-
     </script>
 
         <table id="dataTable" data-sort-order="asc">
