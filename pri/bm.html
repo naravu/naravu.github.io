@@ -201,6 +201,44 @@
 <!-- a id="downloadJson" style="cursor:pointer;" title="Download JSON bookmarks"><u>JSON</u></a -->
 <button id="downloadJson">Download JSON</button>
 
+<script>
+    function downloadTableAsJson(tableId, filename) {
+            const table = document.getElementById(tableId);
+            const headers = [];
+            const jsonData = [];
+
+            // Get headers from the table's thead
+            table.querySelectorAll("thead th").forEach(header => {
+                headers.push(header.textContent.trim());
+            });
+
+            // Get all rows from the table's tbody
+            table.querySelectorAll("tbody tr").forEach(row => {
+                const rowData = {};
+                row.querySelectorAll("td").forEach((cell, index) => {
+                    rowData[headers[index]] = cell.textContent.trim();
+                });
+                jsonData.push(rowData);
+            });
+
+            // Convert JSON data to file and trigger download
+            const jsonString = JSON.stringify(jsonData, null, 2); // Pretty-printed JSON
+            const blob = new Blob([jsonString], { type: "application/json" });
+            const url = URL.createObjectURL(blob);
+
+            const a = document.createElement("a");
+            a.href = url;
+            a.download = filename;
+            a.click();
+
+            URL.revokeObjectURL(url); // Release URL object
+        }
+
+        document.getElementById("downloadJson").addEventListener("click", () => {
+            downloadTableAsJson("dataTable", "full-table.json"); // Customize filename as needed
+        });
+
+    </script>
 
         <table id="dataTable" data-sort-order="asc">
             <tr>
