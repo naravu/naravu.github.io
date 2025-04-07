@@ -251,30 +251,7 @@
         });
     </script>
 
-    <script>
-  async function isURLLive(url) {
-      try {
-        const response = await fetch(url, { method: 'GET', mode: 'no-cors' });
-        return response.ok || response.type === 'opaque'; // Opaque type for cross-origin URLs
-      } catch (error) {
-        return false;
-      }
-    }
-
-    async function checkURLs() {
-      const cells = document.querySelectorAll('td[data-url]');
-      for (const cell of cells) {
-        const url = cell.getAttribute('data-url');
-        const isLive = await isURLLive(url);
-        cell.textContent = isLive ? 'Live' : 'Not Live';
-        cell.classList.add(isLive ? 'live' : 'not-live');
-      }
-    }
-
-    checkURLs(); // Run the function on page load
-</script>
-    
-        <table id="dataTable" data-sort-order="asc">
+    <table id="dataTable" data-sort-order="asc">
             <tr>
                 <th onclick="sortTable(0)">URL</th>
                 <th onclick="sortTable(1)">Description</th>
@@ -306,6 +283,29 @@
                 <td data-url="https://www.modulify.ai/">Checking...</td>
             </tr>
         </table>
+
+<script>
+  async function isURLLive(url) {
+      try {
+        const response = await fetch(url, { method: 'GET', mode: 'no-cors' });
+        return response.ok || response.type === 'opaque'; // Opaque type for cross-origin URLs
+      } catch (error) {
+        return false;
+      }
+    }
+
+    async function checkURLs() {
+      const cells = document.querySelectorAll('td[data-url]');
+      for (const cell of cells) {
+        const url = cell.getAttribute('data-url');
+        const isLive = await isURLLive(url);
+        cell.textContent = isLive ? 'Live' : 'Not Live';
+        cell.classList.add(isLive ? 'live' : 'not-live');
+      }
+    }
+
+    checkURLs(); // Run the function on page load
+</script>
 
     </body>
 </html>
