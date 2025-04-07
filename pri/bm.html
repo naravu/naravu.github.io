@@ -81,6 +81,12 @@
                 top: 0;
                 left: 0;
             }
+    .live {
+      background-color: lightgreen;
+    }
+    .not-live {
+      background-color: lightcoral;
+    }
         </style>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <script>
@@ -245,6 +251,28 @@
         });
     </script>
 
+    <script>
+  async function isURLLive(url) {
+      try {
+        const response = await fetch(url, { method: 'GET', mode: 'no-cors' });
+        return response.ok || response.type === 'opaque'; // Opaque type for cross-origin URLs
+      } catch (error) {
+        return false;
+      }
+    }
+
+    async function checkURLs() {
+      const cells = document.querySelectorAll('td[data-url]');
+      for (const cell of cells) {
+        const url = cell.getAttribute('data-url');
+        const isLive = await isURLLive(url);
+        cell.textContent = isLive ? 'Live' : 'Not Live';
+        cell.classList.add(isLive ? 'live' : 'not-live');
+      }
+    }
+
+    checkURLs(); // Run the function on page load
+</script>
     
         <table id="dataTable" data-sort-order="asc">
             <tr>
@@ -278,5 +306,6 @@
                 <td data-url="https://www.modulify.ai/">Checking...</td>
             </tr>
         </table>
+
     </body>
 </html>
