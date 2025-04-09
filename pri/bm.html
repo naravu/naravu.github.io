@@ -210,7 +210,6 @@
         <b>Noorkuri</b>
         <input type="text" id="searchBox" onkeyup="filterTable()" placeholder="Search...">
         <span id="countLabel">Count: 0</span>
-<a id="themeToggle" style="cursor:pointer;" onclick="toggleTheme()">🌙</a>
 <a onclick="this.href='data:text/html;charset=UTF-8,'+encodeURIComponent(document.documentElement.outerHTML)" style="cursor:pointer;" download="Noorkuri.xls" title="Download full webpage as xls"><u>Full</u></a>
 <a onclick="exportToExcel()" style="cursor:pointer;" title="Download Excel bookmarks"><u>XLS</u></a>
 <a onclick="downloadCsv()" style="cursor:pointer;" title="Download CSV bookmarks"><u>CSV</u></a>
@@ -218,6 +217,7 @@
 <a id="downloadJson" style="cursor:pointer;" title="Download JSON bookmarks"><u>JSON</u></a>
 <a id="exportLink" style="cursor:pointer;" title="Download Doc bookmarks"><u>DOC</u></a>
 
+<a id="themeToggle" style="cursor:pointer;" onclick="toggleTheme()" title="Toggle theme" >🌙</a>
 <script>
     function downloadTableAsJson(tableId, filename) {
             const table = document.getElementById(tableId);
