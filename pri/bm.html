@@ -215,6 +215,7 @@
 <a onclick="downloadCsv()" style="cursor:pointer;" title="Download CSV bookmarks"><u>CSV</u></a>
 <a onclick="downloadPdf()" style="cursor:pointer;" title="Download PDF bookmarks"><u>PDF</u></a>
 <a id="downloadJson" style="cursor:pointer;" title="Download JSON bookmarks"><u>JSON</u></a>
+<a id=""exportLink" style="cursor:pointer;" title="Download Doc bookmarks"><u>Doc</u></a>
 
 <script>
     function downloadTableAsJson(tableId, filename) {
@@ -258,6 +259,57 @@
         document.getElementById("downloadJson").addEventListener("click", () => {
             downloadTableAsJson("dataTable", "table-data.json"); // Replace with your table ID and desired file name
         });
+    </script>
+
+    <script>
+        function exportTableToDoc(tableID, filename = 'table') {
+            // Get the table element
+            const table = document.getElementById(tableID);
+
+            if (!table) {
+                alert('Table not found!');
+                return;
+            }
+
+            // Extract HTML content of the table
+            const tableHTML = table.outerHTML;
+
+            // Prepare the HTML structure for the Word document
+            const docHTML = `
+                <html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word' xmlns='http://www.w3.org/TR/REC-html40'>
+                <head>
+                    <meta charset="utf-8">
+                    <title>Export Table</title>
+                </head>
+                <body>
+                    ${tableHTML}
+                </body>
+                </html>
+            `;
+
+            // Create a Blob object for the Word document
+            const blob = new Blob(['\ufeff', docHTML], {
+                type: 'application/msword'
+            });
+
+            // Create a download link
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(blob);
+            link.download = `${filename}.doc`;
+
+            // Trigger the download
+            document.body.appendChild(link);
+            link.click();
+
+            // Clean up the DOM
+            document.body.removeChild(link);
+        }
+
+        // Add event listener to the hyperlink
+        document.getElementById('exportLink').addEventListener('click', function (e) {
+            e.preventDefault(); // Prevent default action of the hyperlink
+            exportTableToDoc('dataTable', 'ExportedTable');
+        });    
     </script>
 
     <table id="dataTable" data-sort-order="asc" class="css-serial">
