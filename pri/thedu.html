@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thedu</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 10px;
+        }
+        input {
+           
+            padding: 5px;
+            border: 1px solid #ccc;
+            font-size: 16px;
+            display: block;
+        }
+          .result-item {
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+            width: 100%;
+        }
+        a {
+            text-decoration: none;
+            color: blue;
+            display: block;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+     <form id="searchForm">
+        <input type="text" id="queryInput" name="query" placeholder="Enter search term...">
+    </form>
+
+    <div id="results"></div>
+
+    <script>
+        $(document).ready(function() {
+            $("#searchForm").submit(function(event) {
+                event.preventDefault(); // Prevent query from appearing in URL
+                
+                let query = $("#queryInput").val();
+                if (!query) return;
+
+                let apiUrl = `https://api.duckduckgo.com/?q=${encodeURIComponent(query)}&format=json`;
+
+                // Fetch search results
+                fetch(apiUrl)
+                .then(response => response.json())
+                .then(data => {
+                    let resultsHtml = "";
+                    if (data.RelatedTopics.length > 0) {
+                        data.RelatedTopics.forEach(item => {
+                            if (item.Text && item.FirstURL) {
+                                resultsHtml += `<div class='result-item'><a href='${item.FirstURL}' target='_blank'>${item.Text}</a></div>`;
+                            }
+                        });
+                    } else {
+                        resultsHtml += "No results found.";
+                    }
+                    $("#results").html(resultsHtml);
+                })
+                .catch(error => console.error("Error fetching results:", error));
+            });
+        });
+    </script>
+</body>
+</html>
