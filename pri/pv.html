@@ -4,59 +4,27 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Python Code Validator</title>
-    <style>
-        textarea {
-            width: 100%;
-            height: 150px;
-            font-family: monospace;
-        }
-        #result {
-            margin-top: 10px;
-            font-weight: bold;
-        }
-    </style>
 </head>
 <body>
-    <h2>Python Code Validator</h2>
-    <textarea id="codeInput" placeholder="Enter Python code here..."></textarea>
-    <button onclick="validatePythonCode()">Validate</button>
-    <div id="result"></div>
+    <b>Python Code Validator (using Pyodide)</b>
+    <textarea id="pythonCode" rows="10" cols="50" placeholder="Enter Python code here..."></textarea>
+    <br>
+    <button onclick="validatePython()">Validate Code</button>
+    <pre id="output"></pre>
 
+    <script src="https://cdn.jsdelivr.net/pyodide/v0.23.4/full/pyodide.js"></script>
     <script>
-        function validatePythonCode() {
-            const code = document.getElementById("codeInput").value;
-            const resultDiv = document.getElementById("result");
+        async function validatePython() {
+            let code = document.getElementById("pythonCode").value;
+            let outputElement = document.getElementById("output");
 
-            // Basic Python validation patterns
-            const invalidChars = /[^a-zA-Z0-9\s\_\:\(\)\{\}
-
-\[\]
-
-\.\'\"\#]/g;
-            const keywords = ["def", "return", "if", "else", "elif", "for", "while", "import", "from", "class"];
-            const indentationPattern = /^\s{4}/m; // Checks if lines have 4 spaces indentation
-
-            // Validation checks
-            if (invalidChars.test(code)) {
-                resultDiv.innerHTML = "❌ Invalid characters detected!";
-                resultDiv.style.color = "red";
-                return;
+            try {
+                let pyodide = await loadPyodide();
+                pyodide.runPython(code); // Runs Python code
+                outputElement.textContent = "✅ Code is valid!";
+            } catch (error) {
+                outputElement.textContent = "❌ Invalid Python code:\n" + error.message;
             }
-
-            if (!keywords.some(keyword => code.includes(keyword))) {
-                resultDiv.innerHTML = "⚠️ No Python keywords found!";
-                resultDiv.style.color = "orange";
-                return;
-            }
-
-            if (!indentationPattern.test(code) && code.includes(":")) {
-                resultDiv.innerHTML = "⚠️ Improper indentation (Python uses 4 spaces)";
-                resultDiv.style.color = "orange";
-                return;
-            }
-
-            resultDiv.innerHTML = "✅ Python syntax looks valid!";
-            resultDiv.style.color = "green";
         }
     </script>
 </body>
