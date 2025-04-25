@@ -10,7 +10,7 @@
             margin: 0;
             padding: 0;
             font-family: Arial, sans-serif; /* Added a default font */
-            font-size: medium;
+            
         }
 
         .navbar {
@@ -67,6 +67,18 @@
             color: #FFFFFF;
             text-decoration: underline;
         }
+
+    #draggable {
+    width: 200px;
+    height: 100px;
+    background-color: #f9f9f9;
+    border: 1px solid #ccc;
+    padding: 10px;
+    position: absolute;
+    resize: both;
+    overflow: auto;
+    }
+
     </style>
 </head>
 <body>
@@ -101,9 +113,7 @@
     <a href="pri/thedu.html" target="_blank" title="IP">Thedu</a>
     
     <pre>
-        Statistics tools
-        BookMark Manager, Todo List 
-        Time conversion
+        Statistics tools, Todo List, Time conversion
         Full Bible random quotes daily
         Full Thirukural random daily quotes
         Magazines, Python, Java code generator with code highlights
@@ -111,14 +121,14 @@
     </pre> 
 <!-- Info-->
 
-    <div id="info">
+    <div id="draggable">
         <b>IP Address:</b> <span id="ip"></span><b>Location:</b><span id="location"></span><br>
-        <strong>Last Document Update:</strong> <span id="lastUpdate"></span><br>
-        <strong>Browser Details:</strong> <span id="browser"></span><br>
-        <strong>App Name:</strong> <span id="appName"></span><b>App Version:</b> <span id="appVersion"></span><br>
-        <strong>User Agent:</strong> <span id="userAgent"></span><br>
-        <strong>Platform:</strong> <span id="platform"></span><b>Language:</b> <span id="language"></span><br>
-        <strong>Cookies Enabled:</strong> <span id="cookieEnabled"></span><b>Online Status:</b> <span id="onLine"></span><br>
+        <b>Last Document Update:</b> <span id="lastUpdate"></span><br>
+        <b>Browser Details:</b> <span id="browser"></span><br>
+        <b>App Name:</b> <span id="appName"></span><b>App Version:</b> <span id="appVersion"></span><br>
+        <b>User Agent:</b> <span id="userAgent"></span><br>
+        <b>Platform:</b> <span id="platform"></span><b>Language:</b> <span id="language"></span><br>
+        <b>Cookies Enabled:</b> <span id="cookieEnabled"></span><b>Online Status:</b> <span id="onLine"></span><br>
     </div>
     <script>
         document.addEventListener("DOMContentLoaded", async () => {
