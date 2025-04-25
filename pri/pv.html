@@ -4,12 +4,76 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Python Code Validator</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            width: 100vw;
+            background-color: #fff;
+            color: #000;
+            transition: 0.3s;
+        }
+
+        .controls {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px;
+            background-color: #f4f4f4;
+            position: sticky;
+            top: 0;
+        }
+
+        button {
+            padding: 5px 10px;
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        textarea {
+            flex: 1;
+            width: 100%;
+            border: none;
+            font-size: 16px;
+            padding: 10px;
+            background-color: inherit;
+            color: inherit;
+        }
+
+        pre {
+            background-color: #222;
+            color: #fff;
+            padding: 10px;
+            width: 100%;
+            white-space: pre-wrap;
+            min-height: 100px;
+        }
+
+        .dark-mode {
+            background-color: #121212;
+            color: #ddd;
+        }
+
+        .dark-mode .controls {
+            background-color: #222;
+        }
+    </style>
 </head>
 <body>
-    <b>Python Code Validator (using Pyodide)</b>
-    <textarea id="pythonCode" rows="10" cols="50" placeholder="Enter Python code here..."></textarea>
-    <br>
-    <button onclick="validatePython()">Validate Code</button>
+    <div class="controls">
+        <button onclick="validatePython()">Validate</button>
+        <button onclick="clearFields()">Clear</button>
+        <button onclick="toggleDarkMode()">🌙</button>
+    </div>
+    <textarea id="pythonCode" placeholder="Enter Python code here..."></textarea>
     <pre id="output"></pre>
 
     <script src="https://cdn.jsdelivr.net/pyodide/v0.23.4/full/pyodide.js"></script>
@@ -20,11 +84,20 @@
 
             try {
                 let pyodide = await loadPyodide();
-                pyodide.runPython(code); // Runs Python code
+                pyodide.runPython(code);
                 outputElement.textContent = "✅ Code is valid!";
             } catch (error) {
                 outputElement.textContent = "❌ Invalid Python code:\n" + error.message;
             }
+        }
+
+        function clearFields() {
+            document.getElementById("pythonCode").value = "";
+            document.getElementById("output").textContent = "";
+        }
+
+        function toggleDarkMode() {
+            document.body.classList.toggle("dark-mode");
         }
     </script>
 </body>
