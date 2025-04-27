@@ -11,7 +11,6 @@ https://www.akto.io/tools
 AI Code generator with login
 https://wegic.ai/
 https://codia.ai/
-https://fish.audio/
 https://websim.ai/
 https://www.recraft.ai
 https://hailuoai.video/ - Video Generator from Text
