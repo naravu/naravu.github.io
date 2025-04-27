@@ -319,7 +319,7 @@
                 <th onclick="sortTable(1)">URL</th>
                 <th onclick="sortTable(2)">Description</th>
                 <th onclick="sortTable(3)">Tag</th>
-                <th onclick="sortTable(4)">Status</th>
+                <th onclick="sortTable(4)">Rank</th>
             </tr>
             <tr>
                 <td></td>
@@ -447,10 +447,17 @@
                 <td>AI Voice tool with login</td>
                 <td data-url="https://fish.audio/">...</td>
             </tr>
+            <tr>
+                <td></td>
+                <td><a href="https://hailuoai.video/">Hailuoai</a></td>
+                <td>AI Video Generator from Text</td>
+                <td>AI AI Video Generator from Text with login</td>
+                <td data-url="https://hailuoai.video/">...</td>
+            </tr>
 
         </table>
 
-<script>
+<script> <!--Check the status of the URL -->
   async function isURLLive(url) {
       try {
         const response = await fetch(url, { method: 'GET', mode: 'no-cors' });
