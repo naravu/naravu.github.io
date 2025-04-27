@@ -458,7 +458,7 @@
       for (const cell of cells) {
         const url = cell.getAttribute('data-url');
         const isLive = await isURLLive(url);
-        cell.textContent = isLive ? 'OK' : 'KO';
+        cell.textContent = isLive ? '✔' : '✘';
         cell.classList.add(isLive ? 'live' : 'not-live');
       }
     }
