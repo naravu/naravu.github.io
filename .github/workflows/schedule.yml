@@ -2,7 +2,7 @@ name: Daily Python Script Execution
 
 on:
   schedule:
-    - cron: '0 23 * * *'  # Runs at 5 AM IST (23:00 UTC)
+    - cron: '0 23 * * *' # Runs at 5 AM IST (23:00 UTC)
 
 jobs:
   run-script:
@@ -18,3 +18,11 @@ jobs:
 
     - name: Run Python Script
       run: python myscript.py
+
+    - name: Commit and Push Report
+      run: |
+        git config --global user.name "github-actions"
+        git config --global user.email "github-actions@github.com"
+        git add report.html
+        git commit -m "Update daily report"
+        git push
