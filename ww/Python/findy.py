@@ -16,7 +16,7 @@ def detect_os(ttl):
     """Determines OS based on TTL value."""
     if ttl is None:
         return "❌ Unable to determine OS (Host unreachable)"
-    return f"✅ Likely {'Windows' if 100 <= ttl <= 128 else 'Linux' if 50 <= ttl <= 64 else 'Unknown'} OS (TTL: {ttl})"
+    return f"✅ {'Windows' if 100 <= ttl <= 128 else 'Linux' if 50 <= ttl <= 64 else 'Unknown/Network'} OS (TTL: {ttl})"
 
 if __name__ == "__main__":
     ip = input("Enter IP address: ").strip()
