@@ -21,11 +21,12 @@ jobs:
 
     - name: Run Python Script
       run: python myscript.py
+      run: python testreport.py
 
-    - name: Commit and Push Report
+    - name: Commit and Pusfindh Report
       run: |
         git config --global user.name "github-actions"
         git config --global user.email "github-actions@github.com"
-        git add report.html
-        git commit -m "Update daily report"
+        git add report.html testreport.html
+        git commit -m "Update daily reports"
         git push
