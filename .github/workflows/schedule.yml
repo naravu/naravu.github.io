@@ -20,8 +20,9 @@ jobs:
         python-version: '3.x'
 
     - name: Run Python Script
-      run: python myscript.py
-      run: python testreport.py
+      run: |
+        python myscript.py
+        python testreport.py
 
     - name: Commit and Pusfindh Report
       run: |
