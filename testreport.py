@@ -14,7 +14,7 @@ def get_system_info():
 
 def generate_html_report(info):
     html = "<html><head><title>System Report</title></head><body>"
-    html += "<h1>Linux System Report</h1><table border='1'>"
+    html += "<h1>Linux System Report</h1><table border='0'>"
     for key, value in info.items():
         html += f"<tr><td><b>{key}</b></td><td>{value}</td></tr>"
     html += "</table></body></html>"
