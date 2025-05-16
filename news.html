@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Latest News</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; background-color: #f8f9fa; }
+        .filter-container { text-align: center; margin-bottom: 20px; }
+        .filter-btn { padding: 10px; border: none; background: #007bff; color: white; cursor: pointer; margin: 5px; }
+        .filter-btn:hover { background: #0056b3; }
+        .news-container { display: flex; flex-wrap: wrap; gap: 20px; justify-content: center; }
+        .news-item { width: 300px; background: white; border: 1px solid #ddd; padding: 15px; border-radius: 5px; box-shadow: 2px 2px 5px #ddd; }
+        .news-item h2 { font-size: 16px; }
+        .news-item p { font-size: 14px; }
+        .news-source { font-weight: bold; color: #555; }
+        .hidden { display: none; }
+    </style>
+    <script>
+        function filterNews(category) {
+            let items = document.querySelectorAll('.news-item');
+            items.forEach(item => {
+                if (category === 'All' || item.dataset.source.includes(category)) {
+                    item.classList.remove('hidden');
+                } else {
+                    item.classList.add('hidden');
+                }
+            });
+        }
+    </script>
+</head>
+<body>
+    <div class="filter-container">
+        <button class="filter-btn" onclick="filterNews('All')">All News</button>
+        <button class="filter-btn" onclick="filterNews('Tamil')">Tamil News</button>
+        <button class="filter-btn" onclick="filterNews('English')">English News</button>
+    </div>
+    <div class="news-container">
+
+        <div class="news-item" data-source="English">
+            <p class="news-source">BBC</p>
+            <h2>Two firefighters and man killed in business park blaze named</h2>
+            <p>The firefighters who died in a fire at Bicester Motion have been named as Jennie Logan and Martyn Sadler.</p>
+            <a href="https://www.bbc.com/news/articles/c1e6zx870p3o" target="_blank">Read More</a>
+        </div>
+        
+        <div class="news-item" data-source="English">
+            <p class="news-source">BBC</p>
+            <h2>Ukraine and Russia far apart in direct talks, but prisoner swap agreed</h2>
+            <p>The talks lasted just over 90 minutes and there were few signs of any progress on ending the war.</p>
+            <a href="https://www.bbc.com/news/articles/c9wg599e79xo" target="_blank">Read More</a>
+        </div>
+        
+        <div class="news-item" data-source="English">
+            <p class="news-source">BBC</p>
+            <h2>Nearly 100 people killed in Israeli attack on north Gaza, rescuers say</h2>
+            <p>It marks the largest ground assault on north Gaza since Israel resumed its offensive in March.</p>
+            <a href="https://www.bbc.com/news/articles/crr704wwklgo" target="_blank">Read More</a>
+        </div>
+        
+        <div class="news-item" data-source="English">
+            <p class="news-source">BBC</p>
+            <h2>Prison governor jailed for nine years over relationship with inmate</h2>
+            <p>Kerri Pegg, 42, was seen as a "rising star" but her trial heard she "didn't play by the rules".</p>
+            <a href="https://www.bbc.com/news/articles/c991y2871r1o" target="_blank">Read More</a>
+        </div>
+        
+        <div class="news-item" data-source="English">
+            <p class="news-source">BBC</p>
+            <h2>Teenager detained in Georgia writes letter asking to see her family</h2>
+            <p>Billingham teenager Bella Culley, 18, is being held in prison in Georgia on suspicion of drug offences.</p>
+            <a href="https://www.bbc.com/news/articles/cp8y206pl15o" target="_blank">Read More</a>
+        </div>
+        
+        <div class="news-item" data-source="English">
+            <p class="news-source">BBC</p>
+            <h2>Melania Trump statue goes missing in Slovenia</h2>
+            <p>The bronze depiction of the US First Lady is a replacement for a previous wooden version, which was set on fire in 2019.</p>
+            <a href="https://www.bbc.com/news/articles/cvg7egyrk40o" target="_blank">Read More</a>
+        </div>
+        
+        <div class="news-item" data-source="English">
+            <p class="news-source">BBC</p>
+            <h2>MPs vote to allow health staff to opt out of assisted dying process</h2>
+            <p>The move is among several tweaks to the assisted dying bill which were debated by MPs.</p>
+            <a href="https://www.bbc.com/news/articles/clyqej092qno" target="_blank">Read More</a>
+        </div>
+        
+        <div class="news-item" data-source="English">
+            <p class="news-source">BBC</p>
+            <h2>Millions more counted as domestic abuse victims as definition widens</h2>
+            <p>One-in-four adults in England and Wales have experienced abusive behaviours, official data suggests.</p>
+            <a href="https://www.bbc.com/news/articles/c991ymnpxzdo" target="_blank">Read More</a>
+        </div>
+        
+        <div class="news-item" data-source="English">
+            <p class="news-source">BBC</p>
+            <h2>Moody's downgrades US credit rating citing rising debt</h2>
+            <p>Moody's said successive US administrations had failed to reverse ballooning deficits and interest costs.</p>
+            <a href="https://www.bbc.com/news/articles/c4ge0xk4ld1o" target="_blank">Read More</a>
+        </div>
+        
+        <div class="news-item" data-source="English">
+            <p class="news-source">BBC</p>
+            <h2>R&B star Chris Brown remanded in custody on nightclub attack charge</h2>
+            <p>The American singer was arrested on Thursday over an alleged assault at a London nightclub in 2023.</p>
+            <a href="https://www.bbc.com/news/articles/cj428kdn749o" target="_blank">Read More</a>
+        </div>
+        
+        <div class="news-item" data-source="English">
+            <p class="news-source">CNN</p>
+            <h2>Some on-air claims about Dominion Voting Systems were false, Fox News acknowledges in statement after deal is announced</h2>
+            <p>No description available.</p>
+            <a href="https://www.cnn.com/business/live-news/fox-news-dominion-trial-04-18-23/index.html" target="_blank">Read More</a>
+        </div>
+        
+        <div class="news-item" data-source="English">
+            <p class="news-source">CNN</p>
+            <h2>Dominion still has pending lawsuits against election deniers such as Rudy Giuliani and Sidney Powell</h2>
+            <p>No description available.</p>
+            <a href="https://www.cnn.com/business/live-news/fox-news-dominion-trial-04-18-23/h_8d51e3ae2714edaa0dace837305d03b8" target="_blank">Read More</a>
+        </div>
+        
+        <div class="news-item" data-source="English">
+            <p class="news-source">CNN</p>
+            <h2>Here are the 20 specific Fox broadcasts and tweets Dominion says were defamatory</h2>
+            <p>• Fox-Dominion trial delay 'is not unusual,' judge says
+• Fox News' defamation battle isn't stopping Trump's election lies</p>
+            <a href="https://www.cnn.com/2023/04/17/media/dominion-fox-news-allegations/index.html" target="_blank">Read More</a>
+        </div>
+        
+        <div class="news-item" data-source="English">
+            <p class="news-source">CNN</p>
+            <h2>Judge in Fox News-Dominion defamation trial: 'The parties have resolved their case'</h2>
+            <p>The judge just announced in court that a settlement has been reached in the historic defamation case between Fox News and Dominion Voting Systems.</p>
+            <a href="https://www.cnn.com/2023/04/18/media/fox-dominion-settlement/index.html" target="_blank">Read More</a>
+        </div>
+        
+        <div class="news-item" data-source="English">
+            <p class="news-source">CNN</p>
+            <h2>'Difficult to say with a straight face': Tapper reacts to Fox News' statement on settlement</h2>
+            <p>A settlement has been reached in Dominion Voting Systems' defamation case against Fox News, the judge for the case announced. The network will pay more than $787 million to Dominion, a lawyer for the company said.</p>
+            <a href="https://www.cnn.com/videos/politics/2023/04/18/jake-tapper-dominion-lawsuit-settlement-fox-news-statement-lead-vpx.cnn" target="_blank">Read More</a>
+        </div>
+        
+        <div class="news-item" data-source="English">
+            <p class="news-source">CNN</p>
+            <h2>Millions in the US could face massive consequences unless McCarthy can navigate out of a debt trap he set for Biden</h2>
+            <p>• DeSantis goes to Washington, a place he once despised, looking for support to take on Trump
+• Opinion: For the GOP to win, it must ditch Trump
+• Chris Christie mulling 2024 White House bid
+• Analysis: The fire next time has begun burning in Tennessee</p>
+            <a href="https://www.cnn.com/2023/04/18/politics/mccarthy-biden-debt-ceiling/index.html" target="_blank">Read More</a>
+        </div>
+        
+        <div class="news-item" data-source="English">
+            <p class="news-source">CNN</p>
+            <h2>White homeowner accused of shooting a Black teen who rang his doorbell turns himself in to face criminal charges</h2>
+            <p>• 'A major part of Ralph died': Aunt of teen shot after ringing wrong doorbell speaks
+• 20-year-old woman shot after friend turned into the wrong driveway in upstate New York, officials say</p>
+            <a href="https://www.cnn.com/2023/04/18/us/kansas-city-ralph-yarl-shooting-tuesday/index.html" target="_blank">Read More</a>
+        </div>
+        
+        <div class="news-item" data-source="English">
+            <p class="news-source">CNN</p>
+            <h2>Newly released video shows scene of Jeremy Renner's snowplow accident</h2>
+            <p>Newly released body camera footage shows firefighters and sheriff's deputies rushing to help actor Jeremy Renner after a near-fatal snowplow accident in January. The "Avengers" actor broke more than 30 bones and suffered other severe injuries. CNN's Chloe Melas has more.</p>
+            <a href="https://www.cnn.com/videos/us/2023/04/18/jeremy-renner-snowplow-accident-bodycam-nc-melas-contd-vpx.cnn" target="_blank">Read More</a>
+        </div>
+        
+        <div class="news-item" data-source="English">
+            <p class="news-source">CNN</p>
+            <h2>Jake Gyllenhaal and Jamie Lee Curtis spent the Covid-19 lockdown together</h2>
+            <p>It's sourdough bread and handstands for Jake Gyllenhaal and Jamie Lee Curtis.</p>
+            <a href="https://www.cnn.com/2023/04/18/entertainment/jake-gyllenhaal-jamie-lee-curtis-pandemic-living/index.html" target="_blank">Read More</a>
+        </div>
+        
+        <div class="news-item" data-source="English">
+            <p class="news-source">CNN</p>
+            <h2>Toddler crawls through White House fence, prompts Secret Service response</h2>
+            <p>A tiny intruder infiltrated White House grounds Tuesday, prompting a swift response from the US Secret Service.</p>
+            <a href="https://www.cnn.com/2023/04/18/politics/white-house-toddler/index.html" target="_blank">Read More</a>
+        </div>
+        
+        <div class="news-item" data-source="English">
+            <p class="news-source">NY Times</p>
+            <h2>Trump Administration Live Updates: Supreme Court Extends Freeze on Use of Alien Enemies Act for Deportations</h2>
+            <p></p>
+            <a href="https://www.nytimes.com/live/2025/05/16/us/trump-news" target="_blank">Read More</a>
+        </div>
+        
+        <div class="news-item" data-source="English">
+            <p class="news-source">NY Times</p>
+            <h2>Trump Appointee Pressed Analyst to Redo Intelligence on Venezuelan Gang</h2>
+            <p>The move followed a disclosure that intelligence agencies disagree with a key factual claim Trump made to invoke a wartime deportation law.</p>
+            <a href="https://www.nytimes.com/2025/05/16/us/politics/trump-appointee-venezuela-gang.html" target="_blank">Read More</a>
+        </div>
+        
+        <div class="news-item" data-source="English">
+            <p class="news-source">NY Times</p>
+            <h2>Republicans Push to End Immigrant Benefits in Democratic States</h2>
+            <p>For years, Democratic state leaders believed their immigrant programs were free from federal interference. But Republicans in Washington are now threatening to penalize states that continue them.</p>
+            <a href="https://www.nytimes.com/2025/05/16/us/immigrant-trump-states-california.html" target="_blank">Read More</a>
+        </div>
+        
+        <div class="news-item" data-source="English">
+            <p class="news-source">NY Times</p>
+            <h2>Conservatives Imperil G.O.P. Megabill That Would Fulfill Trump’s Agenda</h2>
+            <p>Conservatives are demanding deeper cuts in federal spending, including the elimination of clean energy tax credits and work requirements for Medicaid recipients to start earlier.</p>
+            <a href="https://www.nytimes.com/2025/05/16/us/politics/house-republicans-policy-bil.html" target="_blank">Read More</a>
+        </div>
+        
+        <div class="news-item" data-source="English">
+            <p class="news-source">NY Times</p>
+            <h2>Moody’s Downgrades U.S. Credit Rating Below Triple-A</h2>
+            <p>The downgrade means that each of the three major credit rating firms no longer gives the United States its best rating.</p>
+            <a href="https://www.nytimes.com/2025/05/16/business/us-credit-downgrade-moodys.html" target="_blank">Read More</a>
+        </div>
+        
+        <div class="news-item" data-source="English">
+            <p class="news-source">NY Times</p>
+            <h2>As Trump Departs the Middle East, He Takes Aim at Taylor Swift and Bruce Springsteen</h2>
+            <p>President Trump went on a social media posting spree after four days overseas, where he basked in the kind of lavish praise that so delights him.</p>
+            <a href="https://www.nytimes.com/2025/05/16/us/politics/trump-springsteen-critics-internet.html" target="_blank">Read More</a>
+        </div>
+        
+        <div class="news-item" data-source="English">
+            <p class="news-source">NY Times</p>
+            <h2>Secret Service Questions Comey Over Social Media Post About Trump</h2>
+            <p>Administration officials had said the post — a picture of seashells forming the numbers “86 47” — amounted to an assassination threat by the former F.B.I. director.</p>
+            <a href="https://www.nytimes.com/2025/05/16/us/politics/secret-service-comey-social-media-trump.html" target="_blank">Read More</a>
+        </div>
+        
+        <div class="news-item" data-source="English">
+            <p class="news-source">NY Times</p>
+            <h2>Democrats Move to Block Over $3 Billion in Weapons Sales to Qatar and U.A.E.</h2>
+            <p>The lawmakers introduced resolutions as anger erupted over a series of deals involving the president, businesses linked to his family and several countries.</p>
+            <a href="https://www.nytimes.com/2025/05/16/us/politics/trump-democrats-weapons-sales.html" target="_blank">Read More</a>
+        </div>
+        
+        <div class="news-item" data-source="English">
+            <p class="news-source">NY Times</p>
+            <h2>Yiyun Li’s New Book Is No Ordinary Grief Memoir</h2>
+            <p>Only by writing could the acclaimed novelist Yiyun Li grapple with the suicides of her two sons. But her new book is no ordinary grief memoir.</p>
+            <a href="https://www.nytimes.com/2025/05/16/books/yiyun-li-grief-things-in-nature-merely-grow.html" target="_blank">Read More</a>
+        </div>
+        
+        <div class="news-item" data-source="English">
+            <p class="news-source">NY Times</p>
+            <h2>New Jersey Transit Engineers Strike, Idling Trains and Upending Commutes</h2>
+            <p>Wages continued to be a sticking point as New Jersey’s first statewide transit strike in 40 years began Friday morning.</p>
+            <a href="https://www.nytimes.com/2025/05/16/nyregion/nj-transit-strike-amtrak-commute.html" target="_blank">Read More</a>
+        </div>
+        
+        <div class="news-item" data-source="English">
+            <p class="news-source">The Guardian</p>
+            <h2>Almost 300m people at risk of death through starvation – report</h2>
+            <p><p>Aid cuts, conflict, climate and economic shocks contribute to sixth consecutive rise in numbers facing ‘high levels of food insecurity’</p><p>Acute food insecurity continues to rise at an alarming rate, with almost 300 million people at risk of death through starvation, new analysis reveals.</p><p>Escalating conflict and cuts to humanitarian aid along with climate and economic shocks forced an additional 13.7 million people into chronic food insecurity last year.</p> <a href="https://www.theguardian.com/global-development/2025/may/16/300m-people-at-risk-of-death-through-starvation-global-report-food-crises">Continue reading...</a></p>
+            <a href="https://www.theguardian.com/global-development/2025/may/16/300m-people-at-risk-of-death-through-starvation-global-report-food-crises" target="_blank">Read More</a>
+        </div>
+        
+        <div class="news-item" data-source="English">
+            <p class="news-source">The Guardian</p>
+            <h2>Six killed in Tripoli clashes after killing of militia leader</h2>
+            <p><p>Abdel Ghani al-Kikli, known as Gheniwa, had recently been involved in disputes with rival armed groups</p><p>The killing of the head of one of Libya’s most powerful militias, which has been accused of abusing asylum seekers and faced allegations of crimes against humanity, has triggered armed clashes in Tripoli, resulting in at least six deaths.</p><p>Abdel Ghani al-Kikli, better known as Gheniwa, the commander of Stability Support Apparatus SSA, one of Tripoli’s powerful armed groups, based in the densely populated Abu Salim neighbourhood, was killed on Monday night at the headquarters of the 444th Combat Brigade of the Libyan army, a source in one of the country’s security forces told Al Wasat television.</p> <a href="https://www.theguardian.com/world/2025/may/13/tripoli-clashes-after-killing-of-militia-leader-abdel-ghani-al-kikli">Continue reading...</a></p>
+            <a href="https://www.theguardian.com/world/2025/may/13/tripoli-clashes-after-killing-of-militia-leader-abdel-ghani-al-kikli" target="_blank">Read More</a>
+        </div>
+        
+        <div class="news-item" data-source="English">
+            <p class="news-source">The Guardian</p>
+            <h2>Episcopal church says it won’t help resettle white South Africans granted refugee status</h2>
+            <p><p>Church refuses White House directive, citing longstanding ‘commitment to racial justice and reconciliation’</p><p>The Episcopal church’s migration service is refusing a directive from the federal government to help resettle white South Africans granted refugee status, citing the church’s longstanding “commitment to racial justice and reconciliation”.</p><p>Presiding bishop Sean Rowe announced the step on Monday, shortly before 59 South Africans <a href="https://www.theguardian.com/us-news/2025/may/12/white-south-africans-trump">arrived at Dulles international airport</a> outside Washington DC on a private charter plane and were greeted by a government delegation.</p> <a href="https://www.theguardian.com/us-news/2025/may/12/episcopal-church-white-south-africans-trump">Continue reading...</a></p>
+            <a href="https://www.theguardian.com/us-news/2025/may/12/episcopal-church-white-south-africans-trump" target="_blank">Read More</a>
+        </div>
+        
+        <div class="news-item" data-source="English">
+            <p class="news-source">The Guardian</p>
+            <h2>First white South Africans arrive in US after Trump grants them refugee status</h2>
+            <p><p>Trump stirs controversy by calling Afrikaners, minority descended from Dutch colonists, victims of a ‘genocide’</p><p>The first group of white South Africans granted refugee status by Donald Trump’s administration has arrived in the US, stirring controversy in South Africa as the US president declared the Afrikaners victims of a “genocide”.</p><p>The Afrikaners, a minority descended from mainly Dutch colonists, were met at Dulles international airport outside Washington DC by the US deputy secretary of state, Christopher Landau, and deputy secretary of homeland security, Troy Edgar, with many given US flags to wave.</p> <a href="https://www.theguardian.com/us-news/2025/may/12/white-south-africans-trump">Continue reading...</a></p>
+            <a href="https://www.theguardian.com/us-news/2025/may/12/white-south-africans-trump" target="_blank">Read More</a>
+        </div>
+        
+        <div class="news-item" data-source="English">
+            <p class="news-source">The Guardian</p>
+            <h2>Koyo Kouoh, art curator due to lead 2026 Venice Biennale, dies at 57</h2>
+            <p><p>Groundbreaking Swiss-Cameroonian curator would have been the first African woman to head up the art event</p><p>Koyo Kouoh, the groundbreaking Swiss-Cameroonian curator who was to become the first African woman to head up the Venice Biennale, died suddenly on Saturday, the Zeitz Museum of Contemporary Art Africa announced.</p><p>“It is with profound sorrow that the trustees of Zeitz MOCAA announce the sudden passing of Koyo Kouoh, our beloved executive director and chief curator, on Saturday, 10 May 2025,” said the museum in a statement on Monday.</p> <a href="https://www.theguardian.com/artanddesign/2025/may/12/koyo-kouoh-art-curator-2026-venice-biennale-dies">Continue reading...</a></p>
+            <a href="https://www.theguardian.com/artanddesign/2025/may/12/koyo-kouoh-art-curator-2026-venice-biennale-dies" target="_blank">Read More</a>
+        </div>
+        
+        <div class="news-item" data-source="English">
+            <p class="news-source">The Guardian</p>
+            <h2>Supreme court blocks Trump bid to resume deportations under 1798 law</h2>
+            <p><p>Administration’s appeal to quickly deport Venezuelans under Alien Enemies Act rejected with two dissenting</p><p>The <a href="https://www.theguardian.com/us-news/us-supreme-court">supreme court</a> has rejected the <a href="https://www.theguardian.com/us-news/trump-administration">Trump administration</a>’s request to remove a temporary block on deportations of Venezuelans under a rarely used 18th-century wartime law.</p><p>Over two dissenting votes, the justices acted on an emergency appeal from lawyers for Venezuelan men who have been accused of being gang members, a designation that the administration says makes them eligible for rapid removal from the United States under the <a href="https://www.theguardian.com/us-news/2025/mar/16/alien-enemies-act-explainer-can-trump-apply-a-wartime-law-to-deport-gang-members">Alien Enemies Act</a> of 1798.</p> <a href="https://www.theguardian.com/us-news/2025/may/16/supreme-court-alien-enemies-act-trump">Continue reading...</a></p>
+            <a href="https://www.theguardian.com/us-news/2025/may/16/supreme-court-alien-enemies-act-trump" target="_blank">Read More</a>
+        </div>
+        
+        <div class="news-item" data-source="English">
+            <p class="news-source">The Guardian</p>
+            <h2>Mexican woman charged in US with supplying arms to ‘terrorist’ drug cartel</h2>
+            <p><p>María Del Rosario Navarro, 39, accused of conspiring to provide material support to Jalisco New Generation cartel</p><p>A 39-year-old woman has become the first <a href="https://www.theguardian.com/world/mexico">Mexican</a> national to be indicted in the United States on charges of providing material support to a cartel designated as a foreign terrorist organization, according to the US Department of Justice.</p><p>María Del Rosario Navarro is accused of conspiring with others to provide grenades to the <a href="https://www.theguardian.com/world/2021/apr/02/jalisco-cartel-mexico-rise-guadalajara">Jalisco New Generation cartel (CJNG)</a>, a powerful Mexican crime faction that the US in February <a href="https://www.theguardian.com/world/2025/feb/19/us-mexico-cartels-terrorism">designated as a terrorist organization</a> alongside other criminal groups across Latin America.</p> <a href="https://www.theguardian.com/world/2025/may/16/mexican-woman-drug-cartel-weapons-charges">Continue reading...</a></p>
+            <a href="https://www.theguardian.com/world/2025/may/16/mexican-woman-drug-cartel-weapons-charges" target="_blank">Read More</a>
+        </div>
+        
+        <div class="news-item" data-source="English">
+            <p class="news-source">The Guardian</p>
+            <h2>Venezuelans deported by Trump are victims of ‘torture’, lawyers allege</h2>
+            <p><p>Lawyers hired by Venezuela have been unable to confirm ‘proof of life’ for 252 migrants imprisoned in El Salvador</p><p>Lawyers for <a href="https://www.theguardian.com/us-news/2025/mar/16/deportation-alleged-gang-members-el-salvador">252 Venezuelans deported</a> by the Trump administration and imprisoned in <a href="https://www.theguardian.com/world/el-salvador">El Salvador</a> for two months have alleged that the migrants are victims of physical and emotional “torture”.</p><p>A law firm hired by the Venezuelan government said that it had been unable to visit the migrants in <a href="https://www.theguardian.com/world/2025/apr/30/el-salvador-cecot-mega-prison-trump">the mega-prison where they are locked up.</a></p> <a href="https://www.theguardian.com/us-news/2025/may/16/venezuelans-deported-trump-lawyers-torture">Continue reading...</a></p>
+            <a href="https://www.theguardian.com/us-news/2025/may/16/venezuelans-deported-trump-lawyers-torture" target="_blank">Read More</a>
+        </div>
+        
+        <div class="news-item" data-source="English">
+            <p class="news-source">The Guardian</p>
+            <h2>Latin American leaders spend millions to influence Trump’s White House</h2>
+            <p><p>El Salvador’s Bukele has scored an Oval Office Trump meeting, nuclear deal and US prison support</p><p>US government records reveal <a href="https://www.theguardian.com/global-development/series/southern-frontlines">Latin American</a> leaders have spent millions hiring Washington’s top lobbyists to push for a laundry list of <a href="https://www.ft.com/content/42e2138f-ab1d-4d0e-bfe1-39f7af006a90?shareType=nongift">requests</a> – from free-trade deals, security assistance and energy investments – to be heard by the <a href="https://www.theguardian.com/us-news/trump-administration">Trump administration</a>, according to an analysis by the Guardian and <a href="https://quincyinst.org/">The Quincy Institute</a>.</p><p>Since the lead-up to Donald Trump’s election as president in November 2024, Department of Justice records show that at least 10 countries in Latin America and the Caribbean have registered their top officials and envoys as foreign principals under the Foreign Agent Registration Act (Fara). Fara aims to promote transparency by requiring those working as foreign agents to disclose their activities and compensation.</p> <a href="https://www.theguardian.com/world/2025/may/16/trump-bukele-milei-south-america-lobby">Continue reading...</a></p>
+            <a href="https://www.theguardian.com/world/2025/may/16/trump-bukele-milei-south-america-lobby" target="_blank">Read More</a>
+        </div>
+        
+        <div class="news-item" data-source="English">
+            <p class="news-source">The Guardian</p>
+            <h2>Mexico demands compensation from YouTube star MrBeast after pyramid chocolate video</h2>
+            <p><p>Celebrity used trips to ancient Maya cities to advertise his own-brand snacks, drawing criticism from Mexico’s archaeology and history institute</p><p>Mexico is seeking compensation from YouTube celebrity <a href="https://www.theguardian.com/culture/article/2024/jun/24/who-is-mrbeast-why-is-he-in-australia-and-what-do-i-need-to-know-about-this-youtube-phenomenon">MrBeast</a>’s production company, accusing it of using images of the country’s ancient archaeological sites to advertise a chocolate brand.</p><p>A video of the social media star visiting Maya ruins has been viewed around 60m times since 10 May on YouTube, where he has 395 million subscribers.</p> <a href="https://www.theguardian.com/world/2025/may/16/mexico-demands-compensation-from-youtube-star-mrbeast-after-pyramid-chocolate-video">Continue reading...</a></p>
+            <a href="https://www.theguardian.com/world/2025/may/16/mexico-demands-compensation-from-youtube-star-mrbeast-after-pyramid-chocolate-video" target="_blank">Read More</a>
+        </div>
+        
+        <div class="news-item" data-source="Tamil">
+            <p class="news-source">OneIndia Tamil</p>
+            <h2>"மோடி மன்னிச்சு விட்ருக்காரு.. அமைதியா? போரா? என்பது பாகிஸ்தான் கையில்தான் இருக்கு": அண்ணாமலை</h2>
+            <p>"Where blood flows, water does not flow. Although we do not want war, we are ready for war. Prime Minister Modi has forgiven Pakistan this time for the sake of the people of that country. Peace? War? It is up to Pakistan to decide what it wants," Annamalai said.</p>
+            <a href="https://tamil.oneindia.com/news/tamilnadu/we-don-t-want-war-but-we-re-ready-for-it-says-bjp-leader-annamalai-704747.html" target="_blank">Read More</a>
+        </div>
+        
+        <div class="news-item" data-source="Tamil">
+            <p class="news-source">OneIndia Tamil</p>
+            <h2>தேசப்பற்று இல்லைனா பாகிஸ்தானுக்கு போங்க.. ஆவேசமாக கொந்தளித்த நயினார் நாகேந்திரன்</h2>
+            <p>"Those who express pro-Pakistan views on Twitter are not worthy of being called Tamils; those who lack patriotism should go to Pakistan," said Tamil Nadu BJP leader Nainar Nagendran.</p>
+            <a href="https://tamil.oneindia.com/news/tamilnadu/pro-pakistan-supporters-should-go-to-pakistan-tn-bjp-leader-nainar-nagendran-704741.html" target="_blank">Read More</a>
+        </div>
+        
+        <div class="news-item" data-source="Tamil">
+            <p class="news-source">OneIndia Tamil</p>
+            <h2>3 ஆண்டுகளுக்கு பிறகு நேரடி பேச்சுவார்த்தை.. முடிவை நெருங்குகிறது உக்ரைன்-ரஷ்யா போர்!</h2>
+            <p>As former U.S. President Donald Trump has been making efforts to bring the Russia-Ukraine war to an immediate end, direct talks between the two sides began today.</p>
+            <a href="https://tamil.oneindia.com/news/international/trump-brokered-diplomacy-russia-ukraine-begin-direct-talks-amid-former-potus-peace-push-704739.html" target="_blank">Read More</a>
+        </div>
+        
+        <div class="news-item" data-source="Tamil">
+            <p class="news-source">OneIndia Tamil</p>
+            <h2>ஒரே நாளில் 100க்கும் மேற்பட்டோர் பலி.. அலறும் மக்கள்.. காஸாவில் உச்சம் அடைந்த இஸ்ரேல் அட்டாக்!</h2>
+            <p>Israeli air strikes have killed more than 100 Palestinians across Gaza since dawn today, with dozens missing under the rubble of destroyed buildings.</p>
+            <a href="https://tamil.oneindia.com/news/international/over-100-palestinians-killed-in-a-single-day-as-israeli-attacks-intensify-across-gaza-704735.html" target="_blank">Read More</a>
+        </div>
+        
+        <div class="news-item" data-source="Tamil">
+            <p class="news-source">OneIndia Tamil</p>
+            <h2>மழையில் வைப் செய்த டிம் டேவிட்.. நாளை ஆர்சிபி - கேகேஆர் போட்டி பாதிக்கப்படுமா? வானிலை நிலவரம் என்ன?</h2>
+            <p>RCB vs KKR Weather Forecast: Will Rain make a spoilsport at the Chinnaswamy Stadium in the IPL 2025 Resumption</p>
+            <a href="https://tamil.oneindia.com/news/sports/cricket/rcb-vs-kkr-weather-forecast-will-rain-make-a-spoilsport-at-the-chinnaswamy-stadium-in-the-ipl-2025-704697.html" target="_blank">Read More</a>
+        </div>
+        
+        <div class="news-item" data-source="Tamil">
+            <p class="news-source">OneIndia Tamil</p>
+            <h2>இந்த ஏரியா.. அந்த ஏரியா.. எல்லா ஏரியாவையும் வெளுக்கும் கனமழை.. இடி மின்னலுடன் கொட்டித் தீர்க்குது!</h2>
+            <p>Heavy rains are lashing various districts of Tamil Nadu. Areas including Madurai, Dindigul Thiruvarur and Thanjavur are receiving heavy rainfall.</p>
+            <a href="https://tamil.oneindia.com/news/tamilnadu/heavy-rains-batter-tamil-nadu-delta-districts-among-severe-hit-704709.html" target="_blank">Read More</a>
+        </div>
+        
+        <div class="news-item" data-source="Tamil">
+            <p class="news-source">OneIndia Tamil</p>
+            <h2>பூமியை விடுங்க.. மொத்த பிரபஞ்சமே சீக்கிரமா அழிய போகுது! மனித குலம் என்ன ஆகும் தெரியுமா!</h2>
+            <p>You may have come across various reports claiming that the Earth is on the verge of destruction. However, scientists are now expressing concern that the entire universe itself might come to an end sooner than previously expected.</p>
+            <a href="https://tamil.oneindia.com/news/international/end-of-universe-sooner-scientists-predict-shocking-new-timeline-704679.html" target="_blank">Read More</a>
+        </div>
+        
+        <div class="news-item" data-source="Tamil">
+            <p class="news-source">OneIndia Tamil</p>
+            <h2>சூரியனில் நடந்த மாற்றம்.. வெடித்து கிளம்பிய புயல்! பூமிக்கு பேராபத்து.. விஞ்ஞானிகள் வார்னிங்</h2>
+            <p>Scientists have warned that a solar flare (firestorm) has erupted from the Sun, and if it hits Earth, it could cause a massive disaster. This storm, which is about 1 million kilometers in length, poses an uncertain threat — scientists say they are not sure when or if it will strike Earth, or how likely that possibility is.</p>
+            <a href="https://tamil.oneindia.com/news/international/million-kilometer-solar-flare-from-giant-sunspot-could-hit-earth-soon-here-s-what-to-expect-704639.html" target="_blank">Read More</a>
+        </div>
+        
+        <div class="news-item" data-source="Tamil">
+            <p class="news-source">OneIndia Tamil</p>
+            <h2>பாகிஸ்தானை சிதறடித்த "ஆபரேஷன் சிந்தூர்.." யார் பெயர் வைத்தது தெரியுமா! ராஜ்நாத் சிங் மேஜர் தகவல்</h2>
+            <p>Defence Minister Rajnath Singh visits Bhuj Air Force Station to meet Air Warriors after Operation Sindoor (ஆபரேஷன் சிந்தூர் குறித்து பாதுகாப்பு துறை அமைச்சர் ராஜ்நாத் சிங்): Defence Minister Rajnath Singh on Bhuj Air Base.</p>
+            <a href="https://tamil.oneindia.com/news/india/rajnath-singh-visits-bhuj-air-base-and-share-the-reason-behind-naming-of-operation-sindoor-704635.html" target="_blank">Read More</a>
+        </div>
+        
+        <div class="news-item" data-source="Tamil">
+            <p class="news-source">OneIndia Tamil</p>
+            <h2>மின்சாரம் பாய்ந்து இறந்த 10ஆம் வகுப்பு மாணவன் 313 மதிப்பெண்களுடன் தேர்ச்சி! பெற்றோர் கண்ணீர்</h2>
+            <p>Mayiladuthurai Class 10 student died in electrocution in temple festival passed in board exam.</p>
+            <a href="https://tamil.oneindia.com/news/tamilnadu/10th-student-died-in-electrocution-got-313-marks-704631.html" target="_blank">Read More</a>
+        </div>
+        
+        <div class="news-item" data-source="Tamil">
+            <p class="news-source">Hindustan Times Tamil</p>
+            <h2>‘டாஸ்மாக் நிறுவனத்தின் MD-க்கு Directives கொடுக்க இந்த ரத்தீஷ் யார்?’: சரமாரியாக சந்தேகங்களை அடுக்கிய அதிமுக!</h2>
+            <p>' இவர் துணை முதல்வருக்கு இணை முதல்வராக இருப்பதனாலோ என்னவோ, அனைத்து அதிகாரிகளும் பணிந்தார்களா?’ என டாஸ்மாக் எம்.டி.வீட்டில் நடந்த அமலாக்கத்துறை சோதனை குறித்து அதிமுக எக்ஸ் தளப்பக்கம் கேள்வி எழுப்பியிருக்கிறது</p>
+            <a href="https://tamil.hindustantimes.com/tamilnadu/aiadmk-social-media-page-has-been-raising-doubts-about-who-this-ratish-is-who-gave-directives-to-the-md-of-tasmac-131747406286947.html" target="_blank">Read More</a>
+        </div>
+        
+        <div class="news-item" data-source="Tamil">
+            <p class="news-source">Hindustan Times Tamil</p>
+            <h2>’இரவு 7 மணி வரை 34 மாவட்டங்களில் மழை’ சென்னை மண்டல வானிலை ஆய்வு மையம் எச்சரிக்கை!</h2>
+            <p><p>”திருச்சிராப்பள்ளி, அரியலூர், பெரம்பலூர், மயிலாடுதுறை, தஞ்சாவூர், திண்டுக்கல், கரூர், நீலகிரி, தேனி, ஈரோடு, கோயம்புத்தூர் மற்றும் திருப்பூர் மாவட்டங்களில் ஒரு சில இடங்களில் இடியுடன் கூடிய மிதமான மழை பெய்ய வாய்ப்பு”</p></p>
+            <a href="https://tamil.hindustantimes.com/tamilnadu/chennai-regional-meteorological-centre-forecasts-rain-in-34-tamil-nadu-districts-with-showers-expected-till-7-pm-131747396175896.html" target="_blank">Read More</a>
+        </div>
+        
+        <div class="news-item" data-source="Tamil">
+            <p class="news-source">Hindustan Times Tamil</p>
+            <h2>நாச்சியப்பன் பாத்திரக்கடை: ’ஏழை மற்றும் எளிய மாணவர்களின் கல்வி கட்டணத்தை செலுத்தாத திமுக’ விளாசும் எடப்பாடி பழனிசாமி!</h2>
+            <p><p>”முதலமைச்சர் திரு. ஸ்டாலினின் மகனான, விளையாட்டு அமைச்சர் திரு. உதயநிதியும், அவரின் ரசிகர் மன்றத் தலைவரான பள்ளிக் கல்வித் துறை அமைச்சர் திரு. அன்பில் மகேஷ் பொய்யாமொழியும் சுய புராணங்களைப் பாடுவதில் தீவிரமாக உள்ளனர்”</p></p>
+            <a href="https://tamil.hindustantimes.com/tamilnadu/former-tamil-nadu-cm-edappadi-palaniswami-condemns-stalin-model-government-for-failing-to-pay-poor-students-fees-131747395544005.html" target="_blank">Read More</a>
+        </div>
+        
+        <div class="news-item" data-source="Tamil">
+            <p class="news-source">Hindustan Times Tamil</p>
+            <h2>'வெறும் 6 மாதத்தில்…! 450 கோடி! 4 படங்கள்! இட்லி கடை தயாரிப்பாளர் வீட்டில் ED ரெய்டு! யார் இந்த ஆகாஷ் பாஸ்கரன்!</h2>
+            <p><p>”சிவகார்த்திகேயன் நடிக்கும் ‘பராசக்தி’ (200 கோடி பட்ஜெட்), தனுஷ் இயக்கி நடிக்கும் ‘இட்லி கடை’ (100 கோடி பட்ஜெட்), மற்றும் சிலம்பரசன் நடிக்கும் பெயரிடப்படாத படம் (150 கோடி பட்ஜெட்) ஆகிய மூன்று படங்களைத் தயாரித்து வருகிறது”</p></p>
+            <a href="https://tamil.hindustantimes.com/tamilnadu/ed-conducts-search-at-home-of-dawn-pictures-producer-akash-baskaran-for-probing-source-of-450-crore-film-investments-131747394630580.html" target="_blank">Read More</a>
+        </div>
+        
+        <div class="news-item" data-source="Tamil">
+            <p class="news-source">Hindustan Times Tamil</p>
+            <h2>10ஆம் வகுப்பு தேர்வு முடிவுகள்: ’வெற்றிக்கு வாழ்த்து! தோல்விக்கு ஊக்கம்!’ ஈபிஎஸ் போட்ட ட்வீட்!</h2>
+            <p><p>”தேர்ச்சியின் எல்லை வரை சென்று வெற்றியை தவற விட்டவர்கள் யாரும் மனம் தளர வேண்டாம். வெற்றி தோல்வி என்பது வாழ்வில் தற்காலிக நிகழ்வே”</p></p>
+            <a href="https://tamil.hindustantimes.com/tamilnadu/10th-public-exam-results-announced-today-and-opposition-leader-edappadi-palaniswami-congratulates-successful-students-131747393600465.html" target="_blank">Read More</a>
+        </div>
+        
+        <div class="news-item" data-source="Tamil">
+            <p class="news-source">Hindustan Times Tamil</p>
+            <h2>கிழித்து போடப்பட்ட வாட்சப் சாட்! டாஸ்மாக் இயக்குநர் விசாகனை அழைத்து சென்ற ED</h2>
+            <p><p>இதனைத் தொடர்ந்து, விசாகனை விசாரணைக்காக அமலாக்கத்துறை அலுவலகத்திற்கு அழைத்துச் சென்றனர். டாஸ்மாக் நிறுவனத்தில் ரூ.1000 கோடி முறைகேடு நடந்ததாக அமலாக்கத்துறை ஏற்கனவே தெரிவித்திருந்த நிலையில், இந்த சோதனை நடைபெற்றது.</p></p>
+            <a href="https://tamil.hindustantimes.com/tamilnadu/enforcement-directorate-takes-tasmac-managing-director-visakan-into-custody-from-his-residence-for-investigation-131747393100972.html" target="_blank">Read More</a>
+        </div>
+        
+        <div class="news-item" data-source="Tamil">
+            <p class="news-source">Hindustan Times Tamil</p>
+            <h2>‘டாஸ்மாக் வழக்கில் ED-யின் தொடர் ரெய்டுகள்: வசமாய் சிக்கும் முதல் குடும்பம்?’ அதிமுக ஐ.டி.விங் ட்வீட்!</h2>
+            <p><p>”TASMAC ஊழல்- பத்து ரூபாய் பாலாஜி- ரத்தீஷ்- ஆகாஷ் பாஸ்கரன்- அன்பில் மகேஷ்- உதயநிதி- Connect The Dots!”</p></p>
+            <a href="https://tamil.hindustantimes.com/tamilnadu/aiadmk-it-wing-tweets-about-ed-raid-on-chief-ministers-relatives-amid-ongoing-tasmac-liquor-scam-investigation-131747387607310.html" target="_blank">Read More</a>
+        </div>
+        
+        <div class="news-item" data-source="Tamil">
+            <p class="news-source">Hindustan Times Tamil</p>
+            <h2>’ஆடு மாடு மேய்த்துக் கொண்டு கூண்டுக் கிளியாக உள்ளேன்!’ மத்திய அமைச்சர் பதவி குறித்த கேள்விக்கு அண்ணாமலை பதில்!</h2>
+            <p><p>கூட்டணி விவகாரங்களில் இருந்து ஒதுங்கியிருப்பதாகவும், தலைவர்கள் முடிவு எடுப்பார்கள் என்றும் அண்ணாமலை தெரிவித்தார்.</p></p>
+            <a href="https://tamil.hindustantimes.com/tamilnadu/annamalai-says-bjp-is-like-a-caged-parrot-now-but-will-fly-when-time-is-right-replying-to-query-on-union-minister-role-131747386050582.html" target="_blank">Read More</a>
+        </div>
+        
+        <div class="news-item" data-source="Tamil">
+            <p class="news-source">Hindustan Times Tamil</p>
+            <h2>10,11ஆம் பொதுத்தேர்வு முடிவுகள்: ‘வட மாவட்டங்களே கடைசி இடம்; கல்வியில் விடியல் கிடைப்பது எப்போது?' அன்புமணி வேதனை!</h2>
+            <p><p>”வடமாவட்டங்கள் தொடர்ச்சியாக பின்தங்கி வருவது வருத்தமும், வேதனையும் அளிக்கிறது. பத்தாம் வகுப்புப் பொதுத்தேர்வுகளில் அரியலூர், தருமபுரி, விழுப்புரம் ஆகிய மாவட்டங்கள் முதல் 15 இடங்களில் வந்திருப்பது ஆறுதல் அளிக்கிறது”</p></p>
+            <a href="https://tamil.hindustantimes.com/tamilnadu/pmk-leader-anbumani-questions-when-education-will-improve-as-northern-districts-score-lowest-in-10th-and-11th-exams-131747382676709.html" target="_blank">Read More</a>
+        </div>
+        
+        <div class="news-item" data-source="Tamil">
+            <p class="news-source">Hindustan Times Tamil</p>
+            <h2>பாமக மாவட்ட செயலாளர்கள் கூட்டம்: ’வரும் தேர்தலில் படுத்துக் கொண்டே ஜெயிப்பது எப்படி?’ மருத்துவர் ராமதாஸ் பேட்டி</h2>
+            <p><p>”இக்கூட்டத்திற்கு அன்புமணி ராமதாஸ் வராதது ஏன் என செய்தியாளர்கள் எழுப்பிய கேள்விக்கு, அவர் வரலாம்; அல்லது வந்து கொண்டு கொண்டு இருக்கலாம் என பதிலளித்தார். பெரும்பாலான மாவட்ட செயலாளர்கள் வராதது குறித்த கேள்விக்கு, மாநாட்டு வேலைகளை செய்ததால் அவர்களில் சிலர் களைப்போடு இருக்கலாம் என கூறினார்”</p></p>
+            <a href="https://tamil.hindustantimes.com/tamilnadu/pmk-founder-dr-ramadoss-claims-he-taught-strategy-to-win-50-constituencies-while-lying-down-at-party-meeting-131747381705453.html" target="_blank">Read More</a>
+        </div>
+        
+    </div>
+</body>
+</html>
