@@ -28,6 +28,7 @@ jobs:
       run: |
         python myscript.py
         python testreport.py
+        python news.py
 
     - name: Commit and Pusfindh Report
       run: |
