@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Noorkuri</title>
+  <base target="_blank">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <style>
+    body {
+      font-family: sans-serif;
+    }
+    #searchBox {
+      margin-bottom: 10px;
+      padding: 5px;
+      width: 25%;
+      font-size: 13px;
+      border: 1px solid #555;
+    }
+    #countLabel, #themeToggle {
+      margin-left: 10px;
+      font-size: 13px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      counter-reset: serial-number;
+    }
+    th, td {
+      border: 1px solid #555;
+      padding: 8px;
+      text-align: left;
+      font-size: 13px;
+    }
+    th {
+      cursor: pointer;
+    }
+    .css-serial td:first-child::before {
+      counter-increment: serial-number;
+      content: counter(serial-number);
+    }
+
+    /* Themes */
+    body.light {
+      background-color: #fff;
+      color: #000;
+    }
+    body.dark {
+      background-color: #222;
+      color: #fff;
+    }
+    body.light #searchBox {
+      background: #fff;
+      color: #000;
+    }
+    body.dark #searchBox {
+      background: #333;
+      color: #fff;
+    }
+    .light th { background: #FFD700; }
+    .dark th { background: #444; }
+    .light table { background: #fff; }
+    .dark table { background: #333; }
+    .light td a { color: #0000EE; }
+    .dark td a { color: #76c7f0; }
+
+    .live { color: lightgreen; }
+    .not-live { color: lightcoral; }
+
+    @media print {
+      body * { visibility: hidden; }
+      #dataTable, #dataTable * {
+        visibility: visible;
+        position: absolute;
+        top: 0; left: 0;
+      }
+    }
+  </style>
+</head>
+<body class="dark">
+  <b>Noorkuri</b>
+  <input type="text" id="searchBox" onkeyup="filterTable()" placeholder="Search...">
+  <span id="countLabel">Count: 0</span>
+  <a onclick="downloadHTML()" title="Download full page as XLS"><u>Full</u></a>
+  <a onclick="exportToExcel()" title="Export to Excel"><u>XLS</u></a>
+  <a onclick="downloadCsv()" title="Download CSV"><u>CSV</u></a>
+  <a onclick="downloadPdf()" title="Print / PDF"><u>PDF</u></a>
+  <a id="downloadJson" title="Download as JSON"><u>JSON</u></a>
+  <a id="exportLink" title="Download as Word"><u>DOC</u></a>
+  <span id="themeToggle" onclick="toggleTheme()" title="Toggle Theme">🌙</span>
+<table id="dataTable" data-sort-order="asc" class="css-serial">
+            <tr>
+                <th onclick="sortTable(0)">#</th>
+                <th onclick="sortTable(1)">🔗</th>
+                <th onclick="sortTable(2)">🏷️</th>
+                <th onclick="sortTable(3)">🔖</th>
+                <th onclick="sortTable(4)">✔|✘</th>
+            </tr>
+            <tr>
+                <td></td>
+                <td><a href="https://google.com">Google</a></td>
+                <td>Google</td>
+                <td>Search Engine</td>
+                <td data-url="https://google.com">...</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><a href="https://uiverse.io/elements">Uiverse</a></td>
+                <td>Uiverse</td>
+                <td>CSS Templates free code</td>
+                <td data-url="https://uiverse.io/elements">...</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><a href="https://tamileditor.org">தமிழ் எழுதி</a></td>
+                <td>தமிழ் எழுதி</td>
+                <td>தமிழ் எழுதி, தமிழெழுதி - Tamil Editor</td>
+                <td data-url="https://tamileditor.org">...</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><a href="https://www.modulify.ai/">Modulify</a></td>
+                <td>Modulify</td>
+                <td>AI Website builder, Website creator</td>
+                <td data-url="https://www.modulify.ai/">...</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><a href="https://www.doesnot-exist.ai/">Doesnot-exist</a></td>
+                <td>Doesnot-exist</td>
+                <td>Doesnot-exist check confirm</td>
+                <td data-url="https://www.doesnot-exist.ai/">...</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><a href="https://html5up.net/">HTML5UP</a></td>
+                <td>HTML5UP</td>
+                <td>Free HTML5 templates - No login required</td>
+                <td data-url="https://html5up.net/">...</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><a href="https://google.github.io/adk-docs">Google ADK</a></td>
+                <td>Agents Development Kit - ADK</td>
+                <td>AI Agents Development Kit - pip install google-adk</td>
+                <td data-url="https://google.github.io/adk-docs">...</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><a href="https://github.com/google/adk-samples">Google ADK Samples</a></td>
+                <td>Agents Development Kit - ADK Samples</td>
+                <td>AI Agents Development Kit Samples - pip install google-adk</td>
+                <td data-url="https://github.com/google/adk-samples">...</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><a href="https://pythonandvba.com/solutions">Python VBA</a></td>
+                <td>Python VBA</td>
+                <td>Python VBA</td>
+                <td data-url="https://pythonandvba.com/solutions">...</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><a href="https://lite.xlwings.org/">Python XLWings</a></td>
+                <td>Python Excel - XLWings</td>
+                <td>Python Excel - XLWings Documentation</td>
+                <td data-url="https://lite.xlwings.org/">...</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><a href="https://pentestgpt.ai/login">PenTestGPT</a></td>
+                <td>Penetration Test</td>
+                <td>Penetration Test - Hack Tools AI</td>
+                <td data-url="https://pentestgpt.ai/login">...</td>
+            </tr>
+            <tr>         
+                <td></td>
+                <td><a href="https://flowgpt.com/chat/">FlowGPT</a></td>
+                <td>Hack tools documentations AI </td>
+                <td>Hack Tools AI</td>
+                <td data-url="https://flowgpt.com/chat/">...</td>
+            </tr>
+            <tr>         
+                <td></td>
+                <td><a href="https://flowgpt.com/p/chaosgpt">ChaosGPT</a></td>
+                <td>Hack tools documentations</td>
+                <td>Hack Tools AI</td>
+                <td data-url="https://flowgpt.com/p/chaosgpt">...</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><a href="https://github.com/Significant-Gravitas/AutoGPT">AutoGPT</a></td>
+                <td>AutoGPT AI</td>
+                <td>AutoGPT from Github</td>
+                <td data-url="https://github.com/Significant-Gravitas/AutoGPT">...</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><a href="https://www.yeschat.ai/gpts-2OToJMEAIZ-VulnGPT">VulnGPT</a></td>
+                <td>VulnGPT AI</td>
+                <td>VulnGPT for vulnerabilities</td>
+                <td data-url="https://www.yeschat.ai/gpts-2OToJMEAIZ-VulnGPT">...</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><a href="https://www.schoolgoat.com/">Schoolgoat</a></td>
+                <td>Schoolgoat</td>
+                <td>Home work help for school students</td>
+                <td data-url="https://www.schoolgoat.com/">...</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><a href="https://bestfreeaiwebsites.com/">Bestfreeaiwebsites</a></td>
+                <td>Free AI Tool - Code Generator etc.</td>
+                <td>AI Code generator with login</td>
+                <td data-url="https://bestfreeaiwebsites.com/">...</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><a href="https://fish.audio/">Fish.audio</a></td>
+                <td>Free AI Voice Tool - Copy of your own voice.</td>
+                <td>AI Voice tool with login</td>
+                <td data-url="https://fish.audio/">...</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><a href="https://hailuoai.video/">HailuoAI</a></td>
+                <td>AI Video Generator from Text</td>
+                <td>AI Video Generator from Text with login</td>
+                <td data-url="https://hailuoai.video/">...</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><a href="https://magichour.ai">MagichourAI</a></td>
+                <td>AI Video Generator for Pro</td>
+                <td>AI Video creation like a pro with login</td>
+                <td data-url="https://magichour.ai">...</td>
+            </tr>
+
+
+        </table>
+
+  <script>
+    function filterTable() {
+      const filter = document.getElementById('searchBox').value.toLowerCase();
+      const rows = document.querySelectorAll('#dataTable tbody tr');
+      let matchCount = 0;
+      rows.forEach(row => {
+        const text = row.innerText.toLowerCase();
+        const isMatch = text.includes(filter);
+        row.style.display = isMatch ? '' : 'none';
+        if (isMatch) matchCount++;
+      });
+      document.getElementById('countLabel').textContent = `Count: ${matchCount}`;
+    }
+
+    function sortTable(col) {
+      const table = document.getElementById('dataTable');
+      const rows = Array.from(table.rows).slice(1);
+      const asc = table.getAttribute('data-sort-order') !== 'asc';
+      rows.sort((a, b) => {
+        return a.cells[col].textContent.localeCompare(b.cells[col].textContent) * (asc ? 1 : -1);
+      });
+      rows.forEach(row => table.appendChild(row));
+      table.setAttribute('data-sort-order', asc ? 'asc' : 'desc');
+    }
+
+    function toggleTheme() {
+      document.body.classList.toggle('light');
+      document.body.classList.toggle('dark');
+    }
+
+    function exportToExcel() {
+      const table = document.getElementById("dataTable");
+      let html = table.outerHTML;
+      const blob = new Blob([`<html><head><meta charset='UTF-8'></head><body>${html}</body></html>`], {
+        type: "application/vnd.ms-excel"
+      });
+      const link = document.createElement("a");
+      link.href = URL.createObjectURL(blob);
+      link.download = "table_data.xls";
+      link.click();
+    }
+
+    function downloadCsv() {
+      const rows = document.querySelectorAll("#dataTable tr");
+      const csv = [...rows].map(row =>
+        [...row.cells].map(cell => `"${cell.innerText}"`).join(",")
+      ).join("\n");
+      const blob = new Blob([csv], { type: "text/csv" });
+      const link = document.createElement("a");
+      link.href = URL.createObjectURL(blob);
+      link.download = "table.csv";
+      link.click();
+    }
+
+    function downloadPdf() {
+      window.print();
+    }
+
+    function downloadHTML() {
+      const link = document.createElement("a");
+      link.href = 'data:text/html;charset=UTF-8,' + encodeURIComponent(document.documentElement.outerHTML);
+      link.download = "Noorkuri.xls";
+      link.click();
+    }
+
+    function downloadTableAsJson(tableId, filename) {
+      const headers = Array.from(document.querySelectorAll(`#${tableId} th`)).map(h => h.textContent.trim());
+      const data = Array.from(document.querySelectorAll(`#${tableId} tbody tr`)).map(row => {
+        const obj = {};
+        Array.from(row.children).forEach((cell, idx) => {
+          const link = cell.querySelector("a");
+          obj[headers[idx]] = link ? { text: link.innerText, href: link.href } : cell.innerText;
+        });
+        return obj;
+      });
+      const blob = new Blob([JSON.stringify(data, null, 2)], { type: "application/json" });
+      const a = document.createElement("a");
+      a.href = URL.createObjectURL(blob);
+      a.download = filename;
+      a.click();
+    }
+
+    document.getElementById("downloadJson").onclick = () => downloadTableAsJson("dataTable", "table-data.json");
+
+    function exportTableToDoc(tableID, filename = 'table') {
+      const html = document.getElementById(tableID).outerHTML;
+      const blob = new Blob(['\ufeff' + `
+        <html xmlns:o='urn:schemas-microsoft-com:office:office'
+              xmlns:w='urn:schemas-microsoft-com:office:word'
+              xmlns='http://www.w3.org/TR/REC-html40'>
+        <head><meta charset='utf-8'></head><body>${html}</body></html>`],
+        { type: 'application/msword' }
+      );
+      const link = document.createElement("a");
+      link.href = URL.createObjectURL(blob);
+      link.download = `${filename}.doc`;
+      link.click();
+    }
+
+    document.getElementById("exportLink").onclick = () => exportTableToDoc("dataTable", "ExportedTable");
+
+    async function isURLLive(url) {
+      try {
+        const response = await fetch(url, { method: 'GET', mode: 'no-cors' });
+        return response.ok || response.type === 'opaque';
+      } catch {
+        return false;
+      }
+    }
+
+    async function checkURLs() {
+      const cells = document.querySelectorAll('td[data-url]');
+      for (const cell of cells) {
+        const url = cell.getAttribute('data-url');
+        const isLive = await isURLLive(url);
+        cell.textContent = isLive ? '✔' : '✘';
+        cell.classList.add(isLive ? 'live' : 'not-live');
+      }
+    }
+
+    checkURLs();
+  </script>
+</body>
+</html>
