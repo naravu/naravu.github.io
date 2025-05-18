@@ -59,7 +59,7 @@ if __name__ == "__main__":
     info = get_system_info()
     report = generate_html_report(info)
 
-    with open("system_report.html", "w") as file:
+    with open("system.html", "w") as file:
         file.write(report)
 
     print("System report generated: system_report.html")

@@ -34,6 +34,6 @@ jobs:
       run: |
         git config --global user.name "github-actions"
         git config --global user.email "github-actions@github.com"
-        git add report.html news.html system_report.html
+        git add report.html news.html system.html
         git commit -m "Update daily reports"
         git push
