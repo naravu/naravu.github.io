@@ -27,7 +27,7 @@ jobs:
     - name: Run Python Script
       run: |
         python myscript.py
-        python testreport.py
+        python system.py
         python news.py
 
     - name: Commit and Pusfindh Report
