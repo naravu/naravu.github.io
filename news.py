@@ -9,7 +9,8 @@ RSS_FEEDS = {
     "The Guardian": "https://www.theguardian.com/world/rss",
     "OneIndia Tamil": "https://tamil.oneindia.com/rss/feeds/tamil-news-fb.xml",
     "News18 Tamil": "https://tamil.news18.com/rss/tamilnadu.xml",
-    "Hindustan Times Tamil": "https://tamil.hindustantimes.com/rss/tamilnadu"
+    "Hindustan Times Tamil": "https://tamil.hindustantimes.com/rss/tamilnadu",
+    "Linux": "https://opensource.com/feed"
 }
 
 def fetch_rss_news():
