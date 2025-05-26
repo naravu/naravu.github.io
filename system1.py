@@ -3,6 +3,7 @@ import platform
 import psutil
 import socket
 import subprocess
+from datetime import datetime
 
 def get_ip_address():
     """Get the system's IP address."""
@@ -42,9 +43,14 @@ def get_recent_apt_history():
     except FileNotFoundError:
         return "History log not found"
 
+def get_script_run_time():
+    """Get the current date and time when the script runs."""
+    return datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+
 def get_system_info():
     """Collect system information."""
     return {
+        "Script Run Time": get_script_run_time(),
         "Hostname": platform.node(),
         "IP Address": get_ip_address(),
         "OS": platform.system(),
@@ -78,3 +84,4 @@ if __name__ == "__main__":
     with open("system1.html", "w") as file:
         file.write(report)
 
+    print("System report generated: system.html")
