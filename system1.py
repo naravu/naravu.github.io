@@ -7,17 +7,20 @@ from datetime import datetime
 
 def get_ip_address():
     """Get the system's IP address."""
-    return socket.gethostbyname(socket.gethostname())
+    try:
+        return socket.gethostbyname(socket.gethostname())
+    except socket.error:
+        return "Unable to fetch IP address"
 
 def get_disk_usage():
     """Get disk usage using df -h."""
     result = subprocess.run(["df", "-h"], capture_output=True, text=True)
-    return result.stdout if result.stdout else "N/A"
+    return result.stdout.strip() if result.stdout else "N/A"
 
 def get_fdisk_info():
     """Get partition details using fdisk -l."""
     result = subprocess.run(["fdisk", "-l"], capture_output=True, text=True)
-    return result.stdout if result.stdout else "N/A"
+    return result.stdout.strip() if result.stdout else "N/A"
 
 def get_uptime():
     """Get system uptime."""
@@ -32,14 +35,14 @@ def get_last_reboot():
 def get_last_patch():
     """Get last update time (for Debian-based systems)."""
     result = subprocess.run(["ls", "-lt", "/var/log/apt/history.log"], capture_output=True, text=True)
-    return result.stdout.split("\n")[0] if result.stdout else "N/A"
+    return result.stdout.strip().split("\n")[0] if result.stdout else "N/A"
 
 def get_recent_apt_history():
     """Get the last 5 lines from /var/log/apt/history.log."""
     try:
         with open("/var/log/apt/history.log", "r") as file:
             lines = file.readlines()
-            return "".join(lines[-5:]) if lines else "No recent history available"
+            return "".join(lines[-5:]).strip() if lines else "No recent history available"
     except FileNotFoundError:
         return "History log not found"
 
@@ -84,4 +87,4 @@ if __name__ == "__main__":
     with open("system1.html", "w") as file:
         file.write(report)
 
-    print("System report generated: system.html")
+    print("System report generated: system1.html")
