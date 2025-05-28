@@ -75,7 +75,7 @@ def generate_html_report(info):
               <table border='1' cellspacing='2' cellpadding='5'>"""
     
     for key, value in info.items():
-        html += f"<tr><td><b>{key}</b></td><td><pre>{value.replace('\n', '<br>')}</pre></td></tr>"
+        html += f"<tr><td><b>{key}</b></td><td><pre>{str(value).replace('\n', '<br>')}</pre></td></tr>"
     
     html += "</table></body></html>"
     return html
