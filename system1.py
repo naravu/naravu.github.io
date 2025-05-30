@@ -42,7 +42,7 @@ def get_recent_apt_history():
     try:
         with open("/var/log/apt/history.log", "r") as file:
             lines = file.readlines()
-            return "".join(lines[-1:]).strip() if lines else "No recent history available"
+            return "".join(lines[-5:]).strip() if lines else "No recent history available"
     except FileNotFoundError:
         return "History log not found"
 
