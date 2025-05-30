@@ -27,7 +27,6 @@ jobs:
     - name: Run Python Script
       run: |
         python myscript.py
-        python system.py
         python news.py
         python system1.py
 
