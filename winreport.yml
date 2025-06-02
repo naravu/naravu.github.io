@@ -12,8 +12,17 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x' # Change this to the required Python version
+
+      - name: Install dependencies
+        run: |
+          pip install -r winrequirements.txt
+
       - name: Run Python script
-        run: | 
+        run: |
           python winreport.py
 
       - name: Commit and push report
