@@ -158,6 +158,10 @@
         Full Thirukural random daily quotes
         Magazines, Java code generator with code highlights
     </pre> 
-    <script>document.write(new Date(document.lastModified));</script>
+    <small id="dt"></small>
+    <script>
+    const date = new Date(document.lastModified);
+    document.getElementById("dt").innerHTML = date;
+    </script>
     </body>
 </html>
