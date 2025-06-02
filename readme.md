@@ -18,4 +18,5 @@ These are the important pages in the repository:
 - Markdown for documentation
 
 ---
-_Last updated: YYYY-MM-DD_
+## 📫 Contact
+- Yet to update with contact information.
