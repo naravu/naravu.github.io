@@ -70,8 +70,8 @@ def get_system_info():
 
 def generate_html_report(info):
     """Generate an HTML report with system info."""
-    html = """<html><head><title>System Report</title></head><body>
-              <h1>Linux System Report</h1>
+    html = """<html><head><title>Linux System Report</title></head><body>
+              <!-- h1>Linux System Report</h1 -->
               <table border='1' cellspacing='2' cellpadding='5'>"""
     
     for key, value in info.items():
@@ -84,7 +84,7 @@ if __name__ == "__main__":
     info = get_system_info()
     report = generate_html_report(info)
 
-    with open("system1.html", "w") as file:
+    with open("system.html", "w") as file:
         file.write(report)
 
-    print("System report generated: system1.html")
+    print("System report generated: system.html")

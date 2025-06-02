@@ -28,12 +28,12 @@ jobs:
       run: |
         python myscript.py
         python news.py
-        python system1.py
+        python system.py
 
     - name: Commit and Pusfindh Report
       run: |
         git config --global user.name "github-actions"
         git config --global user.email "github-actions@github.com"
-        git add report.html news.html system1.html
+        git add report.html news.html system.html
         git commit -m "Update daily reports"
         git push
