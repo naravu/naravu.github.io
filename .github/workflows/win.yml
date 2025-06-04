@@ -1,0 +1,34 @@
+name: Daily System Report
+
+on:
+  schedule:
+    - cron: '0 0 * * *' # Runs daily at 00:00 UTC (5:30 AM IST)
+
+jobs:
+  generate-report:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x' # Change this to the required Python version
+
+      - name: Install dependencies
+        run: |
+          pip install -r winrequirements.txt
+
+      - name: Run Python script
+        run: |
+          python winreport.py
+
+      - name: Commit and push report
+        run: |
+          git config --global user.name "github-actions"
+          git config --global user.email "actions@github.com"
+          git add winsystem.html
+          git commit -m "Daily system report"
+          git push
