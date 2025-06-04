@@ -1,1 +1,1 @@
-winrequirements.txt
+psutil==5.9.0
