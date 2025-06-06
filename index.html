@@ -168,20 +168,21 @@
         Full Thirukural random daily quotes
         Magazines, Java code generator with code highlights
     </pre> 
-    <!-- small id="dt"></small -->
-    
     <footer><small>
         &nbsp; © All rights reserved.
         Results in <span id="execution-time">0.0000</span>. IP:<span id="user-ip">⏳</span>
         </small>
         <small id="dt"></small>
     </footer>
-    <script>
+    <!-- script>
     const date = new Date(document.lastModified);
     document.getElementById("dt").innerHTML = date;
-    </script>
+    </script -->
 
     <script>
+        const date = new Date(document.lastModified);
+        document.getElementById("dt").innerHTML = date;
+
         // Calculate execution time
         document.getElementById("execution-time").innerText = (performance.now() / 1000).toFixed(4) + " seconds";
 
