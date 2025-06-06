@@ -80,6 +80,16 @@
         font-family: Arial, Helvetica, sans-serif;
         font-size: 12px;
     }
+     footer {
+            font-family: Arial, sans-serif;
+            font-size: 12px;
+            background-color: #ffffff;
+            padding: 0px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            border-top: 1px solid #ccc;
+        }
 
     </style>
 </head>
@@ -163,5 +173,21 @@
     const date = new Date(document.lastModified);
     document.getElementById("dt").innerHTML = date;
     </script>
+
+    <footer>
+        © All rights reserved.
+        Results in <span id="execution-time">0.0000</span>. IP: <span id="user-ip">...</span>
+    </footer>
+
+    <script>
+        // Calculate execution time
+        document.getElementById("execution-time").innerText = (performance.now() / 1000).toFixed(4) + " seconds";
+
+        // Fetch user IP (Requires an external API)
+        fetch("https://api64.ipify.org?format=json")
+            .then(response => response.json())
+            .then(data => document.getElementById("user-ip").innerText = data.ip);
+    </script>
+
     </body>
 </html>
