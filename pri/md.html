@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta charset="UTF-8">
+  <meta name="google" content="notranslate">
+
+  <style type="text/css">
+    * {
+      box-sizing: border-box;
+    }
+    html, body {
+      width: 100%;
+      height: 100%;
+      padding: 0;
+      margin: 0;
+      overflow: hidden;
+    }
+    hr {
+      margin: 1em 0;
+      border: 0;
+      border-bottom: 1px solid #ccc;
+    }
+    blockquote {
+      margin-left: 0;
+      padding: 0.5em 0 0.5em 2em;
+      border-left: 3px solid rgb(211, 218, 234);
+    }
+    li, code {
+      margin: 0.4em 0;
+    }
+    p {
+      margin: 0.9em 0;
+    }
+    code {
+      background: rgba(211, 218, 234, 0.25);
+    }
+    pre > code {
+      display: block;
+      padding: 0.5em 4em;
+    }
+    table {
+      border-spacing: 0;
+      border-collapse: collapse;
+    }
+    td {
+      padding: 4px 8px;
+    }
+    tr:nth-child(2n) {
+      background: #f3f3f3;
+    }
+    th {
+      border-bottom: 1px solid #aaa;
+    }
+    img {
+      max-width: 96px;
+    }
+    .plain, .markdown {
+      position: absolute;
+      width: 50%;
+      height: 100%;
+      margin: 0;
+    }
+    .plain {
+      border: 0;
+      border-right: 1px solid #000;
+      padding: 12px;
+      font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', 'source-code-pro', monospace;
+      font-size: 12px;
+      resize: none;
+    }
+    .markdown {
+      left: 50%;
+      padding: 0 0 0 12px;
+      overflow: auto;
+      font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif;
+      font-size: 14px;
+      line-height: 1.3;
+    }
+  </style>
+  <title>drawdown test</title>
+</head>
+<body>
+  <textarea class="plain"># drawdown
+
+---
+
+Tiny but reliable Markdown to HTML conversion in JavaScript
+
+Supported Markdown features:
+
+#### Headings
+
+Inline styles such as **bold**, *italic*, ***both***, ~~strikethrough~~, `monospace`, --subscript--, and ^^superscript^^.
+
+&gt; Block quotes, including
+&gt; &gt; nested block quotes.
+
+```
+Fenced code blocks
+```
+
+    Indented code blocks
+
+1. Numbered lists
+  - Unordered lists
+  - Nested in other lists
+    a. Lettered lists are an extension to the spec.
+    b. They may be useful for legal documents.
+2. Another entry in my numbered list.
+
+| Tables | Tables | Tables |
+| ------ | ------ | ------ |
+| Cell 1 | Cell 2 | Cell 3 |
+| Cell 4 | Cell 5 | Cell 6 |
+| Cell 7 | Cell 8 | Cell 9 |
+
+[Links](https://github.com/adamvleggett/drawdown)
+
+Images:
+
+![Images](https://img.icons8.com/ios/452/stack-of-photos.png)
+
+---
+
+### Summary...
+
+These are the supported features:
+
+- Block quotes
+- Code blocks
+- Links
+- Images
+- Headings
+- Lists (including lettered lists)
+- Bold
+- Italic
+- Strikethrough
+- Monospace
+- Subscript
+- Horizontal rule
+- Tables
+
+Unsupported Markdown features at this time:
+
+- Line blocks
+- Definition lists
+- Footnotes
+- Twitter/Facebook/YouTube embed
+- Inline math equations
+
+To use:
+
+    element.innerHTML = markdown(text);
+</textarea>
+  <div class="markdown"><h1>drawdown</h1>
+
+<hr><p>Tiny but reliable Markdown to HTML conversion in JavaScript</p><p>Supported Markdown features:</p><h4>Headings</h4><p>Inline styles such as <strong>bold</strong>, <em>italic</em>, <strong><em>both</em></strong>, <s>strikethrough</s>, <code>monospace</code>, <small>subscript</small>, and <sup>superscript</sup>.</p><blockquote>Block quotes, including<blockquote>nested block quotes.</blockquote></blockquote><p></p><pre><code>Fenced code blocks</code></pre>
+<pre><code>Indented code blocks
+</code></pre><p></p><ol start="1"><li>Numbered lists
+<ul><li>Unordered lists</li><li>Nested in other lists
+<ol start="1" style="list-style-type:lower-alpha"><li>Lettered lists are an extension to the spec.</li><li>They may be useful for legal documents.</li></ol></li></ul></li><li>Another entry in my numbered list.</li></ol>
+
+<table><tbody><tr><th> Tables </th><th> Tables </th><th> Tables </th>
+</tr><tr><td> Cell 1 </td><td> Cell 2 </td><td> Cell 3 </td>
+</tr><tr><td> Cell 4 </td><td> Cell 5 </td><td> Cell 6 </td>
+</tr><tr><td> Cell 7 </td><td> Cell 8 </td><td> Cell 9 </td>
+</tr></tbody></table><p><a href="https://github.com/adamvleggett/drawdown">Links</a></p><p>Images:</p><p><img src="drawdown%20test_files/stack-of-photos.png" alt="Images"></p><hr>
+
+<h3>Summary...</h3><p>These are the supported features:</p><ul><li>Block quotes</li><li>Code blocks</li><li>Links</li><li>Images</li><li>Headings</li><li>Lists (including lettered lists)</li><li>Bold</li><li>Italic</li><li>Strikethrough</li><li>Monospace</li><li>Subscript</li><li>Horizontal rule</li><li>Tables</li></ul><p>Unsupported Markdown features at this time:</p><ul><li>Line blocks</li><li>Definition lists</li><li>Footnotes</li><li>Twitter/Facebook/YouTube embed</li><li>Inline math equations</li></ul><p>To use:
+</p><pre><code>element.innerHTML = markdown(text);
+</code></pre><p></p></div>
+  <script type="text/javascript" src="md.js"></script>
+  <script type="text/javascript">
+    var ein = document.querySelector(".plain");
+    var eout = document.querySelector(".markdown");
+    function update() {
+      eout.innerHTML = markdown(ein.value);
+    }
+    ein.addEventListener("input", update);
+    update();
+  </script>
+</body></html>
