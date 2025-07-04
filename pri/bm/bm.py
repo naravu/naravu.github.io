@@ -29,7 +29,7 @@ def generate_html(bookmarks):
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>📚 Bookmarks</title>
+  <title>📌🅝🅞🅞🅡🅚🅤🅡🅘</title>
   <style>
     body {
             background-color: white;
@@ -53,7 +53,7 @@ def generate_html(bookmarks):
       text-align: left;
     }
     th {
-      background: #008000;
+      background: #FFD700;
       color: #fff;
       cursor: pointer;
     }
@@ -68,6 +68,19 @@ def generate_html(bookmarks):
     a:hover {
       text-decoration: underline;
     }
+    .dark-mode a {
+  color: #1e90ff;
+}
+
+.dark-mode tr:hover {
+  background-color: #333;
+}
+
+.dark-mode th {
+  background: #555;
+  color: #FFD700;
+}
+
   </style>
   <script>
     function filterTable() {
@@ -111,15 +124,15 @@ def generate_html(bookmarks):
   
 </head>
 <body>
-  <input type="text" id="filterInput" placeholder="Filter bookmarks..." onkeyup="filterTable()"><button id="theme-button">☀️</button>
+  📌🅝🅞🅞🅡🅚🅤🅡🅘<input type="text" id="filterInput" placeholder="Search..." onkeyup="filterTable()"><button id="theme-button">☀️</button>
   <table id="bookmarkTable" data-sort-dir="asc">
     <thead>
       <tr>
-        <th onclick="sortTable(0)">🔢</th>
-        <th onclick="sortTable(1)">🔗</th>
-        <th onclick="sortTable(2)">🏷️</th>
-        <th onclick="sortTable(3)">🔖</th>
-        <th onclick="sortTable(4)">✅/❌</th>
+        <th onclick="sortTable(0)" title="Serial Number">🔢</th>
+        <th onclick="sortTable(1)" title="URL">🔗</th>
+        <th onclick="sortTable(2)" title="Tags">🏷️</th>
+        <th onclick="sortTable(3)" title="Description">🔖</th>
+        <th onclick="sortTable(4)" title="URL Status">✅/❌</th>
       </tr>
     </thead>
     <tbody>
@@ -139,15 +152,16 @@ def generate_html(bookmarks):
 
     html += """    </tbody>
   </table>
-  <script><!-- dark theme script -->
-        const themeButton = document.getElementById("theme-button");
-        const body = document.body;
+  <script>
+  const themeButton = document.getElementById("theme-button");
+  const body = document.body;
 
-        themeButton.addEventListener("click", () => {
-            body.classList.toggle("dark-mode");
-            button.textContent = body.classList.contains('dark-mode') ? '☀️' : '🌙';
-        });
-    </script>
+  themeButton.addEventListener("click", () => {
+    body.classList.toggle("dark-mode");
+    themeButton.textContent = body.classList.contains("dark-mode") ? "🌙" : "☀️";
+  });
+</script>
+
 </body>
 </html>"""
 
