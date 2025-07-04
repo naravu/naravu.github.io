@@ -23,3 +23,6 @@ https://jionews.com/summary/
 
 https://iptv-org.github.io/
 https://docs.openstack.org/image-guide/obtain-images.html
+
+one line health check
+echo "`hostname`, `uname -r`, `hostname -I`, `who | wc -l`, `uptime | awk '{print $3,$4}'`, `free -m | awk 'NR==2 {printf "%.2f%%", $3*100/$2}'`, `df -h / | awk '$NF=="/" {print $5}'`, `uptime | awk -F'average:' '{print $2}' | sed 's/,//g' | awk '{print $2}'`, `ps -eo stat|grep -w Z|wc -l`, `who -b | awk '{print $3, $4}'`, `ping -c 1 $(hostname) >/dev/null 2>&1 && echo "UP" || echo "DOWN" ` " | tr -s '\n' ' '
