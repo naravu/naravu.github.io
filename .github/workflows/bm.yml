@@ -1,0 +1,37 @@
+name: Daily Python Script Execution
+
+on:
+  schedule:
+    - cron: '30 1 * * *' # Runs at 7 AM IST (01:30 UTC)
+
+permissions:
+  contents: write # Allows write access to repository contents
+
+jobs:
+  run-script:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v3
+
+    - name: Set Up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.x'
+    
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r .github/workflows/bmrequirements.txt
+
+    - name: Run Python Script
+      run: |
+        python pri/bm/bm.py
+        
+    - name: Commit and Pusfindh Report
+      run: |
+        git config --global user.name "github-actions"
+        git config --global user.email "github-actions@github.com"
+        git add pri/bm/bm.html
+        git commit -m "Updated bookmarks"
+        git push
