@@ -21,8 +21,7 @@ jobs:
     
     - name: Install dependencies
       run: |
-        python -m pip install --upgrade pip
-        pip install -r .github/workflows/bmrequirements.txt
+        python -m pip install --upgrade pip        
 
     - name: Run Python Script
       run: |
