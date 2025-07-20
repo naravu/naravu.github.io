@@ -4,7 +4,7 @@
        Icon name: computer-vm
          Chassis: vm 🖴
       Machine ID: 07eaddc811614420b3065018f22a0e33
-         Boot ID: 64dc3df24b1c4b21bb52baa7a9a88a9e
+         Boot ID: d278b97b09fc4cc8a741540c2bad0e40
   Virtualization: microsoft
 Operating System: Ubuntu 24.04.2 LTS
           Kernel: Linux 6.11.0-1018-azure
@@ -13,36 +13,36 @@ Operating System: Ubuntu 24.04.2 LTS
   Hardware Model: Virtual Machine
 Firmware Version: 090008
    Firmware Date: Fri 2018-12-07
-    Firmware Age: 6y 7month 1w 5d</pre>
+    Firmware Age: 6y 7month 1w 6d</pre>
 <a name=network></a><b>Network Details</b><pre>docker0: flags=4099<UP,BROADCAST,MULTICAST>  mtu 1500
         inet 172.17.0.1  netmask 255.255.0.0  broadcast 172.17.255.255
-        ether 52:d3:fb:6c:78:de  txqueuelen 0  (Ethernet)
+        ether 42:43:3b:a9:8d:23  txqueuelen 0  (Ethernet)
         RX packets 0  bytes 0 (0.0 B)
         RX errors 0  dropped 0  overruns 0  frame 0
         TX packets 0  bytes 0 (0.0 B)
         TX errors 0  dropped 2 overruns 0  carrier 0  collisions 0
 
 eth0: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
-        inet 10.1.0.124  netmask 255.255.240.0  broadcast 10.1.15.255
-        inet6 fe80::7eed:8dff:fe55:8835  prefixlen 64  scopeid 0x20<link>
-        ether 7c:ed:8d:55:88:35  txqueuelen 1000  (Ethernet)
-        RX packets 18593  bytes 26182282 (26.1 MB)
+        inet 10.1.0.155  netmask 255.255.240.0  broadcast 10.1.15.255
+        inet6 fe80::7e1e:52ff:fed8:2299  prefixlen 64  scopeid 0x20<link>
+        ether 7c:1e:52:d8:22:99  txqueuelen 1000  (Ethernet)
+        RX packets 18374  bytes 26156133 (26.1 MB)
         RX errors 0  dropped 0  overruns 0  frame 0
-        TX packets 2067  bytes 516386 (516.3 KB)
+        TX packets 1718  bytes 375255 (375.2 KB)
         TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
 
 lo: flags=73<UP,LOOPBACK,RUNNING>  mtu 65536
         inet 127.0.0.1  netmask 255.0.0.0
         inet6 ::1  prefixlen 128  scopeid 0x10<host>
         loop  txqueuelen 1000  (Local Loopback)
-        RX packets 212  bytes 27734 (27.7 KB)
+        RX packets 208  bytes 27578 (27.5 KB)
         RX errors 0  dropped 0  overruns 0  frame 0
-        TX packets 212  bytes 27734 (27.7 KB)
+        TX packets 208  bytes 27578 (27.5 KB)
         TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0</pre>
 <a name=swap></a><font face=serif size=2><b>Swap Details</b></font><pre>               total        used        free      shared  buff/cache   available
-Mem:            15Gi       800Mi        14Gi        41Mi       1.1Gi        14Gi
+Mem:            15Gi       757Mi        14Gi        41Mi       1.1Gi        14Gi
 Swap:          4.0Gi          0B       4.0Gi</pre>
-<a name=user></a><font face=serif size=2><b>Connected User Details</b></font><pre> 23:10:39 up 1 min,  0 user,  load average: 0.48, 0.24, 0.09
+<a name=user></a><font face=serif size=2><b>Connected User Details</b></font><pre> 23:11:49 up 0 min,  0 user,  load average: 0.20, 0.05, 0.01
 USER     TTY      FROM             LOGIN@   IDLE   JCPU   PCPU  WHAT</pre>
 <a name=fstab></a><font face=serif size=2><b>FStab Details</b></font><pre># CLOUD_IMG: This file was created/modified by the Cloud Image build process
 UUID=d9162b33-00a5-4d29-9233-400fdb948f1e	/	 ext4	discard,commit=30,errors=remount-ro	0 1
@@ -100,7 +100,7 @@ UUID=B9A8-AA63	/boot/efi	vfat	umask=0077	0 1
 <td>/run/lock</td>
 </tr>
 <tr>
-<td>/dev/sdb16</td>
+<td>/dev/sda16</td>
 <td>ext4</td>
 <td>924M</td>
 <td>63M</td>
@@ -109,7 +109,7 @@ UUID=B9A8-AA63	/boot/efi	vfat	umask=0077	0 1
 <td>/boot</td>
 </tr>
 <tr>
-<td>/dev/sdb15</td>
+<td>/dev/sda15</td>
 <td>vfat</td>
 <td>110M</td>
 <td>6.4M</td>
@@ -118,7 +118,7 @@ UUID=B9A8-AA63	/boot/efi	vfat	umask=0077	0 1
 <td>/boot/efi</td>
 </tr>
 <tr>
-<td>/dev/sda1</td>
+<td>/dev/sdb1</td>
 <td>ext4</td>
 <td>79G</td>
 <td>4.3G</td>
@@ -196,11 +196,13 @@ tcp6       0      0 :::22                   :::*                    LISTEN      
   polkit.service                                              loaded    active   running Authorization Manager
   rsyslog.service                                             loaded    active   running System Logging Service
   serial-getty@ttyS0.service                                  loaded    active   running Serial Getty on ttyS0
+  systemd-fsckd.service                                       loaded    active   running File System Check Daemon to report status
   systemd-hostnamed.service                                   loaded    active   running Hostname Service
   systemd-journald.service                                    loaded    active   running Journal Service
   systemd-logind.service                                      loaded    active   running User Login Management
   systemd-networkd.service                                    loaded    active   running Network Configuration
   systemd-resolved.service                                    loaded    active   running Network Name Resolution
+  systemd-timedated.service                                   loaded    active   running Time & Date Service
   systemd-udevd.service                                       loaded    active   running Rule-based Manager for Device Events and Files
   ua-timer.service                                            loaded    inactive dead    Ubuntu Pro Timer for running repeated jobs
   udisks2.service                                             loaded    active   running Disk Manager
@@ -331,7 +333,6 @@ tcp6       0      0 :::22                   :::*                    LISTEN      
   systemd-battery-check.service                               loaded    inactive dead    Check battery level during early boot
   systemd-bsod.service                                        loaded    inactive dead    Displays emergency message in full screen.
   systemd-firstboot.service                                   loaded    inactive dead    First Boot Wizard
-  systemd-fsckd.service                                       loaded    inactive dead    File System Check Daemon to report status
   systemd-hibernate-resume.service                            loaded    inactive dead    Resume from hibernation
   systemd-hibernate.service                                   loaded    inactive dead    System Hibernate
   systemd-hwdb-update.service                                 loaded    inactive dead    Rebuild Hardware Database
@@ -374,30 +375,30 @@ tcp6       0      0 :::22                   :::*                    LISTEN      
 <a name=dmidecode></a><font face=serif size=2><b>System Details</b></font><pre># dmidecode 3.5
 Scanning /dev/mem for entry point.</pre>
 <a name=inxi></a><font face=serif size=2><b>System Details New</b></font><pre></pre>
-<a name=zombie></a><font face=serif size=2><b>Zombies</b></font><pre>runner      2184  0.0  0.0   7080  2100 ?        S    23:10   0:00 grep defunct</pre>
-<a name=reboot></a><font face=serif size=2><b>Reboot</b></font><pre>reboot   system boot  6.11.0-1018-azur Sat Jul 19 23:09   still running</pre>
-<a name=shut></a><font face=serif size=2><b>Shutdown</b></font><pre>shutdown system down  6.11.0-1018-azur Thu Jul 10 09:46 - 23:09 (9+13:22)</pre>
+<a name=zombie></a><font face=serif size=2><b>Zombies</b></font><pre>runner      2200  0.0  0.0   7080  2140 ?        S    23:11   0:00 grep defunct</pre>
+<a name=reboot></a><font face=serif size=2><b>Reboot</b></font><pre>reboot   system boot  6.11.0-1018-azur Sun Jul 20 23:11   still running</pre>
+<a name=shut></a><font face=serif size=2><b>Shutdown</b></font><pre>shutdown system down  6.11.0-1018-azur Thu Jul 10 09:46 - 23:11 (10+13:25)</pre>
 <a name=mem></a><font face=serif size=2><b>Memory Hog</b></font><pre>%MEM     PID    PPID USER     STAT COMMAND
 
- 0.7    1954    1939 runner   Sl   /home/runner/actions-runner/cached/bin/Runner.Worker spawnclient 142 145
+ 0.7    1967    1944 runner   Sl   /home/runner/actions-runner/cached/bin/Runner.Worker spawnclient 142 145
 
- 0.5    1939    1888 runner   Sl   /home/runner/actions-runner/cached/bin/Runner.Listener run
+ 0.5    1944    1907 runner   Sl   /home/runner/actions-runner/cached/bin/Runner.Listener run
 
- 0.4    1166       1 root     Ssl  /usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock
+ 0.4    1156       1 root     Ssl  /usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock
 
- 0.3     826       1 root     Ss   php-fpm: master process (/etc/php/8.3/fpm/php-fpm.conf)
+ 0.3     828       1 root     Ss   php-fpm: master process (/etc/php/8.3/fpm/php-fpm.conf)
 
- 0.3     890       1 root     Ssl  /usr/bin/containerd</pre>
+ 0.2     894       1 root     Ssl  /usr/bin/containerd</pre>
 <a name=cpuh></a><font face=serif size=2><b>CPU Hog</b></font><pre>%CPU     PID    PPID USER     STAT COMMAND
 
-19.0    2153       1 root     Ss   /usr/lib/systemd/systemd-hostnamed
+22.2    2169       1 root     Ss   /usr/lib/systemd/systemd-hostnamed
 
-13.9    1954    1939 runner   Sl   /home/runner/actions-runner/cached/bin/Runner.Worker spawnclient 142 145
+16.6    1967    1944 runner   Sl   /home/runner/actions-runner/cached/bin/Runner.Worker spawnclient 142 145
 
- 7.3    1939    1888 runner   Sl   /home/runner/actions-runner/cached/bin/Runner.Listener run
+10.3       1       0 root     Ss   /sbin/init
 
- 3.8    2148    2139 runner   S    python shviapy.py
+ 8.7    1944    1907 runner   Sl   /home/runner/actions-runner/cached/bin/Runner.Listener run
 
- 3.7       1       0 root     Ss   /sbin/init</pre>
+ 4.5    2164    2155 runner   S    python shviapy.py</pre>
 <a name=dp></a><font face=serif size=2><b>Default Path</b></font><pre>/opt/hostedtoolcache/Python/3.13.5/x64/bin:/opt/hostedtoolcache/Python/3.13.5/x64:/snap/bin:/home/runner/.local/bin:/opt/pipx_bin:/home/runner/.cargo/bin:/home/runner/.config/composer/vendor/bin:/usr/local/.ghcup/bin:/home/runner/.dotnet/tools:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin</pre>
-<a name=copy></a><div id=foot><pre> &copy; Last OS update:  | Page update: Sat Jul 19 23:10:39 UTC 2025</pre></div><script>function myFunction() {  var x = document.getElementById("myDIV");  if (x.style.display === "none") {   x.style.display = "block";  } else {   x.style.display = "none";  }}</script></body></html>
+<a name=copy></a><div id=foot><pre> &copy; Last OS update:  | Page update: Sun Jul 20 23:11:50 UTC 2025</pre></div><script>function myFunction() {  var x = document.getElementById("myDIV");  if (x.style.display === "none") {   x.style.display = "block";  } else {   x.style.display = "none";  }}</script></body></html>
