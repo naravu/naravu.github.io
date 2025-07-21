@@ -81,6 +81,20 @@ def generate_html(bookmarks):
   color: #FFD700;
 }
 
+input[type="text"] {
+  padding: 4px;
+  margin-left: 6px;
+  border: 1px solid #ccc;
+  background-color: #f9f9f9;
+  color: #000;
+}
+
+.dark-mode input[type="text"] {
+  background-color: #222;
+  color: #fff;
+  border: 1px solid #444;
+}
+
   </style>
   <script>
     function filterTable() {
