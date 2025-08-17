@@ -4,7 +4,7 @@
        Icon name: computer-vm
          Chassis: vm 🖴
       Machine ID: b44face8d1b645f2b96698aaaa6a19d0
-         Boot ID: bac4923dc754484fa1bbde9c2b076cab
+         Boot ID: 3dc2cd918a4d4b7c870b7c22cf05584a
   Virtualization: microsoft
 Operating System: Ubuntu 24.04.2 LTS
           Kernel: Linux 6.11.0-1018-azure
@@ -13,36 +13,36 @@ Operating System: Ubuntu 24.04.2 LTS
   Hardware Model: Virtual Machine
 Firmware Version: 090008
    Firmware Date: Fri 2018-12-07
-    Firmware Age: 6y 8month 1w 2d</pre>
+    Firmware Age: 6y 8month 1w 3d</pre>
 <a name=network></a><b>Network Details</b><pre>docker0: flags=4099<UP,BROADCAST,MULTICAST>  mtu 1500
         inet 172.17.0.1  netmask 255.255.0.0  broadcast 172.17.255.255
-        ether ae:62:3e:28:d6:55  txqueuelen 0  (Ethernet)
+        ether 66:67:6b:bf:e9:bd  txqueuelen 0  (Ethernet)
         RX packets 0  bytes 0 (0.0 B)
         RX errors 0  dropped 0  overruns 0  frame 0
         TX packets 0  bytes 0 (0.0 B)
         TX errors 0  dropped 2 overruns 0  carrier 0  collisions 0
 
 eth0: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
-        inet 10.1.0.120  netmask 255.255.240.0  broadcast 10.1.15.255
-        inet6 fe80::7e1e:52ff:fe17:13ea  prefixlen 64  scopeid 0x20<link>
-        ether 7c:1e:52:17:13:ea  txqueuelen 1000  (Ethernet)
-        RX packets 22293  bytes 30515448 (30.5 MB)
+        inet 10.1.0.146  netmask 255.255.240.0  broadcast 10.1.15.255
+        inet6 fe80::7e1e:52ff:febd:3982  prefixlen 64  scopeid 0x20<link>
+        ether 7c:1e:52:bd:39:82  txqueuelen 1000  (Ethernet)
+        RX packets 22080  bytes 30668397 (30.6 MB)
         RX errors 0  dropped 0  overruns 0  frame 0
-        TX packets 1672  bytes 387823 (387.8 KB)
+        TX packets 2600  bytes 745656 (745.6 KB)
         TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
 
 lo: flags=73<UP,LOOPBACK,RUNNING>  mtu 65536
         inet 127.0.0.1  netmask 255.0.0.0
         inet6 ::1  prefixlen 128  scopeid 0x10<host>
         loop  txqueuelen 1000  (Local Loopback)
-        RX packets 196  bytes 26356 (26.3 KB)
+        RX packets 212  bytes 28333 (28.3 KB)
         RX errors 0  dropped 0  overruns 0  frame 0
-        TX packets 196  bytes 26356 (26.3 KB)
+        TX packets 212  bytes 28333 (28.3 KB)
         TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0</pre>
 <a name=swap></a><font face=serif size=2><b>Swap Details</b></font><pre>               total        used        free      shared  buff/cache   available
-Mem:            15Gi       890Mi        13Gi        42Mi       1.5Gi        14Gi
+Mem:            15Gi       828Mi        13Gi        42Mi       1.5Gi        14Gi
 Swap:          4.0Gi          0B       4.0Gi</pre>
-<a name=user></a><font face=serif size=2><b>Connected User Details</b></font><pre> 23:09:28 up 0 min,  0 user,  load average: 0.28, 0.06, 0.02
+<a name=user></a><font face=serif size=2><b>Connected User Details</b></font><pre> 23:09:49 up 2 min,  0 user,  load average: 0.33, 0.21, 0.09
 USER     TTY      FROM             LOGIN@   IDLE   JCPU   PCPU  WHAT</pre>
 <a name=fstab></a><font face=serif size=2><b>FStab Details</b></font><pre># CLOUD_IMG: This file was created/modified by the Cloud Image build process
 UUID=5b618de7-3de2-4d29-9615-b61ae39a7ef9	/	 ext4	discard,commit=30,errors=remount-ro	0 1
@@ -177,9 +177,9 @@ Destination     Gateway         Genmask         Flags   MSS Window  irtt Iface
 168.63.129.16   10.1.0.1        255.255.255.255 UGH       0 0          0 eth0
 169.254.169.254 10.1.0.1        255.255.255.255 UGH       0 0          0 eth0
 172.17.0.0      0.0.0.0         255.255.0.0     U         0 0          0 docker0</pre>
-<a name=port></a><font face=serif size=2><b>Listening Ports Details</b></font><pre>tcp        0      0 127.0.0.53:53           0.0.0.0:*               LISTEN      -                   
+<a name=port></a><font face=serif size=2><b>Listening Ports Details</b></font><pre>tcp        0      0 127.0.0.54:53           0.0.0.0:*               LISTEN      -                   
+tcp        0      0 127.0.0.53:53           0.0.0.0:*               LISTEN      -                   
 tcp        0      0 0.0.0.0:22              0.0.0.0:*               LISTEN      -                   
-tcp        0      0 127.0.0.54:53           0.0.0.0:*               LISTEN      -                   
 tcp6       0      0 :::22                   :::*                    LISTEN      -                   </pre>
 <a name=active></a><font face=serif size=2><b>Active Services</b></font><pre>  chrony.service                                              loaded    active   running chrony, an NTP client/server
   containerd.service                                          loaded    active   running containerd container runtime
@@ -202,7 +202,6 @@ tcp6       0      0 :::22                   :::*                    LISTEN      
   systemd-logind.service                                      loaded    active   running User Login Management
   systemd-networkd.service                                    loaded    active   running Network Configuration
   systemd-resolved.service                                    loaded    active   running Network Name Resolution
-  systemd-timedated.service                                   loaded    active   running Time & Date Service
   systemd-udevd.service                                       loaded    active   running Rule-based Manager for Device Events and Files
   ua-timer.service                                            loaded    inactive dead    Ubuntu Pro Timer for running repeated jobs
   udisks2.service                                             loaded    active   running Disk Manager
@@ -376,30 +375,30 @@ tcp6       0      0 :::22                   :::*                    LISTEN      
 <a name=dmidecode></a><font face=serif size=2><b>System Details</b></font><pre># dmidecode 3.5
 Scanning /dev/mem for entry point.</pre>
 <a name=inxi></a><font face=serif size=2><b>System Details New</b></font><pre></pre>
-<a name=zombie></a><font face=serif size=2><b>Zombies</b></font><pre>runner      2181  0.0  0.0   7080  2060 ?        S    23:09   0:00 grep defunct</pre>
-<a name=reboot></a><font face=serif size=2><b>Reboot</b></font><pre>reboot   system boot  6.11.0-1018-azur Sat Aug 16 23:08   still running</pre>
-<a name=shut></a><font face=serif size=2><b>Shutdown</b></font><pre>shutdown system down  6.11.0-1018-azur Sun Aug 10 22:53 - 23:08 (6+00:15)</pre>
+<a name=zombie></a><font face=serif size=2><b>Zombies</b></font><pre>runner      2241  0.0  0.0   7080  2028 ?        S    23:09   0:00 grep defunct</pre>
+<a name=reboot></a><font face=serif size=2><b>Reboot</b></font><pre>reboot   system boot  6.11.0-1018-azur Sun Aug 17 23:07   still running</pre>
+<a name=shut></a><font face=serif size=2><b>Shutdown</b></font><pre>shutdown system down  6.11.0-1018-azur Sun Aug 10 22:53 - 23:07 (7+00:13)</pre>
 <a name=mem></a><font face=serif size=2><b>Memory Hog</b></font><pre>%MEM     PID    PPID USER     STAT COMMAND
 
- 0.7    1950    1931 runner   Sl   /home/runner/actions-runner/cached/bin/Runner.Worker spawnclient 142 145
+ 0.7    2008    1993 runner   Sl   /home/runner/actions-runner/cached/bin/Runner.Worker spawnclient 142 145
 
- 0.5    1931    1891 runner   Sl   /home/runner/actions-runner/cached/bin/Runner.Listener run
+ 0.5    1993    1883 runner   Sl   /home/runner/actions-runner/cached/bin/Runner.Listener run
 
- 0.4    1168       1 root     Ssl  /usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock
+ 0.4    1141       1 root     Ssl  /usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock
 
- 0.3     825       1 root     Ss   php-fpm: master process (/etc/php/8.3/fpm/php-fpm.conf)
+ 0.3     824       1 root     Ss   php-fpm: master process (/etc/php/8.3/fpm/php-fpm.conf)
 
- 0.3     893       1 root     Ssl  /usr/bin/containerd</pre>
+ 0.2     895       1 root     Ssl  /usr/bin/containerd</pre>
 <a name=cpuh></a><font face=serif size=2><b>CPU Hog</b></font><pre>%CPU     PID    PPID USER     STAT COMMAND
 
-19.0    2150       1 root     Ss   /usr/lib/systemd/systemd-hostnamed
+22.2    2210       1 root     Ss   /usr/lib/systemd/systemd-hostnamed
 
-17.1    1950    1931 runner   Sl   /home/runner/actions-runner/cached/bin/Runner.Worker spawnclient 142 145
+18.5    2008    1993 runner   Sl   /home/runner/actions-runner/cached/bin/Runner.Worker spawnclient 142 145
 
- 9.8       1       0 root     Ss   /sbin/init
+ 8.4    1993    1883 runner   Sl   /home/runner/actions-runner/cached/bin/Runner.Listener run
 
- 8.3    1931    1891 runner   Sl   /home/runner/actions-runner/cached/bin/Runner.Listener run
+ 4.5    2205    2196 runner   S    python shviapy.py
 
- 3.5    2145    2135 runner   S    python shviapy.py</pre>
+ 2.2       1       0 root     Ss   /sbin/init</pre>
 <a name=dp></a><font face=serif size=2><b>Default Path</b></font><pre>/opt/hostedtoolcache/Python/3.13.6/x64/bin:/opt/hostedtoolcache/Python/3.13.6/x64:/snap/bin:/home/runner/.local/bin:/opt/pipx_bin:/home/runner/.cargo/bin:/home/runner/.config/composer/vendor/bin:/usr/local/.ghcup/bin:/home/runner/.dotnet/tools:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin</pre>
-<a name=copy></a><div id=foot><pre> &copy; Last OS update:  | Page update: Sat Aug 16 23:09:28 UTC 2025</pre></div><script>function myFunction() {  var x = document.getElementById("myDIV");  if (x.style.display === "none") {   x.style.display = "block";  } else {   x.style.display = "none";  }}</script></body></html>
+<a name=copy></a><div id=foot><pre> &copy; Last OS update:  | Page update: Sun Aug 17 23:09:49 UTC 2025</pre></div><script>function myFunction() {  var x = document.getElementById("myDIV");  if (x.style.display === "none") {   x.style.display = "block";  } else {   x.style.display = "none";  }}</script></body></html>
