@@ -236,6 +236,9 @@ def md_to_html_table(md_path, html_path):
 
         updateCount();
       </script>
+       <small style="display:block; text-align:center; color:#888; font-size:12px; margin-top:20px;">
+      © Kuri. All rights reserved.
+      </small>
     </body>
     </html>
     """
