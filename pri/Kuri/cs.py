@@ -14,53 +14,61 @@ def md_to_html_table(md_path, html_path):
     <head>
       <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <title>&copy; Kuri</title>
+      <title>🐧Kuri &copy;</title>
       <style>
         body {{
           font-family: 'Segoe UI', sans-serif;
           background-color: #121212;
           color: #e0e0e0;
-          padding: 10px;
+          padding: 5px;
           margin: 0;
         }}
         .search-bar {{
           display: flex;
           flex-wrap: wrap;
           align-items: center;
-          gap: 6px;
-          margin-bottom: 10px;
+          margin-bottom: 8px;
+        }}
+        .search-wrapper {{
+          position: relative;
+          flex: 1;
+          display: flex;
+          align-items: center;
         }}
         #searchBox {{
           padding: 8px;
-          flex: 1;
-          min-width: 200px;
+          width: 100%;
           background-color: #1e1e1e;
           color: #e0e0e0;
           border: 1px solid #444;
           box-sizing: border-box;
+          padding-right: 180px;
+        }}
+        .button-group {{
+          position: absolute;
+          right: 6px;
+          display: flex;
+          gap: 4px;
+          align-items: center;
+        }}
+        .icon-btn {{
+          background: transparent;
+          border: none;
+          color: #ccc;
+          font-size: 14px;
+          cursor: pointer;
+          padding: 2px;
+        }}
+        .icon-btn:hover {{
+          color: #fff;
         }}
         #countLabel {{
-          padding: 8px 12px;
-          background-color: #2c2c2c;
+          font-size: 12px;
           color: #ffcc00;
-          font-weight: normal;
-          border: 1px solid #444;
-          white-space: nowrap;
-        }}
-        .action-btn {{
-          padding: 8px 12px;
-          background-color: #2c2c2c;
-          color: #e0e0e0;
-          border: 1px solid #444;
-          cursor: pointer;
-          font-size: 14px;
-          border-radius: 4px;
-        }}
-        .action-btn span {{
-          font-size: 14px;
-        }}
-        .action-btn:hover {{
-          background-color: #3a3a3a;
+          background: transparent;
+          border: none;
+          padding: 2px 6px;
+          pointer-events: none;
         }}
         .table-container {{
           overflow-x: auto;
@@ -83,6 +91,8 @@ def md_to_html_table(md_path, html_path):
         }}
         td {{
           background-color: #1e1e1e;
+          font-family: 'Segoe UI', sans-serif;
+          font-size: 12px;
         }}
         td code {{
           background: #2c2c2c;
@@ -95,25 +105,30 @@ def md_to_html_table(md_path, html_path):
             padding: 4px;
             font-size: 14px;
           }}
-          #searchBox, .action-btn, #countLabel {{
+          #searchBox, .icon-btn {{
             font-size: 12px;
             padding: 6px 10px;
-            font-weight: normal;
           }}
         }}
       </style>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.25/jspdf.plugin.autotable.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
     </head>
     <body>
       <div class="search-bar">
-        <input type="text" id="searchBox" placeholder="🔍 Filter...">
-        <div id="countLabel" title="Count">🔢 0</div>
-        <button class="action-btn" onclick="resetFilter()" title="Reset">🔄</button>
-        <button class="action-btn" onclick="exportTable()" title="Export XLS">📤</button>
-        <button class="action-btn" onclick="showPrinter()" title="Print">🖨️</button>
-                
-        <button class="action-btn" onclick="showInfo()" title="Info"><span>🧠</span>Info</button>
-        <button class="action-btn" onclick="showTools()" title="Tools"><span>🛠️</span>Tools</button>
-        <button class="action-btn" onclick="runTest()" title="Test"><span>🧪</span>Test</button>
+        <div class="search-wrapper">
+          <input type="text" id="searchBox" placeholder="🔍 Filter...">
+          <div class="button-group">
+            <button class="icon-btn" onclick="resetFilter()" title="Reset">🔄</button>
+            <button class="icon-btn" onclick="exportTable()" title="Full XLS">📤</button>
+            <button class="icon-btn" onclick="tableToXLSX()" title="XLSX">📊</button>
+            <button class="icon-btn" onclick="tableToJSON()" title="JSON">🧾</button>
+            <button class="icon-btn" onclick="tableToPDF()" title="PDF">📄</button>
+            <button class="icon-btn" onclick="showPrinter()" title="Print">🖨️</button>
+            <span id="countLabel" title="Visible Rows">0</span>
+          </div>
+        </div>
       </div>
       <div class="table-container">
         {str(table)}
@@ -125,7 +140,7 @@ def md_to_html_table(md_path, html_path):
 
         function updateCount() {{
           const visibleRows = Array.from(table.rows).slice(1).filter(row => row.style.display !== 'none');
-          countLabel.textContent = '🔢' + visibleRows.length;
+          countLabel.textContent = visibleRows.length;
         }}
 
         searchBox.addEventListener('input', () => {{
@@ -169,6 +184,54 @@ def md_to_html_table(md_path, html_path):
 
         function showPrinter() {{
           window.print();
+        }}
+
+        function tableToPDF() {{
+          const {{ jsPDF }} = window.jspdf;
+          const doc = new jsPDF();
+          doc.text("Commands Reference", 14, 20);
+          doc.autoTable({{
+            html: 'table',
+            startY: 30,
+            theme: 'grid',
+            styles: {{
+              fontSize: 10,
+              cellPadding: 4,
+            }},
+            headStyles: {{
+              fillColor: [44, 44, 44],
+              textColor: [255, 255, 255],
+            }},
+            alternateRowStyles: {{
+              fillColor: [240, 240, 240],
+            }}
+          }});
+          doc.save("commands-reference.pdf");
+        }}
+
+        function tableToXLSX() {{
+          const wb = XLSX.utils.book_new();
+          const ws = XLSX.utils.table_to_sheet(document.querySelector('table'));
+          XLSX.utils.book_append_sheet(wb, ws, "Commands");
+          XLSX.writeFile(wb, "commands-reference.xlsx");
+        }}
+
+        function tableToJSON() {{
+          const headers = Array.from(table.rows[0].cells).map(cell => cell.innerText);
+          const data = Array.from(table.rows).slice(1).map(row => {{
+            const rowData = {{}};
+            Array.from(row.cells).forEach((cell, i) => {{
+              rowData[headers[i]] = cell.innerText;
+            }});
+            return rowData;
+          }});
+          const blob = new Blob([JSON.stringify(data, null, 2)], {{ type: 'application/json' }});
+          const link = document.createElement('a');
+          link.href = URL.createObjectURL(blob);
+          link.download = 'table.json';
+          document.body.appendChild(link);
+          link.click();
+          document.body.removeChild(link);
         }}
 
         updateCount();
