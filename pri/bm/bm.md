@@ -12,8 +12,9 @@
 | UnWaterMark | https://unwatermark.ai/ | Water Mark removal | Water mark removal tool on videos |
 | Mark Down app | https://officetomd.streamlit.app/ | Free Mark Down language converter App | Mark Down converter App |
 | Android in Windows | https://www.youtube.com/watch?v=ziXY2OsbB8I | Andriod on Windows | Android on Windows installation video |
-| AI Prompts | https://github.com/x1xhlol/system-prompts-and-models-of-ai-tools/tree/main | AI Prompts | Multiple AI prompts for activities
+| AI Prompts | https://github.com/x1xhlol/system-prompts-and-models-of-ai-tools/tree/main | AI Prompts | Multiple Free AI prompts for activities
 | Online OS | https://puter.com/app/terminal | Online desktop | Live OS in Browser
 | Loveable | https://lovable.dev/ | AI for web development | Web development AI tool
 | Krea AI | https://www.krea.ai/ | AI for manipulating videos & Images | Video & Image AI tool
 | Custom GPT | https://customgpt.ai/ | AI for your cusomization | Custom AI tool creation
+| Copilot | https://copilot.microsoft.com/ | Copilot for Code | Microsoft's AI assistant
