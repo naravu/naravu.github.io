@@ -19,3 +19,4 @@
 | Custom GPT | https://customgpt.ai/ | AI for your cusomization | Custom AI tool creation
 | Copilot | https://copilot.microsoft.com/ | Copilot for Code | Microsoft's AI assistant
 | Solo AI | https://soloist.ai/ | AI for website creation | Mozilla's AI chatbot
+| Mozilla AI | https://www.mozilla.ai/ | Mozilla AI for AI agents creation | Mozilla's AI eco system
