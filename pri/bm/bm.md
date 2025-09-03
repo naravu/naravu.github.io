@@ -18,3 +18,4 @@
 | Krea AI | https://www.krea.ai/ | AI for manipulating videos & Images | Video & Image AI tool
 | Custom GPT | https://customgpt.ai/ | AI for your cusomization | Custom AI tool creation
 | Copilot | https://copilot.microsoft.com/ | Copilot for Code | Microsoft's AI assistant
+| Solo AI | https://soloist.ai/ | AI for website creation | Mozilla's AI chatbot
