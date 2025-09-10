@@ -2,8 +2,8 @@ import re
 import argparse
 from datetime import datetime
 
-MD_FILE = "todo.md"
-HTML_FILE = "todo.html"
+MD_FILE = "pri/todo/todo.py"
+HTML_FILE = "pri/todo/todo.html"
 
 def parse_md(filepath):
     with open(filepath, 'r', encoding='utf-8') as f:
