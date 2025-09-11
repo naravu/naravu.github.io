@@ -2,7 +2,7 @@ import re
 import argparse
 from datetime import datetime
 
-MD_FILE = "pri/todo/todo.py"
+MD_FILE = "pri/todo/todo.md"
 HTML_FILE = "pri/todo/todo.html"
 
 def parse_md(filepath):
