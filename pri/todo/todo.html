@@ -1,0 +1,145 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>📝 Markdown To-Do List</title>
+    <style>
+        body {
+            margin: 0;
+            display: flex;
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: #1e1e1e;
+            color: #f0f0f0;
+        }
+        .sidebar {
+            width: 260px;
+            background-color: #2b2b2b;
+            padding: 20px;
+            border-right: 1px solid #444;
+            height: 100%;
+        }
+        .sidebar h3 {
+            margin-top: 0;
+            color: #ddd;
+        }
+        .sidebar code {
+            display: block;
+            margin: 6px 0;
+            color: #ccc;
+        }
+        .main {
+            flex-grow: 1;
+            padding: 20px;
+        }
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .legend {
+            text-align: center;
+            font-size: 0.95em;
+            color: #aaa;
+            margin-bottom: 10px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #2a2a2a;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+        }
+        thead {
+            background-color: #333;
+        }
+        th {
+            padding: 12px;
+            color: #ddd;
+            border-bottom: 1px solid #444;
+            cursor: pointer;
+        }
+        td {
+            padding: 12px;
+            border-bottom: 1px solid #444;
+        }
+        tr.done {
+            background-color: #264d26;
+            color: #cfc;
+        }
+        tr.pending {
+            background-color: #4d4426;
+            color: #ffe;
+        }
+        tr:hover {
+            background-color: #444;
+        }
+        details {
+            color: #eee;
+        }
+        summary {
+            cursor: pointer;
+            font-weight: bold;
+        }
+        .footer {
+            margin-top: 30px;
+            font-size: 0.85em;
+            color: #888;
+            text-align: center;
+            border-top: 1px solid #444;
+            padding-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <h3>🛠️ CLI Usage</h3>
+        <code>python todo_dashboard.py</code>
+        <code>python todo_dashboard.py --add "New Task"</code>
+        <code>python todo_dashboard.py --add "New Task" --desc "Details"</code>
+        <code>python todo_dashboard.py --remove 2</code>
+            <p><small>Use the CLI to add or remove tasks. Descriptions are optional and shown here.</small></p>
+    </div>
+    <div class="main">
+        
+        <div class="legend">✅ = Done, 🕒 = Pending Updated:2025-09-11 02:48:56</div>
+        <table id="todoTable">
+            <thead>
+                <tr>
+                    <th onclick="sortTable(0)"><span id="arrow0">Line 🔽</span></th>
+                    <th onclick="sortTable(1)"><span id="arrow1">Status 🔽</span></th>
+                    <th onclick="sortTable(2)"><span id="arrow2">Task 🔽</span></th>
+                </tr>
+            </thead>
+            <tbody>
+                
+            </tbody>
+        </table>
+        <div class="footer">
+            &copy; Todo All rights enabled.
+        </div>
+    </div>
+    <script>
+        let sortDirection = [true, true, true];
+        function sortTable(colIndex) {
+            const table = document.getElementById("todoTable");
+            const rows = Array.from(table.rows).slice(1);
+            const dir = sortDirection[colIndex] ? 1 : -1;
+
+            rows.sort((a, b) => {
+                const aText = a.cells[colIndex].innerText.trim();
+                const bText = b.cells[colIndex].innerText.trim();
+                return aText.localeCompare(bText) * dir;
+            });
+
+            sortDirection[colIndex] = !sortDirection[colIndex];
+            const tbody = table.querySelector("tbody");
+            rows.forEach(row => tbody.appendChild(row));
+
+            for (let i = 0; i < 3; i++) {
+                document.getElementById("arrow" + i).textContent =
+                    (i === colIndex ? (sortDirection[i] ? "🔽" : "🔼") : "🔽") + " " + ["Line", "Status", "Task"][i];
+            }
+        }
+    </script>
+</body>
+</html>
+    
