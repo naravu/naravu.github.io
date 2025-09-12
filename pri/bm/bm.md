@@ -20,3 +20,4 @@
 | Copilot | https://copilot.microsoft.com/ | Copilot for Code | Microsoft's AI assistant
 | Solo AI | https://soloist.ai/ | AI for website creation | Mozilla's AI chatbot
 | Mozilla AI | https://www.mozilla.ai/ | Mozilla AI for AI agents creation | Mozilla's AI eco system
+| Movie Site | https://moovai.net/ | Movie recommended Site | Movie recommendation Site with AI
