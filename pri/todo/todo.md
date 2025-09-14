@@ -12,6 +12,3 @@
 > Chatbots for code on own
 - [ ] Articles Preparation
 > Story on paramiko, Prepare other articles one by one
-- [ ] Test todo title
-> This is next todo
-
