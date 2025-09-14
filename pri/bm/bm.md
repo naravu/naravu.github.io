@@ -22,3 +22,4 @@
 | Mozilla AI | https://www.mozilla.ai/ | Mozilla AI for AI agents creation | Mozilla's AI eco system
 | Movie Site | https://moovai.net/ | Movie recommended Site | Movie recommendation Site with AI
 | Circut Verse | https://learn.circuitverse.org/ | Circuts | Electronic circuts
+| Zamzar | https://www.zamzar.com/ | Zamzar file conversion | Zamzar file conversion free online
