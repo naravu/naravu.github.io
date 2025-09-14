@@ -24,3 +24,4 @@
 | Circut Verse | https://learn.circuitverse.org/ | Circuts | Electronic circuts
 | Zamzar | https://www.zamzar.com/ | Zamzar file conversion | Zamzar file conversion free online
 | Kirao | https://kiro.dev/ | Kiro code agent | Kiro vibe code agent free tier
+| Gnukhata | https://gnukhata.org/ | Free accounting software | Free Tally alternative |
