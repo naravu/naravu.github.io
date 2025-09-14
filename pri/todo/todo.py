@@ -183,7 +183,7 @@ def generate_html(tasks):
         <table id="todoTable">
             <thead>
                 <tr>
-                    <th onclick="sortTable(0)"><span id="arrow0">Line 🔽</span></th>
+                    <th onclick="sortTable(0)"><span id="arrow0">🔢 🔽</span></th>
                     <th onclick="sortTable(1)"><span id="arrow1">Status 🔽</span></th>
                     <th onclick="sortTable(2)"><span id="arrow2">Task 🔽</span></th>
                 </tr>
