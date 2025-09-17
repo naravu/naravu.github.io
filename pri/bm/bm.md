@@ -25,3 +25,6 @@
 | Zamzar | https://www.zamzar.com/ | Zamzar file conversion | Zamzar file conversion free online
 | Kirao | https://kiro.dev/ | Kiro code agent | Kiro vibe code agent free tier
 | Gnukhata | https://gnukhata.org/ | Free accounting software | Free Tally alternative |
+| Google | https://www.google.com/ | Search Engine| Google Search Engine |
+| Uiverse | https://uiverse.io/elements | Uiverse | CSS Templates free code |
+| தமிழ் எழுதி | https://tamileditor.org/ | தமிழ் எழுதி | தமிழ் எழுதி, தமிழெழுதி - Tamil Editor |
