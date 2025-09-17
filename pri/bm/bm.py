@@ -126,9 +126,9 @@ input[type="text"] {
         const cell = row.querySelector(".status");
         try {
           await fetch(link.href, { method: "HEAD", mode: "no-cors" });
-          cell.textContent = "✔";
+          cell.textContent = "✅";
         } catch {
-          cell.textContent = "✘";
+          cell.textContent = "❌";
         }
       }
     }
