@@ -247,4 +247,4 @@ def md_to_html_table(md_path, html_path):
         f.write(html_final)
 
 if __name__ == "__main__":
-    md_to_html_table('cs.md', 'commands.html')
+    md_to_html_table('cs.md', 'cs.html')
