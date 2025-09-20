@@ -31,7 +31,7 @@ jobs:
       run: |
         git config --global user.name "github-actions"
         git config --global user.email "github-actions@github.com"
-        git add pri/cs/cs.html
+        git add pri/cs/commands.html
 
         # Only commit if there are changes
         if ! git diff --cached --quiet; then
