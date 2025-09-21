@@ -36,7 +36,7 @@ jobs:
 
         # Only commit if there are changes
         if ! git diff --cached --quiet; then
-          git commit -m "Updated bookmarks"
+          git commit -m "Updated Cheatsheets"
           git push
         else
           echo "No changes to commit"
