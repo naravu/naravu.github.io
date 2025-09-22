@@ -1,10 +1,9 @@
 # 📝 To-Do List
 
 - [x] Bookmark enhancements
-
+- [x] Git integration on Linux cheat sheet
 - [ ] Interview Prepartion
 > DR Vlogs, Dwaraga, Jagadish
-- [x] Git integration on Linux cheat sheet
 - [ ] Bookmark integration
 > Make sure all bookmarks in a single reable page
 - [ ] Create own AI chatbot
@@ -13,3 +12,4 @@
 > Story on paramiko, Prepare other articles one by one
 - [ ] Music class
 > Keyboard class and buying Keyboard
+- [ ] Amplifier repair in Anekal
