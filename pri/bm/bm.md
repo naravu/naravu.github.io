@@ -30,3 +30,4 @@
 | தமிழ் எழுதி | https://tamileditor.org/ | தமிழ் எழுதி | தமிழ் எழுதி, தமிழெழுதி - Tamil Editor |
 | Modulify | https://www.modulify.ai/ | Modulify | AI Website builder, Website creator |
 | TinyWOW | https://tinywow.com/ |TinyWOW | Free online converters - TinyWOW |
+| Emergent | https://app.emergent.sh/landing |Rapid webapp builder | Rapid webapp builder and clone existing webapps |
