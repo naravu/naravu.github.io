@@ -32,3 +32,4 @@
 | TinyWOW | https://tinywow.com/ |TinyWOW | Free online converters - TinyWOW |
 | Emergent | https://app.emergent.sh/landing |Rapid webapp builder | Rapid webapp builder and clone existing webapps |
 | AI Music | https://music.ai/ |AI Music | Free AI Music with login |
+| Docker on Debian| https://docs.docker.com/desktop/setup/install/linux/debian/#install-docker-desktop |Debian docker | Docker explanation on Debian |
