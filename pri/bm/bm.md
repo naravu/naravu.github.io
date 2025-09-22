@@ -31,3 +31,4 @@
 | Modulify | https://www.modulify.ai/ | Modulify | AI Website builder, Website creator |
 | TinyWOW | https://tinywow.com/ |TinyWOW | Free online converters - TinyWOW |
 | Emergent | https://app.emergent.sh/landing |Rapid webapp builder | Rapid webapp builder and clone existing webapps |
+| AI Music | https://music.ai/ |AI Music | Free AI Music with login |
