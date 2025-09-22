@@ -3,9 +3,8 @@
 - [x] Bookmark enhancements
 
 - [ ] Interview Prepartion
-> Suhas, DR Vlogs, Dwaraga, Jagadish, Infosys, Mukkaram 8919887639
-- [ ] Git integration on Linux cheat sheet
-> Cheat sheet daily update via git
+> DR Vlogs, Dwaraga, Jagadish
+- [x] Git integration on Linux cheat sheet
 - [ ] Bookmark integration
 > Make sure all bookmarks in a single reable page
 - [ ] Create own AI chatbot
