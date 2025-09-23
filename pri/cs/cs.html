@@ -3,7 +3,7 @@
     <head>
       <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <title>🐧🅚🅤🅡🅘 &copy;</title>
+      <title>🐧Kuri &copy;</title>
       <style>
         body {
           font-family: 'Segoe UI', sans-serif;
@@ -107,7 +107,6 @@
     <body>
       <div class="search-bar">
         <div class="search-wrapper">
-          🅚🅤🅡🅘
           <input type="text" id="searchBox" placeholder="🔍 Filter...">
           <div class="button-group">
             <button class="icon-btn" onclick="resetFilter()" title="Reset">🔄</button>
@@ -153,12 +152,27 @@
 <tr>
 <td><code>pwd</code></td>
 <td>Print working directory</td>
-<td>RHEL, Debian, Ubuntu, Fedora</td>
+<td>All</td>
 </tr>
 <tr>
 <td><code>cat /etc/debian_version</code>,<code>lsb_release -a</code>,<code>cat /etc/os-release</code></td>
 <td>Check Debian version</td>
 <td>Debian, Ubuntu</td>
+</tr>
+<tr>
+<td><code>dmidecode</code></td>
+<td>View hardware infomation including serial numbers etc.</td>
+<td>RHEL, Ubuntu</td>
+</tr>
+<tr>
+<td><code>dmidecode -s system-manufacturer</code></td>
+<td>Check physical / virtual (vm)</td>
+<td>RHEL, Ubuntu</td>
+</tr>
+<tr>
+<td><code>dmidecode -s system-product-name</code></td>
+<td>Check physical / virtual (vm)</td>
+<td>RHEL, Ubuntu</td>
 </tr>
 </tbody>
 </table>
