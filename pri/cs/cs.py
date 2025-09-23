@@ -14,7 +14,7 @@ def md_to_html_table(md_path, html_path):
     <head>
       <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <title>🐧Kuri &copy;</title>
+      <title>🐧🅚🅤🅡🅘 &copy;</title>
       <style>
         body {{
           font-family: 'Segoe UI', sans-serif;
@@ -117,7 +117,7 @@ def md_to_html_table(md_path, html_path):
     </head>
     <body>
       <div class="search-bar">
-        <div class="search-wrapper">
+        <div class="search-wrapper">🅚🅤🅡🅘
           <input type="text" id="searchBox" placeholder="🔍 Filter...">
           <div class="button-group">
             <button class="icon-btn" onclick="resetFilter()" title="Reset">🔄</button>
