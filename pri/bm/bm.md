@@ -33,3 +33,4 @@
 | Emergent | https://app.emergent.sh/landing |Rapid webapp builder | Rapid webapp builder and clone existing webapps |
 | AI Music | https://music.ai/ |AI Music | Free AI Music with login |
 | Docker on Debian| https://docs.docker.com/desktop/setup/install/linux/debian/#install-docker-desktop |Debian docker | Docker explanation on Debian |
+| Deep AI | https://deepai.org/chat |Deep AI | Free AI Chatbot alternate to Deep Seek|
