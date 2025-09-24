@@ -49,7 +49,7 @@ def generate_html(bookmarks):
     }
     th, td {
       padding: 1px 1px;
-      border-bottom: 0px solid #ddd;
+      border-bottom: 1px solid #ddd;
       text-align: left;
     }
     th {
