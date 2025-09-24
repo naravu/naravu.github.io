@@ -3,9 +3,7 @@
 - [x] Bookmark enhancements
 - [x] Git integration on Linux cheat sheet
 - [ ] Interview Prepartion
-> DR Vlogs, Dwaraga, Jagadish
-- [ ] Bookmark integration
-> Make sure all bookmarks in a single reable page
+> Dwaraga, Jagadish
 - [ ] Create own AI chatbot
 > Chatbots for code on own
 - [ ] Articles Preparation
@@ -13,3 +11,4 @@
 - [ ] Music class
 > Keyboard class and buying Keyboard
 - [ ] Amplifier repair in Anekal
+> small, big
