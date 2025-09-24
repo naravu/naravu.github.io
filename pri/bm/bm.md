@@ -34,3 +34,37 @@
 | AI Music | https://music.ai/ |AI Music | Free AI Music with login |
 | Docker on Debian| https://docs.docker.com/desktop/setup/install/linux/debian/#install-docker-desktop |Debian docker | Docker explanation on Debian |
 | Deep AI | https://deepai.org/chat |Deep AI | Free AI Chatbot alternate to Deep Seek|
+| Agents Development Kit - ADK | https://google.github.io/adk-docs/ | AI Agents Development Kit - pip install google-adk | Google ADK |
+| Agents Development Kit - ADK Samples | https://google.github.io/adk-docs/ | AI Agents Development Kit Samples - pip install google-adk | Google ADK Samples |
+| Python VBA | https://pythonandvba.com/ | Python VBA | Python VBA |
+| Python Excel - XLWings | https://www.xlwings.org/ | Python Excel - XLWings Documentation | Python XLWings |
+| Penetration Test | https://pentestgpt.ai/ | Penetration Test - Hack Tools AI | PenTestGPT |
+| Hack tools documentations AI | https://flowgpt.com/ | Hack Tools AI | FlowGPT |
+| Hack tools documentations | https://flowgpt.com/p/chaosgpt | Hack Tools AI | ChaosGPT |
+| AutoGPT AI | https://agpt.co/ | AutoGPT from Github | AutoGPT |
+| VulnGPT AI | https://gptstore.ai/gpts/nuzDIyCFIM-vulngpt | VulnGPT for vulnerabilities | VulnGPT |
+| Schoolgoat | https://www.schoolgoat.com/ | Home work help for school students | Schoolgoat |
+| Free AI Tool - Code Generator etc. | https://bestfreeaiwebsites.com/ | AI Code generator with login | Bestfreeaiwebsites |
+| Free AI Voice Tool - Copy of your own voice. | https://fish.audio/ | AI Voice tool with login | Fish.audio |
+| AI Video Generator from Text | https://hailuoai.video/ | AI Video Generator from Text with login | HailuoAI |
+| AI Video Generator for Pro | https://magichour.ai/ | AI Video creation like a pro with login | MagichourAI |
+| AI Learning Courses free | https://www.deeplearning.ai/ | AI Learning Courses free with Login | Deep Learning AI |
+| So many free tools online | https://123apps.com/ | free tools online for Video, Audio, PDF & Converters | 123Apps |
+| Alternative tools for Google | https://nomoregoogle.com/ | Free & open source alternative tools for Google | NoMoreGoogle |
+| Tamil Digital Library | https://tamildigitallibrary.in/ | Free Tamil Digital Library | Tamil Digital Library |
+| Open Digital Library | https://openlibrary.org/ | Open Digital Library - English | Open Library |
+| Mark Down converter App | https://markitdown.pro/ | Free Mark Down language converter App | MD Mark Down App |
+| Mark Down converter code in Git | https://github.com/microsoft/markitdown | Free Mark Down converter code from Git | MD Mark Down Code |
+| SEO Tools online | https://smallseotools.com/ | Search Engine Optimization tools online | SEO Tools |
+| Deep Seek AI with Login | https://www.deepseek.com/ | China's Deep Seek AI with Login | Deepseek AI |
+| Free AI Code Generator - No login | https://zzzcode.ai/ | ZZZ Free AI Code Generator - No login | AI ZZZCodegenerator |
+| Search Code | https://searchcode.com/ | Simple, comprehensive code search | Search Code |
+| AI Image Generator | https://www.decohere.ai/ | AI Image Generator with login | Decohere |
+| Duck DNS for loclhost | https://www.duckdns.org/ | Free Dynamic DNS - Duck DNS | Duck DNS |
+| Server World for server configurations | https://www.server-world.info/en/ | Server World for all major flavours of Linux | Server World |
+| Coding is fun youtube channel | https://pythonandvba.com/ | Coding is fun - PythonVBA | PythonVBA |
+| VocalRemover | https://vocalremover.org/ | Music and voice splitter | VocalRemover |
+| Chef AI app Cloner | https://chef.convex.dev/ | Chef AI app Cloner | Chef AI |
+| Emergent AI app Cloner | https://emergent.sh/ | Emergent AI app Cloner | Emergent AI |
+| Learn anything free | https://learn-anything.xyz/ | Learn anything free with certifications | Learn anything free |
+| HTML5UP | https://html5up.net/ | Free HTML5 templates - No login required | HTML5UP.1 |
