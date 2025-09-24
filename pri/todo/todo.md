@@ -1,6 +1,5 @@
 # 📝 To-Do List
 
-- [x] Bookmark enhancements
 - [x] Git integration on Linux cheat sheet
 - [ ] Interview Prepartion
 > Dwaraga, Jagadish
@@ -12,3 +11,4 @@
 > Keyboard class and buying Keyboard
 - [ ] Amplifier repair in Anekal
 > small, big
+- [ ] Integrate other links to the main page
