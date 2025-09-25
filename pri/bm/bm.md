@@ -70,4 +70,4 @@
 | HTML5UP | https://html5up.net/ | Free HTML5 templates - No login required | HTML5UP.1 |
 |Reactbits|https://reactbits.dev|free ai components| free ai tool no sign in|
 |https://toolfk.com|
-|flourish.studio|
+|https:/flourish.studio|
