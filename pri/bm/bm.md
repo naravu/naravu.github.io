@@ -71,4 +71,4 @@
 |Reactbits|https://reactbits.dev|free ai components| free ai tool no sign in|
 |All in one tools|https://toolfk.com| Free Tools | Many free tools online fully free|
 |Excel sheet to Charts |https://flourish.studio|Free Excel Tools | Excle modifications with charts etc|
-|Strip Music & Vocals |https://x-minus.pro/ai|Strip Music & Vocals| Strip Music & Vocals Fully free|
+|Strip Music & Vocals |https://x-minus.pro/ai|Strip Music & Vocals| Vocal remover, Strip Music & Vocals Fully free|
