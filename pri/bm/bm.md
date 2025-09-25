@@ -71,3 +71,4 @@
 |Reactbits|https://reactbits.dev|free ai components| free ai tool no sign in|
 |https://toolfk.com|
 |https://flourish.studio|
+|https://x-minus.pro/ai|
