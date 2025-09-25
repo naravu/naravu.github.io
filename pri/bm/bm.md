@@ -69,6 +69,6 @@
 | Learn anything free | https://learn-anything.xyz/ | Learn anything free with certifications | Learn anything free |
 | HTML5UP | https://html5up.net/ | Free HTML5 templates - No login required | HTML5UP.1 |
 |Reactbits|https://reactbits.dev|free ai components| free ai tool no sign in|
-|https://toolfk.com|
-|https://flourish.studio|
-|https://x-minus.pro/ai|
+|All in one tools|https://toolfk.com| Free Tools | Many free tools online fully free|
+|Excel sheet to Charts |https://flourish.studio|Free Excel Tools | Excle modifications with charts etc|
+|Strip Music & Vocals |https://x-minus.pro/ai|Strip Music & Vocals| Strip Music & Vocals Fully free|
