@@ -1,0 +1,114 @@
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, sans-serif;
+  background: #f0f0f0;
+}
+
+/* Hamburger toggle */
+.hamburger {
+  position: fixed;
+  top: 7px;
+  left: 15px;
+  font-size: 20px;
+  cursor: pointer;
+  z-index: 1100;
+  background: #444;
+  color: #fff;
+  padding: 8px 12px;
+  border-radius: 4px;
+  font-weight: bold;
+}
+
+/* Sidebar */
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 180px;
+  height: 100%;
+  background: #1e1e1e;
+  color: #ccc;
+  padding: 20px 15px;
+  box-sizing: border-box;
+  transform: translateX(-200px);
+  transition: transform 0.3s ease;
+  z-index: 1000;
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+.sidebar.visible {
+  transform: translateX(0);
+}
+
+.sidebar h2 {
+  margin-top: 0;
+  margin-bottom: 10px;
+  font-size: 14px;
+  color: #ffcc00;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+.sidebar button {
+  display: block;
+  margin: 6px 0;
+  padding: 6px 10px;
+  background: #333;
+  border: none;
+  color: #ccc;
+  border-radius: 3px;
+  cursor: pointer;
+  width: 100%;
+  text-align: left;
+  font-size: 12px;
+  font-family: monospace;
+}
+
+.sidebar button:hover {
+  background: #555;
+  color: #fff;
+}
+
+/* Content area */
+.content {
+  margin-left: 20px;
+  padding: 80px 20px 20px 200px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+/* News cards */
+.card {
+  background: #fff;
+  border-radius: 6px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  margin: 10px;
+  padding: 15px;
+  width: 300px;
+  transition: transform 0.2s;
+  font-size: 14px;
+}
+
+.card:hover {
+  transform: scale(1.02);
+}
+
+.card h3 {
+  color: #333;
+  font-size: 16px;
+  margin-bottom: 8px;
+}
+
+.card p {
+  margin: 6px 0;
+  color: #555;
+}
+
+.card a {
+  color: #007acc;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 13px;
+}
