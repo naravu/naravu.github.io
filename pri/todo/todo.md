@@ -3,8 +3,10 @@
 - [x] Git integration on Linux cheat sheet
 - [ ] Interview Prepartion
 > Dwaraga, Jagadish, Naukri
-- [ ] Learn new skill whatever possible
+- [ ] Learn new skills whatever possible
 > AWS, Azure, Windows etc.
+- [ ] Laptop enquired in SIM tech
+- [ ] Car set update
 - [ ] Create own AI chatbot
 > Chatbots for code on own
 - [ ] Articles Preparation
