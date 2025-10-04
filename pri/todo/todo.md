@@ -2,7 +2,9 @@
 
 - [x] Git integration on Linux cheat sheet
 - [ ] Interview Prepartion
-> Dwaraga, Jagadish
+> Dwaraga, Jagadish, Naukri
+- [ ] Learn new skill whatever possible
+> AWS, Azure, Windows etc.
 - [ ] Create own AI chatbot
 > Chatbots for code on own
 - [ ] Articles Preparation
