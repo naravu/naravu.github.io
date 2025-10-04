@@ -1,6 +1,7 @@
 # 📝 To-Do List
 
 - [x] Git integration on Linux cheat sheet
+> Need to update the other excel sheets into git as mark down
 - [ ] Interview Prepartion
 > Dwaraga, Jagadish, Naukri
 - [ ] Learn new skills whatever possible
@@ -14,5 +15,5 @@
 - [ ] Music class
 > Keyboard class and buying Keyboard
 - [ ] Amplifier repair in Anekal
-> small, big
+> Small, Big
 - [ ] Integrate other links to the main page
