@@ -6,7 +6,6 @@
 > Dwaraga, Jagadish, Naukri
 - [ ] Learn new skills whatever possible
 > AWS, Azure, Windows etc.
-- [ ] Laptop enquired in SIM tech
 - [ ] Car set update
 - [ ] Create own AI chatbot
 > Chatbots for code on own
