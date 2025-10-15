@@ -73,3 +73,4 @@
 |Excel sheet to Charts |https://flourish.studio|Free Excel Tools | Excle modifications with charts etc|
 |Strip Music & Vocals |https://x-minus.pro/ai|Strip Music & Vocals| Vocal remover, Strip Music & Vocals Fully free|
 |No Color|https://no-color.org/| Disable all ANSI color and text styling in their terminal output | Color disablement|
+|Wellness Ping|https://wellness-p.ing/| Wellness ping | Activists, journalists, researchers, solo folks. Anyone who needs someone to notice if they go silent.|
