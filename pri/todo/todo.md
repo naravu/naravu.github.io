@@ -3,7 +3,7 @@
 - [x] Git integration on Linux cheat sheet
 > Need to update the other excel sheets into git as mark down
 - [ ] Interview Prepartion
-> Dwaraga, Jagadish, Naukri
+> Dwaraga, Jagadish, Naukri, Saira HR Job
 - [ ] Learn new skills whatever possible
 > AWS, Azure, Windows etc.
 - [ ] Car set update
