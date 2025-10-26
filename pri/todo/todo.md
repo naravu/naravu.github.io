@@ -15,4 +15,3 @@
 > Keyboard class and buying Keyboard
 - [ ] Amplifier repair in Anekal
 > Small, Big
-- [ ] Integrate other links to the main page
