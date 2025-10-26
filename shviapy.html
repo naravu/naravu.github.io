@@ -4,7 +4,7 @@
        Icon name: computer-vm
          Chassis: vm 🖴
       Machine ID: 8666dca590ab44e886276dfeb55aaf04
-         Boot ID: 19ac50a1a7e94db7bf00dc9ca5da60bb
+         Boot ID: fc8165a5e00946038a12097e80c9e436
   Virtualization: microsoft
 Operating System: Ubuntu 24.04.3 LTS
           Kernel: Linux 6.11.0-1018-azure
@@ -12,37 +12,37 @@ Operating System: Ubuntu 24.04.3 LTS
  Hardware Vendor: Microsoft Corporation
   Hardware Model: Virtual Machine
 Firmware Version: 090008
-   Firmware Date: Mon 2023-02-27
-    Firmware Age: 2y 7month 4w</pre>
+   Firmware Date: Fri 2018-12-07
+    Firmware Age: 6y 10month 2w 6d</pre>
 <a name=network></a><b>Network Details</b><pre>docker0: flags=4099<UP,BROADCAST,MULTICAST>  mtu 1500
         inet 172.17.0.1  netmask 255.255.0.0  broadcast 172.17.255.255
-        ether 9a:95:df:64:44:c3  txqueuelen 0  (Ethernet)
+        ether 82:61:76:25:df:0a  txqueuelen 0  (Ethernet)
         RX packets 0  bytes 0 (0.0 B)
         RX errors 0  dropped 0  overruns 0  frame 0
         TX packets 0  bytes 0 (0.0 B)
         TX errors 0  dropped 2 overruns 0  carrier 0  collisions 0
 
 eth0: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
-        inet 10.1.0.219  netmask 255.255.240.0  broadcast 10.1.15.255
-        inet6 fe80::7e1e:52ff:fe0c:376f  prefixlen 64  scopeid 0x20<link>
-        ether 7c:1e:52:0c:37:6f  txqueuelen 1000  (Ethernet)
-        RX packets 231977  bytes 259342876 (259.3 MB)
+        inet 10.1.0.148  netmask 255.255.240.0  broadcast 10.1.15.255
+        inet6 fe80::222:48ff:fe0b:d894  prefixlen 64  scopeid 0x20<link>
+        ether 00:22:48:0b:d8:94  txqueuelen 1000  (Ethernet)
+        RX packets 221013  bytes 257867927 (257.8 MB)
         RX errors 0  dropped 0  overruns 0  frame 0
-        TX packets 91022  bytes 9858765 (9.8 MB)
+        TX packets 65227  bytes 7540219 (7.5 MB)
         TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
 
 lo: flags=73<UP,LOOPBACK,RUNNING>  mtu 65536
         inet 127.0.0.1  netmask 255.0.0.0
         inet6 ::1  prefixlen 128  scopeid 0x10<host>
         loop  txqueuelen 1000  (Local Loopback)
-        RX packets 220  bytes 29456 (29.4 KB)
+        RX packets 236  bytes 30273 (30.2 KB)
         RX errors 0  dropped 0  overruns 0  frame 0
-        TX packets 220  bytes 29456 (29.4 KB)
+        TX packets 236  bytes 30273 (30.2 KB)
         TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0</pre>
 <a name=swap></a><font face=serif size=2><b>Swap Details</b></font><pre>               total        used        free      shared  buff/cache   available
-Mem:            15Gi       837Mi        13Gi        42Mi       1.6Gi        14Gi
+Mem:            15Gi       838Mi        13Gi        44Mi       1.6Gi        14Gi
 Swap:          4.0Gi          0B       4.0Gi</pre>
-<a name=user></a><font face=serif size=2><b>Connected User Details</b></font><pre> 23:08:50 up 9 min,  0 user,  load average: 0.33, 0.08, 0.03
+<a name=user></a><font face=serif size=2><b>Connected User Details</b></font><pre> 23:09:13 up 3 min,  0 user,  load average: 0.44, 0.25, 0.11
 USER     TTY      FROM             LOGIN@   IDLE   JCPU   PCPU  WHAT</pre>
 <a name=fstab></a><font face=serif size=2><b>FStab Details</b></font><pre># CLOUD_IMG: This file was created/modified by the Cloud Image build process
 UUID=a72fddf1-49c4-4653-be67-35f223a2066a	/	 ext4	discard,commit=30,errors=remount-ro	0 1
@@ -100,7 +100,7 @@ UUID=7B14-7487	/boot/efi	vfat	umask=0077	0 1
 <td>/run/lock</td>
 </tr>
 <tr>
-<td>/dev/sdb16</td>
+<td>/dev/sda16</td>
 <td>ext4</td>
 <td>924M</td>
 <td>63M</td>
@@ -109,7 +109,7 @@ UUID=7B14-7487	/boot/efi	vfat	umask=0077	0 1
 <td>/boot</td>
 </tr>
 <tr>
-<td>/dev/sdb15</td>
+<td>/dev/sda15</td>
 <td>vfat</td>
 <td>110M</td>
 <td>6.4M</td>
@@ -118,7 +118,7 @@ UUID=7B14-7487	/boot/efi	vfat	umask=0077	0 1
 <td>/boot/efi</td>
 </tr>
 <tr>
-<td>/dev/sda1</td>
+<td>/dev/sdb1</td>
 <td>ext4</td>
 <td>79G</td>
 <td>4.3G</td>
@@ -375,30 +375,30 @@ tcp6       0      0 :::22                   :::*                    LISTEN      
 <a name=dmidecode></a><font face=serif size=2><b>System Details</b></font><pre># dmidecode 3.5
 Scanning /dev/mem for entry point.</pre>
 <a name=inxi></a><font face=serif size=2><b>System Details New</b></font><pre></pre>
-<a name=zombie></a><font face=serif size=2><b>Zombies</b></font><pre>runner      2215  0.0  0.0   7080  2140 ?        S    23:08   0:00 grep defunct</pre>
-<a name=reboot></a><font face=serif size=2><b>Reboot</b></font><pre>reboot   system boot  6.11.0-1018-azur Sat Oct 25 22:59   still running</pre>
-<a name=shut></a><font face=serif size=2><b>Shutdown</b></font><pre>shutdown system down  6.11.0-1018-azur Mon Sep 29 22:19 - 22:59 (26+00:39)</pre>
+<a name=zombie></a><font face=serif size=2><b>Zombies</b></font><pre>runner      2240  0.0  0.0   7080  2072 ?        S    23:09   0:00 grep defunct</pre>
+<a name=reboot></a><font face=serif size=2><b>Reboot</b></font><pre>reboot   system boot  6.11.0-1018-azur Sun Oct 26 23:05   still running</pre>
+<a name=shut></a><font face=serif size=2><b>Shutdown</b></font><pre>shutdown system down  6.11.0-1018-azur Mon Sep 29 22:19 - 23:05 (27+00:46)</pre>
 <a name=mem></a><font face=serif size=2><b>Memory Hog</b></font><pre>%MEM     PID    PPID USER     STAT COMMAND
 
- 0.7    1984    1969 runner   Sl   /home/runner/actions-runner/cached/bin/Runner.Worker spawnclient 142 145
+ 0.7    1943    1927 runner   Sl   /home/runner/actions-runner/cached/bin/Runner.Worker spawnclient 142 145
 
- 0.5    1969    1885 runner   Sl   /home/runner/actions-runner/cached/bin/Runner.Listener run
+ 0.5    1927    1877 runner   Sl   /home/runner/actions-runner/cached/bin/Runner.Listener run
 
- 0.4    1217       1 root     Ssl  /usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock
+ 0.4    1187       1 root     Ssl  /usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock
 
- 0.3     817       1 root     Ss   php-fpm: master process (/etc/php/8.3/fpm/php-fpm.conf)
+ 0.3     820       1 root     Ss   php-fpm: master process (/etc/php/8.3/fpm/php-fpm.conf)
 
- 0.3     889       1 root     Ssl  /usr/bin/containerd</pre>
+ 0.3     892       1 root     Ssl  /usr/bin/containerd</pre>
 <a name=cpuh></a><font face=serif size=2><b>CPU Hog</b></font><pre>%CPU     PID    PPID USER     STAT COMMAND
 
-12.3    1984    1969 runner   Sl   /home/runner/actions-runner/cached/bin/Runner.Worker spawnclient 142 145
+15.3    2209       1 root     Ss   /usr/lib/systemd/systemd-hostnamed
 
-10.2    2184       1 root     Ss   /usr/lib/systemd/systemd-hostnamed
+12.2    1943    1927 runner   Sl   /home/runner/actions-runner/cached/bin/Runner.Worker spawnclient 142 145
 
- 6.2    1969    1885 runner   Sl   /home/runner/actions-runner/cached/bin/Runner.Listener run
+ 6.4    2204    2194 runner   S    python shviapy.py
 
- 2.1    2179    2169 runner   S    python shviapy.py
+ 4.6    1927    1877 runner   Sl   /home/runner/actions-runner/cached/bin/Runner.Listener run
 
- 1.1    1885       1 runner   Ssl  /opt/hca/hosted-compute-agent</pre>
+ 2.7    1877       1 runner   Ssl  /opt/hca/hosted-compute-agent</pre>
 <a name=dp></a><font face=serif size=2><b>Default Path</b></font><pre>/opt/hostedtoolcache/Python/3.13.7/x64/bin:/opt/hostedtoolcache/Python/3.13.7/x64:/snap/bin:/home/runner/.local/bin:/opt/pipx_bin:/home/runner/.cargo/bin:/home/runner/.config/composer/vendor/bin:/usr/local/.ghcup/bin:/home/runner/.dotnet/tools:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin</pre>
-<a name=copy></a><div id=foot><pre> &copy; Last OS update:  | Page update: Sat Oct 25 23:08:50 UTC 2025</pre></div><script>function myFunction() {  var x = document.getElementById("myDIV");  if (x.style.display === "none") {   x.style.display = "block";  } else {   x.style.display = "none";  }}</script></body></html>
+<a name=copy></a><div id=foot><pre> &copy; Last OS update:  | Page update: Sun Oct 26 23:09:13 UTC 2025</pre></div><script>function myFunction() {  var x = document.getElementById("myDIV");  if (x.style.display === "none") {   x.style.display = "block";  } else {   x.style.display = "none";  }}</script></body></html>
