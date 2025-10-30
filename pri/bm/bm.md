@@ -82,3 +82,4 @@
 |Scribe|https://scribe.com/| Scribe | AI-powered tool transforms any workflow into step-by-step with screenshots |
 |Enzolt|https://enzolt.com/| Enzolt | Enzolt Lithium ion Battery Chennai |
 |Votch|https://votch.tv/| Votch | video translation and dubbing |
+|Simplify|https://simplify.jobs/| Simplify | Simplify - AI based Job search |
