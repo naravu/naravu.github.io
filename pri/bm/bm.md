@@ -76,3 +76,4 @@
 |Wellness Ping|https://wellness-p.ing/| Wellness ping | Activists, journalists, researchers, solo folks. Anyone who needs someone to notice if they go silent.|
 |Linuxserver.io|https://www.linuxserver.io/| Linuxserver | Linux community images with git documents & support.|
 |Bentopdf|https://github.com/alam00000/bentopdf| BentoPDF| BentoPDF-open-source PDF toolkit to manipulate PDF directly in browser.|
+|AI for that|https://theresanaiforthat.com/| AI for that| AI Powered applications|
