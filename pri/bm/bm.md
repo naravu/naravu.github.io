@@ -77,3 +77,8 @@
 |Linuxserver.io|https://www.linuxserver.io/| Linuxserver | Linux community images with git documents & support.|
 |Bentopdf|https://github.com/alam00000/bentopdf| BentoPDF| BentoPDF-open-source PDF toolkit to manipulate PDF directly in browser.|
 |AI for that|https://theresanaiforthat.com/| AI for that| AI Powered applications|
+|Mulerun|https://mulerun.com/| Mulerun| AI Agents|
+|E-Auctions|https://www.eauctionsindia.com/| E-Auctions| Govt E-Auctions website|
+|Scribe|https://scribe.com/| Scribe | AI-powered tool transforms any workflow into step-by-step with screenshots |
+|Enzolt|https://enzolt.com/| Enzolt | Enzolt Lithium ion Battery Chennai |
+|Votch|https://votch.tv/| Votch | video translation and dubbing |
