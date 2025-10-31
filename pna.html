@@ -44,21 +44,41 @@ hr {
     <li>Vulnerability mitigation with respect to the Rapid7 tool suggestions from the security team.</li>
   </ul>
 </div>
+<div class="experience">
+  <h3>2.<a name=ffi>Future Focus Infotech</a>, Bangalore Technical Lead – System Engineering on Linux</strong> (Aug 2022 – Apr 2023)</h3>
+  
+  <ul style="margin-top:0; padding-left:1.5em;">
+    <li>Take care of vulnerability remediation via periodic patching through weekly CABs:
+      <ul style="margin-top:0; padding-left:1.5em;">
+        <li>Manual patching</li>
+        <li>Ansible job patching</li>
+        <li>Draining Rancher cluster nodes before patching and restoring them afterward</li>
+        <li>Fixing kernel panic after reboot (if any)</li>
+        <li>Fixing disk space issues via LVM extension (if any)</li>
+      </ul>
+    </li>
+    <li>Coordinated patching with DB team for quarterly periodic reboots</li>
+    <li>PHP upgrade on Windows servers:
+      <ul style="margin-top:0; padding-left:1.5em;">
+        <li>Coordinated with DevOps engineers</li>
+      </ul>
+    </li>
+    <li>Created Confluence documentation for VMware Tools upgrade on CentOS 7</li>
+    <li>Developed simple playbooks in Git to fetch server details:
+      <ul style="margin-top:0; padding-left:1.5em;">
+        <li>Details of FreeIPA servers</li>
+        <li>Changed log permissions for DB team (`/var/log/messages`)</li>
+        <li>Shell script for manual steps to create `svcansiblelocal` user</li>
+      </ul>
+    </li>
+    <li>Handled monthly PagerDuty shifts and resolved on-call issues</li>
+    <li>Commissioned new CentOS 7 servers using Terraform code provided by DevOps team</li>
+    <li>Performed physical builds for DB team</li>
+    <li>Managed decommissioning of servers not remediated from critical vulnerabilities and ensured proper migration</li>
+  </ul>
+</div>
 
 <pre>
-1. Trianz, Bangalore | Senior Technical Lead on Linux (Jan 2024 – Sep 2025)
-  •	Apply all pending OS updates, including security patches, kernel updates, and performance enhancements.
-  •	Deploy the latest security patches to mitigate vulnerabilities and protect systems from cyber threats.
-  •	Upgrade server packages, dependencies, and configurations to ensure compatibility, stability, and performance improvements.
-  •	Perform validation checks, reboot servers if needed, and monitor logs for any anomalies post-update.
-  •	Ensure data backups are in place before updates and have a rollback plan in case of critical failures.
-  •	Ensure the OS level validations like file systems mounted, services running and ports open etc.
-  •	Create & maintain separate repositories for RHEL8,9 & 10 and schedule the regular sync.
-  •	Maintain ansible playbooks for full patching, security patching and automation tasks from ansible-cli and tower.
-  •	Simple automation tasks with Python paramiko module on Linux servers, like daily reports and monitoring dashboards.
-  •	Health check reports on all Linux servers using python script.
-  •	Vulnerability mitigation with respect to the rapid7 tool suggestion from security team.
-
 2. Future Focus Infotech, Bangalore | Technical Lead - System Engineering on Linux (Aug 2022 – Apr 2023)
   ●	Take care of the vulnerability remediation via periodic patching via weekly CABs.
   •	- Manual patching
