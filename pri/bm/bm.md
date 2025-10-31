@@ -83,3 +83,4 @@
 |Enzolt|https://enzolt.com/| Enzolt | Enzolt Lithium ion Battery Chennai |
 |Votch|https://votch.tv/| Votch | video translation and dubbing |
 |Simplify|https://simplify.jobs/| Simplify | Simplify - AI based Job search |
+|Bazzite|https://bazzite.gg/| Bazzite | Bazzite - Linux for Gaming, Steam|
