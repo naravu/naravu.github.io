@@ -8,9 +8,49 @@
     body {
       font-family: Arial, sans-serif;
       margin: 0;
-      padding-bottom: 100px; /* space for fixed bottom bar */
+      padding-left: 220px; /* space for sidebar */
       background: #f9f9f9;
       color: #222;
+    }
+    .sidebar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      width: 220px;
+      background: #333;
+      color: #fff;
+      padding: 1em;
+      box-sizing: border-box;
+      z-index: 1000;
+      transition: transform 0.3s ease;
+    }
+    .sidebar h2 {
+      font-size: 1em;
+      margin-bottom: 1em;
+    }
+    .sidebar a {
+      display: block;
+      color: #fff;
+      text-decoration: none;
+      margin: 0.5em 0;
+      font-size: 0.9em;
+    }
+    .sidebar a:hover {
+      text-decoration: underline;
+    }
+    .hamburger {
+      position: fixed;
+      top: 1em;
+      left: 1em;
+      background: #333;
+      color: #fff;
+      border: none;
+      font-size: 1.2em;
+      padding: 0.5em;
+      z-index: 1100;
+      cursor: pointer;
+      display: none;
     }
     header {
       text-align: center;
@@ -39,31 +79,37 @@
     li {
       margin-bottom: 0.5em;
     }
-    .bottom-bar {
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      background: #333;
-      color: #fff;
-      font-size: 0.85em;
-      text-align: center;
-      padding: 0.8em 1em;
-      z-index: 1000;
-    }
-    .bottom-bar a {
-      color: #fff;
-      text-decoration: underline;
-      margin: 0 0.5em;
-      font-size: 0.9em;
-    }
     @media (max-width: 600px) {
-      h1 { font-size: 1.2em; }
-      .section h2 { font-size: 1em; }
+      body {
+        padding-left: 0;
+      }
+      .sidebar {
+        transform: translateX(-100%);
+      }
+      .sidebar.open {
+        transform: translateX(0);
+      }
+      .hamburger {
+        display: block;
+      }
     }
   </style>
 </head>
 <body>
+
+<button class="hamburger" onclick="document.querySelector('.sidebar').classList.toggle('open')">☰</button>
+
+<div class="sidebar">
+  <h2>📍 Bangalore-562106, KA</h2>
+  <p>📧 pnaprasanna[at]gmail.com</p>
+  <p>🌐 <a href="https://www.linkedin.com/in/pnaprasanna/" target="_blank">LinkedIn</a></p>
+  <nav>
+    <a href="#exp1">Trianz</a>
+    <a href="#exp2">Future Focus</a>
+    <a href="#exp3">Education</a>
+    <a href="#exp4">Extra</a>
+  </nav>
+</div>
 
 <header>
   <h1>👨‍💻 PNA Portfolio</h1>
@@ -109,15 +155,6 @@
     <li>Nature Club participant</li>
     <li>Writes Tamil poems, sings, listens to music, enjoys photography</li>
   </ul>
-</div>
-
-<div class="bottom-bar">
-  📍 Bangalore-562106, KA | 📧 pnaprasanna[at]gmail.com |
-  🌐 <a href="https://www.linkedin.com/in/pnaprasanna/">LinkedIn</a> |
-  <a href="#exp1">Trianz</a>
-  <a href="#exp2">Future Focus</a>
-  <a href="#exp3">Education</a>
-  <a href="#exp4">Extra</a>
 </div>
 
 </body>
