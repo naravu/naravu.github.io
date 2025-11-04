@@ -8,37 +8,15 @@
     body {
       font-family: Arial, sans-serif;
       margin: 0;
-      padding-top: 100px; /* space for fixed top bar */
+      padding-bottom: 100px; /* space for fixed bottom bar */
       background: #f9f9f9;
       color: #222;
-    }
-    .top-bar {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      background: #333;
-      color: #fff;
-      padding: 0.8em 1em;
-      z-index: 1000;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-    }
-    .top-bar .contact {
-      font-size: 0.85em;
-      margin-bottom: 0.5em;
-    }
-    .top-bar nav a {
-      margin: 0 0.5em;
-      text-decoration: none;
-      color: #fff;
-      font-size: 0.9em;
     }
     header {
       text-align: center;
       padding: 1em;
+      background: #fff;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
     }
     h1 {
       font-size: 1.5em;
@@ -61,6 +39,24 @@
     li {
       margin-bottom: 0.5em;
     }
+    .bottom-bar {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: #333;
+      color: #fff;
+      font-size: 0.85em;
+      text-align: center;
+      padding: 0.8em 1em;
+      z-index: 1000;
+    }
+    .bottom-bar a {
+      color: #fff;
+      text-decoration: underline;
+      margin: 0 0.5em;
+      font-size: 0.9em;
+    }
     @media (max-width: 600px) {
       h1 { font-size: 1.2em; }
       .section h2 { font-size: 1em; }
@@ -68,19 +64,6 @@
   </style>
 </head>
 <body>
-
-<div class="top-bar">
-  <div class="contact">
-    📍 Bangalore-562106, KA | 📧 pnaprasanna[at]gmail.com |
-    🌐 <a href="https://www.linkedin.com/in/pnaprasanna/" style="color:#fff; text-decoration:underline;">LinkedIn</a>
-  </div>
-  <nav>
-    <a href="#exp1">Trianz</a>
-    <a href="#exp2">Future Focus</a>
-    <a href="#exp3">Education</a>
-    <a href="#exp4">Extra</a>
-  </nav>
-</div>
 
 <header>
   <h1>👨‍💻 PNA Portfolio</h1>
@@ -126,6 +109,15 @@
     <li>Nature Club participant</li>
     <li>Writes Tamil poems, sings, listens to music, enjoys photography</li>
   </ul>
+</div>
+
+<div class="bottom-bar">
+  📍 Bangalore-562106, KA | 📧 pnaprasanna[at]gmail.com |
+  🌐 <a href="https://www.linkedin.com/in/pnaprasanna/">LinkedIn</a> |
+  <a href="#exp1">Trianz</a>
+  <a href="#exp2">Future Focus</a>
+  <a href="#exp3">Education</a>
+  <a href="#exp4">Extra</a>
 </div>
 
 </body>
