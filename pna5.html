@@ -8,24 +8,48 @@
     body {
       font-family: Arial, sans-serif;
       margin: 0;
-      padding: 1em;
+      padding-top: 100px; /* space for fixed top bar */
       background: #f9f9f9;
       color: #222;
     }
+    .top-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      background: #333;
+      color: #fff;
+      padding: 0.8em 1em;
+      z-index: 1000;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+    .top-bar .contact {
+      font-size: 0.85em;
+      margin-bottom: 0.5em;
+    }
+    .top-bar nav a {
+      margin: 0 0.5em;
+      text-decoration: none;
+      color: #fff;
+      font-size: 0.9em;
+    }
     header {
       text-align: center;
-      margin-bottom: 1em;
+      padding: 1em;
     }
     h1 {
       font-size: 1.5em;
       margin: 0.5em 0;
     }
     .section {
-      margin-bottom: 1em;
-      border: 1px solid #ccc;
-      border-radius: 6px;
-      background: #fff;
+      margin: 1em;
       padding: 1em;
+      background: #fff;
+      border-radius: 6px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
     }
     .section h2 {
       font-size: 1.2em;
@@ -37,11 +61,6 @@
     li {
       margin-bottom: 0.5em;
     }
-    .contact {
-      font-size: 0.9em;
-      text-align: center;
-      margin-top: 1em;
-    }
     @media (max-width: 600px) {
       h1 { font-size: 1.2em; }
       .section h2 { font-size: 1em; }
@@ -50,17 +69,25 @@
 </head>
 <body>
 
+<div class="top-bar">
+  <div class="contact">
+    📍 Bangalore-562106, KA | 📧 pnaprasanna[at]gmail.com |
+    🌐 <a href="https://www.linkedin.com/in/pnaprasanna/" style="color:#fff; text-decoration:underline;">LinkedIn</a>
+  </div>
+  <nav>
+    <a href="#exp1">Trianz</a>
+    <a href="#exp2">Future Focus</a>
+    <a href="#exp3">Education</a>
+    <a href="#exp4">Extra</a>
+  </nav>
+</div>
+
 <header>
   <h1>👨‍💻 PNA Portfolio</h1>
   <p>Senior Technical Lead – Linux Infra | RHCE | MSc-CS</p>
-  <div class="contact">
-    📍 Bangalore-562106, KA<br>
-    📧 pnaprasanna[at]gmail.com<br>
-    🌐 <a href="https://www.linkedin.com/in/pnaprasanna/">LinkedIn</a>
-  </div>
 </header>
 
-<div class="section">
+<div id="exp1" class="section">
   <h2>1. Trianz, Bangalore | Senior Technical Lead (Jan 2024 – Dec 2025)</h2>
   <ul>
     <li>Applied OS updates, kernel upgrades, and performance patches</li>
@@ -71,8 +98,8 @@
   </ul>
 </div>
 
-<div class="section">
-  <h2>2. Future Focus Infotech, Bangalore | Technical Lead (Aug 2022 – Apr 2023)</h2>
+<div id="exp2" class="section">
+  <h2>2. Future Focus Infotech | Technical Lead (Aug 2022 – Apr 2023)</h2>
   <ul>
     <li>Handled patching via CABs, Ansible, and manual methods</li>
     <li>Resolved kernel panics and disk space issues</li>
@@ -82,9 +109,7 @@
   </ul>
 </div>
 
-<!-- Repeat similar blocks for entries 3 to 15 -->
-
-<div class="section">
+<div id="exp3" class="section">
   <h2>🎓 Education</h2>
   <ul>
     <li>M.Sc Computer Science – St. Joseph’s College (2001 – 70.02%)</li>
@@ -95,7 +120,7 @@
   </ul>
 </div>
 
-<div class="section">
+<div id="exp4" class="section">
   <h2>🎵 Extra-Curricular</h2>
   <ul>
     <li>Nature Club participant</li>
