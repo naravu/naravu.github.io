@@ -84,3 +84,4 @@
 |Votch|https://votch.tv/| Votch | video translation and dubbing |
 |Simplify|https://simplify.jobs/| Simplify | Simplify - AI based Job search |
 |Bazzite|https://bazzite.gg/| Bazzite | Bazzite - Linux for Gaming, Steam|
+|Vazu|https://vazu.ai/| Vazu | AWS Pay automation - Bill reduction|
