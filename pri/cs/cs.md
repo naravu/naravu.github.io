@@ -9,3 +9,4 @@
 | `dmidecode` | View hardware infomation including serial numbers etc. | RHEL, Ubuntu |
 | `dmidecode -s system-manufacturer` | Check physical / virtual (vm) | RHEL, Ubuntu |
 | `dmidecode -s system-product-name` | Check physical / virtual (vm) | RHEL, Ubuntu | 
+| `zypper refresh --force` | Force a Repository Refresh  | Open Suse, Suse | 
