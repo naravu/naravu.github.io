@@ -10,3 +10,4 @@
 | `dmidecode -s system-manufacturer` | Check physical / virtual (vm) | RHEL, Ubuntu |
 | `dmidecode -s system-product-name` | Check physical / virtual (vm) | RHEL, Ubuntu | 
 | `zypper refresh --force` | Force a Repository Refresh  | Open Suse, Suse | 
+| `zypper up` | Update the packages in suse | Open Suse, Suse | 
