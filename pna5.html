@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Portfolio</title>
+  <title>👨‍💻 Portfolio</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -24,6 +24,7 @@
       box-sizing: border-box;
       z-index: 1000;
       transition: transform 0.3s ease;
+      overflow: auto;
     }
     .sidebar h2 {
       font-size: 1em;
@@ -38,19 +39,6 @@
     }
     .sidebar a:hover {
       text-decoration: underline;
-    }
-    .hamburger {
-      position: fixed;
-      top: 1em;
-      left: 1em;
-      background: #333;
-      color: #fff;
-      border: none;
-      font-size: 1.2em;
-      padding: 0.5em;
-      z-index: 1100;
-      cursor: pointer;
-      display: none;
     }
     header {
       text-align: center;
@@ -97,64 +85,252 @@
 </head>
 <body>
 
-<button class="hamburger" onclick="document.querySelector('.sidebar').classList.toggle('open')">☰</button>
 
 <div class="sidebar">
-  📍 Bangalore-562106, KA <br>
-  📧 pnaprasanna[at]gmail.com<br>
-  <a href="https://www.linkedin.com/in/pnaprasanna/" target="_blank">LinkedIn</a>
-  <nav>
+    <a href='https://www.linkedin.com/in/pnaprasanna/' title="https://www.linkedin.com/in/pnaprasanna/" target="_blank"><img src="https://upload.wikimedia.org/wikipedia/commons/c/ca/LinkedIn_logo_initials.png" alt="LinkedIn" width="15"></a>
+    <a href='#' title="Senior Technical Lead – Linux Infra | RHCE | MSc-CS">👨‍💻 Prasanna</a>
+    <nav>
+    pnaprasanna[at]gmail.com
     <a href="#exp1">Trianz</a>
-    <a href="#exp2">Future Focus</a>
-    <a href="#exp3">Education</a>
-    <a href="#exp4">Extra</a>
+    <a href="#exp2">Future Focus Infotech</a>
+    <a href="#exp3">QuessCorp</a>
+    <a href="#exp4">IBM</a>
+    <a href="#exp5">Schneider</a>
+    <a href="#exp6">Medgenome</a>
+    <a href="#exp7">Wipro</a>
+    <a href="#exp8">Cisco</a>
+    <a href="#exp9">Jetking</a>
+    <a href="#exp10">IBM</a>
+    <a href="#exp11">Network Labs</a>
+    <a href="#exp12">Candor Solutions</a>
+    <a href="#exp13">KCC</a>
+    <a href="#exp14">RVS</a>
+    <a href="#exp15">Axis</a>
+    <a href="#exp16">Education</a>
+    <a href="#exp17">Extra</a>
+    <small>DOB: 1<sup>st</sup>Jun 1978 <br> Linguistic: English, Tamil & Kannada</small>
   </nav>
 </div>
 
 <header>
-  <h1>👨‍💻 Prasanna </h1>
-  <p>Senior Technical Lead – Linux Infra | RHCE | MSc-CS</p>
+    <p>Senior Technical Lead – Linux Infra | RHCE | MSc-CS | Bangalore-562106, KA</p>
+    <p>RedHat, Ubuntu/Debian, Suse | Shellscript, Python, Ansible | Linux Patches, Upgrades, Automations, Vulnerability Mitigatations</p>
 </header>
 
 <div id="exp1" class="section">
   <h2>1. Trianz, Bangalore | Senior Technical Lead (Jan 2024 – Dec 2025)</h2>
   <ul>
-    <li>Applied OS updates, kernel upgrades, and performance patches</li>
-    <li>Maintained RHEL repositories and Ansible playbooks</li>
-    <li>Automated tasks using Python (Paramiko, Netmiko)</li>
-    <li>Generated health check reports and backed up network configs</li>
-    <li>Mitigated vulnerabilities per Rapid7 recommendations</li>
+    <li>Apply all pending OS updates, including security patches, kernel updates, and performance enhancements.</li>
+    <li>Deploy the latest security patches to mitigate vulnerabilities and protect systems from cyber threats.</li>
+    <li>Upgrade server packages, dependencies, and configurations to ensure compatibility, stability, and performance improvements.</li>
+    <li>Perform validation checks, reboot servers if needed, and monitor logs for any anomalies post-update.</li>
+    <li>Ensure data backups are in place before updates and have a rollback plan in case of critical failures.</li>
+    <li>Ensure the OS level validations like file systems mounted, services running, and ports open etc.</li>
+    <li>Create & maintain separate repositories for RHEL8, 9 & 10 and schedule the regular sync.</li>
+    <li>Maintain Ansible playbooks for full patching, security patching, and automation tasks from ansible-cli and tower.</li>
+    <li>Simple automation tasks with Python Paramiko module on Linux servers, like daily reports and monitoring dashboards.</li>
+    <li>Backing up the router and other network devices configuration files into Linux server with Python netmiko module.</li>
+    <li>Health check reports on all Linux servers using Python script.</li>
+    <li>Vulnerability mitigation with respect to the Rapid7 tool suggestions from the security team.</li>
+
   </ul>
 </div>
 
 <div id="exp2" class="section">
   <h2>2. Future Focus Infotech | Technical Lead (Aug 2022 – Apr 2023)</h2>
   <ul>
-    <li>Handled patching via CABs, Ansible, and manual methods</li>
-    <li>Resolved kernel panics and disk space issues</li>
-    <li>Documented VMware upgrades and created Git playbooks</li>
-    <li>Commissioned CentOS servers via Terraform</li>
-    <li>Managed decommissioning and migration of vulnerable servers</li>
+    
+    <li>Take care of vulnerability remediation via periodic patching through weekly CABs:</li>
+        . Manual patching<br>
+        . Ansible job patching<br>
+        . Draining Rancher cluster nodes before patching and restoring them afterward<br>
+        . Fixing kernel panic after reboot (if any)<br>
+        . Fixing disk space issues via LVM extension (if any)<br>
+    <li>Coordinated patching with DB team for quarterly periodic reboots</li>
+  <li>PHP upgrade on Windows servers:</li>
+        . Coordinated with DevOps engineers<br>
+    <li>Created Confluence documentation for VMware Tools upgrade on CentOS 7</li>
+    <li>Developed simple playbooks in Git to fetch server details:</li>
+        . Details of FreeIPA servers <br>
+        . Changed log permissions for DB team (`/var/log/messages`) <br>
+        . Shell script for manual steps to create `svcansiblelocal` user <br>
+    <li>Handled monthly PagerDuty shifts and resolved on-call issues</li>
+    <li>Commissioned new CentOS 7 servers using Terraform code provided by DevOps team</li>
+    <li>Performed physical builds for DB team</li>
+    <li>Managed decommissioning of servers not remediated from critical vulnerabilities and ensured proper migration</li>
+
   </ul>
 </div>
 
 <div id="exp3" class="section">
-  <h2>🎓 Education</h2>
+  <h2>3. QuessCorp on Wipro, Bangalore. SME on Linux (Apr 2021 – Mar 2022)</h2>
   <ul>
-    <li>M.Sc Computer Science – St. Joseph’s College (2001 – 70.02%)</li>
-    <li>PGDCSA – St. Joseph’s College (1999 – 76.67%)</li>
-    <li>B.Sc Statistics – St. Joseph’s College (1998 – 74.06%)</li>
-    <li>HSC – St. Mary’s HSS (1995 – 72.83%)</li>
-    <li>SSLC – St. Mary’s HSS (1993 – 83.2%)</li>
+    
+    <li>Patching CentOS/RedHat systems via Red Hat Satellite server using Ansible playbooks</li>
+    <li>Managed monthly vulnerability remediation across Linux environments</li>
+    <li>Improved server hardening for both existing and newly provisioned instances</li>
+    <li>Created dynamic dashboard using shell script to report backup status and file sizes</li>
+    <li>Developed daily health check script that generates Excel reports</li>
+    <li>Performed REIP project analysis and integrated data telemetry for system insights</li>
+
   </ul>
 </div>
 
 <div id="exp4" class="section">
+  <h2>4. IBM India Pvt. Ltd, Bangalore. SME on Linux(Jan 2020 – Mar 2021)</h2>
+  <ul>
+    
+    <li>Performed periodic vulnerability remediation via patching based on CVEs provided by the security team</li>
+    <li>Executed patching through Red Hat Satellite server</li>
+    <li>Configured Kickstart servers for hands-free workstation installation with custom profiles, scripts, and package suites</li>
+    <li>Developed shell automation scripts and beginner-level Ansible patching playbooks</li>
+    <li>Handled AWS daily operations including load balancer changes, CloudWatch alarms, and monitoring tasks</li>
+    <li>Resolved day-to-day tickets involving:
+      <ul>
+        <li>LVM and swap analysis/expansion</li>
+        <li>User creation and parameter modification</li>
+        <li>Disk space monitoring and coordination for filesystem expansion or housekeeping</li>
+      </ul>
+    </li>
+    <li>Managed CRs and weekend on-call duties as per team roster</li>
+    <li>Coordinated with vendors for patching and firmware upgrades on ILO and iDRAC interfaces</li>
+    <li>Created internal monitoring dashboards using shell scripts for pre-monitoring team visibility</li>
+    <li>Monitored Nagios, Dynatrace, and ScienceLogic dashboards</li>
+    <li>Applied basic networking knowledge to set up VLANs and gateways with support from storage and network teams</li>
+  </ul>
+
+  </ul>
+</div>
+
+<div id="exp5" class="section">
+  <h2>5. Schneider, Electric R&D, BGRT, Bangalore via Techsystems, Run Expert (Apr 2019 – Dec 2019)</h2>
+  <ul>
+    <li>Monitoring Nagios, Dynatrace, and CloudWatch tools; taking necessary actions to rectify alerts</li>
+    <li>Installation and maintenance of Apache; coordinating with application teams during release cycles</li>
+    <li>Vulnerability management using OpenSCAP and OpenVAS scanning tools</li>
+    <li>Periodic vulnerability remediation based on Rapid7 Nexpose recommendations from the security team</li>
+    <li>Handling L3 requests from the Run team Jira queue</li>
+    <li>Coordinating patching activities for RedHat and Windows systems with the CloudOps team</li>
+    <li>Collaborating with the DevOps team for Dynatrace and other agent installations</li>
+    <li>Monitoring and maintaining AWS run environments</li>
+    <li>Maintaining a data center with VMware access using provided sudo privileges</li>
+    <li>Writing simple shell scripts for internal environment requirements</li>
+  </ul>
+
+  </ul>
+</div>
+
+<div id="exp6" class="section">
+  <h2>6.Medgenome Labs Ltd, Bangalore. Sr.Linux Administrator (Sep 2017 – Apr 2019)</h2>
+  <ul>
+    
+    <li>Deployment and maintenance of various ﬂavors of Linux VMs (Redhat, Ubuntu) systems.</li>
+    <li>Tools monitoring, Problem management.</li>
+    <li>Vulnerability management. Automation via shell scripting, Backup management.</li>
+    <li>RedHat Satellite Spacewalk server maintenance.</li>
+
+  </ul>
+
+  </ul>
+</div>
+
+<div id="exp7" class="section">
+<h2>7.Wipro Technologies, Bangalore Lead Administrator(Jul 2014 – Sep 2017)</h2>
+  <ul>
+    <li>Deployment and maintenance of various Linux VM flavors (RedHat, Ubuntu/Debian, SUSE)</li>
+    <li>OS customization:
+      <ul>
+        <li>Ubuntu/Debian via Remastersys</li>
+        <li>RedHat via Kickstart (KS)</li>
+        <li>SUSE via KIWI</li>
+      </ul>
+    </li>
+    <li>Basic configuration and administration of DNS, Samba, and NFS</li>
+    <li>Apache server configuration and maintenance</li>
+    <li>Periodic vulnerability remediation through CRs</li>
+    <li>Hardening newly built VMs</li>
+    <li>Applying security patches from Satellite server</li>
+    <li>Upgrading lower versions via Satellite server</li>
+    <li>Monitoring and troubleshooting performance-related issues</li>
+    <li>User management and administration</li>
+    <li>Swap space management</li>
+    <li>Job scheduling and automation using CRON</li>
+    <li>Configuring and monitoring disk mirroring and striping using LVM</li>
+    <li>Managed a 7-member team including L1 and L2 engineers</li>
+    <li>Periodic customer communication via emails and meetings (CRM)</li>
+    <li>Delegated tasks to appropriate team members</li>
+    <li>Accountable for customer deliverables</li>
+    <li>Shared knowledge through SOPs and KT sessions</li>
+    <li>Handled problem management including RCA and outage resolution</li>
+  </ul>
+</div>
+
+<div id="exp8" class="section">
+<h2>8.Cisco Inc. via Ariveguru Technology Solutions Lab Admin / Sr. System Administrator(Mar 2013 – Jul 2014)</h2>
+    <ul>
+    <li>Configured virtual machines across various Linux and Windows flavors; provided support across all levels</li>
+    <li>Performed kernel and OS upgrades; automated tasks using cron jobs</li>
+    <li>Handled physical-to-virtual server migrations, VM cloning, and replacements</li>
+    <li>Managed backups using NetBackup for RHEL 5 & 6 and Bacula for Ubuntu 12.04 LTS</li>
+    <li>Troubleshot Linux and Windows servers to improve performance and stability</li>
+    <li>Supported and maintained VMware ESXi in the testing lab; provided vSphere access to users</li>
+    <li>Configured terminal servers and various Cisco routers</li>
+    <li>Set up multiple types of PDUs with access switches; managed PDUs via PowerIQ software</li>
+    <li>Maintained inventory using the Eitms tool</li>
+    </ul>
+    </div>
+
+<div id="exp9" class="section">
+    <h2>9.Jetking Infotrain Limited, Sadashiva Nagar, Bangalore - Linux Trainer & System Administrator(Jan 2011 – Mar 2013)</h2>
+    <ul>
+    <li>Handled Red Hat Enterprise Linux 6, Windows 7, and Network Essentials (N+) batches for Jetking students</li>
+    <li>Installed and maintained DNS, DHCP, WINS, RIS, IIS, LAN routing, and NAT servers</li>
+    <li>Installed and maintained Samba Server, NFS Server, Kickstart, IP forwarding, and VNC Server</li>
+    <li>Set up RHEL5 on USB stick, PXE installation server, Sendmail server, and virtualization environments</li>
+    <li>Provided operational and technical support to computer users; interacted with external technology suppliers</li>
+    <li>Installed and configured computers and peripherals on data networks</li>
+    <li>Guided and assisted students in resolving technical problems and responding to queries</li>
+    <li>Served as the first point of contact for all computer hardware and software issues</li>
+    <li>Analyzed technical and operational problems and delivered workable solutions</li>
+  </ul>
+</div>
+
+<div id="exp10" class="section">
+<h2>10.IBM India Private Limited, Bangalore IT Security Analyst(Mar 2009 – Mar 2010)</h2>
+   <ul>
+    <li>Provided Level 2 support for Identity Access Management at IBM</li>
+    <li>Performed daily server health checks to ensure operational stability</li>
+    <li>Tools used:
+      <ul style="margin-top:0; padding-left:1.5em;">
+        <li>WRT: Work Request Tool (ticketing system)</li>
+        <li>URT: User ID Revalidation Tool</li>
+        <li>MS Excel 2007 for file manipulation and reporting</li>
+      </ul>
+    </li>
+    <li>Managed periodic compliance activities under Q2 Flexi Pool: Rhythm</li>
+    <li>Executed specified scripts on servers; stored formatted output in temp directories</li>
+    <li>Processed formatted files in Excel according to User ID Revalidation format until zero syntax errors were achieved</li>
+    <li>Performed regular server vulnerability checks to maintain security compliance</li>
+  </ul>
+  </div>
+
+<div id="exp16" class="section">
+  <h2>🎓 Education</h2>
+  <ul>
+    <li>M.Sc Computer Science – St. Joseph’s College, Bharathidasan University, Trichy, TN. (2001 – 70.02%)</li>
+    <li>PGDCSA – St. Joseph’s College, Bharathidasan University, Trichy, TN. (1999 – 76.67%)</li>
+    <li>B.Sc Statistics – St. Joseph’s College, Bharathidasan University, Trichy, TN. (1998 – 74.06%)</li>
+    <li>HSC First Group – St. Mary’s HSS, Dindigul, TN. (1995 – 72.83%)</li>
+    <li>SSLC State Board – St. Mary’s HSS, Dindigul, TN. (1993 – 83.2%)</li>
+  </ul>
+</div>
+
+<div id="exp17" class="section">
   <h2>🎵 Extra-Curricular</h2>
   <ul>
     <li>Nature Club participant</li>
-    <li>Writes Tamil poems, sings, listens to music, enjoys photography</li>
-  </ul>
+    <li>Writes Tamil poems, sings, listens to music, Photography</li>
+</ul>
 </div>
 
 </body>
