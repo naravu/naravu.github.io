@@ -12,4 +12,5 @@
 | `zypper refresh --force` | Force a Repository Refresh  | Open Suse, Suse | 
 | `zypper up` | Update the packages in suse | Open Suse, Suse | 
 | `zypper update` | Update the packages in suse | Open Suse, Suse | 
-| `zypper remove packagename` | Remove the packages in suse | Open Suse, Suse | 
+| `zypper remove packagename` | Remove the package in suse | Open Suse, Suse | 
+| `zypper install packagename` | Install the package in suse | Open Suse, Suse | 
