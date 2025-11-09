@@ -80,11 +80,25 @@
       .hamburger {
         display: block;
       }
+      .hamburger {
+  position: fixed;
+  top: 1em;
+  left: 1em;
+  background: #333;
+  color: #fff;
+  border: none;
+  font-size: 1.5em;
+  padding: 0.5em 0.8em;
+  z-index: 1100;
+  cursor: pointer;
+  display: none; /* visible only on small screens */
+}
+
     }
   </style>
 </head>
 <body>
-
+<button class="hamburger" onclick="toggleSidebar()">☰</button>
 
 <div class="sidebar">
     <a href='#' title="Senior Technical Lead – Linux Infra | RHCE | MSc-CS">👨‍💻 Prasanna</a>
@@ -384,6 +398,12 @@
 <li>Linguistic: English, Tamil & Kannada  </li>
 </ul>
 </div>
+
+<script>
+  function toggleSidebar() {
+    document.querySelector('.sidebar').classList.toggle('open');
+  }
+</script>
 
 </body>
 </html>
