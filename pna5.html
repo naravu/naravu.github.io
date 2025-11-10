@@ -121,6 +121,8 @@
       }
     }
   </style>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
 </head>
 <body>
 <button class="hamburger" onclick="toggleSidebar()">☰</button>
@@ -156,6 +158,8 @@
 <header>
     <p>Senior Technical Lead – Linux Infra | RHCE | MSc-CS |<small> Marsur gate, Bangalore-562106, KA</small> | <a href='https://www.linkedin.com/in/pnaprasanna/' title="https://www.linkedin.com/in/pnaprasanna/" target="_blank"><img src="https://upload.wikimedia.org/wikipedia/commons/c/ca/LinkedIn_logo_initials.png" alt="LinkedIn" width="15"></a>
 <a href='https://github.com/pnaprasanna' target='_blank' title='Github'><img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" alt="GitHub" width="15" height="15"></a>
+<button onclick="downloadMainAsPDF()">Download PDF</button>
+
  </p>
     <p><small>RedHat, Ubuntu/Debian, Suse | Shellscript, Python, Ansible | Linux Patches, Upgrades, Automations, Vulnerability Mitigatations</small></p>
 </header>
@@ -429,13 +433,28 @@
 </div>
 </div>
 
-<script>
+<script><!-- Hamburger function -->
   function toggleSidebar() {
     const sidebar = document.getElementById('sidebar');
     sidebar.classList.toggle('hidden');
     sidebar.classList.toggle('open');
   }
 </script>
+
+<script><!-- PDF -->
+  function downloadMainAsPDF() {
+    const element = document.querySelector('.main');
+    const opt = {
+      margin:       0.5,
+      filename:     'main-section.pdf',
+      image:        { type: 'jpeg', quality: 0.98 },
+      html2canvas:  { scale: 2 },
+      jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
+    };
+    html2pdf().set(opt).from(element).save();
+  }
+</script>
+
 
 </body>
 </html>
