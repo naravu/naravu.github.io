@@ -399,7 +399,9 @@
 
 <script>
   function toggleSidebar() {
-    document.querySelector('.sidebar').classList.toggle('open');
+    const sidebar = document.getElementById('sidebar');
+    sidebar.classList.toggle('hidden');
+    sidebar.classList.toggle('open');
   }
 </script>
 
