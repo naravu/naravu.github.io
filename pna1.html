@@ -1,173 +1,37 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>👨‍💻 Portfolio</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      background: #f9f9f9;
-      color: #222;
-    }
+<html>
+    <head><title>&#128104;Portfolio</title>
+    <style>
+body {
+  border: 0px;  
+  font-size: 13px;
+  font-family: Arial, sans-serif;
+}
 
-    /* Sidebar */
-    .sidebar {
-      position: fixed;
-      top: 0;
-      left: 0;
-      bottom: 0;
-      width: 220px;
-      background: #333;
-      color: #fff;
-      padding: 1em;
-      box-sizing: border-box;
-      z-index: 1000;
-      overflow-y: auto;
-      transition: transform 0.3s ease;
-    }
+hr {
+    border: none; /* Remove default border */
+    border-top: 1px solid #000080; /* Add a custom blue border at the top */
+    width: 100%; /* Set width to 75% of its container */
+    margin: 1px auto; /* Center the line and add vertical spacing */
+  }
+#myDIV {position: fixed; right: 0; top: 0; width: 7em; height: 100%; background-color: #fff; color: #000000; text-decoration: none; font-size: 10pt; font-face: serif; list-style-type:none; visibility: show; border-right: 0px; border-left: 1px solid #000080;} .classic {font-size: 12pt; border:1px #fff; border-style: dotted; background-color: #000080; color: #fff;font-family: tahoma; margin-bottom: 0px; margin-right: 0px; text-decoration: bold; position: fixed; bottom:0; right:0; z-index: 2} #foot{position: relative; right: 0; bottom: 0; background-color: #fff; width: 100%} .container {position: relative; } .topright { position: absolute; top: 2px; right: 15px; font-size: 18px; border: 1px solid #000; background-color: #fff; color: #000000; z-index=2; } td{font-size: 15px; font-family: arial,sans-serif;} * {font-size: 1em; font-face: serif; } 
 
-    .sidebar.hidden {
-      transform: translateX(-100%);
-    }
-
-    .sidebar h2 {
-      font-size: 1em;
-      margin-bottom: 1em;
-    }
-
-    .sidebar a {
-      display: block;
-      color: #fff;
-      text-decoration: none;
-      margin: 0.5em 0;
-      font-size: 0.9em;
-    }
-
-    .sidebar a:hover {
-      text-decoration: underline;
-    }
-
-    /* Hamburger */
-    .hamburger {
-      position: fixed;
-      top: 1px;
-      left: 1px;
-      background: #333;
-      color: #fff;
-      border: none;
-      font-size: 1em;
-      padding: 0.5em 0.5em;
-      z-index: 1100;
-      cursor: pointer;
-    }
-
-    /* Content */
-    .main {
-      margin-left: 220px;
-      padding: 1em;
-      transition: margin-left 0.3s ease;
-    }
-
-    .sidebar.hidden ~ .main {
-      margin-left: 0;
-    }
-
-    header {
-      text-align: center;
-      padding: 1em;
-      background: #fff;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    }
-
-    h1 {
-      font-size: 1.5em;
-      margin: 0.5em 0;
-    }
-
-    .section {
-      margin: 1em 0;
-      padding: 1em;
-      background: #fff;
-      border-radius: 6px;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-    }
-
-    .section h2 {
-      font-size: 1.2em;
-      margin-top: 0;
-    }
-
-    ul {
-      padding-left: 1.2em;
-    }
-
-    li {
-      margin-bottom: 0.5em;
-    }
-
-    @media (max-width: 768px) {
-      .sidebar {
-        transform: translateX(-100%);
-      }
-
-      .sidebar.open {
-        transform: translateX(0);
-      }
-
-      .main {
-        margin-left: 0;
-      }
-    }
-  </style>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
-
-</head>
+    </style>
+    </head>
 <body>
-<button class="hamburger" onclick="toggleSidebar()">☰</button>
+ <div id="myDIV"><ul style='margin-top:0;padding-left:3px; list-style:none;'><li title="pnaprasanna[at]gmail.com">&#129489;&#8205;&#128187;<a href='#'>Top</a></li><li><a href='#expertise'>Expertise</li><li><a href=#trianz>Trianz</a></li><li><a href='#ffi'>FFI</a></li><li><a href='#quess'>Quess</li><li><a href='#ibm'>IBM</a></li><li><a href='#sch'>Schneider</li><li><a href='#med'>Medgenome</li><li><a href='#wipro'>Wipro</li><li><a href='#cisco'>Cisco</li><a href='#jetking'>Jetking</li><li><a href='#ibmold'>IBM</li><li><a href='#network'>Network</li><li><a href='#candor'>Candor</li><li><a href='#kcc'>KCC</li><li><a href='#rvs'>RVS</li><li><a href='#axis'>Axis</li><li><a href='#education'>Education</li><li><a href=javascript:window.print() title="Pdf/Print">&#128424;<a></li><li><script language=javascript>document.write('<a onclick="this.href=\'data:text/html;charset=UTF-8,\'+encodeURIComponent(document.documentElement.outerHTML)" href=\'#\' download=\'prasanna-profile.xls\' title="Download Excel">&#128229;</a>');</script></li><li><a href=# onclick=closeM() title="Close">&#10060;</a><script> function closeM() { window.opener = self; window.close(); }</script></li></ul></div>
+<button class=classic onclick='myFunction()' title="Menu">🅟🅝🅐</button>
 
-<div class="sidebar hidden" id="sidebar">
-  <br>
-    <a href='#' title="Senior Technical Lead – Linux Infra | RHCE | MSc-CS">👨‍💻 Prasanna</a>
-    <nav>
+<img src="https://upload.wikimedia.org/wikipedia/commons/c/ca/LinkedIn_logo_initials.png" alt="LinkedIn" width="18">
+<a href='https://www.linkedin.com/in/pnaprasanna/' title="https://www.linkedin.com/in/pnaprasanna/" target="_blank">Prasanna</a> Sr Tech Lead Linux Infra
 
-    <small>pnaprasanna[at]gmail.com</small>
-    <a href="#exp1">Trianz</a>
-    <a href="#exp2">Future Focus Infotech</a>
-    <a href="#exp3">QuessCorp</a>
-    <a href="#exp4">IBM</a>
-    <a href="#exp5">Schneider</a>
-    <a href="#exp6">Medgenome</a>
-    <a href="#exp7">Wipro</a>
-    <a href="#exp8">Cisco</a>
-    <a href="#exp9">Jetking</a>
-    <a href="#exp10">IBM</a>
-    <a href="#exp11">Network Labs</a>
-    <a href="#exp12">Candor Solutions</a>
-    <a href="#exp13">KCC</a>
-    <a href="#exp14">RVS</a>
-    <a href="#exp15">Axis</a>
-    <a href="#exp16">Education</a>
-    <a href="#exp17">Extra</a>
-    
-  </nav>
-</div>
+&#127919; RedHat, Ubuntu/Debian, Suse | Shellscript, Python, Ansible | 
+&#127891; MSc-CS, RHCE &#128205;Bangalore-562106,KA &#128231; pnaprasanna[at]gmail.com
+<hr>
+<a name='expertise'><b>Expertise on:</b></a> Linux Patches, Upgrades, Automations, Vulnerability Mitigatations | DOB: 1<sup>st</sup> Jun 1978 | Linguistic: English, Tamil & Kannada
 
-<div class="main">
-<header>
-    <p>Senior Technical Lead – Linux Infra | RHCE | MSc-CS |<small> Marsur gate, Bangalore-562106, KA</small> | <a href='https://www.linkedin.com/in/pnaprasanna/' title="https://www.linkedin.com/in/pnaprasanna/" target="_blank"><img src="https://upload.wikimedia.org/wikipedia/commons/c/ca/LinkedIn_logo_initials.png" alt="LinkedIn" width="15"></a>
-<a href='https://github.com/pnaprasanna' target='_blank' title='Github'><img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" alt="GitHub" width="15" height="15"></a>
-<a href="javascript:void(0)" onclick="downloadMainAsPDF()" title="Download PDF"><img src="https://logowik.com/content/uploads/images/adobe-acrobat-reader3027.jpg" alt="Adobe PDF Reader Logo" width="23"></a>
-<a href="pri/resume.docx" download title="Full Resume"><img src="https://logos-world.net/wp-content/uploads/2020/03/Microsoft-Word-Logo.png" alt="Microsoft Word Logo" width="20"></a>
-
- </p>
-    <p><small>RedHat, Ubuntu/Debian, Suse | Shellscript, Python, Ansible | Linux Patches, Upgrades, Automations, Vulnerability Mitigatations</small></p>
-</header>
-
-<div id="exp1" class="section">
-  <h2>1. Trianz, Bangalore | Senior Technical Lead (Jan 2024 – Dec 2025)</h2>
-  <ul>
+<div class="experience">
+  <h3>1.<a name='trianz'>Trianz</a>, Bangalore | Senior Technical Lead on Linux (Jan 2024 – Dec 2025)</h3>
+   <ul style="margin-top:0; padding-left:1.5em;">
     <li>Apply all pending OS updates, including security patches, kernel updates, and performance enhancements.</li>
     <li>Deploy the latest security patches to mitigate vulnerabilities and protect systems from cyber threats.</li>
     <li>Upgrade server packages, dependencies, and configurations to ensure compatibility, stability, and performance improvements.</li>
@@ -180,61 +44,63 @@
     <li>Backing up the router and other network devices configuration files into Linux server with Python netmiko module.</li>
     <li>Health check reports on all Linux servers using Python script.</li>
     <li>Vulnerability mitigation with respect to the Rapid7 tool suggestions from the security team.</li>
-
   </ul>
 </div>
-
-<div id="exp2" class="section">
-  <h2>2. Future Focus Infotech | Technical Lead (Aug 2022 – Apr 2023)</h2>
-  <ul>
-    
-    <li>Take care of vulnerability remediation via periodic patching through weekly CABs:</li>
-        . Manual patching<br>
-        . Ansible job patching<br>
-        . Draining Rancher cluster nodes before patching and restoring them afterward<br>
-        . Fixing kernel panic after reboot (if any)<br>
-        . Fixing disk space issues via LVM extension (if any)<br>
+<div class="experience">
+  <h3>2.<a name='ffi'>Future Focus Infotech</a>, Bangalore Technical Lead – System Engineering on Linux</strong> (Aug 2022 – Apr 2023)</h3>
+  
+  <ul style="margin-top:0; padding-left:1.5em;">
+    <li>Take care of vulnerability remediation via periodic patching through weekly CABs:
+      <ul style="margin-top:0; padding-left:1.5em;">
+        <li>Manual patching</li>
+        <li>Ansible job patching</li>
+        <li>Draining Rancher cluster nodes before patching and restoring them afterward</li>
+        <li>Fixing kernel panic after reboot (if any)</li>
+        <li>Fixing disk space issues via LVM extension (if any)</li>
+      </ul>
+    </li>
     <li>Coordinated patching with DB team for quarterly periodic reboots</li>
-  <li>PHP upgrade on Windows servers:</li>
-        . Coordinated with DevOps engineers<br>
+    <li>PHP upgrade on Windows servers:
+      <ul style="margin-top:0; padding-left:1.5em;">
+        <li>Coordinated with DevOps engineers</li>
+      </ul>
+    </li>
     <li>Created Confluence documentation for VMware Tools upgrade on CentOS 7</li>
-    <li>Developed simple playbooks in Git to fetch server details:</li>
-        . Details of FreeIPA servers <br>
-        . Changed log permissions for DB team (`/var/log/messages`) <br>
-        . Shell script for manual steps to create `svcansiblelocal` user <br>
+    <li>Developed simple playbooks in Git to fetch server details:
+      <ul style="margin-top:0; padding-left:1.5em;">
+        <li>Details of FreeIPA servers</li>
+        <li>Changed log permissions for DB team (`/var/log/messages`)</li>
+        <li>Shell script for manual steps to create `svcansiblelocal` user</li>
+      </ul>
+    </li>
     <li>Handled monthly PagerDuty shifts and resolved on-call issues</li>
     <li>Commissioned new CentOS 7 servers using Terraform code provided by DevOps team</li>
     <li>Performed physical builds for DB team</li>
     <li>Managed decommissioning of servers not remediated from critical vulnerabilities and ensured proper migration</li>
-
   </ul>
 </div>
 
-<div id="exp3" class="section">
-  <h2>3. QuessCorp on Wipro, Bangalore. SME on Linux (Apr 2021 – Mar 2022)</h2>
-  <ul>
-    
+<div class="experience">
+  <h3>3.<a name='quess'>QuessCorp</a> on Wipro, Bangalore. SME on Linux (Apr 2021 – Mar 2022)</h3>
+   <ul style="margin-top:0; padding-left:1.5em;">
     <li>Patching CentOS/RedHat systems via Red Hat Satellite server using Ansible playbooks</li>
     <li>Managed monthly vulnerability remediation across Linux environments</li>
     <li>Improved server hardening for both existing and newly provisioned instances</li>
     <li>Created dynamic dashboard using shell script to report backup status and file sizes</li>
     <li>Developed daily health check script that generates Excel reports</li>
     <li>Performed REIP project analysis and integrated data telemetry for system insights</li>
-
   </ul>
 </div>
-
-<div id="exp4" class="section">
-  <h2>4. IBM India Pvt. Ltd, Bangalore. SME on Linux(Jan 2020 – Mar 2021)</h2>
-  <ul>
-    
+<div class="experience">
+  <h3>4.<a name='ibm'>IBM India Pvt. Ltd,</a>Bangalore. SME on Linux(Jan 2020 – Mar 2021)</h3>
+  <ul style="margin-top:0; padding-left:1.5em;">
     <li>Performed periodic vulnerability remediation via patching based on CVEs provided by the security team</li>
     <li>Executed patching through Red Hat Satellite server</li>
     <li>Configured Kickstart servers for hands-free workstation installation with custom profiles, scripts, and package suites</li>
     <li>Developed shell automation scripts and beginner-level Ansible patching playbooks</li>
     <li>Handled AWS daily operations including load balancer changes, CloudWatch alarms, and monitoring tasks</li>
     <li>Resolved day-to-day tickets involving:
-      <ul>
+      <ul style="margin-top:0; padding-left:1.5em;">
         <li>LVM and swap analysis/expansion</li>
         <li>User creation and parameter modification</li>
         <li>Disk space monitoring and coordination for filesystem expansion or housekeeping</li>
@@ -246,13 +112,10 @@
     <li>Monitored Nagios, Dynatrace, and ScienceLogic dashboards</li>
     <li>Applied basic networking knowledge to set up VLANs and gateways with support from storage and network teams</li>
   </ul>
-
-  </ul>
 </div>
-
-<div id="exp5" class="section">
-  <h2>5. Schneider, Electric R&D, BGRT, Bangalore via Techsystems, Run Expert (Apr 2019 – Dec 2019)</h2>
-  <ul>
+<div class="experience">
+  <h3>5.<a name='sch'>Schneider Electric R&D,</a>BGRT, Bangalore via Techsystems, Run Expert (Apr 2019 – Dec 2019)</h3>
+  <ul style="margin-top:0; padding-left:1.5em;">
     <li>Monitoring Nagios, Dynatrace, and CloudWatch tools; taking necessary actions to rectify alerts</li>
     <li>Installation and maintenance of Apache; coordinating with application teams during release cycles</li>
     <li>Vulnerability management using OpenSCAP and OpenVAS scanning tools</li>
@@ -264,30 +127,23 @@
     <li>Maintaining a data center with VMware access using provided sudo privileges</li>
     <li>Writing simple shell scripts for internal environment requirements</li>
   </ul>
-
-  </ul>
 </div>
-
-<div id="exp6" class="section">
-  <h2>6. Medgenome Labs Ltd, Bangalore. Sr.Linux Administrator (Sep 2017 – Apr 2019)</h2>
-  <ul>
-    
+<div class="experience">
+  <h3>6.<a name='med'>Medgenome Labs Ltd</a>, Bangalore. Sr.Linux Administrator (Sep 2017 – Apr 2019)</h3>
+  <ul style="margin-top:0; padding-left:1.5em;">
     <li>Deployment and maintenance of various ﬂavors of Linux VMs (Redhat, Ubuntu) systems.</li>
     <li>Tools monitoring, Problem management.</li>
     <li>Vulnerability management. Automation via shell scripting, Backup management.</li>
     <li>RedHat Satellite Spacewalk server maintenance.</li>
-
-  </ul>
-
   </ul>
 </div>
 
-<div id="exp7" class="section">
-<h2>7. Wipro Technologies, Bangalore Lead Administrator(Jul 2014 – Sep 2017)</h2>
-  <ul>
+<div class="experience">
+  <h3>7.<a name='wipro'>Wipro Technologies</a>, Bangalore Lead Administrator(Jul 2014 – Sep 2017)</h3>
+  <ul style="margin-top:0; padding-left:1.5em;">
     <li>Deployment and maintenance of various Linux VM flavors (RedHat, Ubuntu/Debian, SUSE)</li>
     <li>OS customization:
-      <ul>
+      <ul style="margin-top:0; padding-left:1.5em;">
         <li>Ubuntu/Debian via Remastersys</li>
         <li>RedHat via Kickstart (KS)</li>
         <li>SUSE via KIWI</li>
@@ -313,9 +169,9 @@
   </ul>
 </div>
 
-<div id="exp8" class="section">
-<h2>8. Cisco Inc. via Ariveguru Technology Solutions Lab Admin / Sr. System Administrator(Mar 2013 – Jul 2014)</h2>
-    <ul>
+<div class="experience">
+  <h3>8.<a name='cisco'>Cisco Inc.</a> VIA Ariveguru Technology Solutions Lab Admin / Sr. System Administrator(Mar 2013 – Jul 2014)</h3>
+    <ul style="margin-top:0; padding-left:1.5em;">
     <li>Configured virtual machines across various Linux and Windows flavors; provided support across all levels</li>
     <li>Performed kernel and OS upgrades; automated tasks using cron jobs</li>
     <li>Handled physical-to-virtual server migrations, VM cloning, and replacements</li>
@@ -325,12 +181,12 @@
     <li>Configured terminal servers and various Cisco routers</li>
     <li>Set up multiple types of PDUs with access switches; managed PDUs via PowerIQ software</li>
     <li>Maintained inventory using the Eitms tool</li>
-    </ul>
-    </div>
+  </ul>
+</div>
 
-<div id="exp9" class="section">
-    <h2>9. Jetking Infotrain Limited, Sadashiva Nagar, Bangalore - Linux Trainer & System Administrator(Jan 2011 – Mar 2013)</h2>
-    <ul>
+<div class="experience">
+  <h3>9.<a name='jetking'>Jetking Infotrain Limited,</a> Sadashiva Nagar, Bangalore - Linux Trainer &amp; System Administrator(Jan 2011 – Mar 2013)</h3>
+    <ul style="margin-top:0; padding-left:1.5em;">
     <li>Handled Red Hat Enterprise Linux 6, Windows 7, and Network Essentials (N+) batches for Jetking students</li>
     <li>Installed and maintained DNS, DHCP, WINS, RIS, IIS, LAN routing, and NAT servers</li>
     <li>Installed and maintained Samba Server, NFS Server, Kickstart, IP forwarding, and VNC Server</li>
@@ -343,9 +199,9 @@
   </ul>
 </div>
 
-<div id="exp10" class="section">
-<h2>10. IBM India Private Limited, Bangalore IT Security Analyst(Mar 2009 – Mar 2010)</h2>
-   <ul>
+<div class="experience">
+  <h3>10.<a name="ibmold">IBM India Private Limited,</a> Bangalore IT Security Analyst(Mar 2009 – Mar 2010)</h3>
+   <ul style="margin-top:0; padding-left:1.5em;">
     <li>Provided Level 2 support for Identity Access Management at IBM</li>
     <li>Performed daily server health checks to ensure operational stability</li>
     <li>Tools used:
@@ -360,102 +216,72 @@
     <li>Processed formatted files in Excel according to User ID Revalidation format until zero syntax errors were achieved</li>
     <li>Performed regular server vulnerability checks to maintain security compliance</li>
   </ul>
-  </div>
+</div>
 
-<div id="exp11" class="section">
-<h2>11. Network Labs, Jayanagar, Bangalore Linux System Administrator(Oct 2008 – Feb 2009)</h2>
-  <ul>
+<div class="experience">
+  <h3>11.<a name=network>Network Labs</a>, Jayanagar, Bangalore
+Linux System Administrator(Oct 2008 – Feb 2009)</h3>
+  <ul style="margin-top:0; padding-left:1.5em;">
     <li>Installed and maintained DNS, Samba, DHCP, and PXE servers</li>
     <li>Handled Red Hat Enterprise Linux 5, Windows 7, Windows Server 2003, and Network Essentials (N+) batches for students</li>
     <li>Tools used: Putty, Remote Desktop Environment</li>
   </ul>
 </div>
 
-<div id="exp12" class="section">
-<h2>12. Candor Solutions, Rajajinagar, Bangalore Linux System Administrator(Sep 2007 – Sep 2008)</h2>
-  <ul>
+<div class="experience">
+  <h3>12.<a name='candor'>Candor Solutions</a>, Rajajinagar, Bangalore
+  Linux System Administrator(Sep 2007 – Sep 2008)</h3>
+  <ul style="margin-top:0; padding-left:1.5em;">
     <li>Installed and maintained DNS, Samba, HTTP, SquirrelMail, DHCP, and PXE servers on RHEL 5.0</li>
     <li>Tools used: Putty, Remote Desktop Environment</li>
   </ul>
 </div>
-
-<div id="exp13" class="section">
-<h2>13. Kodaikanal Christian College, Kodaikanal, Lecturer (July 2005 – Jul 2007)</h2>
-  <ul>
+<div class="experience">
+  <h3>13.<a name=kcc>Kodaikanal Christian College</a>, Kodaikanal, Lecturer (July 2005 – Jul 2007)</h3>
+  <ul style="margin-top:0; padding-left:1.5em;">
     <li>Worked as a Lecturer. Handling classes for Linux Operating System, Compiler Designer, Microprocessor and Databases as well as Java Language.
 </li>
    </ul>
-  </div>
-
-<div id="exp14" class="section">
-<h2>14. RVS College of Engg & Tech, Dindigul. | Network Lab in-charge (June 2003 – May 2005)</h2>
-  <ul>
-    <li>Cable crimping, Installing & Maintain the OS, Setting security policies.
-</li>
-<li>Tools used: Putty, Remote Desktop Environment</li>
-   </ul>
-  </div>
-
-<div id="exp15" class="section">
-<h2>15. Axis Systems, Kodambakkam, Chennai. | Network Lab in-charge (June 2001 – May 2003)</h2>
-  <ul>
+</div>
+<div class="experience">
+  <h3>14.<a name=rvs>RVS COLLEGE OF ENGG & TECH,</a> Dindigul. | Network Lab in-charge (June 2003 – May 2005)</h3>
+  <ul style="margin-top:0; padding-left:1.5em;">
     <li>Cable crimping, Installing & Maintain the OS, Setting security policies.
 </li>
 <li>Tools used: Putty, Remote Desktop Environment</li>
    </ul>
 </div>
-
-
-<div id="exp16" class="section">
-  <h2>🎓 Education</h2>
-  <ul>
-    <li>M.Sc Computer Science – St. Joseph’s College, Bharathidasan University, Trichy, TN. (2001 – 70.02%)</li>
-    <li>PGDCSA – St. Joseph’s College, Bharathidasan University, Trichy, TN. (1999 – 76.67%)</li>
-    <li>B.Sc Statistics – St. Joseph’s College, Bharathidasan University, Trichy, TN. (1998 – 74.06%)</li>
-    <li>HSC First Group – St. Mary’s HSS, Dindigul, TN. (1995 – 72.83%)</li>
-    <li>SSLC State Board – St. Mary’s HSS, Dindigul, TN. (1993 – 83.2%)</li>
-  </ul>
+<div class="experience">
+  <h3>15.<a name=axis>Axis Systems, Kodambakkam,</a>Chennai. | Network Lab in-charge (June 2001 – May 2003)</h3>
+  <ul style="margin-top:0; padding-left:1.5em;">
+    <li>Cable crimping, Installing & Maintain the OS, Setting security policies.
+</li>
+<li>Tools used: Putty, Remote Desktop Environment</li>
+   </ul>
 </div>
 
-<div id="exp17" class="section">
-  <h2>🎵 Extra-Curricular</h2>
-  <ul>
-    <li>Nature Club participant</li>
-    <li>Writes Tamil poems, sings, listens to music, Photography</li>
+<hr>
+<a name='education'><b>Education</b></a><br><!--break-->
+<div class="experience">
+  <h3>🎓 St.Joseph's College of Arts & Science (Autonomous) Affliated to Bharathidasan University Trichy, TN.</h3>
+  <ul style="margin-top:0; padding-left:1.5em;">
+    <li>M.Sc-Computer Science (2001 - 70.02%) | PGDCSA (1999 - 76.67%) | B.Sc-Statistics (1998 - 74.06%)</li>
+   </ul>
+<h3>&#128218; St.Mary’s HSS, Dindigul, TN.</h3>
+<ul style="margin-top:0; padding-left:1.5em;">
+<li>
+ HSC-I Group(1995 – 72.83%) | SSLC-State Board(1993 – 83.2%)
+</li>
 </ul>
 </div>
 
-<div id="exp18" class="section">
-<h2>Personal Details</h2>
-<ul>
-  <li>DOB: 1<sup>st</sup>Jun 1978 </li>
-<li>Linguistic: English, Tamil & Kannada  </li>
-</ul>
-</div>
+<div class="experience">
+  <h3>&#127926; Extra-Curricular Activities</h3>
+  <ul style="margin-top:0; padding-left:1.5em;">
+    <li>Participated in Nature Club at UG level. | Writing poems in Tamil, Singing Songs, Listening to Music, Photography.</li>
+   </ul>
 </div>
 
-<script><!-- Hamburger function -->
-  function toggleSidebar() {
-    const sidebar = document.getElementById('sidebar');
-    sidebar.classList.toggle('hidden');
-    sidebar.classList.toggle('open');
-  }
-</script>
-
-<script><!-- PDF -->
-  function downloadMainAsPDF() {
-    const element = document.querySelector('.main');
-    const opt = {
-      margin:       0.5,
-      filename:     'main-section.pdf',
-      image:        { type: 'jpeg', quality: 0.98 },
-      html2canvas:  { scale: 2 },
-      jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
-    };
-    html2pdf().set(opt).from(element).save();
-  }
-</script>
-
-
+<script>function myFunction() {  var x = document.getElementById("myDIV");  if (x.style.display === "none") {   x.style.display = "block";  } else {   x.style.display = "none";  }}</script>
 </body>
 </html>
