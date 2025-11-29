@@ -86,3 +86,4 @@
 |Bazzite|https://bazzite.gg/| Bazzite | Bazzite - Linux for Gaming, Steam|
 |Vazu|https://vazu.ai/| Vazu | AWS Pay automation - Bill reduction|
 |duf|https://github.com/muesli/duf| duf | alternate to du or df cmd in Linux.|
+|CEO replacement | https://replaceyourboss.ai/ | Boss replacement | Alternate for Bosses.|
