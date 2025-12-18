@@ -13,5 +13,4 @@
 > Story on paramiko, Prepare other articles one by one
 - [ ] Music class
 > Keyboard class and buying Keyboard
-- [ ] Amplifier repair in Anekal
-> Small, Big
+
