@@ -88,3 +88,4 @@
 |duf|https://github.com/muesli/duf| duf | alternate to du or df cmd in Linux.|
 |CEO replacement | https://replaceyourboss.ai/ | Boss replacement | Alternate for Bosses.|
 | Vibe coding|https://magicloops.dev/ | Vibe coding| Vibe coding|
+|VPN Gate | https://www.vpngate.net/en/ | VPN Gate | Free VPN Japan |
