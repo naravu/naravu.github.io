@@ -90,3 +90,4 @@
 | Vibe coding|https://magicloops.dev/ | Vibe coding| Vibe coding|
 |VPN Gate | https://www.vpngate.net/en/ | VPN Gate | Free VPN Japan |
 |Learn music |https://muted.io | Music| Learn music|
+|Labex Linux Practice | https://labex.io/ | Labex | Linux learning site |
