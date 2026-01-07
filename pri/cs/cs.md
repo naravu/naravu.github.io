@@ -14,3 +14,6 @@
 | `zypper update` | Update the packages in suse | Suse | 
 | `zypper remove packagename` | Remove the package in suse | Suse | 
 | `zypper install packagename` | Install the package in suse | Suse | 
+| `cat /etc/*release` | Find the OS version | All | 
+| `cal` | Calendar | All | 
+| `uname -r` | Kernel version of the OS | All | 
