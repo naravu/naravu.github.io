@@ -92,3 +92,4 @@
 |Learn music |https://muted.io | Music| Learn music|
 |Labex Linux Practice | https://labex.io/ | Labex | Linux learning site |
 |Local AI Model | https://pinokio.co/ | AI | AI on your device |
+|Linux on Pdf |https://github.com/ading2210/linuxpdf | Linux Pdf | Linux on RISC emulator|
