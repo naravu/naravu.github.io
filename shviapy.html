@@ -4,7 +4,7 @@
        Icon name: computer-vm
          Chassis: vm 🖴
       Machine ID: 36bb9a9bd7094147aa1d7169785a00f5
-         Boot ID: 2849870aac764dd29f9864b5002390c3
+         Boot ID: 13cac617829240b2982c7dca8261d9fb
   Virtualization: microsoft
 Operating System: Ubuntu 24.04.3 LTS
           Kernel: Linux 6.11.0-1018-azure
@@ -13,36 +13,36 @@ Operating System: Ubuntu 24.04.3 LTS
   Hardware Model: Virtual Machine
 Firmware Version: Hyper-V UEFI Release v4.1
    Firmware Date: Fri 2024-08-23
-    Firmware Age: 1y 5month 1w 3d</pre>
+    Firmware Age: 1y 5month 1w 4d</pre>
 <a name=network></a><b>Network Details</b><pre>docker0: flags=4099<UP,BROADCAST,MULTICAST>  mtu 1500
         inet 172.17.0.1  netmask 255.255.0.0  broadcast 172.17.255.255
-        ether 82:ee:86:4f:71:92  txqueuelen 0  (Ethernet)
+        ether 56:13:b2:24:8a:b4  txqueuelen 0  (Ethernet)
         RX packets 0  bytes 0 (0.0 B)
         RX errors 0  dropped 0  overruns 0  frame 0
         TX packets 0  bytes 0 (0.0 B)
         TX errors 0  dropped 2 overruns 0  carrier 0  collisions 0
 
 eth0: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
-        inet 10.1.0.176  netmask 255.255.240.0  broadcast 10.1.15.255
-        inet6 fe80::20d:3aff:fe34:3953  prefixlen 64  scopeid 0x20<link>
-        ether 00:0d:3a:34:39:53  txqueuelen 1000  (Ethernet)
-        RX packets 22759  bytes 31765169 (31.7 MB)
+        inet 10.1.0.213  netmask 255.255.240.0  broadcast 10.1.15.255
+        inet6 fe80::20d:3aff:fe04:b40  prefixlen 64  scopeid 0x20<link>
+        ether 00:0d:3a:04:0b:40  txqueuelen 1000  (Ethernet)
+        RX packets 22084  bytes 31385847 (31.3 MB)
         RX errors 0  dropped 0  overruns 0  frame 0
-        TX packets 2489  bytes 695649 (695.6 KB)
+        TX packets 2024  bytes 403800 (403.8 KB)
         TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
 
 lo: flags=73<UP,LOOPBACK,RUNNING>  mtu 65536
         inet 127.0.0.1  netmask 255.0.0.0
         inet6 ::1  prefixlen 128  scopeid 0x10<host>
         loop  txqueuelen 1000  (Local Loopback)
-        RX packets 216  bytes 29343 (29.3 KB)
+        RX packets 208  bytes 27751 (27.7 KB)
         RX errors 0  dropped 0  overruns 0  frame 0
-        TX packets 216  bytes 29343 (29.3 KB)
+        TX packets 208  bytes 27751 (27.7 KB)
         TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0</pre>
 <a name=swap></a><font face=serif size=2><b>Swap Details</b></font><pre>               total        used        free      shared  buff/cache   available
-Mem:            15Gi       809Mi        13Gi        42Mi       1.9Gi        14Gi
+Mem:            15Gi       977Mi        13Gi        42Mi       1.9Gi        14Gi
 Swap:          3.0Gi          0B       3.0Gi</pre>
-<a name=user></a><font face=serif size=2><b>Connected User Details</b></font><pre> 23:15:03 up 2 min,  0 user,  load average: 0.17, 0.06, 0.01
+<a name=user></a><font face=serif size=2><b>Connected User Details</b></font><pre> 23:17:46 up 0 min,  0 user,  load average: 1.27, 0.35, 0.12
 USER     TTY      FROM             LOGIN@   IDLE   JCPU   PCPU  WHAT</pre>
 <a name=fstab></a><font face=serif size=2><b>FStab Details</b></font><pre># CLOUD_IMG: This file was created/modified by the Cloud Image build process
 UUID=a72fddf1-49c4-4653-be67-35f223a2066a	/	 ext4	discard,commit=30,errors=remount-ro	0 1
@@ -179,227 +179,228 @@ Destination     Gateway         Genmask         Flags   MSS Window  irtt Iface
 169.254.169.254 10.1.0.1        255.255.255.255 UGH       0 0          0 eth0
 172.17.0.0      0.0.0.0         255.255.0.0     U         0 0          0 docker0</pre>
 <a name=port></a><font face=serif size=2><b>Listening Ports Details</b></font><pre>tcp        0      0 0.0.0.0:22              0.0.0.0:*               LISTEN      -                   
-tcp        0      0 127.0.0.53:53           0.0.0.0:*               LISTEN      -                   
 tcp        0      0 127.0.0.54:53           0.0.0.0:*               LISTEN      -                   
+tcp        0      0 127.0.0.53:53           0.0.0.0:*               LISTEN      -                   
 tcp6       0      0 :::22                   :::*                    LISTEN      -                   </pre>
-<a name=active></a><font face=serif size=2><b>Active Services</b></font><pre>  chrony.service                                              loaded    active   running chrony, an NTP client/server
-  containerd.service                                          loaded    active   running containerd container runtime
-  cron.service                                                loaded    active   running Regular background program processing daemon
-  dbus.service                                                loaded    active   running D-Bus System Message Bus
-  docker.service                                              loaded    active   running Docker Application Container Engine
-  getty@tty1.service                                          loaded    active   running Getty on tty1
-  haveged.service                                             loaded    active   running Entropy Daemon based on the HAVEGE algorithm
-  hosted-compute-agent.service                                loaded    active   running Job that runs the Hosted Compute Agent
-  hv-kvp-daemon.service                                       loaded    active   running Hyper-V KVP Protocol Daemon
-  ModemManager.service                                        loaded    active   running Modem Manager
-  multipathd.service                                          loaded    active   running Device-Mapper Multipath Device Controller
-  networkd-dispatcher.service                                 loaded    active   running Dispatcher daemon for systemd-networkd
-  php8.3-fpm.service                                          loaded    active   running The PHP 8.3 FastCGI Process Manager
-  polkit.service                                              loaded    active   running Authorization Manager
-  rsyslog.service                                             loaded    active   running System Logging Service
-  serial-getty@ttyS0.service                                  loaded    active   running Serial Getty on ttyS0
-  systemd-hostnamed.service                                   loaded    active   running Hostname Service
-  systemd-journald.service                                    loaded    active   running Journal Service
-  systemd-logind.service                                      loaded    active   running User Login Management
-  systemd-networkd.service                                    loaded    active   running Network Configuration
-  systemd-resolved.service                                    loaded    active   running Network Name Resolution
-  systemd-udevd.service                                       loaded    active   running Rule-based Manager for Device Events and Files
-  ua-timer.service                                            loaded    inactive dead    Ubuntu Pro Timer for running repeated jobs
-  udisks2.service                                             loaded    active   running Disk Manager
-  user@1001.service                                           loaded    active   running User Manager for UID 1001
-  walinuxagent.service                                        loaded    active   running Azure Linux Agent</pre>
-<a name=inactive></a><font face=serif size=2><b>Inactive Services</b></font><pre>  apparmor.service                                            loaded    active   exited  Load AppArmor profiles
-  blk-availability.service                                    loaded    active   exited  Availability of block devices
-  cloud-config.service                                        loaded    active   exited  Cloud-init: Config Stage
-  cloud-final.service                                         loaded    active   exited  Cloud-init: Final Stage
-  cloud-init-local.service                                    loaded    active   exited  Cloud-init: Local Stage (pre-network)
-  cloud-init.service                                          loaded    active   exited  Cloud-init: Network Stage
-  console-setup.service                                       loaded    active   exited  Set console font and keymap
-  finalrd.service                                             loaded    active   exited  Create final runtime dir for shutdown pivot root
-  keyboard-setup.service                                      loaded    active   exited  Set the console keyboard layout
-  kmod-static-nodes.service                                   loaded    active   exited  Create List of Static Device Nodes
-  lvm2-monitor.service                                        loaded    active   exited  Monitoring of LVM2 mirrors, snapshots etc. using dmeventd or progress polling
-  plymouth-quit-wait.service                                  loaded    active   exited  Hold until boot process finishes up
-  plymouth-quit.service                                       loaded    active   exited  Terminate Plymouth Boot Screen
-  plymouth-read-write.service                                 loaded    active   exited  Tell Plymouth To Write Out Runtime Data
-  podman-restart.service                                      loaded    active   exited  Podman Start All Containers With Restart Policy Set To Always
-  setvtrgb.service                                            loaded    active   exited  Set console scheme
-  snapd.apparmor.service                                      loaded    active   exited  Load AppArmor profiles managed internally by snapd
-  snapd.seeded.service                                        loaded    active   exited  Wait until snapd is fully seeded
-  sphinxsearch.service                                        loaded    active   exited  LSB: Fast standalone full-text SQL search engine
-  sysstat.service                                             loaded    active   exited  Resets System Activity Logs
-  systemd-binfmt.service                                      loaded    active   exited  Set Up Additional Binary Formats
-  systemd-fsck-root.service                                   loaded    active   exited  File System Check on Root Device
-  systemd-fsck@dev-disk-by\x2dlabel-BOOT.service              loaded    active   exited  File System Check on /dev/disk/by-label/BOOT
-  systemd-fsck@dev-disk-by\x2duuid-7B14\x2d7487.service       loaded    active   exited  File System Check on /dev/disk/by-uuid/7B14-7487
-  systemd-journal-flush.service                               loaded    active   exited  Flush Journal to Persistent Storage
-  systemd-modules-load.service                                loaded    active   exited  Load Kernel Modules
-  systemd-networkd-wait-online.service                        loaded    active   exited  Wait for Network to be Configured
-  systemd-random-seed.service                                 loaded    active   exited  Load/Save OS Random Seed
-  systemd-remount-fs.service                                  loaded    active   exited  Remount Root and Kernel File Systems
-  systemd-sysctl.service                                      loaded    active   exited  Apply Kernel Variables
-  systemd-tmpfiles-setup-dev-early.service                    loaded    active   exited  Create Static Device Nodes in /dev gracefully
-  systemd-tmpfiles-setup-dev.service                          loaded    active   exited  Create Static Device Nodes in /dev
-  systemd-tmpfiles-setup.service                              loaded    active   exited  Create Volatile Files and Directories
-  systemd-udev-trigger.service                                loaded    active   exited  Coldplug All udev Devices
-  systemd-update-utmp.service                                 loaded    active   exited  Record System Boot/Shutdown in UTMP
-  systemd-user-sessions.service                               loaded    active   exited  Permit User Sessions
-  ufw.service                                                 loaded    active   exited  Uncomplicated firewall
-  user-runtime-dir@1001.service                               loaded    active   exited  User Runtime Directory /run/user/1001
-  walinuxagent-network-setup.service                          loaded    active   exited  Setup network rules for WALinuxAgent</pre>
-<pre>  apport-autoreport.service                                   loaded    inactive dead    Process error reports when automatic reporting is enabled
-● apport.service                                              not-found inactive dead    apport.service
-  apt-daily.service                                           loaded    inactive dead    Daily apt download activities
-● auditd.service                                              not-found inactive dead    auditd.service
-  cloud-init-hotplugd.service                                 loaded    inactive dead    Cloud-init: Hotplug Hook
-● connman.service                                             not-found inactive dead    connman.service
-● console-screen.service                                      not-found inactive dead    console-screen.service
-● display-manager.service                                     not-found inactive dead    display-manager.service
-  dm-event.service                                            loaded    inactive dead    Device-mapper event daemon
-  dmesg.service                                               loaded    inactive dead    Save initial kernel messages after boot
-  dpkg-db-backup.service                                      loaded    inactive dead    Daily dpkg database backup service
-  e2scrub_all.service                                         loaded    inactive dead    Online ext4 Metadata Check for All Filesystems
-  e2scrub_reap.service                                        loaded    inactive dead    Remove Stale Online ext4 Metadata Check Snapshots
-  emergency.service                                           loaded    inactive dead    Emergency Shell
-  ephemeral-disk-warning.service                              loaded    inactive dead    Write warning to Azure ephemeral disk
-● fcoe.service                                                not-found inactive dead    fcoe.service
-● firewalld.service                                           not-found inactive dead    firewalld.service
-  fstrim.service                                              loaded    inactive dead    Discard unused blocks on filesystems from /etc/fstab
-  getty-static.service                                        loaded    inactive dead    getty on tty2-tty6 if dbus and logind are not available
-  grub-common.service                                         loaded    inactive dead    Record successful boot for GRUB
-  grub-initrd-fallback.service                                loaded    inactive dead    GRUB failed boot detection
-  hv-fcopy-daemon.service                                     loaded    inactive dead    Hyper-V File Copy Protocol Daemon
-  hv-vss-daemon.service                                       loaded    inactive dead    Hyper-V VSS Protocol Daemon
-● hv_kvp_daemon.service                                       not-found inactive dead    hv_kvp_daemon.service
-  initrd-cleanup.service                                      loaded    inactive dead    Cleaning Up and Shutting Down Daemons
-  initrd-parse-etc.service                                    loaded    inactive dead    Mountpoints Configured in the Real Root
-  initrd-switch-root.service                                  loaded    inactive dead    Switch Root
-  initrd-udevadm-cleanup-db.service                           loaded    inactive dead    Cleanup udev Database
-● iscsi-shutdown.service                                      not-found inactive dead    iscsi-shutdown.service
-  iscsid.service                                              loaded    inactive dead    iSCSI initiator daemon (iscsid)
-● kbd.service                                                 not-found inactive dead    kbd.service
-  ldconfig.service                                            loaded    inactive dead    Rebuild Dynamic Linker Cache
-  logrotate.service                                           loaded    inactive dead    Rotate log files
-● lvm2-activation-early.service                               not-found inactive dead    lvm2-activation-early.service
-  lvm2-lvmpolld.service                                       loaded    inactive dead    LVM2 poll daemon
-  man-db.service                                              loaded    inactive dead    Daily man-db regeneration
-  modprobe@configfs.service                                   loaded    inactive dead    Load Kernel Module configfs
-  modprobe@dm_mod.service                                     loaded    inactive dead    Load Kernel Module dm_mod
-  modprobe@drm.service                                        loaded    inactive dead    Load Kernel Module drm
-  modprobe@efi_pstore.service                                 loaded    inactive dead    Load Kernel Module efi_pstore
-  modprobe@fuse.service                                       loaded    inactive dead    Load Kernel Module fuse
-  modprobe@loop.service                                       loaded    inactive dead    Load Kernel Module loop
-  modprobe@nvme_fabrics.service                               loaded    inactive dead    Load Kernel Module nvme_fabrics
-  motd-news.service                                           loaded    inactive dead    Message of the Day
-  netplan-ovs-cleanup.service                                 loaded    inactive dead    OpenVSwitch configuration for cleanup
-● networking.service                                          not-found inactive dead    networking.service
-● NetworkManager.service                                      not-found inactive dead    NetworkManager.service
-● ntp.service                                                 not-found inactive dead    ntp.service
-● ntpsec.service                                              not-found inactive dead    ntpsec.service
-  nvmefc-boot-connections.service                             loaded    inactive dead    Auto-connect to subsystems on FC-NVME devices found during boot
-  nvmf-autoconnect.service                                    loaded    inactive dead    Connect NVMe-oF subsystems automatically during boot
-  open-iscsi.service                                          loaded    inactive dead    Login to default iSCSI targets
-  open-vm-tools.service                                       loaded    inactive dead    Service for virtual machines hosted on VMware
-● openntpd.service                                            not-found inactive dead    openntpd.service
-● ovsdb-server.service                                        not-found inactive dead    ovsdb-server.service
-  phpsessionclean.service                                     loaded    inactive dead    Clean php session files
-  plymouth-start.service                                      loaded    inactive dead    Show Plymouth Boot Screen
-  plymouth-switch-root.service                                loaded    inactive dead    Plymouth switch root service
-  podman-auto-update.service                                  loaded    inactive dead    Podman auto-update service
-  podman-clean-transient.service                              loaded    inactive dead    Clean up podman transient data
-  podman.service                                              loaded    inactive dead    Podman API Service
-  pollinate.service                                           loaded    inactive dead    Pollinate to seed the pseudo random number generator
-● rbdmap.service                                              not-found inactive dead    rbdmap.service
-  rc-local.service                                            loaded    inactive dead    /etc/rc.local Compatibility
-  rescue.service                                              loaded    inactive dead    Rescue Shell
-  secureboot-db.service                                       loaded    inactive dead    Secure Boot updates for DB and DBX
-  snapd.autoimport.service                                    loaded    inactive dead    Auto import assertions from block devices
-  snapd.core-fixup.service                                    loaded    inactive dead    Automatically repair incorrect owner/permissions on core devices
-  snapd.failure.service                                       loaded    inactive dead    Failure handling of the snapd snap
-  snapd.recovery-chooser-trigger.service                      loaded    inactive dead    Wait for the Ubuntu Core chooser trigger
-  snapd.service                                               loaded    inactive dead    Snap Daemon
-  snapd.snap-repair.service                                   loaded    inactive dead    Automatically fetch and run repair assertions
-  snapd.system-shutdown.service                               loaded    inactive dead    Ubuntu core (all-snaps) system shutdown helper setup service
-  ssh.service                                                 loaded    inactive dead    OpenBSD Secure Shell server
-● sshd-keygen.service                                         not-found inactive dead    sshd-keygen.service
-● sshd.service                                                not-found inactive dead    sshd.service
-  ssl-cert.service                                            loaded    inactive dead    Generate snakeoil SSL keypair
-  sysstat-collect.service                                     loaded    inactive dead    system activity accounting tool
-  sysstat-summary.service                                     loaded    inactive dead    Generate a daily summary of process accounting
-  systemd-ask-password-console.service                        loaded    inactive dead    Dispatch Password Requests to Console
-  systemd-ask-password-plymouth.service                       loaded    inactive dead    Forward Password Requests to Plymouth
-  systemd-ask-password-wall.service                           loaded    inactive dead    Forward Password Requests to Wall
-  systemd-battery-check.service                               loaded    inactive dead    Check battery level during early boot
-  systemd-bsod.service                                        loaded    inactive dead    Displays emergency message in full screen.
-  systemd-firstboot.service                                   loaded    inactive dead    First Boot Wizard
-  systemd-fsck@dev-disk-cloud-azure_resource\x2dpart1.service loaded    inactive dead    File System Check on /dev/disk/cloud/azure_resource-part1
-  systemd-fsckd.service                                       loaded    inactive dead    File System Check Daemon to report status
-  systemd-hibernate-resume.service                            loaded    inactive dead    Resume from hibernation
-  systemd-hibernate.service                                   loaded    inactive dead    System Hibernate
-  systemd-hwdb-update.service                                 loaded    inactive dead    Rebuild Hardware Database
-  systemd-hybrid-sleep.service                                loaded    inactive dead    System Hybrid Suspend+Hibernate
-  systemd-initctl.service                                     loaded    inactive dead    initctl Compatibility Daemon
-  systemd-journal-catalog-update.service                      loaded    inactive dead    Rebuild Journal Catalog
-  systemd-machine-id-commit.service                           loaded    inactive dead    Commit a transient machine-id on disk
-● systemd-oomd.service                                        not-found inactive dead    systemd-oomd.service
-  systemd-pcrmachine.service                                  loaded    inactive dead    TPM2 PCR Machine ID Measurement
-  systemd-pcrphase-initrd.service                             loaded    inactive dead    TPM2 PCR Barrier (initrd)
-  systemd-pcrphase-sysinit.service                            loaded    inactive dead    TPM2 PCR Barrier (Initialization)
-  systemd-pcrphase.service                                    loaded    inactive dead    TPM2 PCR Barrier (User)
-  systemd-pstore.service                                      loaded    inactive dead    Platform Persistent Storage Archival
-  systemd-quotacheck.service                                  loaded    inactive dead    File System Quota Check
-  systemd-repart.service                                      loaded    inactive dead    Repartition Root Disk
-  systemd-rfkill.service                                      loaded    inactive dead    Load/Save RF Kill Switch Status
-  systemd-soft-reboot.service                                 loaded    inactive dead    Reboot System Userspace
-  systemd-suspend-then-hibernate.service                      loaded    inactive dead    System Suspend then Hibernate
-  systemd-suspend.service                                     loaded    inactive dead    System Suspend
-  systemd-sysext.service                                      loaded    inactive dead    Merge System Extension Images into /usr/ and /opt/
-  systemd-sysusers.service                                    loaded    inactive dead    Create System Users
-  systemd-tmpfiles-clean.service                              loaded    inactive dead    Cleanup of Temporary Directories
-  systemd-tpm2-setup-early.service                            loaded    inactive dead    TPM2 SRK Setup (Early)
-  systemd-tpm2-setup.service                                  loaded    inactive dead    TPM2 SRK Setup
-  systemd-udev-settle.service                                 loaded    inactive dead    Wait for udev To Complete Device Initialization
-  systemd-update-done.service                                 loaded    inactive dead    Update is Completed
-  systemd-update-utmp-runlevel.service                        loaded    inactive dead    Record Runlevel Change in UTMP
-● systemd-vconsole-setup.service                              not-found inactive dead    systemd-vconsole-setup.service
-  tpm-udev.service                                            loaded    inactive dead    Handle dynamically added tpm devices
-● ua-auto-attach.service                                      not-found inactive dead    ua-auto-attach.service
-  ua-reboot-cmds.service                                      loaded    inactive dead    Ubuntu Pro reboot cmds
-  ua-timer.service                                            loaded    inactive dead    Ubuntu Pro Timer for running repeated jobs
-● ubuntu-advantage-cloud-id-shim.service                      not-found inactive dead    ubuntu-advantage-cloud-id-shim.service
-  ubuntu-advantage.service                                    loaded    inactive dead    Ubuntu Pro Background Auto Attach
-  update-notifier-download.service                            loaded    inactive dead    Download data for packages that failed at package install time
-  update-notifier-motd.service                                loaded    inactive dead    Check to see whether there is a new version of Ubuntu available
-  uuidd.service                                               loaded    inactive dead    Daemon for generating UUIDs
-  vgauth.service                                              loaded    inactive dead    Authentication service for virtual machines hosted on VMware
-● zfs-mount.service                                           not-found inactive dead    zfs-mount.service</pre>
+<a name=active></a><font face=serif size=2><b>Active Services</b></font><pre>  chrony.service                                              loaded    active   running       chrony, an NTP client/server
+  containerd.service                                          loaded    active   running       containerd container runtime
+  cron.service                                                loaded    active   running       Regular background program processing daemon
+  dbus.service                                                loaded    active   running       D-Bus System Message Bus
+  docker.service                                              loaded    active   running       Docker Application Container Engine
+  getty@tty1.service                                          loaded    active   running       Getty on tty1
+  haveged.service                                             loaded    active   running       Entropy Daemon based on the HAVEGE algorithm
+  hosted-compute-agent.service                                loaded    active   running       Job that runs the Hosted Compute Agent
+  hv-kvp-daemon.service                                       loaded    active   running       Hyper-V KVP Protocol Daemon
+  ModemManager.service                                        loaded    active   running       Modem Manager
+  multipathd.service                                          loaded    active   running       Device-Mapper Multipath Device Controller
+  networkd-dispatcher.service                                 loaded    active   running       Dispatcher daemon for systemd-networkd
+  php8.3-fpm.service                                          loaded    active   running       The PHP 8.3 FastCGI Process Manager
+  polkit.service                                              loaded    active   running       Authorization Manager
+  rsyslog.service                                             loaded    active   running       System Logging Service
+  serial-getty@ttyS0.service                                  loaded    active   running       Serial Getty on ttyS0
+  systemd-hostnamed.service                                   loaded    active   running       Hostname Service
+  systemd-journald.service                                    loaded    active   running       Journal Service
+  systemd-logind.service                                      loaded    active   running       User Login Management
+  systemd-networkd.service                                    loaded    active   running       Network Configuration
+  systemd-resolved.service                                    loaded    active   running       Network Name Resolution
+  systemd-timedated.service                                   loaded    active   running       Time & Date Service
+  systemd-udevd.service                                       loaded    active   running       Rule-based Manager for Device Events and Files
+  ua-timer.service                                            loaded    inactive dead          Ubuntu Pro Timer for running repeated jobs
+  udisks2.service                                             loaded    active   running       Disk Manager
+  user@1001.service                                           loaded    active   running       User Manager for UID 1001
+  walinuxagent.service                                        loaded    active   running       Azure Linux Agent</pre>
+<a name=inactive></a><font face=serif size=2><b>Inactive Services</b></font><pre>  apparmor.service                                            loaded    active   exited        Load AppArmor profiles
+  blk-availability.service                                    loaded    active   exited        Availability of block devices
+  cloud-config.service                                        loaded    active   exited        Cloud-init: Config Stage
+  cloud-final.service                                         loaded    active   exited        Cloud-init: Final Stage
+  cloud-init-local.service                                    loaded    active   exited        Cloud-init: Local Stage (pre-network)
+  cloud-init.service                                          loaded    active   exited        Cloud-init: Network Stage
+  console-setup.service                                       loaded    active   exited        Set console font and keymap
+  finalrd.service                                             loaded    active   exited        Create final runtime dir for shutdown pivot root
+  keyboard-setup.service                                      loaded    active   exited        Set the console keyboard layout
+  kmod-static-nodes.service                                   loaded    active   exited        Create List of Static Device Nodes
+  lvm2-monitor.service                                        loaded    active   exited        Monitoring of LVM2 mirrors, snapshots etc. using dmeventd or progress polling
+  plymouth-quit-wait.service                                  loaded    active   exited        Hold until boot process finishes up
+  plymouth-quit.service                                       loaded    active   exited        Terminate Plymouth Boot Screen
+  plymouth-read-write.service                                 loaded    active   exited        Tell Plymouth To Write Out Runtime Data
+  podman-restart.service                                      loaded    active   exited        Podman Start All Containers With Restart Policy Set To Always
+  setvtrgb.service                                            loaded    active   exited        Set console scheme
+  snapd.apparmor.service                                      loaded    active   exited        Load AppArmor profiles managed internally by snapd
+  snapd.seeded.service                                        loaded    active   exited        Wait until snapd is fully seeded
+  sphinxsearch.service                                        loaded    active   exited        LSB: Fast standalone full-text SQL search engine
+  sysstat.service                                             loaded    active   exited        Resets System Activity Logs
+  systemd-binfmt.service                                      loaded    active   exited        Set Up Additional Binary Formats
+  systemd-fsck-root.service                                   loaded    active   exited        File System Check on Root Device
+  systemd-fsck@dev-disk-by\x2dlabel-BOOT.service              loaded    active   exited        File System Check on /dev/disk/by-label/BOOT
+  systemd-fsck@dev-disk-by\x2duuid-7B14\x2d7487.service       loaded    active   exited        File System Check on /dev/disk/by-uuid/7B14-7487
+  systemd-journal-flush.service                               loaded    active   exited        Flush Journal to Persistent Storage
+  systemd-modules-load.service                                loaded    active   exited        Load Kernel Modules
+  systemd-networkd-wait-online.service                        loaded    active   exited        Wait for Network to be Configured
+  systemd-random-seed.service                                 loaded    active   exited        Load/Save OS Random Seed
+  systemd-remount-fs.service                                  loaded    active   exited        Remount Root and Kernel File Systems
+  systemd-sysctl.service                                      loaded    active   exited        Apply Kernel Variables
+  systemd-tmpfiles-setup-dev-early.service                    loaded    active   exited        Create Static Device Nodes in /dev gracefully
+  systemd-tmpfiles-setup-dev.service                          loaded    active   exited        Create Static Device Nodes in /dev
+  systemd-tmpfiles-setup.service                              loaded    active   exited        Create Volatile Files and Directories
+  systemd-udev-trigger.service                                loaded    active   exited        Coldplug All udev Devices
+  systemd-update-utmp.service                                 loaded    active   exited        Record System Boot/Shutdown in UTMP
+  systemd-user-sessions.service                               loaded    active   exited        Permit User Sessions
+  ufw.service                                                 loaded    active   exited        Uncomplicated firewall
+  user-runtime-dir@1001.service                               loaded    active   exited        User Runtime Directory /run/user/1001
+  walinuxagent-network-setup.service                          loaded    active   exited        Setup network rules for WALinuxAgent</pre>
+<pre>  apport-autoreport.service                                   loaded    inactive dead          Process error reports when automatic reporting is enabled
+● apport.service                                              not-found inactive dead          apport.service
+  apt-daily.service                                           loaded    inactive dead          Daily apt download activities
+● auditd.service                                              not-found inactive dead          auditd.service
+  cloud-init-hotplugd.service                                 loaded    inactive dead          Cloud-init: Hotplug Hook
+● connman.service                                             not-found inactive dead          connman.service
+● console-screen.service                                      not-found inactive dead          console-screen.service
+● display-manager.service                                     not-found inactive dead          display-manager.service
+  dm-event.service                                            loaded    inactive dead          Device-mapper event daemon
+  dmesg.service                                               loaded    inactive dead          Save initial kernel messages after boot
+  dpkg-db-backup.service                                      loaded    inactive dead          Daily dpkg database backup service
+  e2scrub_all.service                                         loaded    inactive dead          Online ext4 Metadata Check for All Filesystems
+  e2scrub_reap.service                                        loaded    inactive dead          Remove Stale Online ext4 Metadata Check Snapshots
+  emergency.service                                           loaded    inactive dead          Emergency Shell
+  ephemeral-disk-warning.service                              loaded    inactive dead          Write warning to Azure ephemeral disk
+● fcoe.service                                                not-found inactive dead          fcoe.service
+● firewalld.service                                           not-found inactive dead          firewalld.service
+  fstrim.service                                              loaded    inactive dead          Discard unused blocks on filesystems from /etc/fstab
+  getty-static.service                                        loaded    inactive dead          getty on tty2-tty6 if dbus and logind are not available
+  grub-common.service                                         loaded    inactive dead          Record successful boot for GRUB
+  grub-initrd-fallback.service                                loaded    inactive dead          GRUB failed boot detection
+  hv-fcopy-daemon.service                                     loaded    inactive dead          Hyper-V File Copy Protocol Daemon
+  hv-vss-daemon.service                                       loaded    inactive dead          Hyper-V VSS Protocol Daemon
+● hv_kvp_daemon.service                                       not-found inactive dead          hv_kvp_daemon.service
+  initrd-cleanup.service                                      loaded    inactive dead          Cleaning Up and Shutting Down Daemons
+  initrd-parse-etc.service                                    loaded    inactive dead          Mountpoints Configured in the Real Root
+  initrd-switch-root.service                                  loaded    inactive dead          Switch Root
+  initrd-udevadm-cleanup-db.service                           loaded    inactive dead          Cleanup udev Database
+● iscsi-shutdown.service                                      not-found inactive dead          iscsi-shutdown.service
+  iscsid.service                                              loaded    inactive dead          iSCSI initiator daemon (iscsid)
+● kbd.service                                                 not-found inactive dead          kbd.service
+  ldconfig.service                                            loaded    inactive dead          Rebuild Dynamic Linker Cache
+  logrotate.service                                           loaded    inactive dead          Rotate log files
+● lvm2-activation-early.service                               not-found inactive dead          lvm2-activation-early.service
+  lvm2-lvmpolld.service                                       loaded    inactive dead          LVM2 poll daemon
+  man-db.service                                              loaded    inactive dead          Daily man-db regeneration
+  modprobe@configfs.service                                   loaded    inactive dead          Load Kernel Module configfs
+  modprobe@dm_mod.service                                     loaded    inactive dead          Load Kernel Module dm_mod
+  modprobe@drm.service                                        loaded    inactive dead          Load Kernel Module drm
+  modprobe@efi_pstore.service                                 loaded    inactive dead          Load Kernel Module efi_pstore
+  modprobe@fuse.service                                       loaded    inactive dead          Load Kernel Module fuse
+  modprobe@loop.service                                       loaded    inactive dead          Load Kernel Module loop
+  modprobe@nvme_fabrics.service                               loaded    inactive dead          Load Kernel Module nvme_fabrics
+  motd-news.service                                           loaded    inactive dead          Message of the Day
+  netplan-ovs-cleanup.service                                 loaded    inactive dead          OpenVSwitch configuration for cleanup
+● networking.service                                          not-found inactive dead          networking.service
+● NetworkManager.service                                      not-found inactive dead          NetworkManager.service
+● ntp.service                                                 not-found inactive dead          ntp.service
+● ntpsec.service                                              not-found inactive dead          ntpsec.service
+  nvmefc-boot-connections.service                             loaded    inactive dead          Auto-connect to subsystems on FC-NVME devices found during boot
+  nvmf-autoconnect.service                                    loaded    inactive dead          Connect NVMe-oF subsystems automatically during boot
+  open-iscsi.service                                          loaded    inactive dead          Login to default iSCSI targets
+  open-vm-tools.service                                       loaded    inactive dead          Service for virtual machines hosted on VMware
+● openntpd.service                                            not-found inactive dead          openntpd.service
+● ovsdb-server.service                                        not-found inactive dead          ovsdb-server.service
+  phpsessionclean.service                                     loaded    inactive dead          Clean php session files
+  plymouth-start.service                                      loaded    inactive dead          Show Plymouth Boot Screen
+  plymouth-switch-root.service                                loaded    inactive dead          Plymouth switch root service
+  podman-auto-update.service                                  loaded    inactive dead          Podman auto-update service
+  podman-clean-transient.service                              loaded    inactive dead          Clean up podman transient data
+  podman.service                                              loaded    inactive dead          Podman API Service
+  pollinate.service                                           loaded    inactive dead          Pollinate to seed the pseudo random number generator
+● rbdmap.service                                              not-found inactive dead          rbdmap.service
+  rc-local.service                                            loaded    inactive dead          /etc/rc.local Compatibility
+  rescue.service                                              loaded    inactive dead          Rescue Shell
+  secureboot-db.service                                       loaded    inactive dead          Secure Boot updates for DB and DBX
+  snapd.autoimport.service                                    loaded    inactive dead          Auto import assertions from block devices
+  snapd.core-fixup.service                                    loaded    inactive dead          Automatically repair incorrect owner/permissions on core devices
+  snapd.failure.service                                       loaded    inactive dead          Failure handling of the snapd snap
+  snapd.recovery-chooser-trigger.service                      loaded    inactive dead          Wait for the Ubuntu Core chooser trigger
+  snapd.service                                               loaded    inactive dead          Snap Daemon
+  snapd.snap-repair.service                                   loaded    inactive dead          Automatically fetch and run repair assertions
+  snapd.system-shutdown.service                               loaded    inactive dead          Ubuntu core (all-snaps) system shutdown helper setup service
+  ssh.service                                                 loaded    inactive dead          OpenBSD Secure Shell server
+● sshd-keygen.service                                         not-found inactive dead          sshd-keygen.service
+● sshd.service                                                not-found inactive dead          sshd.service
+  ssl-cert.service                                            loaded    inactive dead          Generate snakeoil SSL keypair
+  sysstat-collect.service                                     loaded    inactive dead          system activity accounting tool
+  sysstat-summary.service                                     loaded    inactive dead          Generate a daily summary of process accounting
+  systemd-ask-password-console.service                        loaded    inactive dead          Dispatch Password Requests to Console
+  systemd-ask-password-plymouth.service                       loaded    inactive dead          Forward Password Requests to Plymouth
+  systemd-ask-password-wall.service                           loaded    inactive dead          Forward Password Requests to Wall
+  systemd-battery-check.service                               loaded    inactive dead          Check battery level during early boot
+  systemd-bsod.service                                        loaded    inactive dead          Displays emergency message in full screen.
+  systemd-firstboot.service                                   loaded    inactive dead          First Boot Wizard
+  systemd-fsck@dev-disk-cloud-azure_resource\x2dpart1.service loaded    inactive dead    start File System Check on /dev/disk/cloud/azure_resource-part1
+  systemd-fsckd.service                                       loaded    inactive dead          File System Check Daemon to report status
+  systemd-hibernate-resume.service                            loaded    inactive dead          Resume from hibernation
+  systemd-hibernate.service                                   loaded    inactive dead          System Hibernate
+  systemd-hwdb-update.service                                 loaded    inactive dead          Rebuild Hardware Database
+  systemd-hybrid-sleep.service                                loaded    inactive dead          System Hybrid Suspend+Hibernate
+  systemd-initctl.service                                     loaded    inactive dead          initctl Compatibility Daemon
+  systemd-journal-catalog-update.service                      loaded    inactive dead          Rebuild Journal Catalog
+  systemd-machine-id-commit.service                           loaded    inactive dead          Commit a transient machine-id on disk
+● systemd-oomd.service                                        not-found inactive dead          systemd-oomd.service
+  systemd-pcrmachine.service                                  loaded    inactive dead          TPM2 PCR Machine ID Measurement
+  systemd-pcrphase-initrd.service                             loaded    inactive dead          TPM2 PCR Barrier (initrd)
+  systemd-pcrphase-sysinit.service                            loaded    inactive dead          TPM2 PCR Barrier (Initialization)
+  systemd-pcrphase.service                                    loaded    inactive dead          TPM2 PCR Barrier (User)
+  systemd-pstore.service                                      loaded    inactive dead          Platform Persistent Storage Archival
+  systemd-quotacheck.service                                  loaded    inactive dead          File System Quota Check
+  systemd-repart.service                                      loaded    inactive dead          Repartition Root Disk
+  systemd-rfkill.service                                      loaded    inactive dead          Load/Save RF Kill Switch Status
+  systemd-soft-reboot.service                                 loaded    inactive dead          Reboot System Userspace
+  systemd-suspend-then-hibernate.service                      loaded    inactive dead          System Suspend then Hibernate
+  systemd-suspend.service                                     loaded    inactive dead          System Suspend
+  systemd-sysext.service                                      loaded    inactive dead          Merge System Extension Images into /usr/ and /opt/
+  systemd-sysusers.service                                    loaded    inactive dead          Create System Users
+  systemd-tmpfiles-clean.service                              loaded    inactive dead          Cleanup of Temporary Directories
+  systemd-tpm2-setup-early.service                            loaded    inactive dead          TPM2 SRK Setup (Early)
+  systemd-tpm2-setup.service                                  loaded    inactive dead          TPM2 SRK Setup
+  systemd-udev-settle.service                                 loaded    inactive dead          Wait for udev To Complete Device Initialization
+  systemd-update-done.service                                 loaded    inactive dead          Update is Completed
+  systemd-update-utmp-runlevel.service                        loaded    inactive dead          Record Runlevel Change in UTMP
+● systemd-vconsole-setup.service                              not-found inactive dead          systemd-vconsole-setup.service
+  tpm-udev.service                                            loaded    inactive dead          Handle dynamically added tpm devices
+● ua-auto-attach.service                                      not-found inactive dead          ua-auto-attach.service
+  ua-reboot-cmds.service                                      loaded    inactive dead          Ubuntu Pro reboot cmds
+  ua-timer.service                                            loaded    inactive dead          Ubuntu Pro Timer for running repeated jobs
+● ubuntu-advantage-cloud-id-shim.service                      not-found inactive dead          ubuntu-advantage-cloud-id-shim.service
+  ubuntu-advantage.service                                    loaded    inactive dead          Ubuntu Pro Background Auto Attach
+  update-notifier-download.service                            loaded    inactive dead          Download data for packages that failed at package install time
+  update-notifier-motd.service                                loaded    inactive dead          Check to see whether there is a new version of Ubuntu available
+  uuidd.service                                               loaded    inactive dead          Daemon for generating UUIDs
+  vgauth.service                                              loaded    inactive dead          Authentication service for virtual machines hosted on VMware
+● zfs-mount.service                                           not-found inactive dead          zfs-mount.service</pre>
 <a name=dmidecode></a><font face=serif size=2><b>System Details</b></font><pre># dmidecode 3.5
 Scanning /dev/mem for entry point.</pre>
 <a name=inxi></a><font face=serif size=2><b>System Details New</b></font><pre></pre>
-<a name=zombie></a><font face=serif size=2><b>Zombies</b></font><pre>runner      2324  0.0  0.0   7080  2052 ?        S    23:15   0:00 grep defunct</pre>
-<a name=reboot></a><font face=serif size=2><b>Reboot</b></font><pre>reboot   system boot  6.11.0-1018-azur Sun Feb  1 23:12   still running</pre>
-<a name=shut></a><font face=serif size=2><b>Shutdown</b></font><pre>shutdown system down  6.11.0-1018-azur Mon Jan 26 22:10 - 23:12 (6+01:01)</pre>
+<a name=zombie></a><font face=serif size=2><b>Zombies</b></font><pre>runner      2306  0.0  0.0   7080  2140 ?        S    23:17   0:00 grep defunct</pre>
+<a name=reboot></a><font face=serif size=2><b>Reboot</b></font><pre>reboot   system boot  6.11.0-1018-azur Mon Feb  2 23:17   still running</pre>
+<a name=shut></a><font face=serif size=2><b>Shutdown</b></font><pre>shutdown system down  6.11.0-1018-azur Mon Jan 26 22:10 - 23:17 (7+01:06)</pre>
 <a name=mem></a><font face=serif size=2><b>Memory Hog</b></font><pre>%MEM     PID    PPID USER     STAT COMMAND
 
- 0.7    2085    2070 runner   Sl   /home/runner/actions-runner/cached/bin/Runner.Worker spawnclient 142 145
+ 0.7    2071    2056 runner   Sl   /home/runner/actions-runner/cached/bin/Runner.Worker spawnclient 142 145
 
- 0.5    2070    2029 runner   Sl   /home/runner/actions-runner/cached/bin/Runner.Listener run
+ 0.5    2056    2019 runner   Sl   /home/runner/actions-runner/cached/bin/Runner.Listener run
 
- 0.4    1148       1 root     Ssl  /usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock
+ 0.4    1212       1 root     Ssl  /usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock
 
  0.3     915       1 root     Ss   php-fpm: master process (/etc/php/8.3/fpm/php-fpm.conf)
 
- 0.2     980       1 root     Ssl  /usr/bin/containerd</pre>
+ 0.2     991       1 root     Ssl  /usr/bin/containerd</pre>
 <a name=cpuh></a><font face=serif size=2><b>CPU Hog</b></font><pre>%CPU     PID    PPID USER     STAT COMMAND
 
-20.0    2293       1 root     Ss   /usr/lib/systemd/systemd-hostnamed
+16.6    2275       1 root     Ss   /usr/lib/systemd/systemd-hostnamed
 
-15.1    2085    2070 runner   Sl   /home/runner/actions-runner/cached/bin/Runner.Worker spawnclient 142 145
+15.2    2071    2056 runner   Sl   /home/runner/actions-runner/cached/bin/Runner.Worker spawnclient 142 145
 
- 6.5    2070    2029 runner   Sl   /home/runner/actions-runner/cached/bin/Runner.Listener run
+ 7.8    2056    2019 runner   Sl   /home/runner/actions-runner/cached/bin/Runner.Listener run
 
- 4.1    2288    2275 runner   S    python shviapy.py
+ 6.9       1       0 root     Ss   /sbin/init
 
- 1.9       1       0 root     Ss   /sbin/init</pre>
+ 3.7    2270    2261 runner   S    python shviapy.py</pre>
 <a name=dp></a><font face=serif size=2><b>Default Path</b></font><pre>/opt/hostedtoolcache/Python/3.14.2/x64/bin:/opt/hostedtoolcache/Python/3.14.2/x64:/snap/bin:/home/runner/.local/bin:/opt/pipx_bin:/home/runner/.cargo/bin:/home/runner/.config/composer/vendor/bin:/usr/local/.ghcup/bin:/home/runner/.dotnet/tools:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin</pre>
-<a name=copy></a><div id=foot><pre> &copy; Last OS update:  | Page update: Sun Feb  1 23:15:03 UTC 2026</pre></div><script>function myFunction() {  var x = document.getElementById("myDIV");  if (x.style.display === "none") {   x.style.display = "block";  } else {   x.style.display = "none";  }}</script></body></html>
+<a name=copy></a><div id=foot><pre> &copy; Last OS update:  | Page update: Mon Feb  2 23:17:46 UTC 2026</pre></div><script>function myFunction() {  var x = document.getElementById("myDIV");  if (x.style.display === "none") {   x.style.display = "block";  } else {   x.style.display = "none";  }}</script></body></html>
