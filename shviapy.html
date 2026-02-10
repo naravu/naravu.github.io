@@ -4,7 +4,7 @@
        Icon name: computer-vm
          Chassis: vm 🖴
       Machine ID: 92854b8c09b54602a1f67310509f534b
-         Boot ID: 3aa81056ee634f84b568f3d9ed740027
+         Boot ID: d8271b16496f47a3a84a5dbbabdc78ed
   Virtualization: microsoft
 Operating System: Ubuntu 24.04.3 LTS
           Kernel: Linux 6.11.0-1018-azure
@@ -13,42 +13,43 @@ Operating System: Ubuntu 24.04.3 LTS
   Hardware Model: Virtual Machine
 Firmware Version: Hyper-V UEFI Release v4.1
    Firmware Date: Tue 2025-06-10
-    Firmware Age: 8month 1d</pre>
+    Firmware Age: 8month 2d</pre>
 <a name=network></a><b>Network Details</b><pre>docker0: flags=4099<UP,BROADCAST,MULTICAST>  mtu 1500
         inet 172.17.0.1  netmask 255.255.0.0  broadcast 172.17.255.255
-        ether da:32:05:a0:d0:ef  txqueuelen 0  (Ethernet)
+        ether b2:81:8c:53:66:1a  txqueuelen 0  (Ethernet)
         RX packets 0  bytes 0 (0.0 B)
         RX errors 0  dropped 0  overruns 0  frame 0
         TX packets 0  bytes 0 (0.0 B)
         TX errors 0  dropped 2 overruns 0  carrier 0  collisions 0
 
 eth0: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
-        inet 10.1.0.147  netmask 255.255.240.0  broadcast 10.1.15.255
-        inet6 fe80::7eed:8dff:fee1:f3d5  prefixlen 64  scopeid 0x20<link>
-        ether 7c:ed:8d:e1:f3:d5  txqueuelen 1000  (Ethernet)
-        RX packets 22415  bytes 31554637 (31.5 MB)
+        inet 10.1.0.142  netmask 255.255.240.0  broadcast 10.1.15.255
+        inet6 fe80::7e1e:52ff:fef3:8ad8  prefixlen 64  scopeid 0x20<link>
+        ether 7c:1e:52:f3:8a:d8  txqueuelen 1000  (Ethernet)
+        RX packets 22403  bytes 31274167 (31.2 MB)
         RX errors 0  dropped 0  overruns 0  frame 0
-        TX packets 2447  bytes 596287 (596.2 KB)
+        TX packets 2559  bytes 687433 (687.4 KB)
         TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
 
 lo: flags=73<UP,LOOPBACK,RUNNING>  mtu 65536
         inet 127.0.0.1  netmask 255.0.0.0
         inet6 ::1  prefixlen 128  scopeid 0x10<host>
         loop  txqueuelen 1000  (Local Loopback)
-        RX packets 208  bytes 28603 (28.6 KB)
+        RX packets 216  bytes 29507 (29.5 KB)
         RX errors 0  dropped 0  overruns 0  frame 0
-        TX packets 208  bytes 28603 (28.6 KB)
+        TX packets 216  bytes 29507 (29.5 KB)
         TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0</pre>
 <a name=swap></a><font face=serif size=2><b>Swap Details</b></font><pre>               total        used        free      shared  buff/cache   available
-Mem:            15Gi       853Mi       9.1Gi        44Mi       6.0Gi        14Gi
-Swap:          4.0Gi          0B       4.0Gi</pre>
-<a name=user></a><font face=serif size=2><b>Connected User Details</b></font><pre> 23:27:34 up 1 min,  0 user,  load average: 0.29, 0.16, 0.06
+Mem:            15Gi       806Mi        13Gi        42Mi       1.9Gi        14Gi
+Swap:          3.0Gi          0B       3.0Gi</pre>
+<a name=user></a><font face=serif size=2><b>Connected User Details</b></font><pre> 23:29:09 up 2 min,  0 user,  load average: 0.31, 0.10, 0.03
 USER     TTY      FROM             LOGIN@   IDLE   JCPU   PCPU  WHAT</pre>
 <a name=fstab></a><font face=serif size=2><b>FStab Details</b></font><pre># CLOUD_IMG: This file was created/modified by the Cloud Image build process
 UUID=a72fddf1-49c4-4653-be67-35f223a2066a	/	 ext4	discard,commit=30,errors=remount-ro	0 1
 LABEL=BOOT	/boot	ext4	defaults,discard	0 2
 UUID=7B14-7487	/boot/efi	vfat	umask=0077	0 1
-/dev/disk/cloud/azure_resource-part1	/mnt	auto	defaults,nofail,x-systemd.after=cloud-init.service,_netdev,comment=cloudconfig	0	2</pre>
+/dev/disk/cloud/azure_resource-part1	/mnt	auto	defaults,nofail,x-systemd.after=cloud-init.service,_netdev,comment=cloudconfig	0	2
+/swapfile none swap sw 0 0</pre>
 <a name=file></a><font face=serif size=2><b>File System Details</b></font>
 <div> <p>
 <table cellpadding=0 cellspacing=0 border=0><tr><td>
@@ -66,10 +67,10 @@ UUID=7B14-7487	/boot/efi	vfat	umask=0077	0 1
 <tr>
 <td>/dev/root</td>
 <td>ext4</td>
-<td>77G</td>
-<td>54G</td>
-<td>24G</td>
-<td>70%</td>
+<td>155G</td>
+<td>57G</td>
+<td>99G</td>
+<td>37%</td>
 <td>/</td>
 </tr>
 <tr>
@@ -127,15 +128,6 @@ UUID=7B14-7487	/boot/efi	vfat	umask=0077	0 1
 <td>/boot/efi</td>
 </tr>
 <tr>
-<td>/dev/sdb1</td>
-<td>ext4</td>
-<td>79G</td>
-<td>4.3G</td>
-<td>71G</td>
-<td>6%</td>
-<td>/mnt</td>
-</tr>
-<tr>
 <td>tmpfs</td>
 <td>tmpfs</td>
 <td>1.7G</td>
@@ -151,7 +143,7 @@ UUID=7B14-7487	/boot/efi	vfat	umask=0077	0 1
 <td>Avail%</td><td><meter low=0.45 optimum=.2 high=0.75 value=0></meter>
 </td></tr>
 <tr>
-<td>24G%</td><td><meter low=0.45 optimum=.2 high=0.75 value=0.24></meter>
+<td>99G%</td><td><meter low=0.45 optimum=.2 high=0.75 value=0.99></meter>
 </td></tr>
 <tr>
 <td>8.4G%</td><td><meter low=0.45 optimum=.2 high=0.75 value=0.084></meter>
@@ -170,9 +162,6 @@ UUID=7B14-7487	/boot/efi	vfat	umask=0077	0 1
 </td></tr>
 <tr>
 <td>103M%</td><td><meter low=0.45 optimum=.2 high=0.75 value=1.03></meter>
-</td></tr>
-<tr>
-<td>71G%</td><td><meter low=0.45 optimum=.2 high=0.75 value=0.71></meter>
 </td></tr>
 <tr>
 <td>1.7G%</td><td><meter low=0.45 optimum=.2 high=0.75 value=0.017></meter>
@@ -226,7 +215,6 @@ tcp6       0      0 :::22                   :::*                    LISTEN      
   cloud-init-local.service                                    loaded    active   exited  Cloud-init: Local Stage (pre-network)
   cloud-init.service                                          loaded    active   exited  Cloud-init: Network Stage
   console-setup.service                                       loaded    active   exited  Set console font and keymap
-  ephemeral-disk-warning.service                              loaded    active   exited  Write warning to Azure ephemeral disk
   finalrd.service                                             loaded    active   exited  Create final runtime dir for shutdown pivot root
   keyboard-setup.service                                      loaded    active   exited  Set the console keyboard layout
   kmod-static-nodes.service                                   loaded    active   exited  Create List of Static Device Nodes
@@ -244,7 +232,6 @@ tcp6       0      0 :::22                   :::*                    LISTEN      
   systemd-fsck-root.service                                   loaded    active   exited  File System Check on Root Device
   systemd-fsck@dev-disk-by\x2dlabel-BOOT.service              loaded    active   exited  File System Check on /dev/disk/by-label/BOOT
   systemd-fsck@dev-disk-by\x2duuid-7B14\x2d7487.service       loaded    active   exited  File System Check on /dev/disk/by-uuid/7B14-7487
-  systemd-fsck@dev-disk-cloud-azure_resource\x2dpart1.service loaded    active   exited  File System Check on /dev/disk/cloud/azure_resource-part1
   systemd-journal-flush.service                               loaded    active   exited  Flush Journal to Persistent Storage
   systemd-modules-load.service                                loaded    active   exited  Load Kernel Modules
   systemd-networkd-wait-online.service                        loaded    active   exited  Wait for Network to be Configured
@@ -274,6 +261,7 @@ tcp6       0      0 :::22                   :::*                    LISTEN      
   e2scrub_all.service                                         loaded    inactive dead    Online ext4 Metadata Check for All Filesystems
   e2scrub_reap.service                                        loaded    inactive dead    Remove Stale Online ext4 Metadata Check Snapshots
   emergency.service                                           loaded    inactive dead    Emergency Shell
+  ephemeral-disk-warning.service                              loaded    inactive dead    Write warning to Azure ephemeral disk
 ● fcoe.service                                                not-found inactive dead    fcoe.service
 ● firewalld.service                                           not-found inactive dead    firewalld.service
   fstrim.service                                              loaded    inactive dead    Discard unused blocks on filesystems from /etc/fstab
@@ -344,6 +332,7 @@ tcp6       0      0 :::22                   :::*                    LISTEN      
   systemd-battery-check.service                               loaded    inactive dead    Check battery level during early boot
   systemd-bsod.service                                        loaded    inactive dead    Displays emergency message in full screen.
   systemd-firstboot.service                                   loaded    inactive dead    First Boot Wizard
+  systemd-fsck@dev-disk-cloud-azure_resource\x2dpart1.service loaded    inactive dead    File System Check on /dev/disk/cloud/azure_resource-part1
   systemd-fsckd.service                                       loaded    inactive dead    File System Check Daemon to report status
   systemd-hibernate-resume.service                            loaded    inactive dead    Resume from hibernation
   systemd-hibernate.service                                   loaded    inactive dead    System Hibernate
@@ -387,30 +376,30 @@ tcp6       0      0 :::22                   :::*                    LISTEN      
 <a name=dmidecode></a><font face=serif size=2><b>System Details</b></font><pre># dmidecode 3.5
 Scanning /dev/mem for entry point.</pre>
 <a name=inxi></a><font face=serif size=2><b>System Details New</b></font><pre></pre>
-<a name=zombie></a><font face=serif size=2><b>Zombies</b></font><pre>runner      2276  0.0  0.0   7080  2052 ?        S    23:27   0:00 grep defunct</pre>
-<a name=reboot></a><font face=serif size=2><b>Reboot</b></font><pre>reboot   system boot  6.11.0-1018-azur Mon Feb  9 23:25   still running</pre>
-<a name=shut></a><font face=serif size=2><b>Shutdown</b></font><pre>shutdown system down  6.11.0-1018-azur Sun Feb  1 22:09 - 23:25 (8+01:16)</pre>
+<a name=zombie></a><font face=serif size=2><b>Zombies</b></font><pre>runner      2255  0.0  0.0   7080  2140 ?        S    23:29   0:00 grep defunct</pre>
+<a name=reboot></a><font face=serif size=2><b>Reboot</b></font><pre>reboot   system boot  6.11.0-1018-azur Tue Feb 10 23:26   still running</pre>
+<a name=shut></a><font face=serif size=2><b>Shutdown</b></font><pre>shutdown system down  6.11.0-1018-azur Sun Feb  1 22:09 - 23:26 (9+01:17)</pre>
 <a name=mem></a><font face=serif size=2><b>Memory Hog</b></font><pre>%MEM     PID    PPID USER     STAT COMMAND
 
- 0.7    2043    2028 runner   Sl   /home/runner/actions-runner/cached/bin/Runner.Worker spawnclient 142 145
+ 0.7    2021    2005 runner   Sl   /home/runner/actions-runner/cached/bin/Runner.Worker spawnclient 142 145
 
- 0.5    2028    1988 runner   Sl   /home/runner/actions-runner/cached/bin/Runner.Listener run
+ 0.5    2005    1963 runner   Sl   /home/runner/actions-runner/cached/bin/Runner.Listener run
 
- 0.4    1221       1 root     Ssl  /usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock
+ 0.4    1178       1 root     Ssl  /usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock
 
- 0.3     881       1 root     Ss   php-fpm: master process (/etc/php/8.3/fpm/php-fpm.conf)
+ 0.3     862       1 root     Ss   php-fpm: master process (/etc/php/8.3/fpm/php-fpm.conf)
 
- 0.2     958       1 root     Ssl  /usr/bin/containerd</pre>
+ 0.2     940       1 root     Ssl  /usr/bin/containerd</pre>
 <a name=cpuh></a><font face=serif size=2><b>CPU Hog</b></font><pre>%CPU     PID    PPID USER     STAT COMMAND
 
-19.5    2043    2028 runner   Sl   /home/runner/actions-runner/cached/bin/Runner.Worker spawnclient 142 145
+15.6    2021    2005 runner   Sl   /home/runner/actions-runner/cached/bin/Runner.Worker spawnclient 142 145
 
-18.1    2245       1 root     Ss   /usr/lib/systemd/systemd-hostnamed
+13.0    2224       1 root     Ss   /usr/lib/systemd/systemd-hostnamed
 
- 7.4    2028    1988 runner   Sl   /home/runner/actions-runner/cached/bin/Runner.Listener run
+ 8.0    2005    1963 runner   Sl   /home/runner/actions-runner/cached/bin/Runner.Listener run
 
- 3.8    2240    2231 runner   S    python shviapy.py
+ 3.5    2219    2210 runner   S    python shviapy.py
 
- 2.9       1       0 root     Ss   /sbin/init</pre>
+ 1.8       1       0 root     Ss   /sbin/init</pre>
 <a name=dp></a><font face=serif size=2><b>Default Path</b></font><pre>/opt/hostedtoolcache/Python/3.14.2/x64/bin:/opt/hostedtoolcache/Python/3.14.2/x64:/snap/bin:/home/runner/.local/bin:/opt/pipx_bin:/home/runner/.cargo/bin:/home/runner/.config/composer/vendor/bin:/usr/local/.ghcup/bin:/home/runner/.dotnet/tools:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin</pre>
-<a name=copy></a><div id=foot><pre> &copy; Last OS update:  | Page update: Mon Feb  9 23:27:34 UTC 2026</pre></div><script>function myFunction() {  var x = document.getElementById("myDIV");  if (x.style.display === "none") {   x.style.display = "block";  } else {   x.style.display = "none";  }}</script></body></html>
+<a name=copy></a><div id=foot><pre> &copy; Last OS update:  | Page update: Tue Feb 10 23:29:09 UTC 2026</pre></div><script>function myFunction() {  var x = document.getElementById("myDIV");  if (x.style.display === "none") {   x.style.display = "block";  } else {   x.style.display = "none";  }}</script></body></html>
