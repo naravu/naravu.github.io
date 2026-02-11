@@ -95,3 +95,4 @@
 |Linux on Pdf |https://github.com/ading2210/linuxpdf | Linux Pdf | Linux on RISC emulator|
 |Thumbnail Editing tools|https://editingtools.io/thumbnail/ | Free Image Editing tool |Image Editing tool with no login |
 |Ernie Chat bot | https://ernie.baidu.com | Ernie Model | An alternate free AI Chat bot with newer things|
+| Kimi | https://www.kimi.com/en/slides | Kimi slides | Kimi AI presentations, Key notes |
