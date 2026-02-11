@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Gradua — News Aggregator</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#f4f6f8;
+    --card:#ffffff;
+    --muted:#6b7280;
+    --accent:#1e90ff;
+    --accent-contrast:#ffffff;
+    --shadow-1: 0 8px 20px rgba(16,24,40,0.12);
+    --shadow-3: 0 20px 60px rgba(16,24,40,0.12);
+    --radius:14px;
+    --header-height:55px;
+    --max-width:1280px;
+  }
+
+  html,body{height:100%;margin:0;}
+  body{
+    font-family:'Inter',system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;
+    background:var(--bg);
+    color:#0f172a;
+    margin:0;
+    padding-top:var(--header-height);
+    transition:background 0.45s ease,color 0.45s ease;
+    -webkit-font-smoothing:antialiased;
+    -moz-osx-font-smoothing:grayscale;
+  }
+  body.dark{
+    --bg:#0b0f12;
+    --card:#0f1720;
+    --muted:#9aa6b2;
+    --accent:#90caf9;
+    --accent-contrast:#0b1726;
+  }
+
+  /* Fixed header */
+  header{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:var(--header-height);
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:12px;
+    padding:12px 20px;
+    box-sizing:border-box;
+    background:linear-gradient(90deg,var(--accent),#0f7be6);
+    color:var(--accent-contrast);
+    z-index:1200;
+    transition:background 0.45s ease,backdrop-filter 0.45s ease;
+    backdrop-filter: blur(6px);
+  }
+  body.dark header{ background:linear-gradient(90deg,#2b2b2b,#1f2937); }
+
+  .left-controls{ display:flex; align-items:center; gap:12px; }
+
+  /* Hamburger button */
+  .hamburger{
+    width:44px;
+    height:44px;
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:10px;
+    background:rgba(255,255,255,0.12);
+    border:0;
+    color:var(--accent-contrast);
+    cursor:pointer;
+    transition:transform 0.15s ease, background 0.2s ease;
+    font-size:20px;
+  }
+  .hamburger:active{ transform:translateY(1px); }
+  body.dark .hamburger{ background:rgba(255,255,255,0.06); }
+
+  .brand{ font-weight:700; letter-spacing:0.2px; font-size:16px; }
+
+  .header-controls{ display:flex; align-items:center; gap:12px; font-size:13px; }
+
+  .search-box input{
+    width:260px;
+    max-width:40vw;
+    padding:8px 10px;
+    border-radius:8px;
+    border:0;
+    outline:none;
+    font-size:13px;
+    background:rgba(255,255,255,0.95);
+    color:#0f172a;
+    box-shadow:0 1px 0 rgba(0,0,0,0.03) inset;
+    transition:background 0.25s ease, color 0.25s ease;
+  }
+  body.dark .search-box input{ background:#0b1220; color:var(--muted); }
+
+  .theme-toggle{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    gap:8px;
+    padding:8px 10px;
+    border-radius:8px;
+    border:0;
+    cursor:pointer;
+    background:var(--card);
+    color:var(--accent);
+    font-weight:600;
+    box-shadow:var(--shadow-1);
+    transition:transform 0.18s ease, box-shadow 0.18s ease;
+  }
+  .theme-toggle:active{ transform:translateY(1px); }
+  body.dark .theme-toggle{ background:#111827; color:var(--accent); box-shadow:none; }
+
+  /* Off-canvas menu */
+  .offcanvas {
+    position: fixed;
+    top: 0;
+    left: -320px;
+    width: 300px;
+    height: 100vh;
+    display:flex;
+    flex-direction:column;
+    justify-content:space-between;
+    background: linear-gradient(180deg, #ffffff, #f7fbff);
+    box-shadow: 8px 0 30px rgba(2,6,23,0.12);
+    z-index: 1250;
+    padding: 20px;
+    box-sizing: border-box;
+    transition: left 0.32s cubic-bezier(.2,.9,.2,1);
+    border-right: 1px solid rgba(15,23,42,0.04);
+  }
+  body.dark .offcanvas { background: linear-gradient(180deg,#0b0f12,#071018); border-right-color: rgba(255,255,255,0.03); }
+  .offcanvas.open { left: 0; }
+
+  .offcanvas h3 { margin:0 0 12px 0; font-size:16px; }
+  .menu-list { list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:8px; }
+  .menu-list a {
+    display:flex;
+    align-items:center;
+    gap:10px;
+    padding:10px 12px;
+    border-radius:8px;
+    text-decoration:none;
+    color:#0f172a;
+    font-weight:600;
+    background:transparent;
+    transition:background 0.18s ease, color 0.18s ease;
+  }
+  .menu-list a:hover { background:rgba(30,144,255,0.08); color:var(--accent); }
+  body.dark .menu-list a { color:#cbd5e1; }
+  body.dark .menu-list a:hover { background:rgba(144,202,249,0.06); color:var(--accent); }
+
+  .offcanvas-footer {
+    margin-top:16px;
+    padding-top:12px;
+    border-top:1px solid rgba(15,23,42,0.04);
+    font-size:12px;
+    color:var(--muted);
+  }
+  body.dark .offcanvas-footer { border-top-color: rgba(255,255,255,0.03); color:var(--muted); }
+
+  /* Page title */
+  .page-title{ text-align:center; margin:18px 0 6px; font-size:20px; font-weight:600; color:inherit; }
+
+  /* Grid: 4 columns on wide screens */
+  .container{
+    width:100%;
+    max-width:var(--max-width);
+    margin:0 auto;
+    padding:18px;
+    box-sizing:border-box;
+    display:grid;
+    grid-template-columns: repeat(4, minmax(240px, 1fr));
+    gap:20px;
+  }
+
+  /* Responsive fallbacks */
+  @media (max-width:1200px) {
+    .container { grid-template-columns: repeat(3, minmax(220px, 1fr)); }
+  }
+  @media (max-width:900px) {
+    .container { grid-template-columns: repeat(2, minmax(220px, 1fr)); }
+  }
+  @media (max-width:640px) {
+    .container { grid-template-columns: 1fr; }
+    .search-box input{ width:140px; }
+    header{ padding:10px 12px; }
+    body{ padding-top:72px; }
+    .offcanvas{ width:260px; left:-280px; }
+    .offcanvas.open{ left:0; }
+  }
+
+  /* Card with 3D shadow effect */
+  .card{ background:var(--card); border-radius:var(--radius); padding:16px; box-sizing:border-box; box-shadow: var(--shadow-1), 0 6px 18px rgba(16,24,40,0.06); transform-style:preserve-3d; transition: transform 0.35s cubic-bezier(.2,.9,.2,1), box-shadow 0.35s ease, background 0.35s ease; will-change:transform, box-shadow; overflow:hidden; border: 1px solid rgba(15,23,42,0.03); }
+  body.dark .card{ border-color: rgba(255,255,255,0.03); }
+
+  .card:hover{ transform: translateY(-14px) rotateX(1.2deg) scale(1.02); box-shadow: var(--shadow-3), 0 28px 80px rgba(2,6,23,0.35); }
+
+  .card img{ width:100%; height:auto; display:block; border-radius:10px; margin-bottom:12px; object-fit:cover; background:#e6eefc; }
+
+  .card-title{ margin:0 0 8px 0; font-size:16px; line-height:1.25; font-weight:600; }
+  .card-title a{ color:var(--accent); text-decoration:none; transition:color 0.2s ease, text-decoration 0.2s ease; }
+  .card-title a:hover{ text-decoration:underline; }
+  .card-meta{ margin:0 0 10px 0; color:var(--muted); font-size:12px; }
+  .card-summary{ margin:0 0 12px 0; color: #0b1220; font-size:13px; line-height:1.45; }
+  body.dark .card-summary{ color:#cbd5e1; }
+
+  /* Back to top */
+  #backToTop{ position:fixed; right:28px; bottom:28px; width:48px; height:48px; border-radius:50%; border:0; background:var(--accent); color:var(--accent-contrast); font-size:20px; display:none; align-items:center; justify-content:center; box-shadow:0 10px 30px rgba(16,24,40,0.2); cursor:pointer; z-index:1300; transition:transform 0.18s ease, opacity 0.18s ease; }
+  #backToTop:hover{ transform:translateY(-4px); }
+
+  /* Overlay when offcanvas open */
+  .overlay { position: fixed; inset: 0; background: rgba(2,6,23,0.35); opacity: 0; pointer-events: none; transition: opacity 0.28s ease; z-index:1240; }
+  .overlay.show { opacity: 1; pointer-events: auto; }
+</style>
+</head>
+<body>
+<header>
+  <div class="left-controls">
+    <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">☰</button>
+    <div class="brand">Gradua</div>
+  </div>
+
+  <div class="header-controls">
+    <div class="search-box"><input id="searchInput" type="search" placeholder="Search news..." aria-label="Search news"></div>
+    <button class="theme-toggle" id="themeToggle" aria-pressed="false" title="Toggle dark theme">🌙</button>
+  </div>
+</header>
+
+<!-- Off-canvas menu -->
+<aside class="offcanvas" id="offcanvas" aria-hidden="true">
+  <div>
+    <h3>Menu</h3>
+    <nav>
+      <ul class="menu-list">
+        <li><a href="#" data-action="all">🏠 Home</a></li>
+        <li><a href="#" data-action="security">🔒 Security</a></li>
+        <li><a href="#" data-action="linux">🐧 Linux</a></li>
+        <li><a href="#" data-action="devops">⚙️ DevOps</a></li>
+        <li><a href="#" data-action="about">ℹ️ About</a></li>
+        <li><a href="#" data-action="settings">⚙️ Settings</a></li>
+      </ul>
+    </nav>
+  </div>
+
+  <div class="offcanvas-footer" role="contentinfo">
+    <div>© 2026 Gradua All rights reserved.</div>
+  </div>
+</aside>
+
+<div class="overlay" id="overlay" tabindex="-1"></div>
+
+<main>
+  
+  <section class="container" id="newsContainer">
+
+    <article class="card" data-source="darkreading">
+        <img src="https://eu-images.contentstack.com/v3/assets/blt6d90778a997de1cd/bltb6cbcc2ccc50eb28/698cef37eddb0d5845453339/DPRK_flag_Valerio_Rosati_Alamy.jpg?width=1280&amp;auto=webp&amp;quality=80&amp;disable=upscale" alt="News image">
+        <h2 class="card-title"><a href="https://www.darkreading.com/threat-intelligence/north-koreas-unc1069-hammers-crypto-firms" target="_blank" rel="noopener noreferrer" title="Read more">North Korea&#x27;s UNC1069 Hammers Crypto Firms With AI</a></h2>
+        <p class="card-meta"><strong>Date:</strong> Wed, 11 Feb 2026 21:56:11 GMT &nbsp; • &nbsp; <strong>Source:</strong> darkreading</p>
+        <p class="card-summary">In moving away from traditional banks to focus on Web3 companies, the threat actor is leveraging LLMs, deepfakes, legitimate platforms, and ClickFix.</p>
+    </article>
+    
+    <article class="card" data-source="darkreading">
+        <img src="https://eu-images.contentstack.com/v3/assets/blt6d90778a997de1cd/blt9f65631630e592f3/698b910082cad77379eec706/Warning_question_mark_Lensw0rld_Alamy.jpg?width=1280&amp;auto=webp&amp;quality=80&amp;disable=upscale" alt="News image">
+        <h2 class="card-title"><a href="https://www.darkreading.com/data-privacy/do-we-know-enough-about-data-populating-ai" target="_blank" rel="noopener noreferrer" title="Read more">AI Rising: Do We Know Enough About the Data Populating It?</a></h2>
+        <p class="card-meta"><strong>Date:</strong> Wed, 11 Feb 2026 14:31:47 GMT &nbsp; • &nbsp; <strong>Source:</strong> darkreading</p>
+        <p class="card-summary">Organizations remain reluctant to address the fact that AI can dangerously expose business operations as well as personal data.</p>
+    </article>
+    
+    <article class="card" data-source="darkreading">
+        <img src="https://eu-images.contentstack.com/v3/assets/blt6d90778a997de1cd/blt9e68ba407e192fcf/698b83f535702e4a5ec046c6/Keyboard_grass-mediacolor_s-Alamy.jpg?width=1280&amp;auto=webp&amp;quality=80&amp;disable=upscale" alt="News image">
+        <h2 class="card-title"><a href="https://www.darkreading.com/application-security/cyber-industry-defenses-co2-emissions" target="_blank" rel="noopener noreferrer" title="Read more">Top Cyber Industry Defenses Spike CO2 Emissions</a></h2>
+        <p class="card-meta"><strong>Date:</strong> Wed, 11 Feb 2026 14:00:00 GMT &nbsp; • &nbsp; <strong>Source:</strong> darkreading</p>
+        <p class="card-summary">Organizations can improve their climate footprints by optimizing two specific cybersecurity protections, without incurring added risks.</p>
+    </article>
+    
+    <article class="card" data-source="darkreading">
+        <img src="https://eu-images.contentstack.com/v3/assets/blt6d90778a997de1cd/blt08f32e99d14cdbd4/698bb0e92235b48ce2af9429/telnet-asia-traffic-90-days-GreyNoise.jpg?width=1280&amp;auto=webp&amp;quality=80&amp;disable=upscale" alt="News image">
+        <h2 class="card-title"><a href="https://www.darkreading.com/threat-intelligence/asia-fumbles-telnet-threat-traffic" target="_blank" rel="noopener noreferrer" title="Read more">Asia Fumbles With Throttling Back Telnet Traffic in Region</a></h2>
+        <p class="card-meta"><strong>Date:</strong> Wed, 11 Feb 2026 02:00:00 GMT &nbsp; • &nbsp; <strong>Source:</strong> darkreading</p>
+        <p class="card-summary">Only Taiwan made the top 10 list of governments, effectively blocking the threat-ridden protocol, but overall, the region lagged in curbing Telnet traffic.</p>
+    </article>
+    
+    <article class="card" data-source="darkreading">
+        <img src="https://eu-images.contentstack.com/v3/assets/blt6d90778a997de1cd/bltec9ead879e17bed7/698b9bc83dfe3e901d750ec1/solarwinds_tofino_Alamy.jpg?width=1280&amp;auto=webp&amp;quality=80&amp;disable=upscale" alt="News image">
+        <h2 class="card-title"><a href="https://www.darkreading.com/vulnerabilities-threats/solarwinds-whd-attacks-exposed-apps" target="_blank" rel="noopener noreferrer" title="Read more">SolarWinds WHD Attacks Highlight Risks of Exposed Apps</a></h2>
+        <p class="card-meta"><strong>Date:</strong> Tue, 10 Feb 2026 22:00:53 GMT &nbsp; • &nbsp; <strong>Source:</strong> darkreading</p>
+        <p class="card-summary">Organizations that have exposed their instances of Web Help Desk to the public Internet have inadvertently made them prime targets for attackers.</p>
+    </article>
+    
+    <article class="card" data-source="LWN.net">
+        
+        <h2 class="card-title"><a href="https://lwn.net/Articles/1058323/" target="_blank" rel="noopener noreferrer" title="Read more">Linux man pages 6.17 released</a></h2>
+        <p class="card-meta"><strong>Date:</strong> Wed, 11 Feb 2026 21:24:02 +0000 &nbsp; • &nbsp; <strong>Source:</strong> LWN.net</p>
+        <p class="card-summary">&lt;a href=&quot;https://lwn.net/ml/all/aYy41v6tYda2Qc_1@devuan&quot;&gt;Version 6.17&lt;/a&gt; of the Linux
+manual-page collection has been released.  Along with a long list of
+updates to the man pages themselves, it includes some new utilit…</p>
+    </article>
+    
+    <article class="card" data-source="LWN.net">
+        
+        <h2 class="card-title"><a href="https://lwn.net/Articles/1057561/" target="_blank" rel="noopener noreferrer" title="Read more">[$] Evolving Git for the next decade</a></h2>
+        <p class="card-meta"><strong>Date:</strong> Wed, 11 Feb 2026 15:55:58 +0000 &nbsp; • &nbsp; <strong>Source:</strong> LWN.net</p>
+        <p class="card-summary">&lt;p&gt;Git is ubiquitous; in the last two decades, the version-control
+system has truly achieved world domination. Almost every developer
+uses it and the vast majority of open-source projects are hosted in
+Git repositories.…</p>
+    </article>
+    
+    <article class="card" data-source="LWN.net">
+        
+        <h2 class="card-title"><a href="https://lwn.net/Articles/1058285/" target="_blank" rel="noopener noreferrer" title="Read more">postmarketOS FOSDEM 2026 and hackathon recap</a></h2>
+        <p class="card-meta"><strong>Date:</strong> Wed, 11 Feb 2026 15:55:28 +0000 &nbsp; • &nbsp; <strong>Source:</strong> LWN.net</p>
+        <p class="card-summary">&lt;p&gt;The &lt;a href=&quot;https://postmarketos.org/&quot;&gt;postmarketOS&lt;/a&gt; project
+has &lt;a href=&quot;https://postmarketos.org/blog/2026/02/10/fosdem-and-hackathon/&quot;&gt;published&lt;/a&gt;
+a recap from FOSDEM&amp;#160;2026, including the &lt;a href=&quot;https:/…</p>
+    </article>
+    
+    <article class="card" data-source="LWN.net">
+        
+        <h2 class="card-title"><a href="https://lwn.net/Articles/1058268/" target="_blank" rel="noopener noreferrer" title="Read more">Stable kernels for Wednesday</a></h2>
+        <p class="card-meta"><strong>Date:</strong> Wed, 11 Feb 2026 14:33:56 +0000 &nbsp; • &nbsp; <strong>Source:</strong> LWN.net</p>
+        <p class="card-summary">&lt;p&gt;Greg Kroah-Hartman has unleashed six new stable kernels: &lt;a href=&quot;https://lwn.net/Articles/1058269/&quot;&gt;6.18.10&lt;/a&gt;, &lt;a href=&quot;https://lwn.net/Articles/1058270/&quot;&gt;6.6.124&lt;/a&gt;, &lt;a href=&quot;https://lwn.net/Articles/1058271/&quot;&gt;6.…</p>
+    </article>
+    
+    <article class="card" data-source="LWN.net">
+        
+        <h2 class="card-title"><a href="https://lwn.net/Articles/1058265/" target="_blank" rel="noopener noreferrer" title="Read more">Security updates for Wednesday</a></h2>
+        <p class="card-meta"><strong>Date:</strong> Wed, 11 Feb 2026 14:01:00 +0000 &nbsp; • &nbsp; <strong>Source:</strong> LWN.net</p>
+        <p class="card-summary">Security updates have been issued by &lt;b&gt;Debian&lt;/b&gt; (kernel, linux-6.1, munge, and tcpflow), &lt;b&gt;Fedora&lt;/b&gt; (accel-ppp, atuin, babl, bustle, endless-sky, envision, ettercap, fapolicy-analyzer, firefox, glycin, gnome-settin…</p>
+    </article>
+    
+    <article class="card" data-source="sysadvent">
+        
+        <h2 class="card-title"><a href="http://sysadvent.blogspot.com/2021/12/day-23-what-is-ebpf.html" target="_blank" rel="noopener noreferrer" title="Read more">Day 23 - What is eBPF?</a></h2>
+        <p class="card-meta"><strong>Date:</strong> 2021-12-23T00:00:00.001-05:00 &nbsp; • &nbsp; <strong>Source:</strong> sysadvent</p>
+        <p class="card-summary">&lt;p&gt;
+    By: Ania Kapuścińska (&lt;a href=&quot;https://twitter.com/lambdanis&quot;&gt;@lambdanis&lt;/a&gt;)&lt;br /&gt;
+    Edited by:  Shaun Mouton (&lt;a href=&quot;https://twitter.com/sdmouton&quot;&gt;@sdmouton&lt;/a&gt; )
+  &lt;/p&gt;
+&lt;p&gt;
+Like many engineers, for a long…</p>
+    </article>
+    
+    <article class="card" data-source="sysadvent">
+        
+        <h2 class="card-title"><a href="http://sysadvent.blogspot.com/2021/12/day-22-so-youre-incident-commander-now.html" target="_blank" rel="noopener noreferrer" title="Read more">Day 22 - So, You&#x27;re Incident Commander, Now What?</a></h2>
+        <p class="card-meta"><strong>Date:</strong> 2021-12-22T00:00:00.029-05:00 &nbsp; • &nbsp; <strong>Source:</strong> sysadvent</p>
+        <p class="card-summary">&lt;p&gt;
+    By: Joshua Timberman (&lt;a href=&quot;https://twitter.com/jtimberman&quot;&gt;@jtimberman&lt;/a&gt;)&lt;br /&gt;
+&lt;/p&gt;
+&lt;p&gt;
+You’re the SRE on call and, while working on a project, your phone buzzes with
+an alert: “Elevated 500s from API.”
+&lt;/…</p>
+    </article>
+    
+    <article class="card" data-source="sysadvent">
+        
+        <h2 class="card-title"><a href="http://sysadvent.blogspot.com/2021/12/day-20-to-deploy-or-not-to-deploy-that.html" target="_blank" rel="noopener noreferrer" title="Read more">Day 20 - To Deploy or Not to Deploy? That is the question.</a></h2>
+        <p class="card-meta"><strong>Date:</strong> 2021-12-20T00:00:00.031-05:00 &nbsp; • &nbsp; <strong>Source:</strong> sysadvent</p>
+        <p class="card-summary">&lt;p&gt;
+    By: Jessica DeVita (&lt;a href=&quot;https://twitter.com/ubergeekgirl&quot;&gt;@ubergeekgirl&lt;/a&gt;)&lt;br /&gt;
+    Edited by: Jennifer Davis (&lt;a href=&quot;https://twitter.com/sigje&quot;&gt;@sigje&lt;/a&gt;)
+  &lt;/p&gt;
+
+&lt;p&gt;
+Deployment Decision-Making during…</p>
+    </article>
+    
+    <article class="card" data-source="sysadvent">
+        <img src="https://lh3.googleusercontent.com/rvY18DoLrWsIahDlhnI4x-WGDNq7P0s5serUySR7OslmizjdRlkAvdcY2wQcCFu8UFs-AZJI5wEBqTCPlWTdBerob_3Cw7A9i1ymyPuvYNsO3CA3r0oWYWTLbTHyMRlKJws3eXkh=s72-c" alt="News image">
+        <h2 class="card-title"><a href="http://sysadvent.blogspot.com/2021/12/day-19-into-world-of-chaos-engineering.html" target="_blank" rel="noopener noreferrer" title="Read more">Day 19 - Into the World of Chaos Engineering</a></h2>
+        <p class="card-meta"><strong>Date:</strong> 2021-12-19T00:00:00.005-05:00 &nbsp; • &nbsp; <strong>Source:</strong> sysadvent</p>
+        <p class="card-summary">&lt;p&gt;
+    By: Julie Gunderson (&lt;a href=&quot;https://twitter.com/Julie_Gund&quot;&gt;@Julie_Gund&lt;/a&gt;)&lt;br /&gt;
+    Edited by: Kerim Satirli (&lt;a href=&quot;https://twitter.com/ksatirli&quot;&gt;@ksatirli&lt;/a&gt;)
+  &lt;/p&gt;
+&lt;h2&gt;Intro&lt;/h2&gt;
+&lt;p&gt;
+I recently left m…</p>
+    </article>
+    
+    <article class="card" data-source="sysadvent">
+        
+        <h2 class="card-title"><a href="http://sysadvent.blogspot.com/2021/12/day-18-minimizing-false-positive.html" target="_blank" rel="noopener noreferrer" title="Read more">Day 18 - Minimizing False Positive Monitoring Alerts with Checkmk</a></h2>
+        <p class="card-meta"><strong>Date:</strong> 2021-12-18T00:00:00.043-05:00 &nbsp; • &nbsp; <strong>Source:</strong> sysadvent</p>
+        <p class="card-summary">&lt;p&gt;
+    By: Elias Voelker (&lt;a href=&quot;https://twitter.com/Elijah2807&quot;&gt;@Elijah2807&lt;/a&gt;) and Faye Tandog (&lt;a href=&quot;https://twitter.com/fayetandog&quot;&gt;@fayetandog&lt;/a&gt;&lt;br /&gt;
+    Edited by: Jennifer Davis (&lt;a href=&quot;https://twitter…</p>
+    </article>
+    
+    <article class="card" data-source="Schneier on Security">
+        
+        <h2 class="card-title"><a href="https://www.schneier.com/blog/archives/2026/02/rewiring-democracy-ebook-is-on-sale.html" target="_blank" rel="noopener noreferrer" title="Read more">Rewiring Democracy Ebook is on Sale</a></h2>
+        <p class="card-meta"><strong>Date:</strong> Wed, 11 Feb 2026 14:48:14 +0000 &nbsp; • &nbsp; <strong>Source:</strong> Schneier on Security</p>
+        <p class="card-summary">&lt;p&gt;I just noticed that the ebook version of &lt;a href=&quot;https://www.schneier.com/books/rewiring-democracy/&quot;&gt;&lt;i&gt;Rewriring Democracy&lt;/i&gt; is on sale for $5 on &lt;a href=&quot;https://www.amazon.com/gp/product/B0DTNZ2H86&quot;&gt;Amazon&lt;/a&gt;,…</p>
+    </article>
+    
+    <article class="card" data-source="Schneier on Security">
+        
+        <h2 class="card-title"><a href="https://www.schneier.com/blog/archives/2026/02/prompt-injection-via-road-signs.html" target="_blank" rel="noopener noreferrer" title="Read more">Prompt Injection Via Road Signs</a></h2>
+        <p class="card-meta"><strong>Date:</strong> Wed, 11 Feb 2026 12:03:22 +0000 &nbsp; • &nbsp; <strong>Source:</strong> Schneier on Security</p>
+        <p class="card-summary">&lt;p&gt;Interesting research: &amp;#8220;&lt;a href=&quot;https://arxiv.org/pdf/2510.00181&quot;&gt;CHAI: Command Hijacking Against Embodied AI&lt;/a&gt;.&amp;#8221;&lt;/p&gt;
+&lt;blockquote&gt;&lt;p&gt;&lt;b&gt;Abstract:&lt;/b&gt; Embodied Artificial Intelligence (AI) promises to han…</p>
+    </article>
+    
+    <article class="card" data-source="Schneier on Security">
+        
+        <h2 class="card-title"><a href="https://www.schneier.com/blog/archives/2026/02/the-ai-generated-text-arms-race.html" target="_blank" rel="noopener noreferrer" title="Read more">AI-Generated Text and the Detection Arms Race</a></h2>
+        <p class="card-meta"><strong>Date:</strong> Tue, 10 Feb 2026 12:03:50 +0000 &nbsp; • &nbsp; <strong>Source:</strong> Schneier on Security</p>
+        <p class="card-summary">&lt;p&gt;In 2023, the science fiction literary magazine &lt;cite&gt;Clarkesworld&lt;/cite&gt; &lt;a href=&quot;https://www.npr.org/2023/02/24/1159286436/ai-chatbot-chatgpt-magazine-&amp;#60;cite&amp;#62;Clarkesworld&amp;#60;/cite&amp;#62;-artificial-intelligence…</p>
+    </article>
+    
+    <article class="card" data-source="Schneier on Security">
+        
+        <h2 class="card-title"><a href="https://www.schneier.com/blog/archives/2026/02/llms-are-getting-a-lot-better-and-faster-at-finding-and-exploiting-zero-days.html" target="_blank" rel="noopener noreferrer" title="Read more">LLMs are Getting a Lot Better and Faster at Finding and Exploiting Zero-Days</a></h2>
+        <p class="card-meta"><strong>Date:</strong> Mon, 09 Feb 2026 12:04:29 +0000 &nbsp; • &nbsp; <strong>Source:</strong> Schneier on Security</p>
+        <p class="card-summary">&lt;p&gt;This is &lt;a href=&quot;https://red.anthropic.com/2026/zero-days/&quot;&gt;amazing&lt;/a&gt;:&lt;/p&gt;
+&lt;blockquote&gt;&lt;p&gt;Opus 4.6 is notably better at finding high-severity vulnerabilities than previous models and a sign of how quickly things are…</p>
+    </article>
+    
+    <article class="card" data-source="Schneier on Security">
+        
+        <h2 class="card-title"><a href="https://www.schneier.com/blog/archives/2026/02/friday-squid-blogging-squid-fishing-tips.html" target="_blank" rel="noopener noreferrer" title="Read more">Friday Squid Blogging: Squid Fishing Tips</a></h2>
+        <p class="card-meta"><strong>Date:</strong> Fri, 06 Feb 2026 22:01:05 +0000 &nbsp; • &nbsp; <strong>Source:</strong> Schneier on Security</p>
+        <p class="card-summary">&lt;p&gt;This is a &lt;a href=&quot;https://www.youtube.com/watch?v=pNq_W2CkACU&quot;&gt;video&lt;/a&gt; of advice for squid fishing in Puget Sound.&lt;/p&gt;
+&lt;p&gt;As usual, you can also use this squid post to talk about the security stories in the news th…</p>
+    </article>
+    
+  </section>
+</main>
+
+<button id="backToTop" aria-label="Back to top">⬆️</button>
+
+<script>
+/* Off-canvas menu logic */
+const hamburger = document.getElementById('hamburger');
+const offcanvas = document.getElementById('offcanvas');
+const overlay = document.getElementById('overlay');
+
+function openMenu() {
+  offcanvas.classList.add('open');
+  overlay.classList.add('show');
+  hamburger.setAttribute('aria-expanded', 'true');
+  offcanvas.setAttribute('aria-hidden', 'false');
+}
+function closeMenu() {
+  offcanvas.classList.remove('open');
+  overlay.classList.remove('show');
+  hamburger.setAttribute('aria-expanded', 'false');
+  offcanvas.setAttribute('aria-hidden', 'true');
+}
+
+hamburger.addEventListener('click', () => {
+  const open = offcanvas.classList.contains('open');
+  if (open) closeMenu(); else openMenu();
+});
+overlay.addEventListener('click', closeMenu);
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') closeMenu();
+});
+
+/* Menu item actions (filter by data-action) */
+document.querySelectorAll('.menu-list a').forEach(a => {
+  a.addEventListener('click', (e) => {
+    e.preventDefault();
+    const action = a.getAttribute('data-action');
+    closeMenu();
+    // Simple client-side filters for demo: filter by keyword
+    const qmap = {
+      'all': '',
+      'security': 'security',
+      'linux': 'linux',
+      'devops': 'devops',
+      'about': '',
+      'settings': ''
+    };
+    const q = qmap[action] || '';
+    const input = document.getElementById('searchInput');
+    input.value = q;
+    input.dispatchEvent(new Event('input'));
+  });
+});
+
+/* Theme toggle */
+const themeToggle = document.getElementById('themeToggle');
+themeToggle.addEventListener('click', () => {
+  document.body.classList.toggle('dark');
+  const pressed = document.body.classList.contains('dark');
+  themeToggle.setAttribute('aria-pressed', pressed ? 'true' : 'false');
+});
+
+/* Search filter */
+const searchInput = document.getElementById('searchInput');
+searchInput.addEventListener('input', (e) => {
+  const q = e.target.value.trim().toLowerCase();
+  const cards = document.querySelectorAll('.card');
+  if (!q) {
+    cards.forEach(c => c.style.display = '');
+    return;
+  }
+  cards.forEach(card => {
+    const text = card.innerText.toLowerCase();
+    card.style.display = text.includes(q) ? '' : 'none';
+  });
+});
+
+/* Back to top button */
+const backBtn = document.getElementById('backToTop');
+window.addEventListener('scroll', () => {
+  const show = window.scrollY > 240;
+  backBtn.style.display = show ? 'flex' : 'none';
+});
+backBtn.addEventListener('click', () => {
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+});
+
+/* Accessibility: focus outline for keyboard users */
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Tab') {
+    document.body.classList.add('show-focus');
+  }
+});
+</script>
+</body>
+</html>
