@@ -8,6 +8,16 @@ FEEDS = [
     "https://lxer.com/rss/",
     "https://sysadvent.blogspot.com/feeds/posts/default",
     "https://www.schneier.com/feed/"
+    # AI feeds 
+    "https://machinelearningmastery.com/feed/", 
+    "https://arxiv.org/rss/cs.LG", 
+    "https://aws.amazon.com/blogs/machine-learning/feed/", 
+    "https://blog.statsbot.co/feed", 
+    # Linux feeds 
+    "https://www.tecmint.com/feed/", 
+    "https://archlinux.org/feeds/news/", 
+    "https://www.blackmoreops.com/feed/", 
+    "https://itsfoss.com/feed/"
 ]
 
 # Use timezone-aware UTC now to avoid deprecation warnings
