@@ -96,5 +96,5 @@
 |Thumbnail Editing tools|https://editingtools.io/thumbnail/ | Free Image Editing tool |Image Editing tool with no login |
 |Ernie Chat bot | https://ernie.baidu.com | Ernie Model | An alternate free AI Chat bot with newer things|
 | Kimi | https://www.kimi.com/en/slides | Kimi slides | Kimi AI presentations, Key notes |
-| Famelack | https://famelack.com/ | Live TVs | Free Live TVs of various countries |
+| Famelack | https://famelack.com/ | Live TVs app & Web | Free Live TVs of various countries |
 | Free stuff | https://fmhy.net/ | Free stuff on internet | largest collection of free stuff on the internet! |
