@@ -99,3 +99,4 @@
 | Famelack | https://famelack.com/ | Live TVs app & Web | Free Live TVs of various countries |
 | Free stuff | https://fmhy.net/ | Free stuff on internet | largest collection of free stuff on the internet! |
 | Kimi AI | https://www.kimi.com/ |"Swarm" intelligence for complex projects! | Autonomous AI Agent & Research	Largest context window with multi-agent |
+| Ubuntu on Android | https://github.com/jarvesusaram99/termux-hacklab | Termux, Termux-x11 | Hack lab installation Ubuntu on Android |
