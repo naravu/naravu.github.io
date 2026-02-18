@@ -97,6 +97,6 @@
 |Ernie Chat bot | https://ernie.baidu.com | Ernie Model | An alternate free AI Chat bot with newer things|
 | Kimi | https://www.kimi.com/en/slides | Kimi slides | Kimi AI presentations, Key notes |
 | Famelack | https://famelack.com/ | Live TVs app & Web | Free Live TVs of various countries |
-| Free stuff | https://fmhy.net/ | Free stuff on internet | largest collection of free stuff on the internet! |
+| Free stuff | https://fmhy.net/ | Free stuff on internet | Free Media Heck Yeah - largest collection of free stuff on the internet! |
 | Kimi AI | https://www.kimi.com/ |"Swarm" intelligence for complex projects! | Autonomous AI Agent & Research	Largest context window with multi-agent |
 | Ubuntu on Android | https://github.com/jarvesusaram99/termux-hacklab | Termux, Termux-x11 | Hack lab installation Ubuntu on Android |
