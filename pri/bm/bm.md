@@ -100,3 +100,5 @@
 | Free stuff | https://fmhy.net/ | Free stuff on internet | Free Media Heck Yeah - largest collection of free stuff on the internet! |
 | Kimi AI | https://www.kimi.com/ |"Swarm" intelligence for complex projects! | Autonomous AI Agent & Research	Largest context window with multi-agent |
 | Ubuntu on Android | https://github.com/jarvesusaram99/termux-hacklab | Termux, Termux-x11 | Hack lab installation Ubuntu on Android |
+| Quick Ref | https://quickref.me/ | Master Cheatsheet references | Here are some cheatsheets and quick references contributed by open source angels.|
+| Video Audio AI | https://www.minimax.io/ | AI audio video models | Covering five major areas: text, speech, video, image, and music. Helping developers efficiently build intelligent applications |
