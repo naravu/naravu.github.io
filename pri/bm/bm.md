@@ -98,8 +98,9 @@
 | Kimi | https://www.kimi.com/en/slides | Kimi slides | Kimi AI presentations, Key notes |
 | Famelack | https://famelack.com/ | Live TVs app & Web | Free Live TVs of various countries |
 | Free stuff | https://fmhy.net/ | Free stuff on internet | Free Media Heck Yeah - largest collection of free stuff on the internet! |
-| Kimi AI | https://www.kimi.com/ |"Swarm" intelligence for complex projects! | Autonomous AI Agent & Research	Largest context window with multi-agent |
+| Kimi AI | https://www.kimi.com/ |"Swarm" intelligence for complex projects! for Slides, Sheets and Docs | Autonomous AI Agent & Research	Largest context window with multi-agent |
 | Ubuntu on Android | https://github.com/jarvesusaram99/termux-hacklab | Termux, Termux-x11 | Hack lab installation Ubuntu on Android |
 | Quick Ref | https://quickref.me/ | Master Cheatsheet references | Here are some cheatsheets and quick references contributed by open source angels.|
 | Video Audio AI | https://www.minimax.io/ | AI audio video models | Covering five major areas: text, speech, video, image, and music. Helping developers efficiently build intelligent applications |
 | Realwork From anywhere | https://www.realworkfromanywhere.com/ |The only fully location independent job board. | Remote jobs online |
+|Fabricodes | https://fabricodes.com/auth/login | AI with daily free credits |  |
