@@ -103,4 +103,5 @@
 | Quick Ref | https://quickref.me/ | Master Cheatsheet references | Here are some cheatsheets and quick references contributed by open source angels.|
 | Video Audio AI | https://www.minimax.io/ | AI audio video models | Covering five major areas: text, speech, video, image, and music. Helping developers efficiently build intelligent applications |
 | Realwork From anywhere | https://www.realworkfromanywhere.com/ |The only fully location independent job board. | Remote jobs online |
-|Fabricodes | https://fabricodes.com/auth/login | AI with daily free credits |  |
+|Fabricodes | https://fabricodes.com/auth/login | AI with daily free credits | Industrial manufacturing & supply chain management |
+|AI freeforever | https://aifreeforever.com/ | Free AI | Free AI forever |
