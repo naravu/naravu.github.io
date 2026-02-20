@@ -100,6 +100,27 @@
     .hidden {
       display: none;
     }
+
+   .footbar {
+    width: 100%; /* full width */
+    background: #1e2a38;
+    border-top: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+    padding: 6px 10px;
+    font-size: 0.65em; /* smallest readable font */
+    line-height: 1.3;
+    text-align: left;
+    box-shadow: 0 -2px 6px rgba(0,0,0,0.05);
+    margin-top: 20px; /* spacing above footbar */
+  }
+  .footbar b {
+    font-weight: 600;
+    color: #fff; /* neutral label color */
+  }
+  .footbar span {
+    color: #00ffff; /* calm AI blue for values */
+    font-weight: 500;
+  }
   </style>
 </head>
 <body>
@@ -108,7 +129,47 @@
     <a href="#">🏠 Home</a>
     <a href="#">🎵 Playlist</a>
     <a href="#">📺 Videos</a>
-    <small>&copy; All rights reserved.</small>
+
+    <div class="footbar">
+    IP:<span id="ip"></span> | 
+    Location: <span id="location"></span> | 
+    Browser: <span id="browser"></span> | 
+    App: <span id="appName"></span> 
+    Version: <span id="appVersion"></span> | 
+    User Agent: <span id="userAgent"></span> | 
+    OS: <span id="platform"></span> | 
+    Lang: <span id="language"></span> | 
+    Cookies: <span id="cookieEnabled"></span> | 
+    Online: <span id="onLine"></span> | 
+    Update: <span id="lastUpdate"></span><br>
+    <hr size="1">
+    &copy; All rights reserved.
+  </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", async () => {
+      try {
+        const response = await fetch("https://ipapi.co/json/");
+        const data = await response.json();
+        document.getElementById("ip").textContent = data.ip;
+        document.getElementById("location").textContent = `${data.city}, ${data.country}`;
+      } catch (error) {
+        document.getElementById("ip").textContent = "N/A";
+        document.getElementById("location").textContent = "N/A";
+      }
+
+      document.getElementById("lastUpdate").textContent = document.lastModified;
+      document.getElementById("browser").textContent = navigator.userAgent;
+      document.getElementById("appName").textContent = navigator.appName;
+      document.getElementById("appVersion").textContent = navigator.appVersion;
+      document.getElementById("userAgent").textContent = navigator.userAgent;
+      document.getElementById("platform").textContent = navigator.platform;
+      document.getElementById("language").textContent = navigator.language;
+      document.getElementById("cookieEnabled").textContent = navigator.cookieEnabled;
+      document.getElementById("onLine").textContent = navigator.onLine;
+    });
+  </script>
+   
   </div>
 
   <!-- Header -->
@@ -211,6 +272,7 @@
       }
     });
   </script>
-  
+    
+
 </body>
 </html>
