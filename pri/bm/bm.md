@@ -106,3 +106,4 @@
 |Fabricodes | https://fabricodes.com/auth/login | AI with daily free credits | Industrial manufacturing & supply chain management |
 |AI freeforever | https://aifreeforever.com/ | Free AI | Free AI forever |
 | Suno alternate | https://www.youtube.com/watch?v=QzddQoCKKss | Open source Music generator | An alternate open source music generator setup video|
+| Free IPTV index | https://iptv-org.github.io/ | IPTV | IPTV.org |
