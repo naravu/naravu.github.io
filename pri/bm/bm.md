@@ -107,3 +107,4 @@
 |AI freeforever | https://aifreeforever.com/ | Free AI | Free AI forever |
 | Suno alternate | https://www.youtube.com/watch?v=QzddQoCKKss | Open source Music generator | An alternate open source music generator setup video|
 | Free IPTV Index | https://iptv-org.github.io/ | IPTV | Free IPTV Index |
+| Spoton | https://sixthsample.com/spoton/ | Free Music | Free alternate to autotune plugin |
