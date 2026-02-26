@@ -109,3 +109,4 @@
 | Free IPTV Index | https://iptv-org.github.io/ | IPTV | Free IPTV Index |
 | Spoton | https://sixthsample.com/spoton/ | Free Music | Free alternate to autotune plugin |
 | Apps in mins | https://www.youtube.com/watch?v=EsRyyJmO-u8 | Website learners app in mins | How ChatGPT Built My App in Minutes |
+| Linux Distros | https://distrosea.com/ | Linux free online | Set of all Linux |
