@@ -31,11 +31,12 @@ jobs:
         python system.py
         python shviapy.py
         python technews.py
+        python bm1.py
 
     - name: Commit and Pusfindh Report
       run: |
         git config --global user.name "github-actions"
         git config --global user.email "github-actions@github.com"
-        git add report.html news.html system.html shviapy.html technews.html
+        git add report.html news.html system.html shviapy.html technews.html bm1.html
         git commit -m "Update daily reports"
         git push

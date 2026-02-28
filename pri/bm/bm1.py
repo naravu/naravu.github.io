@@ -1,7 +1,7 @@
 import os
 
 BOOKMARKS_FILE = 'bm.md'
-HTML_FILE = 'bm.html'
+HTML_FILE = 'bm1.html'
 
 def load_bookmarks():
     bookmarks = []
