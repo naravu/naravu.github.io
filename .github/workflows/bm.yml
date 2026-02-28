@@ -26,12 +26,14 @@ jobs:
     - name: Run Python Script
       run: |
         python pri/bm/bm.py
+        python pri/bm/bm1.py
 
     - name: Commit and Push Report (if changed)
       run: |
         git config --global user.name "github-actions"
         git config --global user.email "github-actions@github.com"
         git add pri/bm/bm.html
+        git add pri/bm/bm1.html
 
         # Only commit if there are changes
         if ! git diff --cached --quiet; then
