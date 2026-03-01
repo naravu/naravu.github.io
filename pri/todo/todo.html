@@ -98,6 +98,24 @@
         <code>python todo_dashboard.py --remove 2</code>
             <p><small>Use the CLI to add or remove tasks. Descriptions are optional and shown here.</small></p>
     </div>
+    <div class="sidebar">
+    <!-- ...existing code... -->
+    <h3>🔍 Search</h3>
+    <input type="text" id="searchInput" placeholder="Search tasks..." class="search-input">
+</div>
+
+<style>
+    /* ...existing code... */
+    .search-input {
+        width: 100%;
+        padding: 8px;
+        margin-top: 10px;
+        background: #333;
+        border: 1px solid #444;
+        color: #fff;
+        border-radius: 4px;
+    }
+</style>
     <div class="main">
         
         <div class="legend">✅ = Done, 🕒 = Pending Updated:2026-03-01 04:07:21</div>
@@ -109,6 +127,14 @@
                     <th onclick="sortTable(2)"><span id="arrow2">Task 🔽</span></th>
                 </tr>
             </thead>
+            <thead>
+    <tr>
+        <th onclick="sortTable(0)"><span id="arrow0">🔢 🔽</span></th>
+        <th onclick="sortTable(1)"><span id="arrow1">Status 🔽</span></th>
+        <th onclick="sortTable(2)"><span id="arrow2">Task 🔽</span></th>
+        <th>Priority</th>
+    </tr>
+</thead>
             <tbody>
                 
         <tr class="done">
