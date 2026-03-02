@@ -1,0 +1,949 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>📌🅝🅞🅞🅡🅚🅤🅡🅘</title>
+  <style>
+    body {
+      background: linear-gradient(to bottom, #f5f7fa, #eaeef3);
+      color: #333;
+      margin: 0;
+      font-family: 'Segoe UI', Arial, sans-serif;
+      font-size: 0.95em;
+      padding-top: 60px; /* space for fixed header */
+    }
+    .dark-mode {
+      background: #111;
+      color: #eee;
+    }
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background: #1e2a38;
+      color: #fff;
+      padding: 10px 15px;
+      font-size: 1em;
+      font-weight: bold;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+      z-index: 1000;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+      justify-content: center;
+      padding: 10px;
+    }
+    .card {
+      flex: 1 1 260px;
+      background: linear-gradient(135deg, #ffffff, #f0f4ff);
+      border: 1px solid #ddd;
+      border-radius: 12px;
+      padding: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      display: flex;
+      flex-direction: column;
+      cursor: pointer;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+    }
+    .card a {
+      color: #0366d6;
+      text-decoration: none;
+      word-break: break-word;
+      font-weight: bold;
+      font-size: 1em;
+    }
+    .card a:hover {
+      text-decoration: underline;
+    }
+    .dark-mode .card {
+      background: #222;
+      border-color: #444;
+    }
+    .dark-mode a {
+      color: #1e90ff;
+    }
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.85em; /* smaller font for status */
+      margin-bottom: 6px;
+    }
+    .status {
+      font-size: 0.8em;
+      color: #555;
+    }
+    input[type="text"] {
+      padding: 6px;
+      margin-left: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      width: 200px;
+    }
+    .dark-mode input[type="text"] {
+      background-color: #222;
+      color: #fff;
+      border: 1px solid #444;
+    }
+    button {
+      margin-left: 10px;
+      padding: 6px 10px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      background: #FFD700;
+      color: #000;
+      font-weight: bold;
+    }
+    .card[title] {
+      position: relative;
+    }
+    .card[title]:hover::after {
+      content: attr(title);
+      position: absolute;
+      bottom: 100%;
+      left: 10px;
+      background: #0366d6;
+      color: #fff;
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-size: 0.8em;
+      white-space: nowrap;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+    }
+  </style>
+  <script>
+    function filterCards() {
+      const input = document.getElementById("filterInput").value.toLowerCase();
+      const cards = document.querySelectorAll(".card");
+      cards.forEach(card => {
+        card.style.display = card.innerText.toLowerCase().includes(input) ? "" : "none";
+      });
+    }
+
+    async function validateURLs() {
+      const links = document.querySelectorAll(".bookmark-link");
+      for (const link of links) {
+        const status = link.closest(".card").querySelector(".status");
+        try {
+          await fetch(link.href, { method: "HEAD", mode: "no-cors" });
+          status.textContent = "✅";
+        } catch {
+          status.textContent = "❌";
+        }
+      }
+    }
+
+    window.addEventListener("DOMContentLoaded", validateURLs);
+  </script>
+</head>
+<body>
+  <header>
+    <div>📌🅝🅞🅞🅡🅚🅤🅡🅘</div>
+    <div>
+      <input type="text" id="filterInput" placeholder="Search..." onkeyup="filterCards()">
+      <button id="theme-button">☀️</button>
+    </div>
+    <div class="watermark">© Naravu. All rights reserved.</div><div></div>
+
+<style>
+  .watermark {
+    position: fixed;
+    top: 50%;
+    left: 0;
+    transform: rotate(-90deg) translate(-50%, 0);
+    transform-origin: left top;
+    font-size: 0.8em;
+    color: rgba(0,0,0,0.3); /* subtle watermark color */
+    pointer-events: none;    /* ensures it doesn’t block clicks */
+    z-index: 9999;
+  }
+</style>
+
+    </div>
+  </header>
+  <div class="container">
+    <div class="card" onclick="window.open('https://docs.python.org', '_blank')" title="Python Docs">
+      <div class="card-header"><b>🔢 1</b><span class="status">⏳</span></div>
+      <div><a href="https://docs.python.org" class="bookmark-link" target="_blank">Python Docs</a></div>
+      <div>🔗 https://docs.python.org</div>
+      <div>🏷️ python,docs</div>
+      <div>🔖 Official Python docs</div>
+    </div>
+    <div class="card" onclick="window.open('https://github.com/features/copilot', '_blank')" title="GitHub Copilot">
+      <div class="card-header"><b>🔢 2</b><span class="status">⏳</span></div>
+      <div><a href="https://github.com/features/copilot" class="bookmark-link" target="_blank">GitHub Copilot</a></div>
+      <div>🔗 https://github.com/features/copilot</div>
+      <div>🏷️ AI,tools</div>
+      <div>🔖 GitHub’s AI pair programmer</div>
+    </div>
+    <div class="card" onclick="window.open('https://google.com', '_blank')" title="Google">
+      <div class="card-header"><b>🔢 3</b><span class="status">⏳</span></div>
+      <div><a href="https://google.com" class="bookmark-link" target="_blank">Google</a></div>
+      <div>🔗 https://google.com</div>
+      <div>🏷️ Google,Search engine</div>
+      <div>🔖 Google search engine</div>
+    </div>
+    <div class="card" onclick="window.open('https://unwatermark.ai/pricing/', '_blank')" title="Unwatermark AI Pricing">
+      <div class="card-header"><b>🔢 4</b><span class="status">⏳</span></div>
+      <div><a href="https://unwatermark.ai/pricing/" class="bookmark-link" target="_blank">Unwatermark AI Pricing</a></div>
+      <div>🔗 https://unwatermark.ai/pricing/</div>
+      <div>🏷️ AI,tools,image,video</div>
+      <div>🔖 AI-powered watermark remover for images/videos with flexible pricing</div>
+    </div>
+    <div class="card" onclick="window.open('https://receive-sms-free.cc/', '_blank')" title="Receive SMS Free">
+      <div class="card-header"><b>🔢 5</b><span class="status">⏳</span></div>
+      <div><a href="https://receive-sms-free.cc/" class="bookmark-link" target="_blank">Receive SMS Free</a></div>
+      <div>🔗 https://receive-sms-free.cc/</div>
+      <div>🏷️ sms,temp,privacy</div>
+      <div>🔖 Free temporary numbers for SMS verification</div>
+    </div>
+    <div class="card" onclick="window.open('https://temp-number.com/', '_blank')" title="Temp Number">
+      <div class="card-header"><b>🔢 6</b><span class="status">⏳</span></div>
+      <div><a href="https://temp-number.com/" class="bookmark-link" target="_blank">Temp Number</a></div>
+      <div>🔗 https://temp-number.com/</div>
+      <div>🏷️ sms,temp,tools</div>
+      <div>🔖 Disposable numbers for SMS with global coverage</div>
+    </div>
+    <div class="card" onclick="window.open('https://chatglm.cn/main/alltoolsdetail?lang=en', '_blank')" title="ChatGLM Tools Directory">
+      <div class="card-header"><b>🔢 7</b><span class="status">⏳</span></div>
+      <div><a href="https://chatglm.cn/main/alltoolsdetail?lang=en" class="bookmark-link" target="_blank">ChatGLM Tools Directory</a></div>
+      <div>🔗 https://chatglm.cn/main/alltoolsdetail?lang=en</div>
+      <div>🏷️ AI,chatbot,tools</div>
+      <div>🔖 Chinese-English AI assistant with multimodal tools</div>
+    </div>
+    <div class="card" onclick="window.open('https://unwatermark.ai/', '_blank')" title="UnWaterMark">
+      <div class="card-header"><b>🔢 8</b><span class="status">⏳</span></div>
+      <div><a href="https://unwatermark.ai/" class="bookmark-link" target="_blank">UnWaterMark</a></div>
+      <div>🔗 https://unwatermark.ai/</div>
+      <div>🏷️ Water Mark removal</div>
+      <div>🔖 Water mark removal tool on videos</div>
+    </div>
+    <div class="card" onclick="window.open('https://officetomd.streamlit.app/', '_blank')" title="Mark Down app">
+      <div class="card-header"><b>🔢 9</b><span class="status">⏳</span></div>
+      <div><a href="https://officetomd.streamlit.app/" class="bookmark-link" target="_blank">Mark Down app</a></div>
+      <div>🔗 https://officetomd.streamlit.app/</div>
+      <div>🏷️ Free Mark Down language converter App</div>
+      <div>🔖 Mark Down converter App</div>
+    </div>
+    <div class="card" onclick="window.open('https://www.youtube.com/watch?v=ziXY2OsbB8I', '_blank')" title="Android in Windows">
+      <div class="card-header"><b>🔢 10</b><span class="status">⏳</span></div>
+      <div><a href="https://www.youtube.com/watch?v=ziXY2OsbB8I" class="bookmark-link" target="_blank">Android in Windows</a></div>
+      <div>🔗 https://www.youtube.com/watch?v=ziXY2OsbB8I</div>
+      <div>🏷️ Andriod on Windows</div>
+      <div>🔖 Android on Windows installation video</div>
+    </div>
+    <div class="card" onclick="window.open('https://github.com/x1xhlol/system-prompts-and-models-of-ai-tools/tree/main', '_blank')" title="AI Prompts">
+      <div class="card-header"><b>🔢 11</b><span class="status">⏳</span></div>
+      <div><a href="https://github.com/x1xhlol/system-prompts-and-models-of-ai-tools/tree/main" class="bookmark-link" target="_blank">AI Prompts</a></div>
+      <div>🔗 https://github.com/x1xhlol/system-prompts-and-models-of-ai-tools/tree/main</div>
+      <div>🏷️ AI Prompts</div>
+      <div>🔖 Multiple Free AI prompts for activities</div>
+    </div>
+    <div class="card" onclick="window.open('https://puter.com/app/terminal', '_blank')" title="Online OS">
+      <div class="card-header"><b>🔢 12</b><span class="status">⏳</span></div>
+      <div><a href="https://puter.com/app/terminal" class="bookmark-link" target="_blank">Online OS</a></div>
+      <div>🔗 https://puter.com/app/terminal</div>
+      <div>🏷️ Online desktop</div>
+      <div>🔖 Live OS in Browser</div>
+    </div>
+    <div class="card" onclick="window.open('https://lovable.dev/', '_blank')" title="Loveable">
+      <div class="card-header"><b>🔢 13</b><span class="status">⏳</span></div>
+      <div><a href="https://lovable.dev/" class="bookmark-link" target="_blank">Loveable</a></div>
+      <div>🔗 https://lovable.dev/</div>
+      <div>🏷️ AI for web development</div>
+      <div>🔖 Web development AI tool</div>
+    </div>
+    <div class="card" onclick="window.open('https://www.krea.ai/', '_blank')" title="Krea AI">
+      <div class="card-header"><b>🔢 14</b><span class="status">⏳</span></div>
+      <div><a href="https://www.krea.ai/" class="bookmark-link" target="_blank">Krea AI</a></div>
+      <div>🔗 https://www.krea.ai/</div>
+      <div>🏷️ AI for manipulating videos & Images</div>
+      <div>🔖 Video & Image AI tool</div>
+    </div>
+    <div class="card" onclick="window.open('https://customgpt.ai/', '_blank')" title="Custom GPT">
+      <div class="card-header"><b>🔢 15</b><span class="status">⏳</span></div>
+      <div><a href="https://customgpt.ai/" class="bookmark-link" target="_blank">Custom GPT</a></div>
+      <div>🔗 https://customgpt.ai/</div>
+      <div>🏷️ AI for your cusomization</div>
+      <div>🔖 Custom AI tool creation</div>
+    </div>
+    <div class="card" onclick="window.open('https://copilot.microsoft.com/', '_blank')" title="Copilot">
+      <div class="card-header"><b>🔢 16</b><span class="status">⏳</span></div>
+      <div><a href="https://copilot.microsoft.com/" class="bookmark-link" target="_blank">Copilot</a></div>
+      <div>🔗 https://copilot.microsoft.com/</div>
+      <div>🏷️ Copilot for Code</div>
+      <div>🔖 Microsoft's AI assistant</div>
+    </div>
+    <div class="card" onclick="window.open('https://soloist.ai/', '_blank')" title="Solo AI">
+      <div class="card-header"><b>🔢 17</b><span class="status">⏳</span></div>
+      <div><a href="https://soloist.ai/" class="bookmark-link" target="_blank">Solo AI</a></div>
+      <div>🔗 https://soloist.ai/</div>
+      <div>🏷️ AI for website creation</div>
+      <div>🔖 Mozilla's AI chatbot</div>
+    </div>
+    <div class="card" onclick="window.open('https://www.mozilla.ai/', '_blank')" title="Mozilla AI">
+      <div class="card-header"><b>🔢 18</b><span class="status">⏳</span></div>
+      <div><a href="https://www.mozilla.ai/" class="bookmark-link" target="_blank">Mozilla AI</a></div>
+      <div>🔗 https://www.mozilla.ai/</div>
+      <div>🏷️ Mozilla AI for AI agents creation</div>
+      <div>🔖 Mozilla's AI eco system</div>
+    </div>
+    <div class="card" onclick="window.open('https://moovai.net/', '_blank')" title="Movie Site">
+      <div class="card-header"><b>🔢 19</b><span class="status">⏳</span></div>
+      <div><a href="https://moovai.net/" class="bookmark-link" target="_blank">Movie Site</a></div>
+      <div>🔗 https://moovai.net/</div>
+      <div>🏷️ Movie recommended Site</div>
+      <div>🔖 Movie recommendation Site with AI</div>
+    </div>
+    <div class="card" onclick="window.open('https://learn.circuitverse.org/', '_blank')" title="Circut Verse">
+      <div class="card-header"><b>🔢 20</b><span class="status">⏳</span></div>
+      <div><a href="https://learn.circuitverse.org/" class="bookmark-link" target="_blank">Circut Verse</a></div>
+      <div>🔗 https://learn.circuitverse.org/</div>
+      <div>🏷️ Circuts</div>
+      <div>🔖 Electronic circuts</div>
+    </div>
+    <div class="card" onclick="window.open('https://www.zamzar.com/', '_blank')" title="Zamzar">
+      <div class="card-header"><b>🔢 21</b><span class="status">⏳</span></div>
+      <div><a href="https://www.zamzar.com/" class="bookmark-link" target="_blank">Zamzar</a></div>
+      <div>🔗 https://www.zamzar.com/</div>
+      <div>🏷️ Zamzar file conversion</div>
+      <div>🔖 Zamzar file conversion free online</div>
+    </div>
+    <div class="card" onclick="window.open('https://kiro.dev/', '_blank')" title="Kirao">
+      <div class="card-header"><b>🔢 22</b><span class="status">⏳</span></div>
+      <div><a href="https://kiro.dev/" class="bookmark-link" target="_blank">Kirao</a></div>
+      <div>🔗 https://kiro.dev/</div>
+      <div>🏷️ Kiro code agent</div>
+      <div>🔖 Kiro vibe code agent free tier</div>
+    </div>
+    <div class="card" onclick="window.open('https://gnukhata.org/', '_blank')" title="Gnukhata">
+      <div class="card-header"><b>🔢 23</b><span class="status">⏳</span></div>
+      <div><a href="https://gnukhata.org/" class="bookmark-link" target="_blank">Gnukhata</a></div>
+      <div>🔗 https://gnukhata.org/</div>
+      <div>🏷️ Free accounting software</div>
+      <div>🔖 Free Tally alternative</div>
+    </div>
+    <div class="card" onclick="window.open('https://www.google.com/', '_blank')" title="Google">
+      <div class="card-header"><b>🔢 24</b><span class="status">⏳</span></div>
+      <div><a href="https://www.google.com/" class="bookmark-link" target="_blank">Google</a></div>
+      <div>🔗 https://www.google.com/</div>
+      <div>🏷️ Search Engine</div>
+      <div>🔖 Google Search Engine</div>
+    </div>
+    <div class="card" onclick="window.open('https://uiverse.io/elements', '_blank')" title="Uiverse">
+      <div class="card-header"><b>🔢 25</b><span class="status">⏳</span></div>
+      <div><a href="https://uiverse.io/elements" class="bookmark-link" target="_blank">Uiverse</a></div>
+      <div>🔗 https://uiverse.io/elements</div>
+      <div>🏷️ Uiverse</div>
+      <div>🔖 CSS Templates free code</div>
+    </div>
+    <div class="card" onclick="window.open('https://tamileditor.org/', '_blank')" title="தமிழ் எழுதி">
+      <div class="card-header"><b>🔢 26</b><span class="status">⏳</span></div>
+      <div><a href="https://tamileditor.org/" class="bookmark-link" target="_blank">தமிழ் எழுதி</a></div>
+      <div>🔗 https://tamileditor.org/</div>
+      <div>🏷️ தமிழ் எழுதி</div>
+      <div>🔖 தமிழ் எழுதி, தமிழெழுதி - Tamil Editor</div>
+    </div>
+    <div class="card" onclick="window.open('https://www.modulify.ai/', '_blank')" title="Modulify">
+      <div class="card-header"><b>🔢 27</b><span class="status">⏳</span></div>
+      <div><a href="https://www.modulify.ai/" class="bookmark-link" target="_blank">Modulify</a></div>
+      <div>🔗 https://www.modulify.ai/</div>
+      <div>🏷️ Modulify</div>
+      <div>🔖 AI Website builder, Website creator</div>
+    </div>
+    <div class="card" onclick="window.open('https://tinywow.com/', '_blank')" title="TinyWOW">
+      <div class="card-header"><b>🔢 28</b><span class="status">⏳</span></div>
+      <div><a href="https://tinywow.com/" class="bookmark-link" target="_blank">TinyWOW</a></div>
+      <div>🔗 https://tinywow.com/</div>
+      <div>🏷️ TinyWOW</div>
+      <div>🔖 Free online converters - TinyWOW</div>
+    </div>
+    <div class="card" onclick="window.open('https://app.emergent.sh/landing', '_blank')" title="Emergent">
+      <div class="card-header"><b>🔢 29</b><span class="status">⏳</span></div>
+      <div><a href="https://app.emergent.sh/landing" class="bookmark-link" target="_blank">Emergent</a></div>
+      <div>🔗 https://app.emergent.sh/landing</div>
+      <div>🏷️ Rapid webapp builder</div>
+      <div>🔖 Rapid webapp builder and clone existing webapps</div>
+    </div>
+    <div class="card" onclick="window.open('https://music.ai/', '_blank')" title="AI Music">
+      <div class="card-header"><b>🔢 30</b><span class="status">⏳</span></div>
+      <div><a href="https://music.ai/" class="bookmark-link" target="_blank">AI Music</a></div>
+      <div>🔗 https://music.ai/</div>
+      <div>🏷️ AI Music</div>
+      <div>🔖 Free AI Music with login</div>
+    </div>
+    <div class="card" onclick="window.open('https://docs.docker.com/desktop/setup/install/linux/debian/#install-docker-desktop', '_blank')" title="Docker on Debian">
+      <div class="card-header"><b>🔢 31</b><span class="status">⏳</span></div>
+      <div><a href="https://docs.docker.com/desktop/setup/install/linux/debian/#install-docker-desktop" class="bookmark-link" target="_blank">Docker on Debian</a></div>
+      <div>🔗 https://docs.docker.com/desktop/setup/install/linux/debian/#install-docker-desktop</div>
+      <div>🏷️ Debian docker</div>
+      <div>🔖 Docker explanation on Debian</div>
+    </div>
+    <div class="card" onclick="window.open('https://deepai.org/chat', '_blank')" title="Deep AI">
+      <div class="card-header"><b>🔢 32</b><span class="status">⏳</span></div>
+      <div><a href="https://deepai.org/chat" class="bookmark-link" target="_blank">Deep AI</a></div>
+      <div>🔗 https://deepai.org/chat</div>
+      <div>🏷️ Deep AI</div>
+      <div>🔖 Free AI Chatbot alternate to Deep Seek</div>
+    </div>
+    <div class="card" onclick="window.open('https://google.github.io/adk-docs/', '_blank')" title="Agents Development Kit - ADK">
+      <div class="card-header"><b>🔢 33</b><span class="status">⏳</span></div>
+      <div><a href="https://google.github.io/adk-docs/" class="bookmark-link" target="_blank">Agents Development Kit - ADK</a></div>
+      <div>🔗 https://google.github.io/adk-docs/</div>
+      <div>🏷️ AI Agents Development Kit - pip install google-adk</div>
+      <div>🔖 Google ADK</div>
+    </div>
+    <div class="card" onclick="window.open('https://google.github.io/adk-docs/', '_blank')" title="Agents Development Kit - ADK Samples">
+      <div class="card-header"><b>🔢 34</b><span class="status">⏳</span></div>
+      <div><a href="https://google.github.io/adk-docs/" class="bookmark-link" target="_blank">Agents Development Kit - ADK Samples</a></div>
+      <div>🔗 https://google.github.io/adk-docs/</div>
+      <div>🏷️ AI Agents Development Kit Samples - pip install google-adk</div>
+      <div>🔖 Google ADK Samples</div>
+    </div>
+    <div class="card" onclick="window.open('https://pythonandvba.com/', '_blank')" title="Python VBA">
+      <div class="card-header"><b>🔢 35</b><span class="status">⏳</span></div>
+      <div><a href="https://pythonandvba.com/" class="bookmark-link" target="_blank">Python VBA</a></div>
+      <div>🔗 https://pythonandvba.com/</div>
+      <div>🏷️ Python VBA</div>
+      <div>🔖 Python VBA</div>
+    </div>
+    <div class="card" onclick="window.open('https://www.xlwings.org/', '_blank')" title="Python Excel - XLWings">
+      <div class="card-header"><b>🔢 36</b><span class="status">⏳</span></div>
+      <div><a href="https://www.xlwings.org/" class="bookmark-link" target="_blank">Python Excel - XLWings</a></div>
+      <div>🔗 https://www.xlwings.org/</div>
+      <div>🏷️ Python Excel - XLWings Documentation</div>
+      <div>🔖 Python XLWings</div>
+    </div>
+    <div class="card" onclick="window.open('https://pentestgpt.ai/', '_blank')" title="Penetration Test">
+      <div class="card-header"><b>🔢 37</b><span class="status">⏳</span></div>
+      <div><a href="https://pentestgpt.ai/" class="bookmark-link" target="_blank">Penetration Test</a></div>
+      <div>🔗 https://pentestgpt.ai/</div>
+      <div>🏷️ Penetration Test - Hack Tools AI</div>
+      <div>🔖 PenTestGPT</div>
+    </div>
+    <div class="card" onclick="window.open('https://flowgpt.com/', '_blank')" title="Hack tools documentations AI">
+      <div class="card-header"><b>🔢 38</b><span class="status">⏳</span></div>
+      <div><a href="https://flowgpt.com/" class="bookmark-link" target="_blank">Hack tools documentations AI</a></div>
+      <div>🔗 https://flowgpt.com/</div>
+      <div>🏷️ Hack Tools AI</div>
+      <div>🔖 FlowGPT</div>
+    </div>
+    <div class="card" onclick="window.open('https://flowgpt.com/p/chaosgpt', '_blank')" title="Hack tools documentations">
+      <div class="card-header"><b>🔢 39</b><span class="status">⏳</span></div>
+      <div><a href="https://flowgpt.com/p/chaosgpt" class="bookmark-link" target="_blank">Hack tools documentations</a></div>
+      <div>🔗 https://flowgpt.com/p/chaosgpt</div>
+      <div>🏷️ Hack Tools AI</div>
+      <div>🔖 ChaosGPT</div>
+    </div>
+    <div class="card" onclick="window.open('https://agpt.co/', '_blank')" title="AutoGPT AI">
+      <div class="card-header"><b>🔢 40</b><span class="status">⏳</span></div>
+      <div><a href="https://agpt.co/" class="bookmark-link" target="_blank">AutoGPT AI</a></div>
+      <div>🔗 https://agpt.co/</div>
+      <div>🏷️ AutoGPT from Github</div>
+      <div>🔖 AutoGPT</div>
+    </div>
+    <div class="card" onclick="window.open('https://gptstore.ai/gpts/nuzDIyCFIM-vulngpt', '_blank')" title="VulnGPT AI">
+      <div class="card-header"><b>🔢 41</b><span class="status">⏳</span></div>
+      <div><a href="https://gptstore.ai/gpts/nuzDIyCFIM-vulngpt" class="bookmark-link" target="_blank">VulnGPT AI</a></div>
+      <div>🔗 https://gptstore.ai/gpts/nuzDIyCFIM-vulngpt</div>
+      <div>🏷️ VulnGPT for vulnerabilities</div>
+      <div>🔖 VulnGPT</div>
+    </div>
+    <div class="card" onclick="window.open('https://www.schoolgoat.com/', '_blank')" title="Schoolgoat">
+      <div class="card-header"><b>🔢 42</b><span class="status">⏳</span></div>
+      <div><a href="https://www.schoolgoat.com/" class="bookmark-link" target="_blank">Schoolgoat</a></div>
+      <div>🔗 https://www.schoolgoat.com/</div>
+      <div>🏷️ Home work help for school students</div>
+      <div>🔖 Schoolgoat</div>
+    </div>
+    <div class="card" onclick="window.open('https://bestfreeaiwebsites.com/', '_blank')" title="Free AI Tool - Code Generator etc.">
+      <div class="card-header"><b>🔢 43</b><span class="status">⏳</span></div>
+      <div><a href="https://bestfreeaiwebsites.com/" class="bookmark-link" target="_blank">Free AI Tool - Code Generator etc.</a></div>
+      <div>🔗 https://bestfreeaiwebsites.com/</div>
+      <div>🏷️ AI Code generator with login</div>
+      <div>🔖 Bestfreeaiwebsites</div>
+    </div>
+    <div class="card" onclick="window.open('https://fish.audio/', '_blank')" title="Free AI Voice Tool - Copy of your own voice.">
+      <div class="card-header"><b>🔢 44</b><span class="status">⏳</span></div>
+      <div><a href="https://fish.audio/" class="bookmark-link" target="_blank">Free AI Voice Tool - Copy of your own voice.</a></div>
+      <div>🔗 https://fish.audio/</div>
+      <div>🏷️ AI Voice tool with login</div>
+      <div>🔖 Fish.audio</div>
+    </div>
+    <div class="card" onclick="window.open('https://hailuoai.video/', '_blank')" title="AI Video Generator from Text">
+      <div class="card-header"><b>🔢 45</b><span class="status">⏳</span></div>
+      <div><a href="https://hailuoai.video/" class="bookmark-link" target="_blank">AI Video Generator from Text</a></div>
+      <div>🔗 https://hailuoai.video/</div>
+      <div>🏷️ AI Video Generator from Text with login</div>
+      <div>🔖 HailuoAI</div>
+    </div>
+    <div class="card" onclick="window.open('https://magichour.ai/', '_blank')" title="AI Video Generator for Pro">
+      <div class="card-header"><b>🔢 46</b><span class="status">⏳</span></div>
+      <div><a href="https://magichour.ai/" class="bookmark-link" target="_blank">AI Video Generator for Pro</a></div>
+      <div>🔗 https://magichour.ai/</div>
+      <div>🏷️ AI Video creation like a pro with login</div>
+      <div>🔖 MagichourAI</div>
+    </div>
+    <div class="card" onclick="window.open('https://www.deeplearning.ai/', '_blank')" title="AI Learning Courses free">
+      <div class="card-header"><b>🔢 47</b><span class="status">⏳</span></div>
+      <div><a href="https://www.deeplearning.ai/" class="bookmark-link" target="_blank">AI Learning Courses free</a></div>
+      <div>🔗 https://www.deeplearning.ai/</div>
+      <div>🏷️ AI Learning Courses free with Login</div>
+      <div>🔖 Deep Learning AI</div>
+    </div>
+    <div class="card" onclick="window.open('https://123apps.com/', '_blank')" title="So many free tools online">
+      <div class="card-header"><b>🔢 48</b><span class="status">⏳</span></div>
+      <div><a href="https://123apps.com/" class="bookmark-link" target="_blank">So many free tools online</a></div>
+      <div>🔗 https://123apps.com/</div>
+      <div>🏷️ free tools online for Video, Audio, PDF & Converters</div>
+      <div>🔖 123Apps</div>
+    </div>
+    <div class="card" onclick="window.open('https://nomoregoogle.com/', '_blank')" title="Alternative tools for Google">
+      <div class="card-header"><b>🔢 49</b><span class="status">⏳</span></div>
+      <div><a href="https://nomoregoogle.com/" class="bookmark-link" target="_blank">Alternative tools for Google</a></div>
+      <div>🔗 https://nomoregoogle.com/</div>
+      <div>🏷️ Free & open source alternative tools for Google</div>
+      <div>🔖 NoMoreGoogle</div>
+    </div>
+    <div class="card" onclick="window.open('https://tamildigitallibrary.in/', '_blank')" title="Tamil Digital Library">
+      <div class="card-header"><b>🔢 50</b><span class="status">⏳</span></div>
+      <div><a href="https://tamildigitallibrary.in/" class="bookmark-link" target="_blank">Tamil Digital Library</a></div>
+      <div>🔗 https://tamildigitallibrary.in/</div>
+      <div>🏷️ Free Tamil Digital Library</div>
+      <div>🔖 Tamil Digital Library</div>
+    </div>
+    <div class="card" onclick="window.open('https://openlibrary.org/', '_blank')" title="Open Digital Library">
+      <div class="card-header"><b>🔢 51</b><span class="status">⏳</span></div>
+      <div><a href="https://openlibrary.org/" class="bookmark-link" target="_blank">Open Digital Library</a></div>
+      <div>🔗 https://openlibrary.org/</div>
+      <div>🏷️ Open Digital Library - English</div>
+      <div>🔖 Open Library</div>
+    </div>
+    <div class="card" onclick="window.open('https://markitdown.pro/', '_blank')" title="Mark Down converter App">
+      <div class="card-header"><b>🔢 52</b><span class="status">⏳</span></div>
+      <div><a href="https://markitdown.pro/" class="bookmark-link" target="_blank">Mark Down converter App</a></div>
+      <div>🔗 https://markitdown.pro/</div>
+      <div>🏷️ Free Mark Down language converter App</div>
+      <div>🔖 MD Mark Down App</div>
+    </div>
+    <div class="card" onclick="window.open('https://github.com/microsoft/markitdown', '_blank')" title="Mark Down converter code in Git">
+      <div class="card-header"><b>🔢 53</b><span class="status">⏳</span></div>
+      <div><a href="https://github.com/microsoft/markitdown" class="bookmark-link" target="_blank">Mark Down converter code in Git</a></div>
+      <div>🔗 https://github.com/microsoft/markitdown</div>
+      <div>🏷️ Free Mark Down converter code from Git</div>
+      <div>🔖 MD Mark Down Code</div>
+    </div>
+    <div class="card" onclick="window.open('https://smallseotools.com/', '_blank')" title="SEO Tools online">
+      <div class="card-header"><b>🔢 54</b><span class="status">⏳</span></div>
+      <div><a href="https://smallseotools.com/" class="bookmark-link" target="_blank">SEO Tools online</a></div>
+      <div>🔗 https://smallseotools.com/</div>
+      <div>🏷️ Search Engine Optimization tools online</div>
+      <div>🔖 SEO Tools</div>
+    </div>
+    <div class="card" onclick="window.open('https://www.deepseek.com/', '_blank')" title="Deep Seek AI with Login">
+      <div class="card-header"><b>🔢 55</b><span class="status">⏳</span></div>
+      <div><a href="https://www.deepseek.com/" class="bookmark-link" target="_blank">Deep Seek AI with Login</a></div>
+      <div>🔗 https://www.deepseek.com/</div>
+      <div>🏷️ China's Deep Seek AI with Login</div>
+      <div>🔖 Deepseek AI</div>
+    </div>
+    <div class="card" onclick="window.open('https://zzzcode.ai/', '_blank')" title="Free AI Code Generator - No login">
+      <div class="card-header"><b>🔢 56</b><span class="status">⏳</span></div>
+      <div><a href="https://zzzcode.ai/" class="bookmark-link" target="_blank">Free AI Code Generator - No login</a></div>
+      <div>🔗 https://zzzcode.ai/</div>
+      <div>🏷️ ZZZ Free AI Code Generator - No login</div>
+      <div>🔖 AI ZZZCodegenerator</div>
+    </div>
+    <div class="card" onclick="window.open('https://searchcode.com/', '_blank')" title="Search Code">
+      <div class="card-header"><b>🔢 57</b><span class="status">⏳</span></div>
+      <div><a href="https://searchcode.com/" class="bookmark-link" target="_blank">Search Code</a></div>
+      <div>🔗 https://searchcode.com/</div>
+      <div>🏷️ Simple, comprehensive code search</div>
+      <div>🔖 Search Code</div>
+    </div>
+    <div class="card" onclick="window.open('https://www.decohere.ai/', '_blank')" title="AI Image Generator">
+      <div class="card-header"><b>🔢 58</b><span class="status">⏳</span></div>
+      <div><a href="https://www.decohere.ai/" class="bookmark-link" target="_blank">AI Image Generator</a></div>
+      <div>🔗 https://www.decohere.ai/</div>
+      <div>🏷️ AI Image Generator with login</div>
+      <div>🔖 Decohere</div>
+    </div>
+    <div class="card" onclick="window.open('https://www.duckdns.org/', '_blank')" title="Duck DNS for loclhost">
+      <div class="card-header"><b>🔢 59</b><span class="status">⏳</span></div>
+      <div><a href="https://www.duckdns.org/" class="bookmark-link" target="_blank">Duck DNS for loclhost</a></div>
+      <div>🔗 https://www.duckdns.org/</div>
+      <div>🏷️ Free Dynamic DNS - Duck DNS</div>
+      <div>🔖 Duck DNS</div>
+    </div>
+    <div class="card" onclick="window.open('https://www.server-world.info/en/', '_blank')" title="Server World for server configurations">
+      <div class="card-header"><b>🔢 60</b><span class="status">⏳</span></div>
+      <div><a href="https://www.server-world.info/en/" class="bookmark-link" target="_blank">Server World for server configurations</a></div>
+      <div>🔗 https://www.server-world.info/en/</div>
+      <div>🏷️ Server World for all major flavours of Linux</div>
+      <div>🔖 Server World</div>
+    </div>
+    <div class="card" onclick="window.open('https://pythonandvba.com/', '_blank')" title="Coding is fun youtube channel">
+      <div class="card-header"><b>🔢 61</b><span class="status">⏳</span></div>
+      <div><a href="https://pythonandvba.com/" class="bookmark-link" target="_blank">Coding is fun youtube channel</a></div>
+      <div>🔗 https://pythonandvba.com/</div>
+      <div>🏷️ Coding is fun - PythonVBA</div>
+      <div>🔖 PythonVBA</div>
+    </div>
+    <div class="card" onclick="window.open('https://vocalremover.org/', '_blank')" title="VocalRemover">
+      <div class="card-header"><b>🔢 62</b><span class="status">⏳</span></div>
+      <div><a href="https://vocalremover.org/" class="bookmark-link" target="_blank">VocalRemover</a></div>
+      <div>🔗 https://vocalremover.org/</div>
+      <div>🏷️ Music and voice splitter</div>
+      <div>🔖 VocalRemover</div>
+    </div>
+    <div class="card" onclick="window.open('https://chef.convex.dev/', '_blank')" title="Chef AI app Cloner">
+      <div class="card-header"><b>🔢 63</b><span class="status">⏳</span></div>
+      <div><a href="https://chef.convex.dev/" class="bookmark-link" target="_blank">Chef AI app Cloner</a></div>
+      <div>🔗 https://chef.convex.dev/</div>
+      <div>🏷️ Chef AI app Cloner</div>
+      <div>🔖 Chef AI</div>
+    </div>
+    <div class="card" onclick="window.open('https://emergent.sh/', '_blank')" title="Emergent AI app Cloner">
+      <div class="card-header"><b>🔢 64</b><span class="status">⏳</span></div>
+      <div><a href="https://emergent.sh/" class="bookmark-link" target="_blank">Emergent AI app Cloner</a></div>
+      <div>🔗 https://emergent.sh/</div>
+      <div>🏷️ Emergent AI app Cloner</div>
+      <div>🔖 Emergent AI</div>
+    </div>
+    <div class="card" onclick="window.open('https://learn-anything.xyz/', '_blank')" title="Learn anything free">
+      <div class="card-header"><b>🔢 65</b><span class="status">⏳</span></div>
+      <div><a href="https://learn-anything.xyz/" class="bookmark-link" target="_blank">Learn anything free</a></div>
+      <div>🔗 https://learn-anything.xyz/</div>
+      <div>🏷️ Learn anything free with certifications</div>
+      <div>🔖 Learn anything free</div>
+    </div>
+    <div class="card" onclick="window.open('https://html5up.net/', '_blank')" title="HTML5UP">
+      <div class="card-header"><b>🔢 66</b><span class="status">⏳</span></div>
+      <div><a href="https://html5up.net/" class="bookmark-link" target="_blank">HTML5UP</a></div>
+      <div>🔗 https://html5up.net/</div>
+      <div>🏷️ Free HTML5 templates - No login required</div>
+      <div>🔖 HTML5UP.1</div>
+    </div>
+    <div class="card" onclick="window.open('https://reactbits.dev', '_blank')" title="Reactbits">
+      <div class="card-header"><b>🔢 67</b><span class="status">⏳</span></div>
+      <div><a href="https://reactbits.dev" class="bookmark-link" target="_blank">Reactbits</a></div>
+      <div>🔗 https://reactbits.dev</div>
+      <div>🏷️ free ai components</div>
+      <div>🔖 free ai tool no sign in</div>
+    </div>
+    <div class="card" onclick="window.open('https://toolfk.com', '_blank')" title="All in one tools">
+      <div class="card-header"><b>🔢 68</b><span class="status">⏳</span></div>
+      <div><a href="https://toolfk.com" class="bookmark-link" target="_blank">All in one tools</a></div>
+      <div>🔗 https://toolfk.com</div>
+      <div>🏷️ Free Tools</div>
+      <div>🔖 Many free tools online fully free</div>
+    </div>
+    <div class="card" onclick="window.open('https://flourish.studio', '_blank')" title="Excel sheet to Charts">
+      <div class="card-header"><b>🔢 69</b><span class="status">⏳</span></div>
+      <div><a href="https://flourish.studio" class="bookmark-link" target="_blank">Excel sheet to Charts</a></div>
+      <div>🔗 https://flourish.studio</div>
+      <div>🏷️ Free Excel Tools</div>
+      <div>🔖 Excle modifications with charts etc</div>
+    </div>
+    <div class="card" onclick="window.open('https://x-minus.pro/ai', '_blank')" title="Strip Music & Vocals">
+      <div class="card-header"><b>🔢 70</b><span class="status">⏳</span></div>
+      <div><a href="https://x-minus.pro/ai" class="bookmark-link" target="_blank">Strip Music & Vocals</a></div>
+      <div>🔗 https://x-minus.pro/ai</div>
+      <div>🏷️ Strip Music & Vocals</div>
+      <div>🔖 Vocal remover, Strip Music & Vocals Fully free</div>
+    </div>
+    <div class="card" onclick="window.open('https://no-color.org/', '_blank')" title="No Color">
+      <div class="card-header"><b>🔢 71</b><span class="status">⏳</span></div>
+      <div><a href="https://no-color.org/" class="bookmark-link" target="_blank">No Color</a></div>
+      <div>🔗 https://no-color.org/</div>
+      <div>🏷️ Disable all ANSI color and text styling in their terminal output</div>
+      <div>🔖 Color disablement</div>
+    </div>
+    <div class="card" onclick="window.open('https://wellness-p.ing/', '_blank')" title="Wellness Ping">
+      <div class="card-header"><b>🔢 72</b><span class="status">⏳</span></div>
+      <div><a href="https://wellness-p.ing/" class="bookmark-link" target="_blank">Wellness Ping</a></div>
+      <div>🔗 https://wellness-p.ing/</div>
+      <div>🏷️ Wellness ping</div>
+      <div>🔖 Activists, journalists, researchers, solo folks. Anyone who needs someone to notice if they go silent.</div>
+    </div>
+    <div class="card" onclick="window.open('https://www.linuxserver.io/', '_blank')" title="Linuxserver.io">
+      <div class="card-header"><b>🔢 73</b><span class="status">⏳</span></div>
+      <div><a href="https://www.linuxserver.io/" class="bookmark-link" target="_blank">Linuxserver.io</a></div>
+      <div>🔗 https://www.linuxserver.io/</div>
+      <div>🏷️ Linuxserver</div>
+      <div>🔖 Linux community images with git documents & support.</div>
+    </div>
+    <div class="card" onclick="window.open('https://github.com/alam00000/bentopdf', '_blank')" title="Bentopdf">
+      <div class="card-header"><b>🔢 74</b><span class="status">⏳</span></div>
+      <div><a href="https://github.com/alam00000/bentopdf" class="bookmark-link" target="_blank">Bentopdf</a></div>
+      <div>🔗 https://github.com/alam00000/bentopdf</div>
+      <div>🏷️ BentoPDF</div>
+      <div>🔖 BentoPDF-open-source PDF toolkit to manipulate PDF directly in browser.</div>
+    </div>
+    <div class="card" onclick="window.open('https://theresanaiforthat.com/', '_blank')" title="AI for that">
+      <div class="card-header"><b>🔢 75</b><span class="status">⏳</span></div>
+      <div><a href="https://theresanaiforthat.com/" class="bookmark-link" target="_blank">AI for that</a></div>
+      <div>🔗 https://theresanaiforthat.com/</div>
+      <div>🏷️ AI for that</div>
+      <div>🔖 AI Powered applications</div>
+    </div>
+    <div class="card" onclick="window.open('https://mulerun.com/', '_blank')" title="Mulerun">
+      <div class="card-header"><b>🔢 76</b><span class="status">⏳</span></div>
+      <div><a href="https://mulerun.com/" class="bookmark-link" target="_blank">Mulerun</a></div>
+      <div>🔗 https://mulerun.com/</div>
+      <div>🏷️ Mulerun</div>
+      <div>🔖 AI Agents</div>
+    </div>
+    <div class="card" onclick="window.open('https://www.eauctionsindia.com/', '_blank')" title="E-Auctions">
+      <div class="card-header"><b>🔢 77</b><span class="status">⏳</span></div>
+      <div><a href="https://www.eauctionsindia.com/" class="bookmark-link" target="_blank">E-Auctions</a></div>
+      <div>🔗 https://www.eauctionsindia.com/</div>
+      <div>🏷️ E-Auctions</div>
+      <div>🔖 Govt E-Auctions website</div>
+    </div>
+    <div class="card" onclick="window.open('https://scribe.com/', '_blank')" title="Scribe">
+      <div class="card-header"><b>🔢 78</b><span class="status">⏳</span></div>
+      <div><a href="https://scribe.com/" class="bookmark-link" target="_blank">Scribe</a></div>
+      <div>🔗 https://scribe.com/</div>
+      <div>🏷️ Scribe</div>
+      <div>🔖 AI-powered tool transforms any workflow into step-by-step with screenshots</div>
+    </div>
+    <div class="card" onclick="window.open('https://enzolt.com/', '_blank')" title="Enzolt">
+      <div class="card-header"><b>🔢 79</b><span class="status">⏳</span></div>
+      <div><a href="https://enzolt.com/" class="bookmark-link" target="_blank">Enzolt</a></div>
+      <div>🔗 https://enzolt.com/</div>
+      <div>🏷️ Enzolt</div>
+      <div>🔖 Enzolt Lithium ion Battery Chennai</div>
+    </div>
+    <div class="card" onclick="window.open('https://votch.tv/', '_blank')" title="Votch">
+      <div class="card-header"><b>🔢 80</b><span class="status">⏳</span></div>
+      <div><a href="https://votch.tv/" class="bookmark-link" target="_blank">Votch</a></div>
+      <div>🔗 https://votch.tv/</div>
+      <div>🏷️ Votch</div>
+      <div>🔖 video translation and dubbing</div>
+    </div>
+    <div class="card" onclick="window.open('https://simplify.jobs/', '_blank')" title="Simplify">
+      <div class="card-header"><b>🔢 81</b><span class="status">⏳</span></div>
+      <div><a href="https://simplify.jobs/" class="bookmark-link" target="_blank">Simplify</a></div>
+      <div>🔗 https://simplify.jobs/</div>
+      <div>🏷️ Simplify</div>
+      <div>🔖 Simplify - AI based Job search</div>
+    </div>
+    <div class="card" onclick="window.open('https://bazzite.gg/', '_blank')" title="Bazzite">
+      <div class="card-header"><b>🔢 82</b><span class="status">⏳</span></div>
+      <div><a href="https://bazzite.gg/" class="bookmark-link" target="_blank">Bazzite</a></div>
+      <div>🔗 https://bazzite.gg/</div>
+      <div>🏷️ Bazzite</div>
+      <div>🔖 Bazzite - Linux for Gaming, Steam</div>
+    </div>
+    <div class="card" onclick="window.open('https://vazu.ai/', '_blank')" title="Vazu">
+      <div class="card-header"><b>🔢 83</b><span class="status">⏳</span></div>
+      <div><a href="https://vazu.ai/" class="bookmark-link" target="_blank">Vazu</a></div>
+      <div>🔗 https://vazu.ai/</div>
+      <div>🏷️ Vazu</div>
+      <div>🔖 AWS Pay automation - Bill reduction</div>
+    </div>
+    <div class="card" onclick="window.open('https://github.com/muesli/duf', '_blank')" title="duf">
+      <div class="card-header"><b>🔢 84</b><span class="status">⏳</span></div>
+      <div><a href="https://github.com/muesli/duf" class="bookmark-link" target="_blank">duf</a></div>
+      <div>🔗 https://github.com/muesli/duf</div>
+      <div>🏷️ duf</div>
+      <div>🔖 alternate to du or df cmd in Linux.</div>
+    </div>
+    <div class="card" onclick="window.open('https://replaceyourboss.ai/', '_blank')" title="CEO replacement">
+      <div class="card-header"><b>🔢 85</b><span class="status">⏳</span></div>
+      <div><a href="https://replaceyourboss.ai/" class="bookmark-link" target="_blank">CEO replacement</a></div>
+      <div>🔗 https://replaceyourboss.ai/</div>
+      <div>🏷️ Boss replacement</div>
+      <div>🔖 Alternate for Bosses.</div>
+    </div>
+    <div class="card" onclick="window.open('https://magicloops.dev/', '_blank')" title="Vibe coding">
+      <div class="card-header"><b>🔢 86</b><span class="status">⏳</span></div>
+      <div><a href="https://magicloops.dev/" class="bookmark-link" target="_blank">Vibe coding</a></div>
+      <div>🔗 https://magicloops.dev/</div>
+      <div>🏷️ Vibe coding</div>
+      <div>🔖 Vibe coding</div>
+    </div>
+    <div class="card" onclick="window.open('https://www.vpngate.net/en/', '_blank')" title="VPN Gate">
+      <div class="card-header"><b>🔢 87</b><span class="status">⏳</span></div>
+      <div><a href="https://www.vpngate.net/en/" class="bookmark-link" target="_blank">VPN Gate</a></div>
+      <div>🔗 https://www.vpngate.net/en/</div>
+      <div>🏷️ VPN Gate</div>
+      <div>🔖 Free VPN Japan</div>
+    </div>
+    <div class="card" onclick="window.open('https://muted.io', '_blank')" title="Learn music">
+      <div class="card-header"><b>🔢 88</b><span class="status">⏳</span></div>
+      <div><a href="https://muted.io" class="bookmark-link" target="_blank">Learn music</a></div>
+      <div>🔗 https://muted.io</div>
+      <div>🏷️ Music</div>
+      <div>🔖 Learn music</div>
+    </div>
+    <div class="card" onclick="window.open('https://labex.io/', '_blank')" title="Labex Linux Practice">
+      <div class="card-header"><b>🔢 89</b><span class="status">⏳</span></div>
+      <div><a href="https://labex.io/" class="bookmark-link" target="_blank">Labex Linux Practice</a></div>
+      <div>🔗 https://labex.io/</div>
+      <div>🏷️ Labex</div>
+      <div>🔖 Linux learning site</div>
+    </div>
+    <div class="card" onclick="window.open('https://pinokio.co/', '_blank')" title="Local AI Model">
+      <div class="card-header"><b>🔢 90</b><span class="status">⏳</span></div>
+      <div><a href="https://pinokio.co/" class="bookmark-link" target="_blank">Local AI Model</a></div>
+      <div>🔗 https://pinokio.co/</div>
+      <div>🏷️ AI</div>
+      <div>🔖 AI on your device</div>
+    </div>
+    <div class="card" onclick="window.open('https://github.com/ading2210/linuxpdf', '_blank')" title="Linux on Pdf">
+      <div class="card-header"><b>🔢 91</b><span class="status">⏳</span></div>
+      <div><a href="https://github.com/ading2210/linuxpdf" class="bookmark-link" target="_blank">Linux on Pdf</a></div>
+      <div>🔗 https://github.com/ading2210/linuxpdf</div>
+      <div>🏷️ Linux Pdf</div>
+      <div>🔖 Linux on RISC emulator</div>
+    </div>
+    <div class="card" onclick="window.open('https://editingtools.io/thumbnail/', '_blank')" title="Thumbnail Editing tools">
+      <div class="card-header"><b>🔢 92</b><span class="status">⏳</span></div>
+      <div><a href="https://editingtools.io/thumbnail/" class="bookmark-link" target="_blank">Thumbnail Editing tools</a></div>
+      <div>🔗 https://editingtools.io/thumbnail/</div>
+      <div>🏷️ Free Image Editing tool</div>
+      <div>🔖 Image Editing tool with no login</div>
+    </div>
+    <div class="card" onclick="window.open('https://ernie.baidu.com', '_blank')" title="Ernie Chat bot">
+      <div class="card-header"><b>🔢 93</b><span class="status">⏳</span></div>
+      <div><a href="https://ernie.baidu.com" class="bookmark-link" target="_blank">Ernie Chat bot</a></div>
+      <div>🔗 https://ernie.baidu.com</div>
+      <div>🏷️ Ernie Model</div>
+      <div>🔖 An alternate free AI Chat bot with newer things</div>
+    </div>
+    <div class="card" onclick="window.open('https://www.kimi.com/en/slides', '_blank')" title="Kimi">
+      <div class="card-header"><b>🔢 94</b><span class="status">⏳</span></div>
+      <div><a href="https://www.kimi.com/en/slides" class="bookmark-link" target="_blank">Kimi</a></div>
+      <div>🔗 https://www.kimi.com/en/slides</div>
+      <div>🏷️ Kimi slides</div>
+      <div>🔖 Kimi AI presentations, Key notes</div>
+    </div>
+    <div class="card" onclick="window.open('https://famelack.com/', '_blank')" title="Famelack">
+      <div class="card-header"><b>🔢 95</b><span class="status">⏳</span></div>
+      <div><a href="https://famelack.com/" class="bookmark-link" target="_blank">Famelack</a></div>
+      <div>🔗 https://famelack.com/</div>
+      <div>🏷️ Live TVs app & Web</div>
+      <div>🔖 Free Live TVs of various countries</div>
+    </div>
+    <div class="card" onclick="window.open('https://fmhy.net/', '_blank')" title="Free stuff">
+      <div class="card-header"><b>🔢 96</b><span class="status">⏳</span></div>
+      <div><a href="https://fmhy.net/" class="bookmark-link" target="_blank">Free stuff</a></div>
+      <div>🔗 https://fmhy.net/</div>
+      <div>🏷️ Free stuff on internet</div>
+      <div>🔖 Free Media Heck Yeah - largest collection of free stuff on the internet!</div>
+    </div>
+    <div class="card" onclick="window.open('https://www.kimi.com/', '_blank')" title="Kimi AI">
+      <div class="card-header"><b>🔢 97</b><span class="status">⏳</span></div>
+      <div><a href="https://www.kimi.com/" class="bookmark-link" target="_blank">Kimi AI</a></div>
+      <div>🔗 https://www.kimi.com/</div>
+      <div>🏷️ "Swarm" intelligence for complex projects! for Slides, Sheets and Docs</div>
+      <div>🔖 Autonomous AI Agent & Research	Largest context window with multi-agent</div>
+    </div>
+    <div class="card" onclick="window.open('https://github.com/jarvesusaram99/termux-hacklab', '_blank')" title="Ubuntu on Android">
+      <div class="card-header"><b>🔢 98</b><span class="status">⏳</span></div>
+      <div><a href="https://github.com/jarvesusaram99/termux-hacklab" class="bookmark-link" target="_blank">Ubuntu on Android</a></div>
+      <div>🔗 https://github.com/jarvesusaram99/termux-hacklab</div>
+      <div>🏷️ Termux, Termux-x11</div>
+      <div>🔖 Hack lab installation Ubuntu on Android</div>
+    </div>
+    <div class="card" onclick="window.open('https://quickref.me/', '_blank')" title="Quick Ref">
+      <div class="card-header"><b>🔢 99</b><span class="status">⏳</span></div>
+      <div><a href="https://quickref.me/" class="bookmark-link" target="_blank">Quick Ref</a></div>
+      <div>🔗 https://quickref.me/</div>
+      <div>🏷️ Master Cheatsheet references</div>
+      <div>🔖 Here are some cheatsheets and quick references contributed by open source angels.</div>
+    </div>
+    <div class="card" onclick="window.open('https://www.minimax.io/', '_blank')" title="Video Audio AI">
+      <div class="card-header"><b>🔢 100</b><span class="status">⏳</span></div>
+      <div><a href="https://www.minimax.io/" class="bookmark-link" target="_blank">Video Audio AI</a></div>
+      <div>🔗 https://www.minimax.io/</div>
+      <div>🏷️ AI audio video models</div>
+      <div>🔖 Covering five major areas: text, speech, video, image, and music. Helping developers efficiently build intelligent applications</div>
+    </div>
+    <div class="card" onclick="window.open('https://www.realworkfromanywhere.com/', '_blank')" title="Realwork From anywhere">
+      <div class="card-header"><b>🔢 101</b><span class="status">⏳</span></div>
+      <div><a href="https://www.realworkfromanywhere.com/" class="bookmark-link" target="_blank">Realwork From anywhere</a></div>
+      <div>🔗 https://www.realworkfromanywhere.com/</div>
+      <div>🏷️ The only fully location independent job board.</div>
+      <div>🔖 Remote jobs online</div>
+    </div>
+    <div class="card" onclick="window.open('https://fabricodes.com/auth/login', '_blank')" title="Fabricodes">
+      <div class="card-header"><b>🔢 102</b><span class="status">⏳</span></div>
+      <div><a href="https://fabricodes.com/auth/login" class="bookmark-link" target="_blank">Fabricodes</a></div>
+      <div>🔗 https://fabricodes.com/auth/login</div>
+      <div>🏷️ AI with daily free credits</div>
+      <div>🔖 Industrial manufacturing & supply chain management</div>
+    </div>
+    <div class="card" onclick="window.open('https://aifreeforever.com/', '_blank')" title="AI freeforever">
+      <div class="card-header"><b>🔢 103</b><span class="status">⏳</span></div>
+      <div><a href="https://aifreeforever.com/" class="bookmark-link" target="_blank">AI freeforever</a></div>
+      <div>🔗 https://aifreeforever.com/</div>
+      <div>🏷️ Free AI</div>
+      <div>🔖 Free AI forever</div>
+    </div>
+    <div class="card" onclick="window.open('https://www.youtube.com/watch?v=QzddQoCKKss', '_blank')" title="Suno alternate">
+      <div class="card-header"><b>🔢 104</b><span class="status">⏳</span></div>
+      <div><a href="https://www.youtube.com/watch?v=QzddQoCKKss" class="bookmark-link" target="_blank">Suno alternate</a></div>
+      <div>🔗 https://www.youtube.com/watch?v=QzddQoCKKss</div>
+      <div>🏷️ Open source Music generator</div>
+      <div>🔖 An alternate open source music generator setup video</div>
+    </div>
+    <div class="card" onclick="window.open('https://iptv-org.github.io/', '_blank')" title="Free IPTV Index">
+      <div class="card-header"><b>🔢 105</b><span class="status">⏳</span></div>
+      <div><a href="https://iptv-org.github.io/" class="bookmark-link" target="_blank">Free IPTV Index</a></div>
+      <div>🔗 https://iptv-org.github.io/</div>
+      <div>🏷️ IPTV</div>
+      <div>🔖 Free IPTV Index</div>
+    </div>
+    <div class="card" onclick="window.open('https://sixthsample.com/spoton/', '_blank')" title="Spoton">
+      <div class="card-header"><b>🔢 106</b><span class="status">⏳</span></div>
+      <div><a href="https://sixthsample.com/spoton/" class="bookmark-link" target="_blank">Spoton</a></div>
+      <div>🔗 https://sixthsample.com/spoton/</div>
+      <div>🏷️ Free Music</div>
+      <div>🔖 Free alternate to autotune plugin</div>
+    </div>
+    <div class="card" onclick="window.open('https://www.youtube.com/watch?v=EsRyyJmO-u8', '_blank')" title="Apps in mins">
+      <div class="card-header"><b>🔢 107</b><span class="status">⏳</span></div>
+      <div><a href="https://www.youtube.com/watch?v=EsRyyJmO-u8" class="bookmark-link" target="_blank">Apps in mins</a></div>
+      <div>🔗 https://www.youtube.com/watch?v=EsRyyJmO-u8</div>
+      <div>🏷️ Website learners app in mins</div>
+      <div>🔖 How ChatGPT Built My App in Minutes</div>
+    </div>
+    <div class="card" onclick="window.open('https://distrosea.com/', '_blank')" title="Linux Distros">
+      <div class="card-header"><b>🔢 108</b><span class="status">⏳</span></div>
+      <div><a href="https://distrosea.com/" class="bookmark-link" target="_blank">Linux Distros</a></div>
+      <div>🔗 https://distrosea.com/</div>
+      <div>🏷️ Linux free online</div>
+      <div>🔖 Set of all Linux</div>
+    </div>
+    <div class="card" onclick="window.open('https://opencode.ai/', '_blank')" title="Open code">
+      <div class="card-header"><b>🔢 109</b><span class="status">⏳</span></div>
+      <div><a href="https://opencode.ai/" class="bookmark-link" target="_blank">Open code</a></div>
+      <div>🔗 https://opencode.ai/</div>
+      <div>🏷️ Open AI Agents</div>
+      <div>🔖 free open code</div>
+    </div>
+  </div>
+  <script>
+    const themeButton = document.getElementById("theme-button");
+    const body = document.body;
+    themeButton.addEventListener("click", () => {
+      body.classList.toggle("dark-mode");
+      themeButton.textContent = body.classList.contains("dark-mode") ? "🌙" : "☀️";
+    });
+  </script>
+</body>
+</html>
