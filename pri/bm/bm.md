@@ -113,3 +113,4 @@
 | Open code | https://opencode.ai/ | Open AI Agents | free open code |
 | Qwen AI | https://chat.qwen.ai/ | Qwen | AI PPT, slides, Keynotes |
 | Perplexity AI | https://www.perplexity.ai/ | Perplexity | Perplexity AI for Research |
+| Mindluster | https://www.mindluster.com/ | Mindluster | Free online courses with certificate |
