@@ -112,3 +112,4 @@
 | Linux Distros | https://distrosea.com/ | Linux free online | Set of all Linux |
 | Open code | https://opencode.ai/ | Open AI Agents | free open code |
 | Qwen AI | https://chat.qwen.ai/ | Qwen | AI PPT, slides, Keynotes |
+| Perplexity AI | https://www.perplexity.ai/ | Perplexity | Perplexity AI for Research |
