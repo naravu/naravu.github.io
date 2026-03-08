@@ -111,6 +111,6 @@
 | Apps in mins | https://www.youtube.com/watch?v=EsRyyJmO-u8 | Website learners app in mins | How ChatGPT Built My App in Minutes |
 | Linux Distros | https://distrosea.com/ | Linux free online | Set of all Linux |
 | Open code | https://opencode.ai/ | Open AI Agents | free open code |
-| Qwen AI | https://chat.qwen.ai/ | Qwen | AI PPT, slides, Keynotes |
+| Qwen AI | https://chat.qwen.ai/ | Qwen | AI PPT, slides, Keynotes, Videos |
 | Perplexity AI | https://www.perplexity.ai/ | Perplexity | Perplexity AI for Research |
 | Mindluster | https://www.mindluster.com/ | Mindluster | Free online courses with certificate |
