@@ -116,3 +116,4 @@
 | Mindluster | https://www.mindluster.com/ | Mindluster | Free online courses with certificate |
 | World Monitor| https://www.worldmonitor.app | Monitoring the world | Monitor the whole world activities |
 | Terminal | https://terminator.aeza.net/en/ | Live terminal | Linux terminal |
+|Free tools|https://www.commontools.org/| Free stuff | Common tools, text to  handwriting |
