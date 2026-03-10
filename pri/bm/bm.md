@@ -127,3 +127,4 @@
 |picoCTF|https://picoctf.org/| Hack tools | Capture the flag competitions for students |
 |UltraEdit|https://ultraedit.com/| Hack tools | Advanced text editor for coding and analysis |
 |Root Me|https://root-me.org/| Hack tools | Hands-on hacking labs and challenges |
+|SEOStudio|https://seostudio.tools/| Free stuff | 200+ free SEO, YouTube, text, image, and web tools for optimization and content creation |
