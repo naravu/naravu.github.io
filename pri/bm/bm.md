@@ -109,7 +109,7 @@
 | Free IPTV Index | https://iptv-org.github.io/ | IPTV | Free IPTV Index |
 | Spoton | https://sixthsample.com/spoton/ | Free Music | Free alternate to autotune plugin |
 | Apps in mins | https://www.youtube.com/watch?v=EsRyyJmO-u8 | Website learners app in mins | How ChatGPT Built My App in Minutes |
-| Linux Distros | https://distrosea.com/ | Linux free online | Set of all Linux |
+| Linux Distros | https://distrosea.com/ | Linux free online | Set of all Linux online free|
 | Open code | https://opencode.ai/ | Open AI Agents | free open code |
 | Qwen AI | https://chat.qwen.ai/ | Qwen | AI PPT, slides, Keynotes, Videos |
 | Perplexity AI | https://www.perplexity.ai/ | Perplexity | Perplexity AI for Research |
