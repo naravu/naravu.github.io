@@ -116,4 +116,14 @@
 | Mindluster | https://www.mindluster.com/ | Mindluster | Free online courses with certificate |
 | World Monitor| https://www.worldmonitor.app | Monitoring the world | Monitor the whole world activities |
 | Terminal | https://terminator.aeza.net/en/ | Live terminal | Linux terminal |
-|Free tools|https://www.commontools.org/| Free stuff | Common tools, text to  handwriting,etc |
+| Free tools|https://www.commontools.org/| Free stuff | Common tools, text to  handwriting,etc |
+|TryHackMe|https://tryhackme.com/| Free stuff | Guided hacking labs, beginner to advanced |
+|Hack The Box|https://hackthebox.com/| Free stuff | Realistic penetration testing challenges |
+|PortSwigger|https://portswigger.net/| Hack tools | Web security academy, Burp Suite training |
+|Hack This Site|https://hackthissite.org/| Hack tools| Legal practice platform for hacking skills |
+|Cybrary|https://cybrary.it/| Hack tools | Cybersecurity courses, certifications prep |
+|Try2Hack|https://try2hack.me/| Hack tools | Classic hacking puzzles and challenges |
+|Hack This!|https://hackthis.co.uk/| Hack tools | Security challenges, community-driven learning |
+|picoCTF|https://picoctf.org/| Hack tools | Capture the flag competitions for students |
+|UltraEdit|https://ultraedit.com/| Hack tools | Advanced text editor for coding and analysis |
+|Root Me|https://root-me.org/| Hack tools | Hands-on hacking labs and challenges |
