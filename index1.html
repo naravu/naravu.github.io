@@ -6,11 +6,7 @@
   <title>Naravu</title>
   <style>
     body { font-family: 'Segoe UI', sans-serif; background: linear-gradient(to bottom, #0f2027, #203a43, #2c5364); color: #fff; margin: 0; padding-top: 50px; /* space equal to header height */ transition: background 0.5s, color 0.5s, margin-left 0.3s; } 
-    a {
-  text-decoration: none;
-  display: block;          /* ensures the card fills width */
-}
-
+    
     body.night {
       background: #111;
       color: #eee;
@@ -75,30 +71,17 @@
       gap: 15px;
       margin: 20px;
     }
-   /* Responsive adjustments */
-@media (max-width: 768px) {
-  .card {
-    font-size: 0.85em;     /* slightly smaller text on tablets */
-    padding: 8px;
-    max-width: 90%;        /* card stretches nicely on mobile */
-  }
-}
-
-@media (max-width: 480px) {
-  .card {
-    font-size: 0.8em;      /* smaller text for phones */
-    padding: 6px;
-  }
-}
-
- .card {
+    @media (min-width: 1024px) {
+      .grid {
+        grid-template-columns: repeat(5, 1fr);
+      }
+    }
+    .card {
       background: #1e2a38;
       border-radius: 8px;
       padding: 15px;
       box-shadow: 0 0 8px rgba(255, 255, 255, 0.1);
       transition: transform 0.3s ease;
-      max-width: 300px;        /* keeps card compact */
-      cursor: pointer;   
     }
     .card:hover {
       transform: scale(1.05);
@@ -107,9 +90,13 @@
       text-decoration: none;
       color: #00ffff;
       font-weight: bold;
-      font-size: 13px;
+      font-size: 1em;
     }
-    
+    .card p {
+      margin-top: 6px;
+      font-size: 0.85em;
+      color: #ccc;
+    }
     .hidden {
       display: none;
     }
@@ -205,44 +192,47 @@
 
   <!-- Cards Grid -->
   <div class="grid" id="cardGrid">
-    <div class="card"><a href="https://naravu.github.io/pri/md/md.html" target="_blank" title="Mark Down Editor">✍️ MarkDown</a></div>
-    <div class="card"><a href="https://naravu.github.io/pri/bm/bm.html" target="_blank" title="Bookmarks">📌 🅝🅞🅞🅡🅚🅤🅡🅘</a></div>
-    <div class="card"><a href="https://naravu.github.io/pri/bm/bm1.html" target="_blank" title="Bookmarks Mobile">📌 BookmarksMobi</a></div>
-
-    <div class="card"><a href="https://naravu.github.io/pri/cs/cs.html" target="_blank" title="Tech Cheatsheet">📒 🅚🅤🅡🅘</a></div>
-    <div class="card"><a href="https://naravu.github.io/news.html" target="_blank" title="News">🗞️ News</a></div>    
-    <div class="card"><a href="https://naravu.github.io/technews.html" target="_blank" title="Technical News">TechNews</a></div>
-    <div class="card"><a href="https://naravu.github.io/pri/prompts/prompts" target="_blank" title="AI Prompts">⚡ Prompts</a></div>
-   <div class="card"><a href="https://naravu.github.io/pri/note.html" target="_blank" title="Text Editor">🔤 Notepad</a></div>
-   <div class="card"><a href="https://naravu.github.io/pri/rich.html" target="_blank" title="Richpad Editor">🧩 Richpad</a></div>
-   <div class="card"><a href="https://naravu.github.io/pri/yml.html" target="_blank" title="Playbook validator">Playbook</a></div>
-   <div class="card"><a href="https://naravu.github.io/pri/r.html" target="_blank" title="Radio Streams" >✨ Radios</a></div>
-   <div class="card"><a href="https://naravu.github.io/pri/aed.html" target="_blank" title="HTML Editors">HTML</a></div>
-   <div class="card"><a href="https://naravu.github.io/pri/news.html" target="_blank" title="Tamil News">TamilNews</a></div>
-   <div class="card"><a href="https://naravu.github.io/pri/calc.html" target="_blank" title="Calculator">Calc</a></div>
-   <div class="card"><a href="https://naravu.github.io/pri/t.html" target="_blank" title="TamilEditor">TamilEditor</a></div>
-   <div class="card"><a href="https://naravu.github.io/pri/thedu.html" target="_blank" title="Search Engine">Thedi</a></div>
-   <div class="card"><a href="https://naravu.github.io/pri/pv.html" target="_blank" title="Python Validator">PyValid</a></div>
-   <div class="card"><a href="https://seppuga.streamlit.app/" target="_blank" title="Seppuga AI">Seppuga</a></div>
-   <div class="card"><a href="https://naravu.github.io/pri/todo/todo.html" target="_blank" title="Todo list">Todo</a></div>
-   <div class="card"><a href="https://zzzcode.ai/html/code-generator" target="_blank" title="CodeAI">CodeAI</a></div>
-   <div class="card"><a href="https://deepai.org" target="_blank" title="DeepAI">DeepAI</a> </div>
-  
+    <div class="card"><a href="https://naravu.github.io/pri/md/md.html" target="_blank">✍️ MarkDown</a><p>MarkDown</p></div>
+    <div class="card"><a href="https://naravu.github.io/pri/bm/bm.html" target="_blank">📌 🅝🅞🅞🅡🅚🅤🅡🅘</a>
+      <a href="https://naravu.github.io/pri/bm.htm" target="_blank">Noorkuri</a>
+      <a href="https://naravu.github.io/pri/bm/bm1.html" target="_blank">NoorkuriMobi</a>
+      </div>
+    <div class="card"><a href="https://naravu.github.io/pri/cs/cs.html" target="_blank">📒 🅚🅤🅡🅘</a><p>Kuri</p></div>
+    <div class="card"><a href="https://naravu.github.io/news.html" target="_blank">🗞️ News</a><p>News</p></div>    
+    <div class="card"><a href="https://naravu.github.io/technews.html" target="_blank">TechNews</a><p>Technews</p></div>
+    <div class="card"><a href="https://naravu.github.io/pri/prompts/prompts" target="_blank">⚡ Prompts</a><p>AI Prompts</p></div>
+   <div class="card"><a href="https://naravu.github.io/pri/note.html" target="_blank">🔤 Notepad</a><p>Notepad</p></div>
+   <div class="card"><a href="https://naravu.github.io/pri/rich.html" target="_blank">Richpad</a><p>Richpad</p></div>
+   <div class="card"><a href="https://naravu.github.io/pri/yml.html" target="_blank">Playbook</a><p>Playbook</p></div>
+   <div class="card"><a href="https://naravu.github.io/pri/r.html" target="_blank">✨ Radios</a><p>Radios</p></div>
+   <div class="card"><a href="https://naravu.github.io/pri/aed.html" target="_blank">HTML</a><p>HTML</p></div>
+   <div class="card"><a href="https://naravu.github.io/pri/news.html" target="_blank">TamilNews</a><p>TamilNews</p></div>
+   <div class="card"><a href="https://naravu.github.io/pri/calc.html" target="_blank">Calc</a><p>Calc</p></div>
+   <div class="card"><a href="https://naravu.github.io/pri/t.html" target="_blank">TamilEditor</a><p>தமிழெழுதி</p></div>
+   <div class="card"><a href="https://naravu.github.io/pri/thedu.html" target="_blank">Thedi</a><p>Search</p></div>
+   <div class="card"><a href="https://naravu.github.io/pri/pv.html" target="_blank">PyValid</a><p>Python Validator</p></div>
+   <div class="card"><a href="https://seppuga.streamlit.app/" target="_blank">Seppuga</a><p>Seppuga</p></div>
+   <div class="card"><a href="https://naravu.github.io/pri/todo/todo.html" target="_blank">Todo</a><p>Todo List</p></div>
+   <div class="card"><a href="https://zzzcode.ai/html/code-generator" target="_blank">CodeAI</a><br>
+      <a href="https://deepai.org" target="_blank">DeepAI</a> 
+  </div>
    
-    <div class="card"><a href="https://naravu.github.io/system.html" target="_blank" title="Linux Report">LinuxReport</a></div>
-    <div class="card"><a href="https://naravu.github.io/shviapy.html" target="_blank" title="Linux System Report">LinuxSystemReport</a></div>
+    <div class="card"><a href="https://naravu.github.io/system.html" target="_blank">LinuxReport</a>
+      <a href="https://naravu.github.io/shviapy.html" target="_blank">LinuxSystemReport</a>
+    </div>
     
-    <div class="card"><a href="https://naravu.github.io/winsystem.html" target="_blank" title="Windows Report">WindowsReport</a></div>
-     <div class="card"><a href="https://naravu.github.io/pri/home.html" target="_blank" title="Home Plans">HomePlans</a></div>
-    <div class="card"><a href="https://httpbin.org/ip" target="_blank" title="IP Address">IP</a></div> 
+    <div class="card"><a href="https://naravu.github.io/winsystem.html" target="_blank">WindowsReport</a><br>
+      <a href="https://naravu.github.io/report.html" target="_blank">Report</a><br>
+    </div>
+    
+    <div class="card"><a href="https://naravu.github.io/pri/home.html" target="_blank">HomePlans</a><p>Home Plans</p></div>
+    <div class="card"><a href="https://httpbin.org/ip" target="_blank">IP</a> | 
+     <a href="https://ip8.com/" target="_blank">IP8</a><br>
+     <a href="https://www.iplocation.net/myip" target="_blank">Location</a>
+    </div>
       
-      
-   <!-- old links-->
-   <a href="https://naravu.github.io/pri/bm.htm" target="_blank">Noorkuri</a>
-   <a href="https://ip8.com/" target="_blank">IP8</a> 
-   <a href="https://www.iplocation.net/myip" target="_blank">Location</a>  
-   <a href="https://www.ipaddress.com/website/1tamilmv.com/" target="_blank">1TamilMV</a>
-    <a href="https://naravu.github.io/report.html" target="_blank">Report</a>
+   <div class="card"><a href="https://www.ipaddress.com/website/1tamilmv.com/" target="_blank">1TamilMV</a><p>1TamilMV</p></div>
+   
   <!-- Footer Card -->
    
   
