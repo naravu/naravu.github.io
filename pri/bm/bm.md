@@ -115,4 +115,4 @@
 | Perplexity AI | https://www.perplexity.ai/ | Perplexity | Perplexity AI for Research |
 | Mindluster | https://www.mindluster.com/ | Mindluster | Free online courses with certificate |
 | World Monitor| https://www.worldmonitor.app | Monitoring the world | Monitor the whole world activities |
-| Terminator | https://terminator.aeza.net/en/ | Live terminal | Linux terminal |
+| Terminal | https://terminator.aeza.net/en/ | Live terminal | Linux terminal |
