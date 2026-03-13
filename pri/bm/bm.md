@@ -129,3 +129,5 @@
 |Root Me|https://root-me.org/| Hack tools | Hands-on hacking labs and challenges |
 |SEOStudio|https://seostudio.tools/| Free stuff | 200+ free SEO, YouTube, text, image, and web tools for optimization and content creation |
 | Opencode documents | https://opencode.ai/docs | Documents of opencode | Free AI vibe coding |
+|Autonmous OPS | https://autonomousops.ai/ | AI Agents for observability | Hyderabad based security firm |
+| AI Square | https://aisquare.studio/ | AI square | AI Experience Management (AIEM) platform designed for Educators |
