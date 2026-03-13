@@ -131,3 +131,5 @@
 | Opencode documents | https://opencode.ai/docs | Documents of opencode | Free AI vibe coding |
 |Autonmous OPS | https://autonomousops.ai/ | AI Agents for observability | Hyderabad based security firm |
 | AI Square | https://aisquare.studio/ | AI square | AI Experience Management (AIEM) platform designed for Educators |
+| Facets | https://www.facets.cloud | AI-Powered Orchestrator for Intelligent Infrastructure | An AI-powered Platform Engineering Orchestration tool built on Terraform |
+
