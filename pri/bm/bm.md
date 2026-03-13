@@ -132,4 +132,4 @@
 |Autonmous OPS | https://autonomousops.ai/ | AI Agents for observability | Hyderabad based security firm |
 | AI Square | https://aisquare.studio/ | AI square | AI Experience Management (AIEM) platform designed for Educators |
 | Facets | https://www.facets.cloud | AI-Powered Orchestrator for Intelligent Infrastructure | An AI-powered Platform Engineering Orchestration tool built on Terraform |
-
+| Bharatbuild | https://bharatbuild.ai/ | An AI-powered code and project generation  | Full-stack applications 3 projects on freetier  |
