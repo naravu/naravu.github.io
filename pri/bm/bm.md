@@ -133,3 +133,4 @@
 | AI Square | https://aisquare.studio/ | AI square | AI Experience Management (AIEM) platform designed for Educators |
 | Facets | https://www.facets.cloud | AI-Powered Orchestrator for Intelligent Infrastructure | An AI-powered Platform Engineering Orchestration tool built on Terraform |
 | Bharatbuild | https://bharatbuild.ai/ | An AI-powered code and project generation  | Full-stack applications 3 projects on freetier  |
+| Architecto | https://architecto.dev/en | AI Architecture Generation | Cloud Architectures in minutes |
