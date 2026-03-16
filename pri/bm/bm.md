@@ -134,4 +134,4 @@
 | Facets | https://www.facets.cloud | AI-Powered Orchestrator for Intelligent Infrastructure | An AI-powered Platform Engineering Orchestration tool built on Terraform |
 | Bharatbuild | https://bharatbuild.ai/ | An AI-powered code and project generation  | Full-stack applications 3 projects on freetier  |
 | Architecto | https://architecto.dev/en | AI Architecture Generation | Cloud Architectures in minutes |
-| AI today | https://whataicandotoday.com/ | Free Al stuff | Free Al |
+| AI today | https://whataicandotoday.com/ | Al stuff longlist | Al stuff |
