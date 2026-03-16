@@ -135,3 +135,4 @@
 | Bharatbuild | https://bharatbuild.ai/ | An AI-powered code and project generation  | Full-stack applications 3 projects on freetier  |
 | Architecto | https://architecto.dev/en | AI Architecture Generation | Cloud Architectures in minutes |
 | AI today | https://whataicandotoday.com/ | Al stuff longlist | Al stuff |
+| Rephrase PDF | https://rephrase-pdf.pdffiller.com/ | This service allows you to rephrase or edit PDF content online. Useful for document cleanup, formatting, and quick text adjustments. | PDF Tools |
