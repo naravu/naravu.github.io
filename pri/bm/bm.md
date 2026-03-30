@@ -138,4 +138,6 @@
 | Rephrase PDF | https://rephrase-pdf.pdffiller.com/ | This service allows you to rephrase or edit PDF content online. Useful for document cleanup, formatting, and quick text adjustments. | PDF Tools |
 | 24Billions | https://24billions.com/ | A versatile online platform offering AI-powered tools for text generation, rewriting, summarization, and creative content production. Useful for quick ideation, document drafting, and productivity enhancement. | AI Tools |
 | RemovePaywalls | https://removepaywalls.com/ | An online service designed to bypass or remove paywalls from articles and websites, allowing users to access restricted content more easily. Useful for research, reading premium news, and accessing locked resources. | Web Tools |
+| Paperpal Edit | https://edit.paperpal.com/ | An AI-powered academic writing assistant that helps refine grammar, style, and clarity in research papers. Useful for polishing manuscripts, improving readability, and preparing documents for journal submission. | Writing Tools |
+| Arena AI | https://arena.ai/ | A collaborative AI platform designed for building, testing, and deploying machine learning models. It provides tools for experimentation, benchmarking, and sharing AI workflows, making it useful for researchers, developers, and teams working on applied AI projects. | AI Tools |
 
