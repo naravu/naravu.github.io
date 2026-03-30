@@ -141,4 +141,5 @@
 | Paperpal Edit | https://edit.paperpal.com/ | An AI-powered academic writing assistant that helps refine grammar, style, and clarity in research papers. Useful for polishing manuscripts, improving readability, and preparing documents for journal submission. | Writing Tools on Research papers |
 | Arena AI | https://arena.ai/ | A collaborative AI platform designed for building, testing, and deploying machine learning models. It provides tools for experimentation, benchmarking, and sharing AI workflows, making it useful for researchers, developers, and teams working on applied AI projects. | AI Tools Free Unlimited |
 | Eyecannndy | https://eyecannndy.com/ | A comprehensive visual technique library showcasing hundreds of cinematic and stylistic effects. Useful for filmmakers, editors, and creatives to explore camera moves, transitions, and experimental aesthetics for inspiration and learning. | Creative Tools |
+| ToolFK | https://www.toolfk.com/ | A multi‑purpose online toolkit offering converters, editors, and productivity utilities. Useful for handling documents, text, and files quickly without installing software. | Free no login AI Web Tools |
 
