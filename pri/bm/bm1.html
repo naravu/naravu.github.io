@@ -2,144 +2,41 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>📌🅝🅞🅞🅡🅚🅤🅡🅘</title>
-  <style>
-    body {
-      background: linear-gradient(to bottom, #f5f7fa, #eaeef3);
-      color: #333;
-      margin: 0;
-      font-family: 'Segoe UI', Arial, sans-serif;
-      font-size: 0.95em;
-      padding-top: 60px; /* space for fixed header */
-    }
-    .dark-mode {
-      background: #111;
-      color: #eee;
-    }
-    header {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      background: #1e2a38;
-      color: #fff;
-      padding: 10px 15px;
-      font-size: 1em;
-      font-weight: bold;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.3);
-      z-index: 1000;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    .container {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 15px;
-      justify-content: center;
-      padding: 10px;
-    }
-    .card {
-      flex: 1 1 260px;
-      background: linear-gradient(135deg, #ffffff, #f0f4ff);
-      border: 1px solid #ddd;
-      border-radius: 12px;
-      padding: 12px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-      display: flex;
-      flex-direction: column;
-      cursor: pointer;
-      transition: transform 0.25s ease, box-shadow 0.25s ease;
-    }
-    .card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 8px 16px rgba(0,0,0,0.15);
-    }
-    .card a {
-      color: #0366d6;
-      text-decoration: none;
-      word-break: break-word;
-      font-weight: bold;
-      font-size: 1em;
-    }
-    .card a:hover {
-      text-decoration: underline;
-    }
-    .dark-mode .card {
-      background: #222;
-      border-color: #444;
-    }
-    .dark-mode a {
-      color: #1e90ff;
-    }
-    .card-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-size: 0.85em; /* smaller font for status */
-      margin-bottom: 6px;
-    }
-    .status {
-      font-size: 0.8em;
-      color: #555;
-    }
-    input[type="text"] {
-      padding: 6px;
-      margin-left: 10px;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-      width: 200px;
-    }
-    .dark-mode input[type="text"] {
-      background-color: #222;
-      color: #fff;
-      border: 1px solid #444;
-    }
-    button {
-      margin-left: 10px;
-      padding: 6px 10px;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-      background: #FFD700;
-      color: #000;
-      font-weight: bold;
-    }
-    .card[title] {
-      position: relative;
-    }
-    .card[title]:hover::after {
-      content: attr(title);
-      position: absolute;
-      bottom: 100%;
-      left: 10px;
-      background: #0366d6;
-      color: #fff;
-      padding: 4px 8px;
-      border-radius: 4px;
-      font-size: 0.8em;
-      white-space: nowrap;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
-    }
-  </style>
   <script>
-    function filterCards() {
+    function filterTable() {
       const input = document.getElementById("filterInput").value.toLowerCase();
-      const cards = document.querySelectorAll(".card");
-      cards.forEach(card => {
-        card.style.display = card.innerText.toLowerCase().includes(input) ? "" : "none";
+      const rows = document.querySelectorAll("#bookmarkTable tbody tr");
+      rows.forEach(row => {
+        row.style.display = row.innerText.toLowerCase().includes(input) ? "" : "none";
       });
     }
 
+    function sortTable(n) {
+      const table = document.getElementById("bookmarkTable");
+      const tbody = table.tBodies[0];
+      const rows = Array.from(tbody.rows);
+      const asc = table.getAttribute("data-sort-dir") !== "asc";
+      rows.sort((a, b) => {
+        const valA = a.cells[n].textContent.trim().toLowerCase();
+        const valB = b.cells[n].textContent.trim().toLowerCase();
+        return asc ? valA.localeCompare(valB) : valB.localeCompare(valA);
+      });
+      rows.forEach(row => tbody.appendChild(row));
+      table.setAttribute("data-sort-dir", asc ? "asc" : "desc");
+    }
+
     async function validateURLs() {
-      const links = document.querySelectorAll(".bookmark-link");
-      for (const link of links) {
-        const status = link.closest(".card").querySelector(".status");
+      const rows = document.querySelectorAll("#bookmarkTable tbody tr");
+      for (const row of rows) {
+        const link = row.querySelector(".bookmark-link");
+        const cell = row.querySelector(".status");
         try {
           await fetch(link.href, { method: "HEAD", mode: "no-cors" });
-          status.textContent = "✅";
+          cell.textContent = "✅";
         } catch {
-          status.textContent = "❌";
+          cell.textContent = "❌";
         }
       }
     }
@@ -147,1068 +44,1528 @@
     window.addEventListener("DOMContentLoaded", validateURLs);
   </script>
 </head>
-<body>
-  <header>
-    <div>📌🅝🅞🅞🅡🅚🅤🅡🅘</div>
-    <div>
-      <input type="text" id="filterInput" placeholder="Search..." onkeyup="filterCards()">
-      <button id="theme-button">☀️</button>
-    </div>
-    <div class="watermark">© Naravu. All rights reserved.</div><div></div>
-
-<style>
-  .watermark {
-    position: fixed;
-    top: 50%;
-    left: 0;
-    transform: rotate(-90deg) translate(-50%, 0);
-    transform-origin: left top;
-    font-size: 0.8em;
-    color: rgba(0,0,0,0.3); /* subtle watermark color */
-    pointer-events: none;    /* ensures it doesn’t block clicks */
-    z-index: 9999;
-  }
-</style>
-
-    </div>
-  </header>
-  <div class="container">
-    <div class="card" onclick="window.open('https://docs.python.org', '_blank')" title="Python Docs">
-      <div class="card-header"><b>🔢 1</b><span class="status">⏳</span></div>
-      <div><a href="https://docs.python.org" class="bookmark-link" target="_blank">Python Docs</a></div>
-      <div>🔗 https://docs.python.org</div>
-      <div>🏷️ python,docs</div>
-      <div>🔖 Official Python docs</div>
-    </div>
-    <div class="card" onclick="window.open('https://github.com/features/copilot', '_blank')" title="GitHub Copilot">
-      <div class="card-header"><b>🔢 2</b><span class="status">⏳</span></div>
-      <div><a href="https://github.com/features/copilot" class="bookmark-link" target="_blank">GitHub Copilot</a></div>
-      <div>🔗 https://github.com/features/copilot</div>
-      <div>🏷️ AI,tools</div>
-      <div>🔖 GitHub’s AI pair programmer</div>
-    </div>
-    <div class="card" onclick="window.open('https://google.com', '_blank')" title="Google">
-      <div class="card-header"><b>🔢 3</b><span class="status">⏳</span></div>
-      <div><a href="https://google.com" class="bookmark-link" target="_blank">Google</a></div>
-      <div>🔗 https://google.com</div>
-      <div>🏷️ Google,Search engine</div>
-      <div>🔖 Google search engine</div>
-    </div>
-    <div class="card" onclick="window.open('https://unwatermark.ai/pricing/', '_blank')" title="Unwatermark AI Pricing">
-      <div class="card-header"><b>🔢 4</b><span class="status">⏳</span></div>
-      <div><a href="https://unwatermark.ai/pricing/" class="bookmark-link" target="_blank">Unwatermark AI Pricing</a></div>
-      <div>🔗 https://unwatermark.ai/pricing/</div>
-      <div>🏷️ AI,tools,image,video</div>
-      <div>🔖 AI-powered watermark remover for images/videos with flexible pricing</div>
-    </div>
-    <div class="card" onclick="window.open('https://receive-sms-free.cc/', '_blank')" title="Receive SMS Free">
-      <div class="card-header"><b>🔢 5</b><span class="status">⏳</span></div>
-      <div><a href="https://receive-sms-free.cc/" class="bookmark-link" target="_blank">Receive SMS Free</a></div>
-      <div>🔗 https://receive-sms-free.cc/</div>
-      <div>🏷️ sms,temp,privacy</div>
-      <div>🔖 Free temporary numbers for SMS verification</div>
-    </div>
-    <div class="card" onclick="window.open('https://temp-number.com/', '_blank')" title="Temp Number">
-      <div class="card-header"><b>🔢 6</b><span class="status">⏳</span></div>
-      <div><a href="https://temp-number.com/" class="bookmark-link" target="_blank">Temp Number</a></div>
-      <div>🔗 https://temp-number.com/</div>
-      <div>🏷️ sms,temp,tools</div>
-      <div>🔖 Disposable numbers for SMS with global coverage</div>
-    </div>
-    <div class="card" onclick="window.open('https://chatglm.cn/main/alltoolsdetail?lang=en', '_blank')" title="ChatGLM Tools Directory">
-      <div class="card-header"><b>🔢 7</b><span class="status">⏳</span></div>
-      <div><a href="https://chatglm.cn/main/alltoolsdetail?lang=en" class="bookmark-link" target="_blank">ChatGLM Tools Directory</a></div>
-      <div>🔗 https://chatglm.cn/main/alltoolsdetail?lang=en</div>
-      <div>🏷️ AI,chatbot,tools</div>
-      <div>🔖 Chinese-English AI assistant with multimodal tools</div>
-    </div>
-    <div class="card" onclick="window.open('https://unwatermark.ai/', '_blank')" title="UnWaterMark">
-      <div class="card-header"><b>🔢 8</b><span class="status">⏳</span></div>
-      <div><a href="https://unwatermark.ai/" class="bookmark-link" target="_blank">UnWaterMark</a></div>
-      <div>🔗 https://unwatermark.ai/</div>
-      <div>🏷️ Water Mark removal</div>
-      <div>🔖 Water mark removal tool on videos</div>
-    </div>
-    <div class="card" onclick="window.open('https://officetomd.streamlit.app/', '_blank')" title="Mark Down app">
-      <div class="card-header"><b>🔢 9</b><span class="status">⏳</span></div>
-      <div><a href="https://officetomd.streamlit.app/" class="bookmark-link" target="_blank">Mark Down app</a></div>
-      <div>🔗 https://officetomd.streamlit.app/</div>
-      <div>🏷️ Free Mark Down language converter App</div>
-      <div>🔖 Mark Down converter App</div>
-    </div>
-    <div class="card" onclick="window.open('https://www.youtube.com/watch?v=ziXY2OsbB8I', '_blank')" title="Android in Windows">
-      <div class="card-header"><b>🔢 10</b><span class="status">⏳</span></div>
-      <div><a href="https://www.youtube.com/watch?v=ziXY2OsbB8I" class="bookmark-link" target="_blank">Android in Windows</a></div>
-      <div>🔗 https://www.youtube.com/watch?v=ziXY2OsbB8I</div>
-      <div>🏷️ Andriod on Windows</div>
-      <div>🔖 Android on Windows installation video</div>
-    </div>
-    <div class="card" onclick="window.open('https://github.com/x1xhlol/system-prompts-and-models-of-ai-tools/tree/main', '_blank')" title="AI Prompts">
-      <div class="card-header"><b>🔢 11</b><span class="status">⏳</span></div>
-      <div><a href="https://github.com/x1xhlol/system-prompts-and-models-of-ai-tools/tree/main" class="bookmark-link" target="_blank">AI Prompts</a></div>
-      <div>🔗 https://github.com/x1xhlol/system-prompts-and-models-of-ai-tools/tree/main</div>
-      <div>🏷️ AI Prompts</div>
-      <div>🔖 Multiple Free AI prompts for activities</div>
-    </div>
-    <div class="card" onclick="window.open('https://puter.com/app/terminal', '_blank')" title="Online OS">
-      <div class="card-header"><b>🔢 12</b><span class="status">⏳</span></div>
-      <div><a href="https://puter.com/app/terminal" class="bookmark-link" target="_blank">Online OS</a></div>
-      <div>🔗 https://puter.com/app/terminal</div>
-      <div>🏷️ Online desktop</div>
-      <div>🔖 Live OS in Browser</div>
-    </div>
-    <div class="card" onclick="window.open('https://lovable.dev/', '_blank')" title="Loveable">
-      <div class="card-header"><b>🔢 13</b><span class="status">⏳</span></div>
-      <div><a href="https://lovable.dev/" class="bookmark-link" target="_blank">Loveable</a></div>
-      <div>🔗 https://lovable.dev/</div>
-      <div>🏷️ AI for web development</div>
-      <div>🔖 Web development AI tool</div>
-    </div>
-    <div class="card" onclick="window.open('https://www.krea.ai/', '_blank')" title="Krea AI">
-      <div class="card-header"><b>🔢 14</b><span class="status">⏳</span></div>
-      <div><a href="https://www.krea.ai/" class="bookmark-link" target="_blank">Krea AI</a></div>
-      <div>🔗 https://www.krea.ai/</div>
-      <div>🏷️ AI for manipulating videos & Images</div>
-      <div>🔖 Video & Image AI tool</div>
-    </div>
-    <div class="card" onclick="window.open('https://customgpt.ai/', '_blank')" title="Custom GPT">
-      <div class="card-header"><b>🔢 15</b><span class="status">⏳</span></div>
-      <div><a href="https://customgpt.ai/" class="bookmark-link" target="_blank">Custom GPT</a></div>
-      <div>🔗 https://customgpt.ai/</div>
-      <div>🏷️ AI for your cusomization</div>
-      <div>🔖 Custom AI tool creation</div>
-    </div>
-    <div class="card" onclick="window.open('https://copilot.microsoft.com/', '_blank')" title="Copilot">
-      <div class="card-header"><b>🔢 16</b><span class="status">⏳</span></div>
-      <div><a href="https://copilot.microsoft.com/" class="bookmark-link" target="_blank">Copilot</a></div>
-      <div>🔗 https://copilot.microsoft.com/</div>
-      <div>🏷️ Copilot for Code</div>
-      <div>🔖 Microsoft's AI assistant</div>
-    </div>
-    <div class="card" onclick="window.open('https://soloist.ai/', '_blank')" title="Solo AI">
-      <div class="card-header"><b>🔢 17</b><span class="status">⏳</span></div>
-      <div><a href="https://soloist.ai/" class="bookmark-link" target="_blank">Solo AI</a></div>
-      <div>🔗 https://soloist.ai/</div>
-      <div>🏷️ AI for website creation</div>
-      <div>🔖 Mozilla's AI chatbot</div>
-    </div>
-    <div class="card" onclick="window.open('https://www.mozilla.ai/', '_blank')" title="Mozilla AI">
-      <div class="card-header"><b>🔢 18</b><span class="status">⏳</span></div>
-      <div><a href="https://www.mozilla.ai/" class="bookmark-link" target="_blank">Mozilla AI</a></div>
-      <div>🔗 https://www.mozilla.ai/</div>
-      <div>🏷️ Mozilla AI for AI agents creation</div>
-      <div>🔖 Mozilla's AI eco system</div>
-    </div>
-    <div class="card" onclick="window.open('https://moovai.net/', '_blank')" title="Movie Site">
-      <div class="card-header"><b>🔢 19</b><span class="status">⏳</span></div>
-      <div><a href="https://moovai.net/" class="bookmark-link" target="_blank">Movie Site</a></div>
-      <div>🔗 https://moovai.net/</div>
-      <div>🏷️ Movie recommended Site</div>
-      <div>🔖 Movie recommendation Site with AI</div>
-    </div>
-    <div class="card" onclick="window.open('https://learn.circuitverse.org/', '_blank')" title="Circut Verse">
-      <div class="card-header"><b>🔢 20</b><span class="status">⏳</span></div>
-      <div><a href="https://learn.circuitverse.org/" class="bookmark-link" target="_blank">Circut Verse</a></div>
-      <div>🔗 https://learn.circuitverse.org/</div>
-      <div>🏷️ Circuts</div>
-      <div>🔖 Electronic circuts</div>
-    </div>
-    <div class="card" onclick="window.open('https://www.zamzar.com/', '_blank')" title="Zamzar">
-      <div class="card-header"><b>🔢 21</b><span class="status">⏳</span></div>
-      <div><a href="https://www.zamzar.com/" class="bookmark-link" target="_blank">Zamzar</a></div>
-      <div>🔗 https://www.zamzar.com/</div>
-      <div>🏷️ Zamzar file conversion</div>
-      <div>🔖 Zamzar file conversion free online</div>
-    </div>
-    <div class="card" onclick="window.open('https://kiro.dev/', '_blank')" title="Kirao">
-      <div class="card-header"><b>🔢 22</b><span class="status">⏳</span></div>
-      <div><a href="https://kiro.dev/" class="bookmark-link" target="_blank">Kirao</a></div>
-      <div>🔗 https://kiro.dev/</div>
-      <div>🏷️ Kiro code agent</div>
-      <div>🔖 Kiro vibe code agent free tier</div>
-    </div>
-    <div class="card" onclick="window.open('https://gnukhata.org/', '_blank')" title="Gnukhata">
-      <div class="card-header"><b>🔢 23</b><span class="status">⏳</span></div>
-      <div><a href="https://gnukhata.org/" class="bookmark-link" target="_blank">Gnukhata</a></div>
-      <div>🔗 https://gnukhata.org/</div>
-      <div>🏷️ Free accounting software</div>
-      <div>🔖 Free Tally alternative</div>
-    </div>
-    <div class="card" onclick="window.open('https://www.google.com/', '_blank')" title="Google">
-      <div class="card-header"><b>🔢 24</b><span class="status">⏳</span></div>
-      <div><a href="https://www.google.com/" class="bookmark-link" target="_blank">Google</a></div>
-      <div>🔗 https://www.google.com/</div>
-      <div>🏷️ Search Engine</div>
-      <div>🔖 Google Search Engine</div>
-    </div>
-    <div class="card" onclick="window.open('https://uiverse.io/elements', '_blank')" title="Uiverse">
-      <div class="card-header"><b>🔢 25</b><span class="status">⏳</span></div>
-      <div><a href="https://uiverse.io/elements" class="bookmark-link" target="_blank">Uiverse</a></div>
-      <div>🔗 https://uiverse.io/elements</div>
-      <div>🏷️ Uiverse</div>
-      <div>🔖 CSS Templates free code</div>
-    </div>
-    <div class="card" onclick="window.open('https://tamileditor.org/', '_blank')" title="தமிழ் எழுதி">
-      <div class="card-header"><b>🔢 26</b><span class="status">⏳</span></div>
-      <div><a href="https://tamileditor.org/" class="bookmark-link" target="_blank">தமிழ் எழுதி</a></div>
-      <div>🔗 https://tamileditor.org/</div>
-      <div>🏷️ தமிழ் எழுதி</div>
-      <div>🔖 தமிழ் எழுதி, தமிழெழுதி - Tamil Editor</div>
-    </div>
-    <div class="card" onclick="window.open('https://www.modulify.ai/', '_blank')" title="Modulify">
-      <div class="card-header"><b>🔢 27</b><span class="status">⏳</span></div>
-      <div><a href="https://www.modulify.ai/" class="bookmark-link" target="_blank">Modulify</a></div>
-      <div>🔗 https://www.modulify.ai/</div>
-      <div>🏷️ Modulify</div>
-      <div>🔖 AI Website builder, Website creator</div>
-    </div>
-    <div class="card" onclick="window.open('https://tinywow.com/', '_blank')" title="TinyWOW">
-      <div class="card-header"><b>🔢 28</b><span class="status">⏳</span></div>
-      <div><a href="https://tinywow.com/" class="bookmark-link" target="_blank">TinyWOW</a></div>
-      <div>🔗 https://tinywow.com/</div>
-      <div>🏷️ TinyWOW</div>
-      <div>🔖 Free online converters - TinyWOW</div>
-    </div>
-    <div class="card" onclick="window.open('https://app.emergent.sh/landing', '_blank')" title="Emergent">
-      <div class="card-header"><b>🔢 29</b><span class="status">⏳</span></div>
-      <div><a href="https://app.emergent.sh/landing" class="bookmark-link" target="_blank">Emergent</a></div>
-      <div>🔗 https://app.emergent.sh/landing</div>
-      <div>🏷️ Rapid webapp builder</div>
-      <div>🔖 Rapid webapp builder and clone existing webapps</div>
-    </div>
-    <div class="card" onclick="window.open('https://music.ai/', '_blank')" title="AI Music">
-      <div class="card-header"><b>🔢 30</b><span class="status">⏳</span></div>
-      <div><a href="https://music.ai/" class="bookmark-link" target="_blank">AI Music</a></div>
-      <div>🔗 https://music.ai/</div>
-      <div>🏷️ AI Music</div>
-      <div>🔖 Free AI Music with login</div>
-    </div>
-    <div class="card" onclick="window.open('https://docs.docker.com/desktop/setup/install/linux/debian/#install-docker-desktop', '_blank')" title="Docker on Debian">
-      <div class="card-header"><b>🔢 31</b><span class="status">⏳</span></div>
-      <div><a href="https://docs.docker.com/desktop/setup/install/linux/debian/#install-docker-desktop" class="bookmark-link" target="_blank">Docker on Debian</a></div>
-      <div>🔗 https://docs.docker.com/desktop/setup/install/linux/debian/#install-docker-desktop</div>
-      <div>🏷️ Debian docker</div>
-      <div>🔖 Docker explanation on Debian</div>
-    </div>
-    <div class="card" onclick="window.open('https://deepai.org/chat', '_blank')" title="Deep AI">
-      <div class="card-header"><b>🔢 32</b><span class="status">⏳</span></div>
-      <div><a href="https://deepai.org/chat" class="bookmark-link" target="_blank">Deep AI</a></div>
-      <div>🔗 https://deepai.org/chat</div>
-      <div>🏷️ Deep AI</div>
-      <div>🔖 Free AI Chatbot alternate to Deep Seek</div>
-    </div>
-    <div class="card" onclick="window.open('https://google.github.io/adk-docs/', '_blank')" title="Agents Development Kit - ADK">
-      <div class="card-header"><b>🔢 33</b><span class="status">⏳</span></div>
-      <div><a href="https://google.github.io/adk-docs/" class="bookmark-link" target="_blank">Agents Development Kit - ADK</a></div>
-      <div>🔗 https://google.github.io/adk-docs/</div>
-      <div>🏷️ AI Agents Development Kit - pip install google-adk</div>
-      <div>🔖 Google ADK</div>
-    </div>
-    <div class="card" onclick="window.open('https://google.github.io/adk-docs/', '_blank')" title="Agents Development Kit - ADK Samples">
-      <div class="card-header"><b>🔢 34</b><span class="status">⏳</span></div>
-      <div><a href="https://google.github.io/adk-docs/" class="bookmark-link" target="_blank">Agents Development Kit - ADK Samples</a></div>
-      <div>🔗 https://google.github.io/adk-docs/</div>
-      <div>🏷️ AI Agents Development Kit Samples - pip install google-adk</div>
-      <div>🔖 Google ADK Samples</div>
-    </div>
-    <div class="card" onclick="window.open('https://pythonandvba.com/', '_blank')" title="Python VBA">
-      <div class="card-header"><b>🔢 35</b><span class="status">⏳</span></div>
-      <div><a href="https://pythonandvba.com/" class="bookmark-link" target="_blank">Python VBA</a></div>
-      <div>🔗 https://pythonandvba.com/</div>
-      <div>🏷️ Python VBA</div>
-      <div>🔖 Python VBA</div>
-    </div>
-    <div class="card" onclick="window.open('https://www.xlwings.org/', '_blank')" title="Python Excel - XLWings">
-      <div class="card-header"><b>🔢 36</b><span class="status">⏳</span></div>
-      <div><a href="https://www.xlwings.org/" class="bookmark-link" target="_blank">Python Excel - XLWings</a></div>
-      <div>🔗 https://www.xlwings.org/</div>
-      <div>🏷️ Python Excel - XLWings Documentation</div>
-      <div>🔖 Python XLWings</div>
-    </div>
-    <div class="card" onclick="window.open('https://pentestgpt.ai/', '_blank')" title="Penetration Test">
-      <div class="card-header"><b>🔢 37</b><span class="status">⏳</span></div>
-      <div><a href="https://pentestgpt.ai/" class="bookmark-link" target="_blank">Penetration Test</a></div>
-      <div>🔗 https://pentestgpt.ai/</div>
-      <div>🏷️ Penetration Test - Hack Tools AI</div>
-      <div>🔖 PenTestGPT</div>
-    </div>
-    <div class="card" onclick="window.open('https://flowgpt.com/', '_blank')" title="Hack tools documentations AI">
-      <div class="card-header"><b>🔢 38</b><span class="status">⏳</span></div>
-      <div><a href="https://flowgpt.com/" class="bookmark-link" target="_blank">Hack tools documentations AI</a></div>
-      <div>🔗 https://flowgpt.com/</div>
-      <div>🏷️ Hack Tools AI</div>
-      <div>🔖 FlowGPT</div>
-    </div>
-    <div class="card" onclick="window.open('https://flowgpt.com/p/chaosgpt', '_blank')" title="Hack tools documentations">
-      <div class="card-header"><b>🔢 39</b><span class="status">⏳</span></div>
-      <div><a href="https://flowgpt.com/p/chaosgpt" class="bookmark-link" target="_blank">Hack tools documentations</a></div>
-      <div>🔗 https://flowgpt.com/p/chaosgpt</div>
-      <div>🏷️ Hack Tools AI</div>
-      <div>🔖 ChaosGPT</div>
-    </div>
-    <div class="card" onclick="window.open('https://agpt.co/', '_blank')" title="AutoGPT AI">
-      <div class="card-header"><b>🔢 40</b><span class="status">⏳</span></div>
-      <div><a href="https://agpt.co/" class="bookmark-link" target="_blank">AutoGPT AI</a></div>
-      <div>🔗 https://agpt.co/</div>
-      <div>🏷️ AutoGPT from Github</div>
-      <div>🔖 AutoGPT</div>
-    </div>
-    <div class="card" onclick="window.open('https://gptstore.ai/gpts/nuzDIyCFIM-vulngpt', '_blank')" title="VulnGPT AI">
-      <div class="card-header"><b>🔢 41</b><span class="status">⏳</span></div>
-      <div><a href="https://gptstore.ai/gpts/nuzDIyCFIM-vulngpt" class="bookmark-link" target="_blank">VulnGPT AI</a></div>
-      <div>🔗 https://gptstore.ai/gpts/nuzDIyCFIM-vulngpt</div>
-      <div>🏷️ VulnGPT for vulnerabilities</div>
-      <div>🔖 VulnGPT</div>
-    </div>
-    <div class="card" onclick="window.open('https://www.schoolgoat.com/', '_blank')" title="Schoolgoat">
-      <div class="card-header"><b>🔢 42</b><span class="status">⏳</span></div>
-      <div><a href="https://www.schoolgoat.com/" class="bookmark-link" target="_blank">Schoolgoat</a></div>
-      <div>🔗 https://www.schoolgoat.com/</div>
-      <div>🏷️ Home work help for school students</div>
-      <div>🔖 Schoolgoat</div>
-    </div>
-    <div class="card" onclick="window.open('https://bestfreeaiwebsites.com/', '_blank')" title="Free AI Tool - Code Generator etc.">
-      <div class="card-header"><b>🔢 43</b><span class="status">⏳</span></div>
-      <div><a href="https://bestfreeaiwebsites.com/" class="bookmark-link" target="_blank">Free AI Tool - Code Generator etc.</a></div>
-      <div>🔗 https://bestfreeaiwebsites.com/</div>
-      <div>🏷️ AI Code generator with login</div>
-      <div>🔖 Bestfreeaiwebsites</div>
-    </div>
-    <div class="card" onclick="window.open('https://fish.audio/', '_blank')" title="Free AI Voice Tool - Copy of your own voice.">
-      <div class="card-header"><b>🔢 44</b><span class="status">⏳</span></div>
-      <div><a href="https://fish.audio/" class="bookmark-link" target="_blank">Free AI Voice Tool - Copy of your own voice.</a></div>
-      <div>🔗 https://fish.audio/</div>
-      <div>🏷️ AI Voice tool with login</div>
-      <div>🔖 Fish.audio</div>
-    </div>
-    <div class="card" onclick="window.open('https://hailuoai.video/', '_blank')" title="AI Video Generator from Text">
-      <div class="card-header"><b>🔢 45</b><span class="status">⏳</span></div>
-      <div><a href="https://hailuoai.video/" class="bookmark-link" target="_blank">AI Video Generator from Text</a></div>
-      <div>🔗 https://hailuoai.video/</div>
-      <div>🏷️ AI Video Generator from Text with login</div>
-      <div>🔖 HailuoAI</div>
-    </div>
-    <div class="card" onclick="window.open('https://magichour.ai/', '_blank')" title="AI Video Generator for Pro">
-      <div class="card-header"><b>🔢 46</b><span class="status">⏳</span></div>
-      <div><a href="https://magichour.ai/" class="bookmark-link" target="_blank">AI Video Generator for Pro</a></div>
-      <div>🔗 https://magichour.ai/</div>
-      <div>🏷️ AI Video creation like a pro with login</div>
-      <div>🔖 MagichourAI</div>
-    </div>
-    <div class="card" onclick="window.open('https://www.deeplearning.ai/', '_blank')" title="AI Learning Courses free">
-      <div class="card-header"><b>🔢 47</b><span class="status">⏳</span></div>
-      <div><a href="https://www.deeplearning.ai/" class="bookmark-link" target="_blank">AI Learning Courses free</a></div>
-      <div>🔗 https://www.deeplearning.ai/</div>
-      <div>🏷️ AI Learning Courses free with Login</div>
-      <div>🔖 Deep Learning AI</div>
-    </div>
-    <div class="card" onclick="window.open('https://123apps.com/', '_blank')" title="So many free tools online">
-      <div class="card-header"><b>🔢 48</b><span class="status">⏳</span></div>
-      <div><a href="https://123apps.com/" class="bookmark-link" target="_blank">So many free tools online</a></div>
-      <div>🔗 https://123apps.com/</div>
-      <div>🏷️ free tools online for Video, Audio, PDF & Converters</div>
-      <div>🔖 123Apps</div>
-    </div>
-    <div class="card" onclick="window.open('https://nomoregoogle.com/', '_blank')" title="Alternative tools for Google">
-      <div class="card-header"><b>🔢 49</b><span class="status">⏳</span></div>
-      <div><a href="https://nomoregoogle.com/" class="bookmark-link" target="_blank">Alternative tools for Google</a></div>
-      <div>🔗 https://nomoregoogle.com/</div>
-      <div>🏷️ Free & open source alternative tools for Google</div>
-      <div>🔖 NoMoreGoogle</div>
-    </div>
-    <div class="card" onclick="window.open('https://tamildigitallibrary.in/', '_blank')" title="Tamil Digital Library">
-      <div class="card-header"><b>🔢 50</b><span class="status">⏳</span></div>
-      <div><a href="https://tamildigitallibrary.in/" class="bookmark-link" target="_blank">Tamil Digital Library</a></div>
-      <div>🔗 https://tamildigitallibrary.in/</div>
-      <div>🏷️ Free Tamil Digital Library</div>
-      <div>🔖 Tamil Digital Library</div>
-    </div>
-    <div class="card" onclick="window.open('https://openlibrary.org/', '_blank')" title="Open Digital Library">
-      <div class="card-header"><b>🔢 51</b><span class="status">⏳</span></div>
-      <div><a href="https://openlibrary.org/" class="bookmark-link" target="_blank">Open Digital Library</a></div>
-      <div>🔗 https://openlibrary.org/</div>
-      <div>🏷️ Open Digital Library - English</div>
-      <div>🔖 Open Library</div>
-    </div>
-    <div class="card" onclick="window.open('https://markitdown.pro/', '_blank')" title="Mark Down converter App">
-      <div class="card-header"><b>🔢 52</b><span class="status">⏳</span></div>
-      <div><a href="https://markitdown.pro/" class="bookmark-link" target="_blank">Mark Down converter App</a></div>
-      <div>🔗 https://markitdown.pro/</div>
-      <div>🏷️ Free Mark Down language converter App</div>
-      <div>🔖 MD Mark Down App</div>
-    </div>
-    <div class="card" onclick="window.open('https://github.com/microsoft/markitdown', '_blank')" title="Mark Down converter code in Git">
-      <div class="card-header"><b>🔢 53</b><span class="status">⏳</span></div>
-      <div><a href="https://github.com/microsoft/markitdown" class="bookmark-link" target="_blank">Mark Down converter code in Git</a></div>
-      <div>🔗 https://github.com/microsoft/markitdown</div>
-      <div>🏷️ Free Mark Down converter code from Git</div>
-      <div>🔖 MD Mark Down Code</div>
-    </div>
-    <div class="card" onclick="window.open('https://smallseotools.com/', '_blank')" title="SEO Tools online">
-      <div class="card-header"><b>🔢 54</b><span class="status">⏳</span></div>
-      <div><a href="https://smallseotools.com/" class="bookmark-link" target="_blank">SEO Tools online</a></div>
-      <div>🔗 https://smallseotools.com/</div>
-      <div>🏷️ Search Engine Optimization tools online</div>
-      <div>🔖 SEO Tools</div>
-    </div>
-    <div class="card" onclick="window.open('https://www.deepseek.com/', '_blank')" title="Deep Seek AI with Login">
-      <div class="card-header"><b>🔢 55</b><span class="status">⏳</span></div>
-      <div><a href="https://www.deepseek.com/" class="bookmark-link" target="_blank">Deep Seek AI with Login</a></div>
-      <div>🔗 https://www.deepseek.com/</div>
-      <div>🏷️ China's Deep Seek AI with Login</div>
-      <div>🔖 Deepseek AI</div>
-    </div>
-    <div class="card" onclick="window.open('https://zzzcode.ai/', '_blank')" title="Free AI Code Generator - No login">
-      <div class="card-header"><b>🔢 56</b><span class="status">⏳</span></div>
-      <div><a href="https://zzzcode.ai/" class="bookmark-link" target="_blank">Free AI Code Generator - No login</a></div>
-      <div>🔗 https://zzzcode.ai/</div>
-      <div>🏷️ ZZZ Free AI Code Generator - No login</div>
-      <div>🔖 AI ZZZCodegenerator</div>
-    </div>
-    <div class="card" onclick="window.open('https://searchcode.com/', '_blank')" title="Search Code">
-      <div class="card-header"><b>🔢 57</b><span class="status">⏳</span></div>
-      <div><a href="https://searchcode.com/" class="bookmark-link" target="_blank">Search Code</a></div>
-      <div>🔗 https://searchcode.com/</div>
-      <div>🏷️ Simple, comprehensive code search</div>
-      <div>🔖 Search Code</div>
-    </div>
-    <div class="card" onclick="window.open('https://www.decohere.ai/', '_blank')" title="AI Image Generator">
-      <div class="card-header"><b>🔢 58</b><span class="status">⏳</span></div>
-      <div><a href="https://www.decohere.ai/" class="bookmark-link" target="_blank">AI Image Generator</a></div>
-      <div>🔗 https://www.decohere.ai/</div>
-      <div>🏷️ AI Image Generator with login</div>
-      <div>🔖 Decohere</div>
-    </div>
-    <div class="card" onclick="window.open('https://www.duckdns.org/', '_blank')" title="Duck DNS for loclhost">
-      <div class="card-header"><b>🔢 59</b><span class="status">⏳</span></div>
-      <div><a href="https://www.duckdns.org/" class="bookmark-link" target="_blank">Duck DNS for loclhost</a></div>
-      <div>🔗 https://www.duckdns.org/</div>
-      <div>🏷️ Free Dynamic DNS - Duck DNS</div>
-      <div>🔖 Duck DNS</div>
-    </div>
-    <div class="card" onclick="window.open('https://www.server-world.info/en/', '_blank')" title="Server World for server configurations">
-      <div class="card-header"><b>🔢 60</b><span class="status">⏳</span></div>
-      <div><a href="https://www.server-world.info/en/" class="bookmark-link" target="_blank">Server World for server configurations</a></div>
-      <div>🔗 https://www.server-world.info/en/</div>
-      <div>🏷️ Server World for all major flavours of Linux</div>
-      <div>🔖 Server World</div>
-    </div>
-    <div class="card" onclick="window.open('https://pythonandvba.com/', '_blank')" title="Coding is fun youtube channel">
-      <div class="card-header"><b>🔢 61</b><span class="status">⏳</span></div>
-      <div><a href="https://pythonandvba.com/" class="bookmark-link" target="_blank">Coding is fun youtube channel</a></div>
-      <div>🔗 https://pythonandvba.com/</div>
-      <div>🏷️ Coding is fun - PythonVBA</div>
-      <div>🔖 PythonVBA</div>
-    </div>
-    <div class="card" onclick="window.open('https://vocalremover.org/', '_blank')" title="VocalRemover">
-      <div class="card-header"><b>🔢 62</b><span class="status">⏳</span></div>
-      <div><a href="https://vocalremover.org/" class="bookmark-link" target="_blank">VocalRemover</a></div>
-      <div>🔗 https://vocalremover.org/</div>
-      <div>🏷️ Music and voice splitter</div>
-      <div>🔖 VocalRemover</div>
-    </div>
-    <div class="card" onclick="window.open('https://chef.convex.dev/', '_blank')" title="Chef AI app Cloner">
-      <div class="card-header"><b>🔢 63</b><span class="status">⏳</span></div>
-      <div><a href="https://chef.convex.dev/" class="bookmark-link" target="_blank">Chef AI app Cloner</a></div>
-      <div>🔗 https://chef.convex.dev/</div>
-      <div>🏷️ Chef AI app Cloner</div>
-      <div>🔖 Chef AI</div>
-    </div>
-    <div class="card" onclick="window.open('https://emergent.sh/', '_blank')" title="Emergent AI app Cloner">
-      <div class="card-header"><b>🔢 64</b><span class="status">⏳</span></div>
-      <div><a href="https://emergent.sh/" class="bookmark-link" target="_blank">Emergent AI app Cloner</a></div>
-      <div>🔗 https://emergent.sh/</div>
-      <div>🏷️ Emergent AI app Cloner</div>
-      <div>🔖 Emergent AI</div>
-    </div>
-    <div class="card" onclick="window.open('https://learn-anything.xyz/', '_blank')" title="Learn anything free">
-      <div class="card-header"><b>🔢 65</b><span class="status">⏳</span></div>
-      <div><a href="https://learn-anything.xyz/" class="bookmark-link" target="_blank">Learn anything free</a></div>
-      <div>🔗 https://learn-anything.xyz/</div>
-      <div>🏷️ Learn anything free with certifications</div>
-      <div>🔖 Learn anything free</div>
-    </div>
-    <div class="card" onclick="window.open('https://html5up.net/', '_blank')" title="HTML5UP">
-      <div class="card-header"><b>🔢 66</b><span class="status">⏳</span></div>
-      <div><a href="https://html5up.net/" class="bookmark-link" target="_blank">HTML5UP</a></div>
-      <div>🔗 https://html5up.net/</div>
-      <div>🏷️ Free HTML5 templates - No login required</div>
-      <div>🔖 HTML5UP.1</div>
-    </div>
-    <div class="card" onclick="window.open('https://reactbits.dev', '_blank')" title="Reactbits">
-      <div class="card-header"><b>🔢 67</b><span class="status">⏳</span></div>
-      <div><a href="https://reactbits.dev" class="bookmark-link" target="_blank">Reactbits</a></div>
-      <div>🔗 https://reactbits.dev</div>
-      <div>🏷️ free ai components</div>
-      <div>🔖 free ai tool no sign in</div>
-    </div>
-    <div class="card" onclick="window.open('https://toolfk.com', '_blank')" title="All in one tools">
-      <div class="card-header"><b>🔢 68</b><span class="status">⏳</span></div>
-      <div><a href="https://toolfk.com" class="bookmark-link" target="_blank">All in one tools</a></div>
-      <div>🔗 https://toolfk.com</div>
-      <div>🏷️ Free Tools</div>
-      <div>🔖 Many free tools online fully free</div>
-    </div>
-    <div class="card" onclick="window.open('https://flourish.studio', '_blank')" title="Excel sheet to Charts">
-      <div class="card-header"><b>🔢 69</b><span class="status">⏳</span></div>
-      <div><a href="https://flourish.studio" class="bookmark-link" target="_blank">Excel sheet to Charts</a></div>
-      <div>🔗 https://flourish.studio</div>
-      <div>🏷️ Free Excel Tools</div>
-      <div>🔖 Excle modifications with charts etc</div>
-    </div>
-    <div class="card" onclick="window.open('https://x-minus.pro/ai', '_blank')" title="Strip Music & Vocals">
-      <div class="card-header"><b>🔢 70</b><span class="status">⏳</span></div>
-      <div><a href="https://x-minus.pro/ai" class="bookmark-link" target="_blank">Strip Music & Vocals</a></div>
-      <div>🔗 https://x-minus.pro/ai</div>
-      <div>🏷️ Strip Music & Vocals</div>
-      <div>🔖 Vocal remover, Strip Music & Vocals Fully free</div>
-    </div>
-    <div class="card" onclick="window.open('https://no-color.org/', '_blank')" title="No Color">
-      <div class="card-header"><b>🔢 71</b><span class="status">⏳</span></div>
-      <div><a href="https://no-color.org/" class="bookmark-link" target="_blank">No Color</a></div>
-      <div>🔗 https://no-color.org/</div>
-      <div>🏷️ Disable all ANSI color and text styling in their terminal output</div>
-      <div>🔖 Color disablement</div>
-    </div>
-    <div class="card" onclick="window.open('https://wellness-p.ing/', '_blank')" title="Wellness Ping">
-      <div class="card-header"><b>🔢 72</b><span class="status">⏳</span></div>
-      <div><a href="https://wellness-p.ing/" class="bookmark-link" target="_blank">Wellness Ping</a></div>
-      <div>🔗 https://wellness-p.ing/</div>
-      <div>🏷️ Wellness ping</div>
-      <div>🔖 Activists, journalists, researchers, solo folks. Anyone who needs someone to notice if they go silent.</div>
-    </div>
-    <div class="card" onclick="window.open('https://www.linuxserver.io/', '_blank')" title="Linuxserver.io">
-      <div class="card-header"><b>🔢 73</b><span class="status">⏳</span></div>
-      <div><a href="https://www.linuxserver.io/" class="bookmark-link" target="_blank">Linuxserver.io</a></div>
-      <div>🔗 https://www.linuxserver.io/</div>
-      <div>🏷️ Linuxserver</div>
-      <div>🔖 Linux community images with git documents & support.</div>
-    </div>
-    <div class="card" onclick="window.open('https://github.com/alam00000/bentopdf', '_blank')" title="Bentopdf">
-      <div class="card-header"><b>🔢 74</b><span class="status">⏳</span></div>
-      <div><a href="https://github.com/alam00000/bentopdf" class="bookmark-link" target="_blank">Bentopdf</a></div>
-      <div>🔗 https://github.com/alam00000/bentopdf</div>
-      <div>🏷️ BentoPDF</div>
-      <div>🔖 BentoPDF-open-source PDF toolkit to manipulate PDF directly in browser.</div>
-    </div>
-    <div class="card" onclick="window.open('https://theresanaiforthat.com/', '_blank')" title="AI for that">
-      <div class="card-header"><b>🔢 75</b><span class="status">⏳</span></div>
-      <div><a href="https://theresanaiforthat.com/" class="bookmark-link" target="_blank">AI for that</a></div>
-      <div>🔗 https://theresanaiforthat.com/</div>
-      <div>🏷️ AI for that</div>
-      <div>🔖 Dark GPT-AI Powered applications</div>
-    </div>
-    <div class="card" onclick="window.open('https://mulerun.com/', '_blank')" title="Mulerun">
-      <div class="card-header"><b>🔢 76</b><span class="status">⏳</span></div>
-      <div><a href="https://mulerun.com/" class="bookmark-link" target="_blank">Mulerun</a></div>
-      <div>🔗 https://mulerun.com/</div>
-      <div>🏷️ Mulerun</div>
-      <div>🔖 AI Agents</div>
-    </div>
-    <div class="card" onclick="window.open('https://www.eauctionsindia.com/', '_blank')" title="E-Auctions">
-      <div class="card-header"><b>🔢 77</b><span class="status">⏳</span></div>
-      <div><a href="https://www.eauctionsindia.com/" class="bookmark-link" target="_blank">E-Auctions</a></div>
-      <div>🔗 https://www.eauctionsindia.com/</div>
-      <div>🏷️ E-Auctions</div>
-      <div>🔖 Govt E-Auctions website</div>
-    </div>
-    <div class="card" onclick="window.open('https://scribe.com/', '_blank')" title="Scribe">
-      <div class="card-header"><b>🔢 78</b><span class="status">⏳</span></div>
-      <div><a href="https://scribe.com/" class="bookmark-link" target="_blank">Scribe</a></div>
-      <div>🔗 https://scribe.com/</div>
-      <div>🏷️ Scribe</div>
-      <div>🔖 AI-powered tool transforms any workflow into step-by-step with screenshots</div>
-    </div>
-    <div class="card" onclick="window.open('https://enzolt.com/', '_blank')" title="Enzolt">
-      <div class="card-header"><b>🔢 79</b><span class="status">⏳</span></div>
-      <div><a href="https://enzolt.com/" class="bookmark-link" target="_blank">Enzolt</a></div>
-      <div>🔗 https://enzolt.com/</div>
-      <div>🏷️ Enzolt</div>
-      <div>🔖 Enzolt Lithium ion Battery Chennai</div>
-    </div>
-    <div class="card" onclick="window.open('https://votch.tv/', '_blank')" title="Votch">
-      <div class="card-header"><b>🔢 80</b><span class="status">⏳</span></div>
-      <div><a href="https://votch.tv/" class="bookmark-link" target="_blank">Votch</a></div>
-      <div>🔗 https://votch.tv/</div>
-      <div>🏷️ Votch</div>
-      <div>🔖 video translation and dubbing</div>
-    </div>
-    <div class="card" onclick="window.open('https://simplify.jobs/', '_blank')" title="Simplify">
-      <div class="card-header"><b>🔢 81</b><span class="status">⏳</span></div>
-      <div><a href="https://simplify.jobs/" class="bookmark-link" target="_blank">Simplify</a></div>
-      <div>🔗 https://simplify.jobs/</div>
-      <div>🏷️ Simplify</div>
-      <div>🔖 Simplify - AI based Job search</div>
-    </div>
-    <div class="card" onclick="window.open('https://bazzite.gg/', '_blank')" title="Bazzite">
-      <div class="card-header"><b>🔢 82</b><span class="status">⏳</span></div>
-      <div><a href="https://bazzite.gg/" class="bookmark-link" target="_blank">Bazzite</a></div>
-      <div>🔗 https://bazzite.gg/</div>
-      <div>🏷️ Bazzite</div>
-      <div>🔖 Bazzite - Linux for Gaming, Steam</div>
-    </div>
-    <div class="card" onclick="window.open('https://vazu.ai/', '_blank')" title="Vazu">
-      <div class="card-header"><b>🔢 83</b><span class="status">⏳</span></div>
-      <div><a href="https://vazu.ai/" class="bookmark-link" target="_blank">Vazu</a></div>
-      <div>🔗 https://vazu.ai/</div>
-      <div>🏷️ Vazu</div>
-      <div>🔖 AWS Pay automation - Bill reduction</div>
-    </div>
-    <div class="card" onclick="window.open('https://github.com/muesli/duf', '_blank')" title="duf">
-      <div class="card-header"><b>🔢 84</b><span class="status">⏳</span></div>
-      <div><a href="https://github.com/muesli/duf" class="bookmark-link" target="_blank">duf</a></div>
-      <div>🔗 https://github.com/muesli/duf</div>
-      <div>🏷️ duf</div>
-      <div>🔖 alternate to du or df cmd in Linux.</div>
-    </div>
-    <div class="card" onclick="window.open('https://replaceyourboss.ai/', '_blank')" title="CEO replacement">
-      <div class="card-header"><b>🔢 85</b><span class="status">⏳</span></div>
-      <div><a href="https://replaceyourboss.ai/" class="bookmark-link" target="_blank">CEO replacement</a></div>
-      <div>🔗 https://replaceyourboss.ai/</div>
-      <div>🏷️ Boss replacement</div>
-      <div>🔖 Alternate for Bosses.</div>
-    </div>
-    <div class="card" onclick="window.open('https://magicloops.dev/', '_blank')" title="Vibe coding">
-      <div class="card-header"><b>🔢 86</b><span class="status">⏳</span></div>
-      <div><a href="https://magicloops.dev/" class="bookmark-link" target="_blank">Vibe coding</a></div>
-      <div>🔗 https://magicloops.dev/</div>
-      <div>🏷️ Vibe coding</div>
-      <div>🔖 Vibe coding</div>
-    </div>
-    <div class="card" onclick="window.open('https://www.vpngate.net/en/', '_blank')" title="VPN Gate">
-      <div class="card-header"><b>🔢 87</b><span class="status">⏳</span></div>
-      <div><a href="https://www.vpngate.net/en/" class="bookmark-link" target="_blank">VPN Gate</a></div>
-      <div>🔗 https://www.vpngate.net/en/</div>
-      <div>🏷️ VPN Gate</div>
-      <div>🔖 Free VPN Japan</div>
-    </div>
-    <div class="card" onclick="window.open('https://muted.io', '_blank')" title="Learn music">
-      <div class="card-header"><b>🔢 88</b><span class="status">⏳</span></div>
-      <div><a href="https://muted.io" class="bookmark-link" target="_blank">Learn music</a></div>
-      <div>🔗 https://muted.io</div>
-      <div>🏷️ Music</div>
-      <div>🔖 Learn music</div>
-    </div>
-    <div class="card" onclick="window.open('https://labex.io/', '_blank')" title="Labex Linux Practice">
-      <div class="card-header"><b>🔢 89</b><span class="status">⏳</span></div>
-      <div><a href="https://labex.io/" class="bookmark-link" target="_blank">Labex Linux Practice</a></div>
-      <div>🔗 https://labex.io/</div>
-      <div>🏷️ Labex</div>
-      <div>🔖 Linux learning site</div>
-    </div>
-    <div class="card" onclick="window.open('https://pinokio.co/', '_blank')" title="Local AI Model">
-      <div class="card-header"><b>🔢 90</b><span class="status">⏳</span></div>
-      <div><a href="https://pinokio.co/" class="bookmark-link" target="_blank">Local AI Model</a></div>
-      <div>🔗 https://pinokio.co/</div>
-      <div>🏷️ AI</div>
-      <div>🔖 AI on your device</div>
-    </div>
-    <div class="card" onclick="window.open('https://github.com/ading2210/linuxpdf', '_blank')" title="Linux on Pdf">
-      <div class="card-header"><b>🔢 91</b><span class="status">⏳</span></div>
-      <div><a href="https://github.com/ading2210/linuxpdf" class="bookmark-link" target="_blank">Linux on Pdf</a></div>
-      <div>🔗 https://github.com/ading2210/linuxpdf</div>
-      <div>🏷️ Linux Pdf</div>
-      <div>🔖 Linux on RISC emulator</div>
-    </div>
-    <div class="card" onclick="window.open('https://editingtools.io/thumbnail/', '_blank')" title="Thumbnail Editing tools">
-      <div class="card-header"><b>🔢 92</b><span class="status">⏳</span></div>
-      <div><a href="https://editingtools.io/thumbnail/" class="bookmark-link" target="_blank">Thumbnail Editing tools</a></div>
-      <div>🔗 https://editingtools.io/thumbnail/</div>
-      <div>🏷️ Free Image Editing tool</div>
-      <div>🔖 Image Editing tool with no login</div>
-    </div>
-    <div class="card" onclick="window.open('https://ernie.baidu.com', '_blank')" title="Ernie Chat bot">
-      <div class="card-header"><b>🔢 93</b><span class="status">⏳</span></div>
-      <div><a href="https://ernie.baidu.com" class="bookmark-link" target="_blank">Ernie Chat bot</a></div>
-      <div>🔗 https://ernie.baidu.com</div>
-      <div>🏷️ Ernie Model</div>
-      <div>🔖 An alternate free AI Chat bot with newer things</div>
-    </div>
-    <div class="card" onclick="window.open('https://www.kimi.com/en/slides', '_blank')" title="Kimi">
-      <div class="card-header"><b>🔢 94</b><span class="status">⏳</span></div>
-      <div><a href="https://www.kimi.com/en/slides" class="bookmark-link" target="_blank">Kimi</a></div>
-      <div>🔗 https://www.kimi.com/en/slides</div>
-      <div>🏷️ Kimi slides</div>
-      <div>🔖 Kimi AI presentations, Key notes</div>
-    </div>
-    <div class="card" onclick="window.open('https://famelack.com/', '_blank')" title="Famelack">
-      <div class="card-header"><b>🔢 95</b><span class="status">⏳</span></div>
-      <div><a href="https://famelack.com/" class="bookmark-link" target="_blank">Famelack</a></div>
-      <div>🔗 https://famelack.com/</div>
-      <div>🏷️ Live TVs app & Web</div>
-      <div>🔖 Free Live TVs of various countries</div>
-    </div>
-    <div class="card" onclick="window.open('https://fmhy.net/', '_blank')" title="Free stuff">
-      <div class="card-header"><b>🔢 96</b><span class="status">⏳</span></div>
-      <div><a href="https://fmhy.net/" class="bookmark-link" target="_blank">Free stuff</a></div>
-      <div>🔗 https://fmhy.net/</div>
-      <div>🏷️ Free stuff on internet</div>
-      <div>🔖 Free Media Heck Yeah - largest collection of free stuff on the internet!</div>
-    </div>
-    <div class="card" onclick="window.open('https://www.kimi.com/', '_blank')" title="Kimi AI">
-      <div class="card-header"><b>🔢 97</b><span class="status">⏳</span></div>
-      <div><a href="https://www.kimi.com/" class="bookmark-link" target="_blank">Kimi AI</a></div>
-      <div>🔗 https://www.kimi.com/</div>
-      <div>🏷️ "Swarm" intelligence for complex projects! for Slides, Sheets and Docs</div>
-      <div>🔖 Autonomous AI Agent & Research	Largest context window with multi-agent</div>
-    </div>
-    <div class="card" onclick="window.open('https://github.com/jarvesusaram99/termux-hacklab', '_blank')" title="Ubuntu on Android">
-      <div class="card-header"><b>🔢 98</b><span class="status">⏳</span></div>
-      <div><a href="https://github.com/jarvesusaram99/termux-hacklab" class="bookmark-link" target="_blank">Ubuntu on Android</a></div>
-      <div>🔗 https://github.com/jarvesusaram99/termux-hacklab</div>
-      <div>🏷️ Termux, Termux-x11</div>
-      <div>🔖 Hack lab installation Ubuntu on Android</div>
-    </div>
-    <div class="card" onclick="window.open('https://quickref.me/', '_blank')" title="Quick Ref">
-      <div class="card-header"><b>🔢 99</b><span class="status">⏳</span></div>
-      <div><a href="https://quickref.me/" class="bookmark-link" target="_blank">Quick Ref</a></div>
-      <div>🔗 https://quickref.me/</div>
-      <div>🏷️ Master Cheatsheet references</div>
-      <div>🔖 Here are some cheatsheets and quick references contributed by open source angels.</div>
-    </div>
-    <div class="card" onclick="window.open('https://www.minimax.io/', '_blank')" title="Video Audio AI">
-      <div class="card-header"><b>🔢 100</b><span class="status">⏳</span></div>
-      <div><a href="https://www.minimax.io/" class="bookmark-link" target="_blank">Video Audio AI</a></div>
-      <div>🔗 https://www.minimax.io/</div>
-      <div>🏷️ AI audio video models</div>
-      <div>🔖 Covering five major areas: text, speech, video, image, and music. Helping developers efficiently build intelligent applications</div>
-    </div>
-    <div class="card" onclick="window.open('https://www.realworkfromanywhere.com/', '_blank')" title="Realwork From anywhere">
-      <div class="card-header"><b>🔢 101</b><span class="status">⏳</span></div>
-      <div><a href="https://www.realworkfromanywhere.com/" class="bookmark-link" target="_blank">Realwork From anywhere</a></div>
-      <div>🔗 https://www.realworkfromanywhere.com/</div>
-      <div>🏷️ The only fully location independent job board.</div>
-      <div>🔖 Remote jobs online</div>
-    </div>
-    <div class="card" onclick="window.open('https://fabricodes.com/auth/login', '_blank')" title="Fabricodes">
-      <div class="card-header"><b>🔢 102</b><span class="status">⏳</span></div>
-      <div><a href="https://fabricodes.com/auth/login" class="bookmark-link" target="_blank">Fabricodes</a></div>
-      <div>🔗 https://fabricodes.com/auth/login</div>
-      <div>🏷️ AI with daily free credits</div>
-      <div>🔖 Industrial manufacturing & supply chain management</div>
-    </div>
-    <div class="card" onclick="window.open('https://aifreeforever.com/', '_blank')" title="AI freeforever">
-      <div class="card-header"><b>🔢 103</b><span class="status">⏳</span></div>
-      <div><a href="https://aifreeforever.com/" class="bookmark-link" target="_blank">AI freeforever</a></div>
-      <div>🔗 https://aifreeforever.com/</div>
-      <div>🏷️ Free AI</div>
-      <div>🔖 Free AI forever</div>
-    </div>
-    <div class="card" onclick="window.open('https://www.youtube.com/watch?v=QzddQoCKKss', '_blank')" title="Suno alternate">
-      <div class="card-header"><b>🔢 104</b><span class="status">⏳</span></div>
-      <div><a href="https://www.youtube.com/watch?v=QzddQoCKKss" class="bookmark-link" target="_blank">Suno alternate</a></div>
-      <div>🔗 https://www.youtube.com/watch?v=QzddQoCKKss</div>
-      <div>🏷️ Open source Music generator</div>
-      <div>🔖 An alternate open source music generator setup video</div>
-    </div>
-    <div class="card" onclick="window.open('https://iptv-org.github.io/', '_blank')" title="Free IPTV Index">
-      <div class="card-header"><b>🔢 105</b><span class="status">⏳</span></div>
-      <div><a href="https://iptv-org.github.io/" class="bookmark-link" target="_blank">Free IPTV Index</a></div>
-      <div>🔗 https://iptv-org.github.io/</div>
-      <div>🏷️ IPTV</div>
-      <div>🔖 Free IPTV Index</div>
-    </div>
-    <div class="card" onclick="window.open('https://sixthsample.com/spoton/', '_blank')" title="Spoton">
-      <div class="card-header"><b>🔢 106</b><span class="status">⏳</span></div>
-      <div><a href="https://sixthsample.com/spoton/" class="bookmark-link" target="_blank">Spoton</a></div>
-      <div>🔗 https://sixthsample.com/spoton/</div>
-      <div>🏷️ Free Music</div>
-      <div>🔖 Free alternate to autotune plugin</div>
-    </div>
-    <div class="card" onclick="window.open('https://www.youtube.com/watch?v=EsRyyJmO-u8', '_blank')" title="Apps in mins">
-      <div class="card-header"><b>🔢 107</b><span class="status">⏳</span></div>
-      <div><a href="https://www.youtube.com/watch?v=EsRyyJmO-u8" class="bookmark-link" target="_blank">Apps in mins</a></div>
-      <div>🔗 https://www.youtube.com/watch?v=EsRyyJmO-u8</div>
-      <div>🏷️ Website learners app in mins</div>
-      <div>🔖 How ChatGPT Built My App in Minutes</div>
-    </div>
-    <div class="card" onclick="window.open('https://distrosea.com/', '_blank')" title="Linux Distros">
-      <div class="card-header"><b>🔢 108</b><span class="status">⏳</span></div>
-      <div><a href="https://distrosea.com/" class="bookmark-link" target="_blank">Linux Distros</a></div>
-      <div>🔗 https://distrosea.com/</div>
-      <div>🏷️ Linux free online</div>
-      <div>🔖 Set of all Linux online free</div>
-    </div>
-    <div class="card" onclick="window.open('https://opencode.ai/', '_blank')" title="Open code">
-      <div class="card-header"><b>🔢 109</b><span class="status">⏳</span></div>
-      <div><a href="https://opencode.ai/" class="bookmark-link" target="_blank">Open code</a></div>
-      <div>🔗 https://opencode.ai/</div>
-      <div>🏷️ Open AI Agents</div>
-      <div>🔖 free open code</div>
-    </div>
-    <div class="card" onclick="window.open('https://chat.qwen.ai/', '_blank')" title="Qwen AI">
-      <div class="card-header"><b>🔢 110</b><span class="status">⏳</span></div>
-      <div><a href="https://chat.qwen.ai/" class="bookmark-link" target="_blank">Qwen AI</a></div>
-      <div>🔗 https://chat.qwen.ai/</div>
-      <div>🏷️ Qwen</div>
-      <div>🔖 AI PPT, slides, Keynotes, Videos</div>
-    </div>
-    <div class="card" onclick="window.open('https://www.perplexity.ai/', '_blank')" title="Perplexity AI">
-      <div class="card-header"><b>🔢 111</b><span class="status">⏳</span></div>
-      <div><a href="https://www.perplexity.ai/" class="bookmark-link" target="_blank">Perplexity AI</a></div>
-      <div>🔗 https://www.perplexity.ai/</div>
-      <div>🏷️ Perplexity</div>
-      <div>🔖 Perplexity AI for Research</div>
-    </div>
-    <div class="card" onclick="window.open('https://www.mindluster.com/', '_blank')" title="Mindluster">
-      <div class="card-header"><b>🔢 112</b><span class="status">⏳</span></div>
-      <div><a href="https://www.mindluster.com/" class="bookmark-link" target="_blank">Mindluster</a></div>
-      <div>🔗 https://www.mindluster.com/</div>
-      <div>🏷️ Mindluster</div>
-      <div>🔖 Free online courses with certificate</div>
-    </div>
-    <div class="card" onclick="window.open('https://www.worldmonitor.app', '_blank')" title="World Monitor">
-      <div class="card-header"><b>🔢 113</b><span class="status">⏳</span></div>
-      <div><a href="https://www.worldmonitor.app" class="bookmark-link" target="_blank">World Monitor</a></div>
-      <div>🔗 https://www.worldmonitor.app</div>
-      <div>🏷️ Monitoring the world</div>
-      <div>🔖 Monitor the whole world activities</div>
-    </div>
-    <div class="card" onclick="window.open('https://terminator.aeza.net/en/', '_blank')" title="Terminal">
-      <div class="card-header"><b>🔢 114</b><span class="status">⏳</span></div>
-      <div><a href="https://terminator.aeza.net/en/" class="bookmark-link" target="_blank">Terminal</a></div>
-      <div>🔗 https://terminator.aeza.net/en/</div>
-      <div>🏷️ Live terminal</div>
-      <div>🔖 Linux terminal</div>
-    </div>
-    <div class="card" onclick="window.open('https://www.commontools.org/', '_blank')" title="Free tools">
-      <div class="card-header"><b>🔢 115</b><span class="status">⏳</span></div>
-      <div><a href="https://www.commontools.org/" class="bookmark-link" target="_blank">Free tools</a></div>
-      <div>🔗 https://www.commontools.org/</div>
-      <div>🏷️ Free stuff</div>
-      <div>🔖 Common tools, text to  handwriting,etc</div>
-    </div>
-    <div class="card" onclick="window.open('https://tryhackme.com/', '_blank')" title="TryHackMe">
-      <div class="card-header"><b>🔢 116</b><span class="status">⏳</span></div>
-      <div><a href="https://tryhackme.com/" class="bookmark-link" target="_blank">TryHackMe</a></div>
-      <div>🔗 https://tryhackme.com/</div>
-      <div>🏷️ Free stuff</div>
-      <div>🔖 Guided hacking labs, beginner to advanced</div>
-    </div>
-    <div class="card" onclick="window.open('https://hackthebox.com/', '_blank')" title="Hack The Box">
-      <div class="card-header"><b>🔢 117</b><span class="status">⏳</span></div>
-      <div><a href="https://hackthebox.com/" class="bookmark-link" target="_blank">Hack The Box</a></div>
-      <div>🔗 https://hackthebox.com/</div>
-      <div>🏷️ Free stuff</div>
-      <div>🔖 Realistic penetration testing challenges</div>
-    </div>
-    <div class="card" onclick="window.open('https://portswigger.net/', '_blank')" title="PortSwigger">
-      <div class="card-header"><b>🔢 118</b><span class="status">⏳</span></div>
-      <div><a href="https://portswigger.net/" class="bookmark-link" target="_blank">PortSwigger</a></div>
-      <div>🔗 https://portswigger.net/</div>
-      <div>🏷️ Hack tools</div>
-      <div>🔖 Web security academy, Burp Suite training</div>
-    </div>
-    <div class="card" onclick="window.open('https://hackthissite.org/', '_blank')" title="Hack This Site">
-      <div class="card-header"><b>🔢 119</b><span class="status">⏳</span></div>
-      <div><a href="https://hackthissite.org/" class="bookmark-link" target="_blank">Hack This Site</a></div>
-      <div>🔗 https://hackthissite.org/</div>
-      <div>🏷️ Hack tools</div>
-      <div>🔖 Legal practice platform for hacking skills</div>
-    </div>
-    <div class="card" onclick="window.open('https://cybrary.it/', '_blank')" title="Cybrary">
-      <div class="card-header"><b>🔢 120</b><span class="status">⏳</span></div>
-      <div><a href="https://cybrary.it/" class="bookmark-link" target="_blank">Cybrary</a></div>
-      <div>🔗 https://cybrary.it/</div>
-      <div>🏷️ Hack tools</div>
-      <div>🔖 Cybersecurity courses, certifications prep</div>
-    </div>
-    <div class="card" onclick="window.open('https://try2hack.me/', '_blank')" title="Try2Hack">
-      <div class="card-header"><b>🔢 121</b><span class="status">⏳</span></div>
-      <div><a href="https://try2hack.me/" class="bookmark-link" target="_blank">Try2Hack</a></div>
-      <div>🔗 https://try2hack.me/</div>
-      <div>🏷️ Hack tools</div>
-      <div>🔖 Classic hacking puzzles and challenges</div>
-    </div>
-    <div class="card" onclick="window.open('https://hackthis.co.uk/', '_blank')" title="Hack This!">
-      <div class="card-header"><b>🔢 122</b><span class="status">⏳</span></div>
-      <div><a href="https://hackthis.co.uk/" class="bookmark-link" target="_blank">Hack This!</a></div>
-      <div>🔗 https://hackthis.co.uk/</div>
-      <div>🏷️ Hack tools</div>
-      <div>🔖 Security challenges, community-driven learning</div>
-    </div>
-    <div class="card" onclick="window.open('https://picoctf.org/', '_blank')" title="picoCTF">
-      <div class="card-header"><b>🔢 123</b><span class="status">⏳</span></div>
-      <div><a href="https://picoctf.org/" class="bookmark-link" target="_blank">picoCTF</a></div>
-      <div>🔗 https://picoctf.org/</div>
-      <div>🏷️ Hack tools</div>
-      <div>🔖 Capture the flag competitions for students</div>
-    </div>
-    <div class="card" onclick="window.open('https://ultraedit.com/', '_blank')" title="UltraEdit">
-      <div class="card-header"><b>🔢 124</b><span class="status">⏳</span></div>
-      <div><a href="https://ultraedit.com/" class="bookmark-link" target="_blank">UltraEdit</a></div>
-      <div>🔗 https://ultraedit.com/</div>
-      <div>🏷️ Hack tools</div>
-      <div>🔖 Advanced text editor for coding and analysis</div>
-    </div>
-    <div class="card" onclick="window.open('https://root-me.org/', '_blank')" title="Root Me">
-      <div class="card-header"><b>🔢 125</b><span class="status">⏳</span></div>
-      <div><a href="https://root-me.org/" class="bookmark-link" target="_blank">Root Me</a></div>
-      <div>🔗 https://root-me.org/</div>
-      <div>🏷️ Hack tools</div>
-      <div>🔖 Hands-on hacking labs and challenges</div>
-    </div>
-    <div class="card" onclick="window.open('https://seostudio.tools/', '_blank')" title="SEOStudio">
-      <div class="card-header"><b>🔢 126</b><span class="status">⏳</span></div>
-      <div><a href="https://seostudio.tools/" class="bookmark-link" target="_blank">SEOStudio</a></div>
-      <div>🔗 https://seostudio.tools/</div>
-      <div>🏷️ Free stuff</div>
-      <div>🔖 200+ free SEO, YouTube, text, image, and web tools for optimization and content creation</div>
-    </div>
-    <div class="card" onclick="window.open('https://opencode.ai/docs', '_blank')" title="Opencode documents">
-      <div class="card-header"><b>🔢 127</b><span class="status">⏳</span></div>
-      <div><a href="https://opencode.ai/docs" class="bookmark-link" target="_blank">Opencode documents</a></div>
-      <div>🔗 https://opencode.ai/docs</div>
-      <div>🏷️ Documents of opencode</div>
-      <div>🔖 Free AI vibe coding</div>
-    </div>
-    <div class="card" onclick="window.open('https://autonomousops.ai/', '_blank')" title="Autonmous OPS">
-      <div class="card-header"><b>🔢 128</b><span class="status">⏳</span></div>
-      <div><a href="https://autonomousops.ai/" class="bookmark-link" target="_blank">Autonmous OPS</a></div>
-      <div>🔗 https://autonomousops.ai/</div>
-      <div>🏷️ AI Agents for observability</div>
-      <div>🔖 Hyderabad based security firm</div>
-    </div>
-    <div class="card" onclick="window.open('https://aisquare.studio/', '_blank')" title="AI Square">
-      <div class="card-header"><b>🔢 129</b><span class="status">⏳</span></div>
-      <div><a href="https://aisquare.studio/" class="bookmark-link" target="_blank">AI Square</a></div>
-      <div>🔗 https://aisquare.studio/</div>
-      <div>🏷️ AI square</div>
-      <div>🔖 AI Experience Management (AIEM) platform designed for Educators</div>
-    </div>
-    <div class="card" onclick="window.open('https://www.facets.cloud', '_blank')" title="Facets">
-      <div class="card-header"><b>🔢 130</b><span class="status">⏳</span></div>
-      <div><a href="https://www.facets.cloud" class="bookmark-link" target="_blank">Facets</a></div>
-      <div>🔗 https://www.facets.cloud</div>
-      <div>🏷️ AI-Powered Orchestrator for Intelligent Infrastructure</div>
-      <div>🔖 An AI-powered Platform Engineering Orchestration tool built on Terraform</div>
-    </div>
-    <div class="card" onclick="window.open('https://bharatbuild.ai/', '_blank')" title="Bharatbuild">
-      <div class="card-header"><b>🔢 131</b><span class="status">⏳</span></div>
-      <div><a href="https://bharatbuild.ai/" class="bookmark-link" target="_blank">Bharatbuild</a></div>
-      <div>🔗 https://bharatbuild.ai/</div>
-      <div>🏷️ An AI-powered code and project generation</div>
-      <div>🔖 Full-stack applications 3 projects on freetier</div>
-    </div>
-    <div class="card" onclick="window.open('https://architecto.dev/en', '_blank')" title="Architecto">
-      <div class="card-header"><b>🔢 132</b><span class="status">⏳</span></div>
-      <div><a href="https://architecto.dev/en" class="bookmark-link" target="_blank">Architecto</a></div>
-      <div>🔗 https://architecto.dev/en</div>
-      <div>🏷️ AI Architecture Generation</div>
-      <div>🔖 Cloud Architectures in minutes</div>
-    </div>
-    <div class="card" onclick="window.open('https://whataicandotoday.com/', '_blank')" title="AI today">
-      <div class="card-header"><b>🔢 133</b><span class="status">⏳</span></div>
-      <div><a href="https://whataicandotoday.com/" class="bookmark-link" target="_blank">AI today</a></div>
-      <div>🔗 https://whataicandotoday.com/</div>
-      <div>🏷️ Al stuff longlist</div>
-      <div>🔖 Al stuff</div>
-    </div>
-    <div class="card" onclick="window.open('https://rephrase-pdf.pdffiller.com/', '_blank')" title="Rephrase PDF">
-      <div class="card-header"><b>🔢 134</b><span class="status">⏳</span></div>
-      <div><a href="https://rephrase-pdf.pdffiller.com/" class="bookmark-link" target="_blank">Rephrase PDF</a></div>
-      <div>🔗 https://rephrase-pdf.pdffiller.com/</div>
-      <div>🏷️ This service allows you to rephrase or edit PDF content online. Useful for document cleanup, formatting, and quick text adjustments.</div>
-      <div>🔖 PDF Tools</div>
-    </div>
-    <div class="card" onclick="window.open('https://24billions.com/', '_blank')" title="24Billions">
-      <div class="card-header"><b>🔢 135</b><span class="status">⏳</span></div>
-      <div><a href="https://24billions.com/" class="bookmark-link" target="_blank">24Billions</a></div>
-      <div>🔗 https://24billions.com/</div>
-      <div>🏷️ A versatile online platform offering AI-powered tools for text generation, rewriting, summarization, and creative content production. Useful for quick ideation, document drafting, and productivity enhancement.</div>
-      <div>🔖 AI Tools</div>
-    </div>
-    <div class="card" onclick="window.open('https://removepaywalls.com/', '_blank')" title="RemovePaywalls">
-      <div class="card-header"><b>🔢 136</b><span class="status">⏳</span></div>
-      <div><a href="https://removepaywalls.com/" class="bookmark-link" target="_blank">RemovePaywalls</a></div>
-      <div>🔗 https://removepaywalls.com/</div>
-      <div>🏷️ An online service designed to bypass or remove paywalls from articles and websites, allowing users to access restricted content more easily. Useful for research, reading premium news, and accessing locked resources.</div>
-      <div>🔖 Web Tools</div>
-    </div>
-    <div class="card" onclick="window.open('https://edit.paperpal.com/', '_blank')" title="Paperpal Edit">
-      <div class="card-header"><b>🔢 137</b><span class="status">⏳</span></div>
-      <div><a href="https://edit.paperpal.com/" class="bookmark-link" target="_blank">Paperpal Edit</a></div>
-      <div>🔗 https://edit.paperpal.com/</div>
-      <div>🏷️ An AI-powered academic writing assistant that helps refine grammar, style, and clarity in research papers. Useful for polishing manuscripts, improving readability, and preparing documents for journal submission.</div>
-      <div>🔖 Writing Tools on Research papers</div>
-    </div>
-    <div class="card" onclick="window.open('https://arena.ai/', '_blank')" title="Arena AI">
-      <div class="card-header"><b>🔢 138</b><span class="status">⏳</span></div>
-      <div><a href="https://arena.ai/" class="bookmark-link" target="_blank">Arena AI</a></div>
-      <div>🔗 https://arena.ai/</div>
-      <div>🏷️ A collaborative AI platform designed for building, testing, and deploying machine learning models. It provides tools for experimentation, benchmarking, and sharing AI workflows, making it useful for researchers, developers, and teams working on applied AI projects.</div>
-      <div>🔖 Free AI Tools Unlimited</div>
-    </div>
-    <div class="card" onclick="window.open('https://eyecannndy.com/', '_blank')" title="Eyecannndy">
-      <div class="card-header"><b>🔢 139</b><span class="status">⏳</span></div>
-      <div><a href="https://eyecannndy.com/" class="bookmark-link" target="_blank">Eyecannndy</a></div>
-      <div>🔗 https://eyecannndy.com/</div>
-      <div>🏷️ A comprehensive visual technique library showcasing hundreds of cinematic and stylistic effects. Useful for filmmakers, editors, and creatives to explore camera moves, transitions, and experimental aesthetics for inspiration and learning.</div>
-      <div>🔖 Creative Tools</div>
-    </div>
-    <div class="card" onclick="window.open('https://www.toolfk.com/', '_blank')" title="ToolFK">
-      <div class="card-header"><b>🔢 140</b><span class="status">⏳</span></div>
-      <div><a href="https://www.toolfk.com/" class="bookmark-link" target="_blank">ToolFK</a></div>
-      <div>🔗 https://www.toolfk.com/</div>
-      <div>🏷️ A multi‑purpose online toolkit offering converters, editors, and productivity utilities. Useful for handling documents, text, and files quickly without installing software.</div>
-      <div>🔖 Free no login AI Web Tools</div>
-    </div>
-    <div class="card" onclick="window.open('https://www.trae.ai/', '_blank')" title="TRAE">
-      <div class="card-header"><b>🔢 141</b><span class="status">⏳</span></div>
-      <div><a href="https://www.trae.ai/" class="bookmark-link" target="_blank">TRAE</a></div>
-      <div>🔗 https://www.trae.ai/</div>
-      <div>🏷️ An AI-powered IDE and coding agent designed to accelerate software development. TRAE integrates into workflows with smart autocompletion, autonomous SOLO mode for end-to-end project building, and customizable agent teams. Useful for developers seeking faster coding, debugging, and deployment with AI assistance.</div>
-      <div>🔖 Free AI Tools</div>
-    </div>
-    <div class="card" onclick="window.open('https://github.com/stackblitz-labs/bolt.diy', '_blank')" title="Bolt DIY">
-      <div class="card-header"><b>🔢 142</b><span class="status">⏳</span></div>
-      <div><a href="https://github.com/stackblitz-labs/bolt.diy" class="bookmark-link" target="_blank">Bolt DIY</a></div>
-      <div>🔗 https://github.com/stackblitz-labs/bolt.diy</div>
-      <div>🏷️ An open-source AI-powered coding assistant that helps developers scaffold, prototype, and build applications directly in the browser. Useful for rapid experimentation, learning, and accelerating project setup with minimal configuration.</div>
-      <div>🔖 Developer Tools Free AI</div>
-    </div>
-    <div class="card" onclick="window.open('https://studio.firebase.google.com/', '_blank')" title="Firebase Studio">
-      <div class="card-header"><b>🔢 143</b><span class="status">⏳</span></div>
-      <div><a href="https://studio.firebase.google.com/" class="bookmark-link" target="_blank">Firebase Studio</a></div>
-      <div>🔗 https://studio.firebase.google.com/</div>
-      <div>🏷️ A web-based console for managing Firebase projects. It provides tools for authentication, databases, hosting, cloud functions, and analytics, making it useful for developers to build, monitor, and scale web and mobile applications.</div>
-      <div>🔖 Developer Tools Free AI</div>
-    </div>
-    <div class="card" onclick="window.open('https://labex.io/', '_blank')" title="LabEx">
-      <div class="card-header"><b>🔢 144</b><span class="status">⏳</span></div>
-      <div><a href="https://labex.io/" class="bookmark-link" target="_blank">LabEx</a></div>
-      <div>🔗 https://labex.io/</div>
-      <div>🏷️ An interactive learning platform offering hands-on coding labs, guided courses, and practice environments. Useful for developers, students, and professionals to learn programming, test skills, and build projects in real-time without complex setup.</div>
-      <div>🔖 Free Learning Tools</div>
-    </div>
-    <div class="card" onclick="window.open('https://pabbly.com/', '_blank')" title="Pabbly">
-      <div class="card-header"><b>🔢 145</b><span class="status">⏳</span></div>
-      <div><a href="https://pabbly.com/" class="bookmark-link" target="_blank">Pabbly</a></div>
-      <div>🔗 https://pabbly.com/</div>
-      <div>🏷️ A suite of business automation tools offering email marketing, subscription billing, form building, and workflow automation. Useful for startups, marketers, and businesses to streamline operations, manage payments, and automate repetitive tasks.</div>
-      <div>🔖 Business Nocode Tools</div>
-    </div>
-    <div class="card" onclick="window.open('https://youtu.be/taeOIEsBeHo?si=C75Pgt9RJsiZbRpP', '_blank')" title="YouTube – AI Tools Overview">
-      <div class="card-header"><b>🔢 146</b><span class="status">⏳</span></div>
-      <div><a href="https://youtu.be/taeOIEsBeHo?si=C75Pgt9RJsiZbRpP" class="bookmark-link" target="_blank">YouTube – AI Tools Overview</a></div>
-      <div>🔗 https://youtu.be/taeOIEsBeHo?si=C75Pgt9RJsiZbRpP</div>
-      <div>🏷️ A video walkthrough showcasing practical AI tools and platforms, highlighting their features, use cases, and benefits. Useful for learners, professionals, and creators seeking visual demonstrations of emerging AI technologies.</div>
-      <div>🔖 Learning Nocode Resources</div>
-    </div>
-    <div class="card" onclick="window.open('https://tuxmate.com/', '_blank')" title="TuxMate">
-      <div class="card-header"><b>🔢 147</b><span class="status">⏳</span></div>
-      <div><a href="https://tuxmate.com/" class="bookmark-link" target="_blank">TuxMate</a></div>
-      <div>🔗 https://tuxmate.com/</div>
-      <div>🏷️ A web-based Linux bulk app installer that generates terminal commands for installing multiple applications at once. Supports popular distributions like Ubuntu, with categorized app lists (browsers, dev tools, communication, creative, gaming, office, security, and more). Useful for developers, sysadmins, and Linux enthusiasts to quickly set up fresh systems without manual installs.</div>
-      <div>🔖 Linux Tools</div>
-    </div>
+<body style="background-color:white;color:black;transition:background-color 0.3s,color 0.3s;margin:4px;font-family:Arial,sans-serif;">
+  <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:8px;align-items:center;">
+    <span style="font-weight:bold;font-size:1.1rem;">📌🅝🅞🅞🅡🅚🅤🅡🅘</span>
+    <input type="text" id="filterInput" placeholder="Search..." onkeyup="filterTable()" 
+           style="flex:1;min-width:150px;padding:6px;border:1px solid #ccc;background-color:#f9f9f9;color:#000;font-size:1rem;">
+    <button id="theme-button" style="padding:6px 10px;font-size:1.2rem;cursor:pointer;">☀️</button>
+  </div>
+  <div style="overflow-x:auto;">
+    <table id="bookmarkTable" data-sort-dir="asc" 
+           style="width:100%;border-collapse:collapse;font-size:0.9rem;min-width:500px;">
+      <thead>
+        <tr>
+          <th onclick="sortTable(0)" title="Serial Number" 
+              style="background:#FFD700;color:#fff;cursor:pointer;font-size:0.95rem;padding:6px;border-bottom:1px solid #ddd;text-align:left;">🔢</th>
+          <th onclick="sortTable(1)" title="URL" 
+              style="background:#FFD700;color:#fff;cursor:pointer;font-size:0.95rem;padding:6px;border-bottom:1px solid #ddd;text-align:left;">🔗</th>
+          <th onclick="sortTable(2)" title="Tags" 
+              style="background:#FFD700;color:#fff;cursor:pointer;font-size:0.95rem;padding:6px;border-bottom:1px solid #ddd;text-align:left;">🏷️</th>
+          <th onclick="sortTable(3)" title="Description" 
+              style="background:#FFD700;color:#fff;cursor:pointer;font-size:0.95rem;padding:6px;border-bottom:1px solid #ddd;text-align:left;">🔖</th>
+          <th onclick="sortTable(4)" title="URL Status" 
+              style="background:#FFD700;color:#fff;cursor:pointer;font-size:0.95rem;padding:6px;border-bottom:1px solid #ddd;text-align:left;">✅/❌</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr style="border-bottom:1px solid #ddd;">
+          <td style="padding:6px;text-align:left;vertical-align:top;">1</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">
+            <a href="https://docs.python.org" class="bookmark-link" title="Python Docs" target="_blank" 
+               style="color:#0366d6;text-decoration:none;word-break:break-word;">https://docs.python.org</a>
+          </td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">python,docs</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">Official Python docs</td>
+          <td class="status" style="padding:6px;text-align:left;vertical-align:top;">⏳</td>
+        </tr>
+        <tr style="border-bottom:1px solid #ddd;">
+          <td style="padding:6px;text-align:left;vertical-align:top;">2</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">
+            <a href="https://github.com/features/copilot" class="bookmark-link" title="GitHub Copilot" target="_blank" 
+               style="color:#0366d6;text-decoration:none;word-break:break-word;">https://github.com/features/copilot</a>
+          </td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">AI,tools</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">GitHub’s AI pair programmer</td>
+          <td class="status" style="padding:6px;text-align:left;vertical-align:top;">⏳</td>
+        </tr>
+        <tr style="border-bottom:1px solid #ddd;">
+          <td style="padding:6px;text-align:left;vertical-align:top;">3</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">
+            <a href="https://google.com" class="bookmark-link" title="Google" target="_blank" 
+               style="color:#0366d6;text-decoration:none;word-break:break-word;">https://google.com</a>
+          </td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">Google,Search engine</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">Google search engine</td>
+          <td class="status" style="padding:6px;text-align:left;vertical-align:top;">⏳</td>
+        </tr>
+        <tr style="border-bottom:1px solid #ddd;">
+          <td style="padding:6px;text-align:left;vertical-align:top;">4</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">
+            <a href="https://unwatermark.ai/pricing/" class="bookmark-link" title="Unwatermark AI Pricing" target="_blank" 
+               style="color:#0366d6;text-decoration:none;word-break:break-word;">https://unwatermark.ai/pricing/</a>
+          </td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">AI,tools,image,video</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">AI-powered watermark remover for images/videos with flexible pricing</td>
+          <td class="status" style="padding:6px;text-align:left;vertical-align:top;">⏳</td>
+        </tr>
+        <tr style="border-bottom:1px solid #ddd;">
+          <td style="padding:6px;text-align:left;vertical-align:top;">5</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">
+            <a href="https://receive-sms-free.cc/" class="bookmark-link" title="Receive SMS Free" target="_blank" 
+               style="color:#0366d6;text-decoration:none;word-break:break-word;">https://receive-sms-free.cc/</a>
+          </td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">sms,temp,privacy</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">Free temporary numbers for SMS verification</td>
+          <td class="status" style="padding:6px;text-align:left;vertical-align:top;">⏳</td>
+        </tr>
+        <tr style="border-bottom:1px solid #ddd;">
+          <td style="padding:6px;text-align:left;vertical-align:top;">6</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">
+            <a href="https://temp-number.com/" class="bookmark-link" title="Temp Number" target="_blank" 
+               style="color:#0366d6;text-decoration:none;word-break:break-word;">https://temp-number.com/</a>
+          </td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">sms,temp,tools</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">Disposable numbers for SMS with global coverage</td>
+          <td class="status" style="padding:6px;text-align:left;vertical-align:top;">⏳</td>
+        </tr>
+        <tr style="border-bottom:1px solid #ddd;">
+          <td style="padding:6px;text-align:left;vertical-align:top;">7</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">
+            <a href="https://chatglm.cn/main/alltoolsdetail?lang=en" class="bookmark-link" title="ChatGLM Tools Directory" target="_blank" 
+               style="color:#0366d6;text-decoration:none;word-break:break-word;">https://chatglm.cn/main/alltoolsdetail?lang=en</a>
+          </td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">AI,chatbot,tools</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">Chinese-English AI assistant with multimodal tools</td>
+          <td class="status" style="padding:6px;text-align:left;vertical-align:top;">⏳</td>
+        </tr>
+        <tr style="border-bottom:1px solid #ddd;">
+          <td style="padding:6px;text-align:left;vertical-align:top;">8</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">
+            <a href="https://unwatermark.ai/" class="bookmark-link" title="UnWaterMark" target="_blank" 
+               style="color:#0366d6;text-decoration:none;word-break:break-word;">https://unwatermark.ai/</a>
+          </td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">Water Mark removal</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">Water mark removal tool on videos</td>
+          <td class="status" style="padding:6px;text-align:left;vertical-align:top;">⏳</td>
+        </tr>
+        <tr style="border-bottom:1px solid #ddd;">
+          <td style="padding:6px;text-align:left;vertical-align:top;">9</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">
+            <a href="https://officetomd.streamlit.app/" class="bookmark-link" title="Mark Down app" target="_blank" 
+               style="color:#0366d6;text-decoration:none;word-break:break-word;">https://officetomd.streamlit.app/</a>
+          </td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">Free Mark Down language converter App</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">Mark Down converter App</td>
+          <td class="status" style="padding:6px;text-align:left;vertical-align:top;">⏳</td>
+        </tr>
+        <tr style="border-bottom:1px solid #ddd;">
+          <td style="padding:6px;text-align:left;vertical-align:top;">10</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">
+            <a href="https://www.youtube.com/watch?v=ziXY2OsbB8I" class="bookmark-link" title="Android in Windows" target="_blank" 
+               style="color:#0366d6;text-decoration:none;word-break:break-word;">https://www.youtube.com/watch?v=ziXY2OsbB8I</a>
+          </td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">Andriod on Windows</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">Android on Windows installation video</td>
+          <td class="status" style="padding:6px;text-align:left;vertical-align:top;">⏳</td>
+        </tr>
+        <tr style="border-bottom:1px solid #ddd;">
+          <td style="padding:6px;text-align:left;vertical-align:top;">11</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">
+            <a href="https://github.com/x1xhlol/system-prompts-and-models-of-ai-tools/tree/main" class="bookmark-link" title="AI Prompts" target="_blank" 
+               style="color:#0366d6;text-decoration:none;word-break:break-word;">https://github.com/x1xhlol/system-prompts-and-models-of-ai-tools/tree/main</a>
+          </td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">AI Prompts</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">Multiple Free AI prompts for activities</td>
+          <td class="status" style="padding:6px;text-align:left;vertical-align:top;">⏳</td>
+        </tr>
+        <tr style="border-bottom:1px solid #ddd;">
+          <td style="padding:6px;text-align:left;vertical-align:top;">12</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">
+            <a href="https://puter.com/app/terminal" class="bookmark-link" title="Online OS" target="_blank" 
+               style="color:#0366d6;text-decoration:none;word-break:break-word;">https://puter.com/app/terminal</a>
+          </td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">Online desktop</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">Live OS in Browser</td>
+          <td class="status" style="padding:6px;text-align:left;vertical-align:top;">⏳</td>
+        </tr>
+        <tr style="border-bottom:1px solid #ddd;">
+          <td style="padding:6px;text-align:left;vertical-align:top;">13</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">
+            <a href="https://lovable.dev/" class="bookmark-link" title="Loveable" target="_blank" 
+               style="color:#0366d6;text-decoration:none;word-break:break-word;">https://lovable.dev/</a>
+          </td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">AI for web development</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">Web development AI tool</td>
+          <td class="status" style="padding:6px;text-align:left;vertical-align:top;">⏳</td>
+        </tr>
+        <tr style="border-bottom:1px solid #ddd;">
+          <td style="padding:6px;text-align:left;vertical-align:top;">14</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">
+            <a href="https://www.krea.ai/" class="bookmark-link" title="Krea AI" target="_blank" 
+               style="color:#0366d6;text-decoration:none;word-break:break-word;">https://www.krea.ai/</a>
+          </td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">AI for manipulating videos & Images</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">Video & Image AI tool</td>
+          <td class="status" style="padding:6px;text-align:left;vertical-align:top;">⏳</td>
+        </tr>
+        <tr style="border-bottom:1px solid #ddd;">
+          <td style="padding:6px;text-align:left;vertical-align:top;">15</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">
+            <a href="https://customgpt.ai/" class="bookmark-link" title="Custom GPT" target="_blank" 
+               style="color:#0366d6;text-decoration:none;word-break:break-word;">https://customgpt.ai/</a>
+          </td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">AI for your cusomization</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">Custom AI tool creation</td>
+          <td class="status" style="padding:6px;text-align:left;vertical-align:top;">⏳</td>
+        </tr>
+        <tr style="border-bottom:1px solid #ddd;">
+          <td style="padding:6px;text-align:left;vertical-align:top;">16</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">
+            <a href="https://copilot.microsoft.com/" class="bookmark-link" title="Copilot" target="_blank" 
+               style="color:#0366d6;text-decoration:none;word-break:break-word;">https://copilot.microsoft.com/</a>
+          </td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">Copilot for Code</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">Microsoft's AI assistant</td>
+          <td class="status" style="padding:6px;text-align:left;vertical-align:top;">⏳</td>
+        </tr>
+        <tr style="border-bottom:1px solid #ddd;">
+          <td style="padding:6px;text-align:left;vertical-align:top;">17</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">
+            <a href="https://soloist.ai/" class="bookmark-link" title="Solo AI" target="_blank" 
+               style="color:#0366d6;text-decoration:none;word-break:break-word;">https://soloist.ai/</a>
+          </td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">AI for website creation</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">Mozilla's AI chatbot</td>
+          <td class="status" style="padding:6px;text-align:left;vertical-align:top;">⏳</td>
+        </tr>
+        <tr style="border-bottom:1px solid #ddd;">
+          <td style="padding:6px;text-align:left;vertical-align:top;">18</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">
+            <a href="https://www.mozilla.ai/" class="bookmark-link" title="Mozilla AI" target="_blank" 
+               style="color:#0366d6;text-decoration:none;word-break:break-word;">https://www.mozilla.ai/</a>
+          </td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">Mozilla AI for AI agents creation</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">Mozilla's AI eco system</td>
+          <td class="status" style="padding:6px;text-align:left;vertical-align:top;">⏳</td>
+        </tr>
+        <tr style="border-bottom:1px solid #ddd;">
+          <td style="padding:6px;text-align:left;vertical-align:top;">19</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">
+            <a href="https://moovai.net/" class="bookmark-link" title="Movie Site" target="_blank" 
+               style="color:#0366d6;text-decoration:none;word-break:break-word;">https://moovai.net/</a>
+          </td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">Movie recommended Site</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">Movie recommendation Site with AI</td>
+          <td class="status" style="padding:6px;text-align:left;vertical-align:top;">⏳</td>
+        </tr>
+        <tr style="border-bottom:1px solid #ddd;">
+          <td style="padding:6px;text-align:left;vertical-align:top;">20</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">
+            <a href="https://learn.circuitverse.org/" class="bookmark-link" title="Circut Verse" target="_blank" 
+               style="color:#0366d6;text-decoration:none;word-break:break-word;">https://learn.circuitverse.org/</a>
+          </td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">Circuts</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">Electronic circuts</td>
+          <td class="status" style="padding:6px;text-align:left;vertical-align:top;">⏳</td>
+        </tr>
+        <tr style="border-bottom:1px solid #ddd;">
+          <td style="padding:6px;text-align:left;vertical-align:top;">21</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">
+            <a href="https://www.zamzar.com/" class="bookmark-link" title="Zamzar" target="_blank" 
+               style="color:#0366d6;text-decoration:none;word-break:break-word;">https://www.zamzar.com/</a>
+          </td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">Zamzar file conversion</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">Zamzar file conversion free online</td>
+          <td class="status" style="padding:6px;text-align:left;vertical-align:top;">⏳</td>
+        </tr>
+        <tr style="border-bottom:1px solid #ddd;">
+          <td style="padding:6px;text-align:left;vertical-align:top;">22</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">
+            <a href="https://kiro.dev/" class="bookmark-link" title="Kirao" target="_blank" 
+               style="color:#0366d6;text-decoration:none;word-break:break-word;">https://kiro.dev/</a>
+          </td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">Kiro code agent</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">Kiro vibe code agent free tier</td>
+          <td class="status" style="padding:6px;text-align:left;vertical-align:top;">⏳</td>
+        </tr>
+        <tr style="border-bottom:1px solid #ddd;">
+          <td style="padding:6px;text-align:left;vertical-align:top;">23</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">
+            <a href="https://gnukhata.org/" class="bookmark-link" title="Gnukhata" target="_blank" 
+               style="color:#0366d6;text-decoration:none;word-break:break-word;">https://gnukhata.org/</a>
+          </td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">Free accounting software</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">Free Tally alternative</td>
+          <td class="status" style="padding:6px;text-align:left;vertical-align:top;">⏳</td>
+        </tr>
+        <tr style="border-bottom:1px solid #ddd;">
+          <td style="padding:6px;text-align:left;vertical-align:top;">24</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">
+            <a href="https://www.google.com/" class="bookmark-link" title="Google" target="_blank" 
+               style="color:#0366d6;text-decoration:none;word-break:break-word;">https://www.google.com/</a>
+          </td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">Search Engine</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">Google Search Engine</td>
+          <td class="status" style="padding:6px;text-align:left;vertical-align:top;">⏳</td>
+        </tr>
+        <tr style="border-bottom:1px solid #ddd;">
+          <td style="padding:6px;text-align:left;vertical-align:top;">25</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">
+            <a href="https://uiverse.io/elements" class="bookmark-link" title="Uiverse" target="_blank" 
+               style="color:#0366d6;text-decoration:none;word-break:break-word;">https://uiverse.io/elements</a>
+          </td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">Uiverse</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">CSS Templates free code</td>
+          <td class="status" style="padding:6px;text-align:left;vertical-align:top;">⏳</td>
+        </tr>
+        <tr style="border-bottom:1px solid #ddd;">
+          <td style="padding:6px;text-align:left;vertical-align:top;">26</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">
+            <a href="https://tamileditor.org/" class="bookmark-link" title="தமிழ் எழுதி" target="_blank" 
+               style="color:#0366d6;text-decoration:none;word-break:break-word;">https://tamileditor.org/</a>
+          </td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">தமிழ் எழுதி</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">தமிழ் எழுதி, தமிழெழுதி - Tamil Editor</td>
+          <td class="status" style="padding:6px;text-align:left;vertical-align:top;">⏳</td>
+        </tr>
+        <tr style="border-bottom:1px solid #ddd;">
+          <td style="padding:6px;text-align:left;vertical-align:top;">27</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">
+            <a href="https://www.modulify.ai/" class="bookmark-link" title="Modulify" target="_blank" 
+               style="color:#0366d6;text-decoration:none;word-break:break-word;">https://www.modulify.ai/</a>
+          </td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">Modulify</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">AI Website builder, Website creator</td>
+          <td class="status" style="padding:6px;text-align:left;vertical-align:top;">⏳</td>
+        </tr>
+        <tr style="border-bottom:1px solid #ddd;">
+          <td style="padding:6px;text-align:left;vertical-align:top;">28</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">
+            <a href="https://tinywow.com/" class="bookmark-link" title="TinyWOW" target="_blank" 
+               style="color:#0366d6;text-decoration:none;word-break:break-word;">https://tinywow.com/</a>
+          </td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">TinyWOW</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">Free online converters - TinyWOW</td>
+          <td class="status" style="padding:6px;text-align:left;vertical-align:top;">⏳</td>
+        </tr>
+        <tr style="border-bottom:1px solid #ddd;">
+          <td style="padding:6px;text-align:left;vertical-align:top;">29</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">
+            <a href="https://app.emergent.sh/landing" class="bookmark-link" title="Emergent" target="_blank" 
+               style="color:#0366d6;text-decoration:none;word-break:break-word;">https://app.emergent.sh/landing</a>
+          </td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">Rapid webapp builder</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">Rapid webapp builder and clone existing webapps</td>
+          <td class="status" style="padding:6px;text-align:left;vertical-align:top;">⏳</td>
+        </tr>
+        <tr style="border-bottom:1px solid #ddd;">
+          <td style="padding:6px;text-align:left;vertical-align:top;">30</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">
+            <a href="https://music.ai/" class="bookmark-link" title="AI Music" target="_blank" 
+               style="color:#0366d6;text-decoration:none;word-break:break-word;">https://music.ai/</a>
+          </td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">AI Music</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">Free AI Music with login</td>
+          <td class="status" style="padding:6px;text-align:left;vertical-align:top;">⏳</td>
+        </tr>
+        <tr style="border-bottom:1px solid #ddd;">
+          <td style="padding:6px;text-align:left;vertical-align:top;">31</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">
+            <a href="https://docs.docker.com/desktop/setup/install/linux/debian/#install-docker-desktop" class="bookmark-link" title="Docker on Debian" target="_blank" 
+               style="color:#0366d6;text-decoration:none;word-break:break-word;">https://docs.docker.com/desktop/setup/install/linux/debian/#install-docker-desktop</a>
+          </td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">Debian docker</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">Docker explanation on Debian</td>
+          <td class="status" style="padding:6px;text-align:left;vertical-align:top;">⏳</td>
+        </tr>
+        <tr style="border-bottom:1px solid #ddd;">
+          <td style="padding:6px;text-align:left;vertical-align:top;">32</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">
+            <a href="https://deepai.org/chat" class="bookmark-link" title="Deep AI" target="_blank" 
+               style="color:#0366d6;text-decoration:none;word-break:break-word;">https://deepai.org/chat</a>
+          </td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">Deep AI</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">Free AI Chatbot alternate to Deep Seek</td>
+          <td class="status" style="padding:6px;text-align:left;vertical-align:top;">⏳</td>
+        </tr>
+        <tr style="border-bottom:1px solid #ddd;">
+          <td style="padding:6px;text-align:left;vertical-align:top;">33</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">
+            <a href="https://google.github.io/adk-docs/" class="bookmark-link" title="Agents Development Kit - ADK" target="_blank" 
+               style="color:#0366d6;text-decoration:none;word-break:break-word;">https://google.github.io/adk-docs/</a>
+          </td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">AI Agents Development Kit - pip install google-adk</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">Google ADK</td>
+          <td class="status" style="padding:6px;text-align:left;vertical-align:top;">⏳</td>
+        </tr>
+        <tr style="border-bottom:1px solid #ddd;">
+          <td style="padding:6px;text-align:left;vertical-align:top;">34</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">
+            <a href="https://google.github.io/adk-docs/" class="bookmark-link" title="Agents Development Kit - ADK Samples" target="_blank" 
+               style="color:#0366d6;text-decoration:none;word-break:break-word;">https://google.github.io/adk-docs/</a>
+          </td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">AI Agents Development Kit Samples - pip install google-adk</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">Google ADK Samples</td>
+          <td class="status" style="padding:6px;text-align:left;vertical-align:top;">⏳</td>
+        </tr>
+        <tr style="border-bottom:1px solid #ddd;">
+          <td style="padding:6px;text-align:left;vertical-align:top;">35</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">
+            <a href="https://pythonandvba.com/" class="bookmark-link" title="Python VBA" target="_blank" 
+               style="color:#0366d6;text-decoration:none;word-break:break-word;">https://pythonandvba.com/</a>
+          </td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">Python VBA</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">Python VBA</td>
+          <td class="status" style="padding:6px;text-align:left;vertical-align:top;">⏳</td>
+        </tr>
+        <tr style="border-bottom:1px solid #ddd;">
+          <td style="padding:6px;text-align:left;vertical-align:top;">36</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">
+            <a href="https://www.xlwings.org/" class="bookmark-link" title="Python Excel - XLWings" target="_blank" 
+               style="color:#0366d6;text-decoration:none;word-break:break-word;">https://www.xlwings.org/</a>
+          </td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">Python Excel - XLWings Documentation</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">Python XLWings</td>
+          <td class="status" style="padding:6px;text-align:left;vertical-align:top;">⏳</td>
+        </tr>
+        <tr style="border-bottom:1px solid #ddd;">
+          <td style="padding:6px;text-align:left;vertical-align:top;">37</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">
+            <a href="https://pentestgpt.ai/" class="bookmark-link" title="Penetration Test" target="_blank" 
+               style="color:#0366d6;text-decoration:none;word-break:break-word;">https://pentestgpt.ai/</a>
+          </td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">Penetration Test - Hack Tools AI</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">PenTestGPT</td>
+          <td class="status" style="padding:6px;text-align:left;vertical-align:top;">⏳</td>
+        </tr>
+        <tr style="border-bottom:1px solid #ddd;">
+          <td style="padding:6px;text-align:left;vertical-align:top;">38</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">
+            <a href="https://flowgpt.com/" class="bookmark-link" title="Hack tools documentations AI" target="_blank" 
+               style="color:#0366d6;text-decoration:none;word-break:break-word;">https://flowgpt.com/</a>
+          </td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">Hack Tools AI</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">FlowGPT</td>
+          <td class="status" style="padding:6px;text-align:left;vertical-align:top;">⏳</td>
+        </tr>
+        <tr style="border-bottom:1px solid #ddd;">
+          <td style="padding:6px;text-align:left;vertical-align:top;">39</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">
+            <a href="https://flowgpt.com/p/chaosgpt" class="bookmark-link" title="Hack tools documentations" target="_blank" 
+               style="color:#0366d6;text-decoration:none;word-break:break-word;">https://flowgpt.com/p/chaosgpt</a>
+          </td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">Hack Tools AI</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">ChaosGPT</td>
+          <td class="status" style="padding:6px;text-align:left;vertical-align:top;">⏳</td>
+        </tr>
+        <tr style="border-bottom:1px solid #ddd;">
+          <td style="padding:6px;text-align:left;vertical-align:top;">40</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">
+            <a href="https://agpt.co/" class="bookmark-link" title="AutoGPT AI" target="_blank" 
+               style="color:#0366d6;text-decoration:none;word-break:break-word;">https://agpt.co/</a>
+          </td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">AutoGPT from Github</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">AutoGPT</td>
+          <td class="status" style="padding:6px;text-align:left;vertical-align:top;">⏳</td>
+        </tr>
+        <tr style="border-bottom:1px solid #ddd;">
+          <td style="padding:6px;text-align:left;vertical-align:top;">41</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">
+            <a href="https://gptstore.ai/gpts/nuzDIyCFIM-vulngpt" class="bookmark-link" title="VulnGPT AI" target="_blank" 
+               style="color:#0366d6;text-decoration:none;word-break:break-word;">https://gptstore.ai/gpts/nuzDIyCFIM-vulngpt</a>
+          </td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">VulnGPT for vulnerabilities</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">VulnGPT</td>
+          <td class="status" style="padding:6px;text-align:left;vertical-align:top;">⏳</td>
+        </tr>
+        <tr style="border-bottom:1px solid #ddd;">
+          <td style="padding:6px;text-align:left;vertical-align:top;">42</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">
+            <a href="https://www.schoolgoat.com/" class="bookmark-link" title="Schoolgoat" target="_blank" 
+               style="color:#0366d6;text-decoration:none;word-break:break-word;">https://www.schoolgoat.com/</a>
+          </td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">Home work help for school students</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">Schoolgoat</td>
+          <td class="status" style="padding:6px;text-align:left;vertical-align:top;">⏳</td>
+        </tr>
+        <tr style="border-bottom:1px solid #ddd;">
+          <td style="padding:6px;text-align:left;vertical-align:top;">43</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">
+            <a href="https://bestfreeaiwebsites.com/" class="bookmark-link" title="Free AI Tool - Code Generator etc." target="_blank" 
+               style="color:#0366d6;text-decoration:none;word-break:break-word;">https://bestfreeaiwebsites.com/</a>
+          </td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">AI Code generator with login</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">Bestfreeaiwebsites</td>
+          <td class="status" style="padding:6px;text-align:left;vertical-align:top;">⏳</td>
+        </tr>
+        <tr style="border-bottom:1px solid #ddd;">
+          <td style="padding:6px;text-align:left;vertical-align:top;">44</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">
+            <a href="https://fish.audio/" class="bookmark-link" title="Free AI Voice Tool - Copy of your own voice." target="_blank" 
+               style="color:#0366d6;text-decoration:none;word-break:break-word;">https://fish.audio/</a>
+          </td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">AI Voice tool with login</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">Fish.audio</td>
+          <td class="status" style="padding:6px;text-align:left;vertical-align:top;">⏳</td>
+        </tr>
+        <tr style="border-bottom:1px solid #ddd;">
+          <td style="padding:6px;text-align:left;vertical-align:top;">45</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">
+            <a href="https://hailuoai.video/" class="bookmark-link" title="AI Video Generator from Text" target="_blank" 
+               style="color:#0366d6;text-decoration:none;word-break:break-word;">https://hailuoai.video/</a>
+          </td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">AI Video Generator from Text with login</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">HailuoAI</td>
+          <td class="status" style="padding:6px;text-align:left;vertical-align:top;">⏳</td>
+        </tr>
+        <tr style="border-bottom:1px solid #ddd;">
+          <td style="padding:6px;text-align:left;vertical-align:top;">46</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">
+            <a href="https://magichour.ai/" class="bookmark-link" title="AI Video Generator for Pro" target="_blank" 
+               style="color:#0366d6;text-decoration:none;word-break:break-word;">https://magichour.ai/</a>
+          </td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">AI Video creation like a pro with login</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">MagichourAI</td>
+          <td class="status" style="padding:6px;text-align:left;vertical-align:top;">⏳</td>
+        </tr>
+        <tr style="border-bottom:1px solid #ddd;">
+          <td style="padding:6px;text-align:left;vertical-align:top;">47</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">
+            <a href="https://www.deeplearning.ai/" class="bookmark-link" title="AI Learning Courses free" target="_blank" 
+               style="color:#0366d6;text-decoration:none;word-break:break-word;">https://www.deeplearning.ai/</a>
+          </td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">AI Learning Courses free with Login</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">Deep Learning AI</td>
+          <td class="status" style="padding:6px;text-align:left;vertical-align:top;">⏳</td>
+        </tr>
+        <tr style="border-bottom:1px solid #ddd;">
+          <td style="padding:6px;text-align:left;vertical-align:top;">48</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">
+            <a href="https://123apps.com/" class="bookmark-link" title="So many free tools online" target="_blank" 
+               style="color:#0366d6;text-decoration:none;word-break:break-word;">https://123apps.com/</a>
+          </td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">free tools online for Video, Audio, PDF & Converters</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">123Apps</td>
+          <td class="status" style="padding:6px;text-align:left;vertical-align:top;">⏳</td>
+        </tr>
+        <tr style="border-bottom:1px solid #ddd;">
+          <td style="padding:6px;text-align:left;vertical-align:top;">49</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">
+            <a href="https://nomoregoogle.com/" class="bookmark-link" title="Alternative tools for Google" target="_blank" 
+               style="color:#0366d6;text-decoration:none;word-break:break-word;">https://nomoregoogle.com/</a>
+          </td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">Free & open source alternative tools for Google</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">NoMoreGoogle</td>
+          <td class="status" style="padding:6px;text-align:left;vertical-align:top;">⏳</td>
+        </tr>
+        <tr style="border-bottom:1px solid #ddd;">
+          <td style="padding:6px;text-align:left;vertical-align:top;">50</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">
+            <a href="https://tamildigitallibrary.in/" class="bookmark-link" title="Tamil Digital Library" target="_blank" 
+               style="color:#0366d6;text-decoration:none;word-break:break-word;">https://tamildigitallibrary.in/</a>
+          </td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">Free Tamil Digital Library</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">Tamil Digital Library</td>
+          <td class="status" style="padding:6px;text-align:left;vertical-align:top;">⏳</td>
+        </tr>
+        <tr style="border-bottom:1px solid #ddd;">
+          <td style="padding:6px;text-align:left;vertical-align:top;">51</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">
+            <a href="https://openlibrary.org/" class="bookmark-link" title="Open Digital Library" target="_blank" 
+               style="color:#0366d6;text-decoration:none;word-break:break-word;">https://openlibrary.org/</a>
+          </td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">Open Digital Library - English</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">Open Library</td>
+          <td class="status" style="padding:6px;text-align:left;vertical-align:top;">⏳</td>
+        </tr>
+        <tr style="border-bottom:1px solid #ddd;">
+          <td style="padding:6px;text-align:left;vertical-align:top;">52</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">
+            <a href="https://markitdown.pro/" class="bookmark-link" title="Mark Down converter App" target="_blank" 
+               style="color:#0366d6;text-decoration:none;word-break:break-word;">https://markitdown.pro/</a>
+          </td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">Free Mark Down language converter App</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">MD Mark Down App</td>
+          <td class="status" style="padding:6px;text-align:left;vertical-align:top;">⏳</td>
+        </tr>
+        <tr style="border-bottom:1px solid #ddd;">
+          <td style="padding:6px;text-align:left;vertical-align:top;">53</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">
+            <a href="https://github.com/microsoft/markitdown" class="bookmark-link" title="Mark Down converter code in Git" target="_blank" 
+               style="color:#0366d6;text-decoration:none;word-break:break-word;">https://github.com/microsoft/markitdown</a>
+          </td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">Free Mark Down converter code from Git</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">MD Mark Down Code</td>
+          <td class="status" style="padding:6px;text-align:left;vertical-align:top;">⏳</td>
+        </tr>
+        <tr style="border-bottom:1px solid #ddd;">
+          <td style="padding:6px;text-align:left;vertical-align:top;">54</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">
+            <a href="https://smallseotools.com/" class="bookmark-link" title="SEO Tools online" target="_blank" 
+               style="color:#0366d6;text-decoration:none;word-break:break-word;">https://smallseotools.com/</a>
+          </td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">Search Engine Optimization tools online</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">SEO Tools</td>
+          <td class="status" style="padding:6px;text-align:left;vertical-align:top;">⏳</td>
+        </tr>
+        <tr style="border-bottom:1px solid #ddd;">
+          <td style="padding:6px;text-align:left;vertical-align:top;">55</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">
+            <a href="https://www.deepseek.com/" class="bookmark-link" title="Deep Seek AI with Login" target="_blank" 
+               style="color:#0366d6;text-decoration:none;word-break:break-word;">https://www.deepseek.com/</a>
+          </td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">China's Deep Seek AI with Login</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">Deepseek AI</td>
+          <td class="status" style="padding:6px;text-align:left;vertical-align:top;">⏳</td>
+        </tr>
+        <tr style="border-bottom:1px solid #ddd;">
+          <td style="padding:6px;text-align:left;vertical-align:top;">56</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">
+            <a href="https://zzzcode.ai/" class="bookmark-link" title="Free AI Code Generator - No login" target="_blank" 
+               style="color:#0366d6;text-decoration:none;word-break:break-word;">https://zzzcode.ai/</a>
+          </td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">ZZZ Free AI Code Generator - No login</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">AI ZZZCodegenerator</td>
+          <td class="status" style="padding:6px;text-align:left;vertical-align:top;">⏳</td>
+        </tr>
+        <tr style="border-bottom:1px solid #ddd;">
+          <td style="padding:6px;text-align:left;vertical-align:top;">57</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">
+            <a href="https://searchcode.com/" class="bookmark-link" title="Search Code" target="_blank" 
+               style="color:#0366d6;text-decoration:none;word-break:break-word;">https://searchcode.com/</a>
+          </td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">Simple, comprehensive code search</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">Search Code</td>
+          <td class="status" style="padding:6px;text-align:left;vertical-align:top;">⏳</td>
+        </tr>
+        <tr style="border-bottom:1px solid #ddd;">
+          <td style="padding:6px;text-align:left;vertical-align:top;">58</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">
+            <a href="https://www.decohere.ai/" class="bookmark-link" title="AI Image Generator" target="_blank" 
+               style="color:#0366d6;text-decoration:none;word-break:break-word;">https://www.decohere.ai/</a>
+          </td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">AI Image Generator with login</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">Decohere</td>
+          <td class="status" style="padding:6px;text-align:left;vertical-align:top;">⏳</td>
+        </tr>
+        <tr style="border-bottom:1px solid #ddd;">
+          <td style="padding:6px;text-align:left;vertical-align:top;">59</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">
+            <a href="https://www.duckdns.org/" class="bookmark-link" title="Duck DNS for loclhost" target="_blank" 
+               style="color:#0366d6;text-decoration:none;word-break:break-word;">https://www.duckdns.org/</a>
+          </td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">Free Dynamic DNS - Duck DNS</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">Duck DNS</td>
+          <td class="status" style="padding:6px;text-align:left;vertical-align:top;">⏳</td>
+        </tr>
+        <tr style="border-bottom:1px solid #ddd;">
+          <td style="padding:6px;text-align:left;vertical-align:top;">60</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">
+            <a href="https://www.server-world.info/en/" class="bookmark-link" title="Server World for server configurations" target="_blank" 
+               style="color:#0366d6;text-decoration:none;word-break:break-word;">https://www.server-world.info/en/</a>
+          </td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">Server World for all major flavours of Linux</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">Server World</td>
+          <td class="status" style="padding:6px;text-align:left;vertical-align:top;">⏳</td>
+        </tr>
+        <tr style="border-bottom:1px solid #ddd;">
+          <td style="padding:6px;text-align:left;vertical-align:top;">61</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">
+            <a href="https://pythonandvba.com/" class="bookmark-link" title="Coding is fun youtube channel" target="_blank" 
+               style="color:#0366d6;text-decoration:none;word-break:break-word;">https://pythonandvba.com/</a>
+          </td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">Coding is fun - PythonVBA</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">PythonVBA</td>
+          <td class="status" style="padding:6px;text-align:left;vertical-align:top;">⏳</td>
+        </tr>
+        <tr style="border-bottom:1px solid #ddd;">
+          <td style="padding:6px;text-align:left;vertical-align:top;">62</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">
+            <a href="https://vocalremover.org/" class="bookmark-link" title="VocalRemover" target="_blank" 
+               style="color:#0366d6;text-decoration:none;word-break:break-word;">https://vocalremover.org/</a>
+          </td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">Music and voice splitter</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">VocalRemover</td>
+          <td class="status" style="padding:6px;text-align:left;vertical-align:top;">⏳</td>
+        </tr>
+        <tr style="border-bottom:1px solid #ddd;">
+          <td style="padding:6px;text-align:left;vertical-align:top;">63</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">
+            <a href="https://chef.convex.dev/" class="bookmark-link" title="Chef AI app Cloner" target="_blank" 
+               style="color:#0366d6;text-decoration:none;word-break:break-word;">https://chef.convex.dev/</a>
+          </td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">Chef AI app Cloner</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">Chef AI</td>
+          <td class="status" style="padding:6px;text-align:left;vertical-align:top;">⏳</td>
+        </tr>
+        <tr style="border-bottom:1px solid #ddd;">
+          <td style="padding:6px;text-align:left;vertical-align:top;">64</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">
+            <a href="https://emergent.sh/" class="bookmark-link" title="Emergent AI app Cloner" target="_blank" 
+               style="color:#0366d6;text-decoration:none;word-break:break-word;">https://emergent.sh/</a>
+          </td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">Emergent AI app Cloner</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">Emergent AI</td>
+          <td class="status" style="padding:6px;text-align:left;vertical-align:top;">⏳</td>
+        </tr>
+        <tr style="border-bottom:1px solid #ddd;">
+          <td style="padding:6px;text-align:left;vertical-align:top;">65</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">
+            <a href="https://learn-anything.xyz/" class="bookmark-link" title="Learn anything free" target="_blank" 
+               style="color:#0366d6;text-decoration:none;word-break:break-word;">https://learn-anything.xyz/</a>
+          </td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">Learn anything free with certifications</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">Learn anything free</td>
+          <td class="status" style="padding:6px;text-align:left;vertical-align:top;">⏳</td>
+        </tr>
+        <tr style="border-bottom:1px solid #ddd;">
+          <td style="padding:6px;text-align:left;vertical-align:top;">66</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">
+            <a href="https://html5up.net/" class="bookmark-link" title="HTML5UP" target="_blank" 
+               style="color:#0366d6;text-decoration:none;word-break:break-word;">https://html5up.net/</a>
+          </td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">Free HTML5 templates - No login required</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">HTML5UP.1</td>
+          <td class="status" style="padding:6px;text-align:left;vertical-align:top;">⏳</td>
+        </tr>
+        <tr style="border-bottom:1px solid #ddd;">
+          <td style="padding:6px;text-align:left;vertical-align:top;">67</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">
+            <a href="https://reactbits.dev" class="bookmark-link" title="Reactbits" target="_blank" 
+               style="color:#0366d6;text-decoration:none;word-break:break-word;">https://reactbits.dev</a>
+          </td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">free ai components</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">free ai tool no sign in</td>
+          <td class="status" style="padding:6px;text-align:left;vertical-align:top;">⏳</td>
+        </tr>
+        <tr style="border-bottom:1px solid #ddd;">
+          <td style="padding:6px;text-align:left;vertical-align:top;">68</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">
+            <a href="https://toolfk.com" class="bookmark-link" title="All in one tools" target="_blank" 
+               style="color:#0366d6;text-decoration:none;word-break:break-word;">https://toolfk.com</a>
+          </td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">Free Tools</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">Many free tools online fully free</td>
+          <td class="status" style="padding:6px;text-align:left;vertical-align:top;">⏳</td>
+        </tr>
+        <tr style="border-bottom:1px solid #ddd;">
+          <td style="padding:6px;text-align:left;vertical-align:top;">69</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">
+            <a href="https://flourish.studio" class="bookmark-link" title="Excel sheet to Charts" target="_blank" 
+               style="color:#0366d6;text-decoration:none;word-break:break-word;">https://flourish.studio</a>
+          </td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">Free Excel Tools</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">Excle modifications with charts etc</td>
+          <td class="status" style="padding:6px;text-align:left;vertical-align:top;">⏳</td>
+        </tr>
+        <tr style="border-bottom:1px solid #ddd;">
+          <td style="padding:6px;text-align:left;vertical-align:top;">70</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">
+            <a href="https://x-minus.pro/ai" class="bookmark-link" title="Strip Music & Vocals" target="_blank" 
+               style="color:#0366d6;text-decoration:none;word-break:break-word;">https://x-minus.pro/ai</a>
+          </td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">Strip Music & Vocals</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">Vocal remover, Strip Music & Vocals Fully free</td>
+          <td class="status" style="padding:6px;text-align:left;vertical-align:top;">⏳</td>
+        </tr>
+        <tr style="border-bottom:1px solid #ddd;">
+          <td style="padding:6px;text-align:left;vertical-align:top;">71</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">
+            <a href="https://no-color.org/" class="bookmark-link" title="No Color" target="_blank" 
+               style="color:#0366d6;text-decoration:none;word-break:break-word;">https://no-color.org/</a>
+          </td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">Disable all ANSI color and text styling in their terminal output</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">Color disablement</td>
+          <td class="status" style="padding:6px;text-align:left;vertical-align:top;">⏳</td>
+        </tr>
+        <tr style="border-bottom:1px solid #ddd;">
+          <td style="padding:6px;text-align:left;vertical-align:top;">72</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">
+            <a href="https://wellness-p.ing/" class="bookmark-link" title="Wellness Ping" target="_blank" 
+               style="color:#0366d6;text-decoration:none;word-break:break-word;">https://wellness-p.ing/</a>
+          </td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">Wellness ping</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">Activists, journalists, researchers, solo folks. Anyone who needs someone to notice if they go silent.</td>
+          <td class="status" style="padding:6px;text-align:left;vertical-align:top;">⏳</td>
+        </tr>
+        <tr style="border-bottom:1px solid #ddd;">
+          <td style="padding:6px;text-align:left;vertical-align:top;">73</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">
+            <a href="https://www.linuxserver.io/" class="bookmark-link" title="Linuxserver.io" target="_blank" 
+               style="color:#0366d6;text-decoration:none;word-break:break-word;">https://www.linuxserver.io/</a>
+          </td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">Linuxserver</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">Linux community images with git documents & support.</td>
+          <td class="status" style="padding:6px;text-align:left;vertical-align:top;">⏳</td>
+        </tr>
+        <tr style="border-bottom:1px solid #ddd;">
+          <td style="padding:6px;text-align:left;vertical-align:top;">74</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">
+            <a href="https://github.com/alam00000/bentopdf" class="bookmark-link" title="Bentopdf" target="_blank" 
+               style="color:#0366d6;text-decoration:none;word-break:break-word;">https://github.com/alam00000/bentopdf</a>
+          </td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">BentoPDF</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">BentoPDF-open-source PDF toolkit to manipulate PDF directly in browser.</td>
+          <td class="status" style="padding:6px;text-align:left;vertical-align:top;">⏳</td>
+        </tr>
+        <tr style="border-bottom:1px solid #ddd;">
+          <td style="padding:6px;text-align:left;vertical-align:top;">75</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">
+            <a href="https://theresanaiforthat.com/" class="bookmark-link" title="AI for that" target="_blank" 
+               style="color:#0366d6;text-decoration:none;word-break:break-word;">https://theresanaiforthat.com/</a>
+          </td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">AI for that</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">Dark GPT-AI Powered applications</td>
+          <td class="status" style="padding:6px;text-align:left;vertical-align:top;">⏳</td>
+        </tr>
+        <tr style="border-bottom:1px solid #ddd;">
+          <td style="padding:6px;text-align:left;vertical-align:top;">76</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">
+            <a href="https://mulerun.com/" class="bookmark-link" title="Mulerun" target="_blank" 
+               style="color:#0366d6;text-decoration:none;word-break:break-word;">https://mulerun.com/</a>
+          </td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">Mulerun</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">AI Agents</td>
+          <td class="status" style="padding:6px;text-align:left;vertical-align:top;">⏳</td>
+        </tr>
+        <tr style="border-bottom:1px solid #ddd;">
+          <td style="padding:6px;text-align:left;vertical-align:top;">77</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">
+            <a href="https://www.eauctionsindia.com/" class="bookmark-link" title="E-Auctions" target="_blank" 
+               style="color:#0366d6;text-decoration:none;word-break:break-word;">https://www.eauctionsindia.com/</a>
+          </td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">E-Auctions</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">Govt E-Auctions website</td>
+          <td class="status" style="padding:6px;text-align:left;vertical-align:top;">⏳</td>
+        </tr>
+        <tr style="border-bottom:1px solid #ddd;">
+          <td style="padding:6px;text-align:left;vertical-align:top;">78</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">
+            <a href="https://scribe.com/" class="bookmark-link" title="Scribe" target="_blank" 
+               style="color:#0366d6;text-decoration:none;word-break:break-word;">https://scribe.com/</a>
+          </td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">Scribe</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">AI-powered tool transforms any workflow into step-by-step with screenshots</td>
+          <td class="status" style="padding:6px;text-align:left;vertical-align:top;">⏳</td>
+        </tr>
+        <tr style="border-bottom:1px solid #ddd;">
+          <td style="padding:6px;text-align:left;vertical-align:top;">79</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">
+            <a href="https://enzolt.com/" class="bookmark-link" title="Enzolt" target="_blank" 
+               style="color:#0366d6;text-decoration:none;word-break:break-word;">https://enzolt.com/</a>
+          </td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">Enzolt</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">Enzolt Lithium ion Battery Chennai</td>
+          <td class="status" style="padding:6px;text-align:left;vertical-align:top;">⏳</td>
+        </tr>
+        <tr style="border-bottom:1px solid #ddd;">
+          <td style="padding:6px;text-align:left;vertical-align:top;">80</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">
+            <a href="https://votch.tv/" class="bookmark-link" title="Votch" target="_blank" 
+               style="color:#0366d6;text-decoration:none;word-break:break-word;">https://votch.tv/</a>
+          </td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">Votch</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">video translation and dubbing</td>
+          <td class="status" style="padding:6px;text-align:left;vertical-align:top;">⏳</td>
+        </tr>
+        <tr style="border-bottom:1px solid #ddd;">
+          <td style="padding:6px;text-align:left;vertical-align:top;">81</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">
+            <a href="https://simplify.jobs/" class="bookmark-link" title="Simplify" target="_blank" 
+               style="color:#0366d6;text-decoration:none;word-break:break-word;">https://simplify.jobs/</a>
+          </td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">Simplify</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">Simplify - AI based Job search</td>
+          <td class="status" style="padding:6px;text-align:left;vertical-align:top;">⏳</td>
+        </tr>
+        <tr style="border-bottom:1px solid #ddd;">
+          <td style="padding:6px;text-align:left;vertical-align:top;">82</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">
+            <a href="https://bazzite.gg/" class="bookmark-link" title="Bazzite" target="_blank" 
+               style="color:#0366d6;text-decoration:none;word-break:break-word;">https://bazzite.gg/</a>
+          </td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">Bazzite</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">Bazzite - Linux for Gaming, Steam</td>
+          <td class="status" style="padding:6px;text-align:left;vertical-align:top;">⏳</td>
+        </tr>
+        <tr style="border-bottom:1px solid #ddd;">
+          <td style="padding:6px;text-align:left;vertical-align:top;">83</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">
+            <a href="https://vazu.ai/" class="bookmark-link" title="Vazu" target="_blank" 
+               style="color:#0366d6;text-decoration:none;word-break:break-word;">https://vazu.ai/</a>
+          </td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">Vazu</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">AWS Pay automation - Bill reduction</td>
+          <td class="status" style="padding:6px;text-align:left;vertical-align:top;">⏳</td>
+        </tr>
+        <tr style="border-bottom:1px solid #ddd;">
+          <td style="padding:6px;text-align:left;vertical-align:top;">84</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">
+            <a href="https://github.com/muesli/duf" class="bookmark-link" title="duf" target="_blank" 
+               style="color:#0366d6;text-decoration:none;word-break:break-word;">https://github.com/muesli/duf</a>
+          </td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">duf</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">alternate to du or df cmd in Linux.</td>
+          <td class="status" style="padding:6px;text-align:left;vertical-align:top;">⏳</td>
+        </tr>
+        <tr style="border-bottom:1px solid #ddd;">
+          <td style="padding:6px;text-align:left;vertical-align:top;">85</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">
+            <a href="https://replaceyourboss.ai/" class="bookmark-link" title="CEO replacement" target="_blank" 
+               style="color:#0366d6;text-decoration:none;word-break:break-word;">https://replaceyourboss.ai/</a>
+          </td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">Boss replacement</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">Alternate for Bosses.</td>
+          <td class="status" style="padding:6px;text-align:left;vertical-align:top;">⏳</td>
+        </tr>
+        <tr style="border-bottom:1px solid #ddd;">
+          <td style="padding:6px;text-align:left;vertical-align:top;">86</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">
+            <a href="https://magicloops.dev/" class="bookmark-link" title="Vibe coding" target="_blank" 
+               style="color:#0366d6;text-decoration:none;word-break:break-word;">https://magicloops.dev/</a>
+          </td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">Vibe coding</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">Vibe coding</td>
+          <td class="status" style="padding:6px;text-align:left;vertical-align:top;">⏳</td>
+        </tr>
+        <tr style="border-bottom:1px solid #ddd;">
+          <td style="padding:6px;text-align:left;vertical-align:top;">87</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">
+            <a href="https://www.vpngate.net/en/" class="bookmark-link" title="VPN Gate" target="_blank" 
+               style="color:#0366d6;text-decoration:none;word-break:break-word;">https://www.vpngate.net/en/</a>
+          </td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">VPN Gate</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">Free VPN Japan</td>
+          <td class="status" style="padding:6px;text-align:left;vertical-align:top;">⏳</td>
+        </tr>
+        <tr style="border-bottom:1px solid #ddd;">
+          <td style="padding:6px;text-align:left;vertical-align:top;">88</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">
+            <a href="https://muted.io" class="bookmark-link" title="Learn music" target="_blank" 
+               style="color:#0366d6;text-decoration:none;word-break:break-word;">https://muted.io</a>
+          </td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">Music</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">Learn music</td>
+          <td class="status" style="padding:6px;text-align:left;vertical-align:top;">⏳</td>
+        </tr>
+        <tr style="border-bottom:1px solid #ddd;">
+          <td style="padding:6px;text-align:left;vertical-align:top;">89</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">
+            <a href="https://labex.io/" class="bookmark-link" title="Labex Linux Practice" target="_blank" 
+               style="color:#0366d6;text-decoration:none;word-break:break-word;">https://labex.io/</a>
+          </td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">Labex</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">Linux learning site</td>
+          <td class="status" style="padding:6px;text-align:left;vertical-align:top;">⏳</td>
+        </tr>
+        <tr style="border-bottom:1px solid #ddd;">
+          <td style="padding:6px;text-align:left;vertical-align:top;">90</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">
+            <a href="https://pinokio.co/" class="bookmark-link" title="Local AI Model" target="_blank" 
+               style="color:#0366d6;text-decoration:none;word-break:break-word;">https://pinokio.co/</a>
+          </td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">AI</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">AI on your device</td>
+          <td class="status" style="padding:6px;text-align:left;vertical-align:top;">⏳</td>
+        </tr>
+        <tr style="border-bottom:1px solid #ddd;">
+          <td style="padding:6px;text-align:left;vertical-align:top;">91</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">
+            <a href="https://github.com/ading2210/linuxpdf" class="bookmark-link" title="Linux on Pdf" target="_blank" 
+               style="color:#0366d6;text-decoration:none;word-break:break-word;">https://github.com/ading2210/linuxpdf</a>
+          </td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">Linux Pdf</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">Linux on RISC emulator</td>
+          <td class="status" style="padding:6px;text-align:left;vertical-align:top;">⏳</td>
+        </tr>
+        <tr style="border-bottom:1px solid #ddd;">
+          <td style="padding:6px;text-align:left;vertical-align:top;">92</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">
+            <a href="https://editingtools.io/thumbnail/" class="bookmark-link" title="Thumbnail Editing tools" target="_blank" 
+               style="color:#0366d6;text-decoration:none;word-break:break-word;">https://editingtools.io/thumbnail/</a>
+          </td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">Free Image Editing tool</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">Image Editing tool with no login</td>
+          <td class="status" style="padding:6px;text-align:left;vertical-align:top;">⏳</td>
+        </tr>
+        <tr style="border-bottom:1px solid #ddd;">
+          <td style="padding:6px;text-align:left;vertical-align:top;">93</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">
+            <a href="https://ernie.baidu.com" class="bookmark-link" title="Ernie Chat bot" target="_blank" 
+               style="color:#0366d6;text-decoration:none;word-break:break-word;">https://ernie.baidu.com</a>
+          </td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">Ernie Model</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">An alternate free AI Chat bot with newer things</td>
+          <td class="status" style="padding:6px;text-align:left;vertical-align:top;">⏳</td>
+        </tr>
+        <tr style="border-bottom:1px solid #ddd;">
+          <td style="padding:6px;text-align:left;vertical-align:top;">94</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">
+            <a href="https://www.kimi.com/en/slides" class="bookmark-link" title="Kimi" target="_blank" 
+               style="color:#0366d6;text-decoration:none;word-break:break-word;">https://www.kimi.com/en/slides</a>
+          </td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">Kimi slides</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">Kimi AI presentations, Key notes</td>
+          <td class="status" style="padding:6px;text-align:left;vertical-align:top;">⏳</td>
+        </tr>
+        <tr style="border-bottom:1px solid #ddd;">
+          <td style="padding:6px;text-align:left;vertical-align:top;">95</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">
+            <a href="https://famelack.com/" class="bookmark-link" title="Famelack" target="_blank" 
+               style="color:#0366d6;text-decoration:none;word-break:break-word;">https://famelack.com/</a>
+          </td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">Live TVs app & Web</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">Free Live TVs of various countries</td>
+          <td class="status" style="padding:6px;text-align:left;vertical-align:top;">⏳</td>
+        </tr>
+        <tr style="border-bottom:1px solid #ddd;">
+          <td style="padding:6px;text-align:left;vertical-align:top;">96</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">
+            <a href="https://fmhy.net/" class="bookmark-link" title="Free stuff" target="_blank" 
+               style="color:#0366d6;text-decoration:none;word-break:break-word;">https://fmhy.net/</a>
+          </td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">Free stuff on internet</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">Free Media Heck Yeah - largest collection of free stuff on the internet!</td>
+          <td class="status" style="padding:6px;text-align:left;vertical-align:top;">⏳</td>
+        </tr>
+        <tr style="border-bottom:1px solid #ddd;">
+          <td style="padding:6px;text-align:left;vertical-align:top;">97</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">
+            <a href="https://www.kimi.com/" class="bookmark-link" title="Kimi AI" target="_blank" 
+               style="color:#0366d6;text-decoration:none;word-break:break-word;">https://www.kimi.com/</a>
+          </td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">"Swarm" intelligence for complex projects! for Slides, Sheets and Docs</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">Autonomous AI Agent & Research	Largest context window with multi-agent</td>
+          <td class="status" style="padding:6px;text-align:left;vertical-align:top;">⏳</td>
+        </tr>
+        <tr style="border-bottom:1px solid #ddd;">
+          <td style="padding:6px;text-align:left;vertical-align:top;">98</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">
+            <a href="https://github.com/jarvesusaram99/termux-hacklab" class="bookmark-link" title="Ubuntu on Android" target="_blank" 
+               style="color:#0366d6;text-decoration:none;word-break:break-word;">https://github.com/jarvesusaram99/termux-hacklab</a>
+          </td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">Termux, Termux-x11</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">Hack lab installation Ubuntu on Android</td>
+          <td class="status" style="padding:6px;text-align:left;vertical-align:top;">⏳</td>
+        </tr>
+        <tr style="border-bottom:1px solid #ddd;">
+          <td style="padding:6px;text-align:left;vertical-align:top;">99</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">
+            <a href="https://quickref.me/" class="bookmark-link" title="Quick Ref" target="_blank" 
+               style="color:#0366d6;text-decoration:none;word-break:break-word;">https://quickref.me/</a>
+          </td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">Master Cheatsheet references</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">Here are some cheatsheets and quick references contributed by open source angels.</td>
+          <td class="status" style="padding:6px;text-align:left;vertical-align:top;">⏳</td>
+        </tr>
+        <tr style="border-bottom:1px solid #ddd;">
+          <td style="padding:6px;text-align:left;vertical-align:top;">100</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">
+            <a href="https://www.minimax.io/" class="bookmark-link" title="Video Audio AI" target="_blank" 
+               style="color:#0366d6;text-decoration:none;word-break:break-word;">https://www.minimax.io/</a>
+          </td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">AI audio video models</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">Covering five major areas: text, speech, video, image, and music. Helping developers efficiently build intelligent applications</td>
+          <td class="status" style="padding:6px;text-align:left;vertical-align:top;">⏳</td>
+        </tr>
+        <tr style="border-bottom:1px solid #ddd;">
+          <td style="padding:6px;text-align:left;vertical-align:top;">101</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">
+            <a href="https://www.realworkfromanywhere.com/" class="bookmark-link" title="Realwork From anywhere" target="_blank" 
+               style="color:#0366d6;text-decoration:none;word-break:break-word;">https://www.realworkfromanywhere.com/</a>
+          </td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">The only fully location independent job board.</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">Remote jobs online</td>
+          <td class="status" style="padding:6px;text-align:left;vertical-align:top;">⏳</td>
+        </tr>
+        <tr style="border-bottom:1px solid #ddd;">
+          <td style="padding:6px;text-align:left;vertical-align:top;">102</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">
+            <a href="https://fabricodes.com/auth/login" class="bookmark-link" title="Fabricodes" target="_blank" 
+               style="color:#0366d6;text-decoration:none;word-break:break-word;">https://fabricodes.com/auth/login</a>
+          </td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">AI with daily free credits</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">Industrial manufacturing & supply chain management</td>
+          <td class="status" style="padding:6px;text-align:left;vertical-align:top;">⏳</td>
+        </tr>
+        <tr style="border-bottom:1px solid #ddd;">
+          <td style="padding:6px;text-align:left;vertical-align:top;">103</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">
+            <a href="https://aifreeforever.com/" class="bookmark-link" title="AI freeforever" target="_blank" 
+               style="color:#0366d6;text-decoration:none;word-break:break-word;">https://aifreeforever.com/</a>
+          </td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">Free AI</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">Free AI forever</td>
+          <td class="status" style="padding:6px;text-align:left;vertical-align:top;">⏳</td>
+        </tr>
+        <tr style="border-bottom:1px solid #ddd;">
+          <td style="padding:6px;text-align:left;vertical-align:top;">104</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">
+            <a href="https://www.youtube.com/watch?v=QzddQoCKKss" class="bookmark-link" title="Suno alternate" target="_blank" 
+               style="color:#0366d6;text-decoration:none;word-break:break-word;">https://www.youtube.com/watch?v=QzddQoCKKss</a>
+          </td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">Open source Music generator</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">An alternate open source music generator setup video</td>
+          <td class="status" style="padding:6px;text-align:left;vertical-align:top;">⏳</td>
+        </tr>
+        <tr style="border-bottom:1px solid #ddd;">
+          <td style="padding:6px;text-align:left;vertical-align:top;">105</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">
+            <a href="https://iptv-org.github.io/" class="bookmark-link" title="Free IPTV Index" target="_blank" 
+               style="color:#0366d6;text-decoration:none;word-break:break-word;">https://iptv-org.github.io/</a>
+          </td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">IPTV</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">Free IPTV Index</td>
+          <td class="status" style="padding:6px;text-align:left;vertical-align:top;">⏳</td>
+        </tr>
+        <tr style="border-bottom:1px solid #ddd;">
+          <td style="padding:6px;text-align:left;vertical-align:top;">106</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">
+            <a href="https://sixthsample.com/spoton/" class="bookmark-link" title="Spoton" target="_blank" 
+               style="color:#0366d6;text-decoration:none;word-break:break-word;">https://sixthsample.com/spoton/</a>
+          </td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">Free Music</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">Free alternate to autotune plugin</td>
+          <td class="status" style="padding:6px;text-align:left;vertical-align:top;">⏳</td>
+        </tr>
+        <tr style="border-bottom:1px solid #ddd;">
+          <td style="padding:6px;text-align:left;vertical-align:top;">107</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">
+            <a href="https://www.youtube.com/watch?v=EsRyyJmO-u8" class="bookmark-link" title="Apps in mins" target="_blank" 
+               style="color:#0366d6;text-decoration:none;word-break:break-word;">https://www.youtube.com/watch?v=EsRyyJmO-u8</a>
+          </td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">Website learners app in mins</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">How ChatGPT Built My App in Minutes</td>
+          <td class="status" style="padding:6px;text-align:left;vertical-align:top;">⏳</td>
+        </tr>
+        <tr style="border-bottom:1px solid #ddd;">
+          <td style="padding:6px;text-align:left;vertical-align:top;">108</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">
+            <a href="https://distrosea.com/" class="bookmark-link" title="Linux Distros" target="_blank" 
+               style="color:#0366d6;text-decoration:none;word-break:break-word;">https://distrosea.com/</a>
+          </td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">Linux free online</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">Set of all Linux online free</td>
+          <td class="status" style="padding:6px;text-align:left;vertical-align:top;">⏳</td>
+        </tr>
+        <tr style="border-bottom:1px solid #ddd;">
+          <td style="padding:6px;text-align:left;vertical-align:top;">109</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">
+            <a href="https://opencode.ai/" class="bookmark-link" title="Open code" target="_blank" 
+               style="color:#0366d6;text-decoration:none;word-break:break-word;">https://opencode.ai/</a>
+          </td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">Open AI Agents</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">free open code</td>
+          <td class="status" style="padding:6px;text-align:left;vertical-align:top;">⏳</td>
+        </tr>
+        <tr style="border-bottom:1px solid #ddd;">
+          <td style="padding:6px;text-align:left;vertical-align:top;">110</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">
+            <a href="https://chat.qwen.ai/" class="bookmark-link" title="Qwen AI" target="_blank" 
+               style="color:#0366d6;text-decoration:none;word-break:break-word;">https://chat.qwen.ai/</a>
+          </td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">Qwen</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">AI PPT, slides, Keynotes, Videos</td>
+          <td class="status" style="padding:6px;text-align:left;vertical-align:top;">⏳</td>
+        </tr>
+        <tr style="border-bottom:1px solid #ddd;">
+          <td style="padding:6px;text-align:left;vertical-align:top;">111</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">
+            <a href="https://www.perplexity.ai/" class="bookmark-link" title="Perplexity AI" target="_blank" 
+               style="color:#0366d6;text-decoration:none;word-break:break-word;">https://www.perplexity.ai/</a>
+          </td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">Perplexity</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">Perplexity AI for Research</td>
+          <td class="status" style="padding:6px;text-align:left;vertical-align:top;">⏳</td>
+        </tr>
+        <tr style="border-bottom:1px solid #ddd;">
+          <td style="padding:6px;text-align:left;vertical-align:top;">112</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">
+            <a href="https://www.mindluster.com/" class="bookmark-link" title="Mindluster" target="_blank" 
+               style="color:#0366d6;text-decoration:none;word-break:break-word;">https://www.mindluster.com/</a>
+          </td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">Mindluster</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">Free online courses with certificate</td>
+          <td class="status" style="padding:6px;text-align:left;vertical-align:top;">⏳</td>
+        </tr>
+        <tr style="border-bottom:1px solid #ddd;">
+          <td style="padding:6px;text-align:left;vertical-align:top;">113</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">
+            <a href="https://www.worldmonitor.app" class="bookmark-link" title="World Monitor" target="_blank" 
+               style="color:#0366d6;text-decoration:none;word-break:break-word;">https://www.worldmonitor.app</a>
+          </td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">Monitoring the world</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">Monitor the whole world activities</td>
+          <td class="status" style="padding:6px;text-align:left;vertical-align:top;">⏳</td>
+        </tr>
+        <tr style="border-bottom:1px solid #ddd;">
+          <td style="padding:6px;text-align:left;vertical-align:top;">114</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">
+            <a href="https://terminator.aeza.net/en/" class="bookmark-link" title="Terminal" target="_blank" 
+               style="color:#0366d6;text-decoration:none;word-break:break-word;">https://terminator.aeza.net/en/</a>
+          </td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">Live terminal</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">Linux terminal</td>
+          <td class="status" style="padding:6px;text-align:left;vertical-align:top;">⏳</td>
+        </tr>
+        <tr style="border-bottom:1px solid #ddd;">
+          <td style="padding:6px;text-align:left;vertical-align:top;">115</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">
+            <a href="https://www.commontools.org/" class="bookmark-link" title="Free tools" target="_blank" 
+               style="color:#0366d6;text-decoration:none;word-break:break-word;">https://www.commontools.org/</a>
+          </td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">Free stuff</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">Common tools, text to  handwriting,etc</td>
+          <td class="status" style="padding:6px;text-align:left;vertical-align:top;">⏳</td>
+        </tr>
+        <tr style="border-bottom:1px solid #ddd;">
+          <td style="padding:6px;text-align:left;vertical-align:top;">116</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">
+            <a href="https://tryhackme.com/" class="bookmark-link" title="TryHackMe" target="_blank" 
+               style="color:#0366d6;text-decoration:none;word-break:break-word;">https://tryhackme.com/</a>
+          </td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">Free stuff</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">Guided hacking labs, beginner to advanced</td>
+          <td class="status" style="padding:6px;text-align:left;vertical-align:top;">⏳</td>
+        </tr>
+        <tr style="border-bottom:1px solid #ddd;">
+          <td style="padding:6px;text-align:left;vertical-align:top;">117</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">
+            <a href="https://hackthebox.com/" class="bookmark-link" title="Hack The Box" target="_blank" 
+               style="color:#0366d6;text-decoration:none;word-break:break-word;">https://hackthebox.com/</a>
+          </td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">Free stuff</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">Realistic penetration testing challenges</td>
+          <td class="status" style="padding:6px;text-align:left;vertical-align:top;">⏳</td>
+        </tr>
+        <tr style="border-bottom:1px solid #ddd;">
+          <td style="padding:6px;text-align:left;vertical-align:top;">118</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">
+            <a href="https://portswigger.net/" class="bookmark-link" title="PortSwigger" target="_blank" 
+               style="color:#0366d6;text-decoration:none;word-break:break-word;">https://portswigger.net/</a>
+          </td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">Hack tools</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">Web security academy, Burp Suite training</td>
+          <td class="status" style="padding:6px;text-align:left;vertical-align:top;">⏳</td>
+        </tr>
+        <tr style="border-bottom:1px solid #ddd;">
+          <td style="padding:6px;text-align:left;vertical-align:top;">119</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">
+            <a href="https://hackthissite.org/" class="bookmark-link" title="Hack This Site" target="_blank" 
+               style="color:#0366d6;text-decoration:none;word-break:break-word;">https://hackthissite.org/</a>
+          </td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">Hack tools</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">Legal practice platform for hacking skills</td>
+          <td class="status" style="padding:6px;text-align:left;vertical-align:top;">⏳</td>
+        </tr>
+        <tr style="border-bottom:1px solid #ddd;">
+          <td style="padding:6px;text-align:left;vertical-align:top;">120</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">
+            <a href="https://cybrary.it/" class="bookmark-link" title="Cybrary" target="_blank" 
+               style="color:#0366d6;text-decoration:none;word-break:break-word;">https://cybrary.it/</a>
+          </td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">Hack tools</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">Cybersecurity courses, certifications prep</td>
+          <td class="status" style="padding:6px;text-align:left;vertical-align:top;">⏳</td>
+        </tr>
+        <tr style="border-bottom:1px solid #ddd;">
+          <td style="padding:6px;text-align:left;vertical-align:top;">121</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">
+            <a href="https://try2hack.me/" class="bookmark-link" title="Try2Hack" target="_blank" 
+               style="color:#0366d6;text-decoration:none;word-break:break-word;">https://try2hack.me/</a>
+          </td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">Hack tools</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">Classic hacking puzzles and challenges</td>
+          <td class="status" style="padding:6px;text-align:left;vertical-align:top;">⏳</td>
+        </tr>
+        <tr style="border-bottom:1px solid #ddd;">
+          <td style="padding:6px;text-align:left;vertical-align:top;">122</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">
+            <a href="https://hackthis.co.uk/" class="bookmark-link" title="Hack This!" target="_blank" 
+               style="color:#0366d6;text-decoration:none;word-break:break-word;">https://hackthis.co.uk/</a>
+          </td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">Hack tools</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">Security challenges, community-driven learning</td>
+          <td class="status" style="padding:6px;text-align:left;vertical-align:top;">⏳</td>
+        </tr>
+        <tr style="border-bottom:1px solid #ddd;">
+          <td style="padding:6px;text-align:left;vertical-align:top;">123</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">
+            <a href="https://picoctf.org/" class="bookmark-link" title="picoCTF" target="_blank" 
+               style="color:#0366d6;text-decoration:none;word-break:break-word;">https://picoctf.org/</a>
+          </td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">Hack tools</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">Capture the flag competitions for students</td>
+          <td class="status" style="padding:6px;text-align:left;vertical-align:top;">⏳</td>
+        </tr>
+        <tr style="border-bottom:1px solid #ddd;">
+          <td style="padding:6px;text-align:left;vertical-align:top;">124</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">
+            <a href="https://ultraedit.com/" class="bookmark-link" title="UltraEdit" target="_blank" 
+               style="color:#0366d6;text-decoration:none;word-break:break-word;">https://ultraedit.com/</a>
+          </td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">Hack tools</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">Advanced text editor for coding and analysis</td>
+          <td class="status" style="padding:6px;text-align:left;vertical-align:top;">⏳</td>
+        </tr>
+        <tr style="border-bottom:1px solid #ddd;">
+          <td style="padding:6px;text-align:left;vertical-align:top;">125</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">
+            <a href="https://root-me.org/" class="bookmark-link" title="Root Me" target="_blank" 
+               style="color:#0366d6;text-decoration:none;word-break:break-word;">https://root-me.org/</a>
+          </td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">Hack tools</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">Hands-on hacking labs and challenges</td>
+          <td class="status" style="padding:6px;text-align:left;vertical-align:top;">⏳</td>
+        </tr>
+        <tr style="border-bottom:1px solid #ddd;">
+          <td style="padding:6px;text-align:left;vertical-align:top;">126</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">
+            <a href="https://seostudio.tools/" class="bookmark-link" title="SEOStudio" target="_blank" 
+               style="color:#0366d6;text-decoration:none;word-break:break-word;">https://seostudio.tools/</a>
+          </td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">Free stuff</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">200+ free SEO, YouTube, text, image, and web tools for optimization and content creation</td>
+          <td class="status" style="padding:6px;text-align:left;vertical-align:top;">⏳</td>
+        </tr>
+        <tr style="border-bottom:1px solid #ddd;">
+          <td style="padding:6px;text-align:left;vertical-align:top;">127</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">
+            <a href="https://opencode.ai/docs" class="bookmark-link" title="Opencode documents" target="_blank" 
+               style="color:#0366d6;text-decoration:none;word-break:break-word;">https://opencode.ai/docs</a>
+          </td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">Documents of opencode</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">Free AI vibe coding</td>
+          <td class="status" style="padding:6px;text-align:left;vertical-align:top;">⏳</td>
+        </tr>
+        <tr style="border-bottom:1px solid #ddd;">
+          <td style="padding:6px;text-align:left;vertical-align:top;">128</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">
+            <a href="https://autonomousops.ai/" class="bookmark-link" title="Autonmous OPS" target="_blank" 
+               style="color:#0366d6;text-decoration:none;word-break:break-word;">https://autonomousops.ai/</a>
+          </td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">AI Agents for observability</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">Hyderabad based security firm</td>
+          <td class="status" style="padding:6px;text-align:left;vertical-align:top;">⏳</td>
+        </tr>
+        <tr style="border-bottom:1px solid #ddd;">
+          <td style="padding:6px;text-align:left;vertical-align:top;">129</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">
+            <a href="https://aisquare.studio/" class="bookmark-link" title="AI Square" target="_blank" 
+               style="color:#0366d6;text-decoration:none;word-break:break-word;">https://aisquare.studio/</a>
+          </td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">AI square</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">AI Experience Management (AIEM) platform designed for Educators</td>
+          <td class="status" style="padding:6px;text-align:left;vertical-align:top;">⏳</td>
+        </tr>
+        <tr style="border-bottom:1px solid #ddd;">
+          <td style="padding:6px;text-align:left;vertical-align:top;">130</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">
+            <a href="https://www.facets.cloud" class="bookmark-link" title="Facets" target="_blank" 
+               style="color:#0366d6;text-decoration:none;word-break:break-word;">https://www.facets.cloud</a>
+          </td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">AI-Powered Orchestrator for Intelligent Infrastructure</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">An AI-powered Platform Engineering Orchestration tool built on Terraform</td>
+          <td class="status" style="padding:6px;text-align:left;vertical-align:top;">⏳</td>
+        </tr>
+        <tr style="border-bottom:1px solid #ddd;">
+          <td style="padding:6px;text-align:left;vertical-align:top;">131</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">
+            <a href="https://bharatbuild.ai/" class="bookmark-link" title="Bharatbuild" target="_blank" 
+               style="color:#0366d6;text-decoration:none;word-break:break-word;">https://bharatbuild.ai/</a>
+          </td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">An AI-powered code and project generation</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">Full-stack applications 3 projects on freetier</td>
+          <td class="status" style="padding:6px;text-align:left;vertical-align:top;">⏳</td>
+        </tr>
+        <tr style="border-bottom:1px solid #ddd;">
+          <td style="padding:6px;text-align:left;vertical-align:top;">132</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">
+            <a href="https://architecto.dev/en" class="bookmark-link" title="Architecto" target="_blank" 
+               style="color:#0366d6;text-decoration:none;word-break:break-word;">https://architecto.dev/en</a>
+          </td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">AI Architecture Generation</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">Cloud Architectures in minutes</td>
+          <td class="status" style="padding:6px;text-align:left;vertical-align:top;">⏳</td>
+        </tr>
+        <tr style="border-bottom:1px solid #ddd;">
+          <td style="padding:6px;text-align:left;vertical-align:top;">133</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">
+            <a href="https://whataicandotoday.com/" class="bookmark-link" title="AI today" target="_blank" 
+               style="color:#0366d6;text-decoration:none;word-break:break-word;">https://whataicandotoday.com/</a>
+          </td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">Al stuff longlist</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">Al stuff</td>
+          <td class="status" style="padding:6px;text-align:left;vertical-align:top;">⏳</td>
+        </tr>
+        <tr style="border-bottom:1px solid #ddd;">
+          <td style="padding:6px;text-align:left;vertical-align:top;">134</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">
+            <a href="https://rephrase-pdf.pdffiller.com/" class="bookmark-link" title="Rephrase PDF" target="_blank" 
+               style="color:#0366d6;text-decoration:none;word-break:break-word;">https://rephrase-pdf.pdffiller.com/</a>
+          </td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">This service allows you to rephrase or edit PDF content online. Useful for document cleanup, formatting, and quick text adjustments.</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">PDF Tools</td>
+          <td class="status" style="padding:6px;text-align:left;vertical-align:top;">⏳</td>
+        </tr>
+        <tr style="border-bottom:1px solid #ddd;">
+          <td style="padding:6px;text-align:left;vertical-align:top;">135</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">
+            <a href="https://24billions.com/" class="bookmark-link" title="24Billions" target="_blank" 
+               style="color:#0366d6;text-decoration:none;word-break:break-word;">https://24billions.com/</a>
+          </td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">A versatile online platform offering AI-powered tools for text generation, rewriting, summarization, and creative content production. Useful for quick ideation, document drafting, and productivity enhancement.</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">AI Tools</td>
+          <td class="status" style="padding:6px;text-align:left;vertical-align:top;">⏳</td>
+        </tr>
+        <tr style="border-bottom:1px solid #ddd;">
+          <td style="padding:6px;text-align:left;vertical-align:top;">136</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">
+            <a href="https://removepaywalls.com/" class="bookmark-link" title="RemovePaywalls" target="_blank" 
+               style="color:#0366d6;text-decoration:none;word-break:break-word;">https://removepaywalls.com/</a>
+          </td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">An online service designed to bypass or remove paywalls from articles and websites, allowing users to access restricted content more easily. Useful for research, reading premium news, and accessing locked resources.</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">Web Tools</td>
+          <td class="status" style="padding:6px;text-align:left;vertical-align:top;">⏳</td>
+        </tr>
+        <tr style="border-bottom:1px solid #ddd;">
+          <td style="padding:6px;text-align:left;vertical-align:top;">137</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">
+            <a href="https://edit.paperpal.com/" class="bookmark-link" title="Paperpal Edit" target="_blank" 
+               style="color:#0366d6;text-decoration:none;word-break:break-word;">https://edit.paperpal.com/</a>
+          </td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">An AI-powered academic writing assistant that helps refine grammar, style, and clarity in research papers. Useful for polishing manuscripts, improving readability, and preparing documents for journal submission.</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">Writing Tools on Research papers</td>
+          <td class="status" style="padding:6px;text-align:left;vertical-align:top;">⏳</td>
+        </tr>
+        <tr style="border-bottom:1px solid #ddd;">
+          <td style="padding:6px;text-align:left;vertical-align:top;">138</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">
+            <a href="https://arena.ai/" class="bookmark-link" title="Arena AI" target="_blank" 
+               style="color:#0366d6;text-decoration:none;word-break:break-word;">https://arena.ai/</a>
+          </td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">A collaborative AI platform designed for building, testing, and deploying machine learning models. It provides tools for experimentation, benchmarking, and sharing AI workflows, making it useful for researchers, developers, and teams working on applied AI projects.</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">Free AI Tools Unlimited</td>
+          <td class="status" style="padding:6px;text-align:left;vertical-align:top;">⏳</td>
+        </tr>
+        <tr style="border-bottom:1px solid #ddd;">
+          <td style="padding:6px;text-align:left;vertical-align:top;">139</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">
+            <a href="https://eyecannndy.com/" class="bookmark-link" title="Eyecannndy" target="_blank" 
+               style="color:#0366d6;text-decoration:none;word-break:break-word;">https://eyecannndy.com/</a>
+          </td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">A comprehensive visual technique library showcasing hundreds of cinematic and stylistic effects. Useful for filmmakers, editors, and creatives to explore camera moves, transitions, and experimental aesthetics for inspiration and learning.</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">Creative Tools</td>
+          <td class="status" style="padding:6px;text-align:left;vertical-align:top;">⏳</td>
+        </tr>
+        <tr style="border-bottom:1px solid #ddd;">
+          <td style="padding:6px;text-align:left;vertical-align:top;">140</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">
+            <a href="https://www.toolfk.com/" class="bookmark-link" title="ToolFK" target="_blank" 
+               style="color:#0366d6;text-decoration:none;word-break:break-word;">https://www.toolfk.com/</a>
+          </td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">A multi‑purpose online toolkit offering converters, editors, and productivity utilities. Useful for handling documents, text, and files quickly without installing software.</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">Free no login AI Web Tools</td>
+          <td class="status" style="padding:6px;text-align:left;vertical-align:top;">⏳</td>
+        </tr>
+        <tr style="border-bottom:1px solid #ddd;">
+          <td style="padding:6px;text-align:left;vertical-align:top;">141</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">
+            <a href="https://www.trae.ai/" class="bookmark-link" title="TRAE" target="_blank" 
+               style="color:#0366d6;text-decoration:none;word-break:break-word;">https://www.trae.ai/</a>
+          </td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">An AI-powered IDE and coding agent designed to accelerate software development. TRAE integrates into workflows with smart autocompletion, autonomous SOLO mode for end-to-end project building, and customizable agent teams. Useful for developers seeking faster coding, debugging, and deployment with AI assistance.</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">Free AI Tools</td>
+          <td class="status" style="padding:6px;text-align:left;vertical-align:top;">⏳</td>
+        </tr>
+        <tr style="border-bottom:1px solid #ddd;">
+          <td style="padding:6px;text-align:left;vertical-align:top;">142</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">
+            <a href="https://github.com/stackblitz-labs/bolt.diy" class="bookmark-link" title="Bolt DIY" target="_blank" 
+               style="color:#0366d6;text-decoration:none;word-break:break-word;">https://github.com/stackblitz-labs/bolt.diy</a>
+          </td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">An open-source AI-powered coding assistant that helps developers scaffold, prototype, and build applications directly in the browser. Useful for rapid experimentation, learning, and accelerating project setup with minimal configuration.</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">Developer Tools Free AI</td>
+          <td class="status" style="padding:6px;text-align:left;vertical-align:top;">⏳</td>
+        </tr>
+        <tr style="border-bottom:1px solid #ddd;">
+          <td style="padding:6px;text-align:left;vertical-align:top;">143</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">
+            <a href="https://studio.firebase.google.com/" class="bookmark-link" title="Firebase Studio" target="_blank" 
+               style="color:#0366d6;text-decoration:none;word-break:break-word;">https://studio.firebase.google.com/</a>
+          </td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">A web-based console for managing Firebase projects. It provides tools for authentication, databases, hosting, cloud functions, and analytics, making it useful for developers to build, monitor, and scale web and mobile applications.</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">Developer Tools Free AI</td>
+          <td class="status" style="padding:6px;text-align:left;vertical-align:top;">⏳</td>
+        </tr>
+        <tr style="border-bottom:1px solid #ddd;">
+          <td style="padding:6px;text-align:left;vertical-align:top;">144</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">
+            <a href="https://labex.io/" class="bookmark-link" title="LabEx" target="_blank" 
+               style="color:#0366d6;text-decoration:none;word-break:break-word;">https://labex.io/</a>
+          </td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">An interactive learning platform offering hands-on coding labs, guided courses, and practice environments. Useful for developers, students, and professionals to learn programming, test skills, and build projects in real-time without complex setup.</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">Free Learning Tools</td>
+          <td class="status" style="padding:6px;text-align:left;vertical-align:top;">⏳</td>
+        </tr>
+        <tr style="border-bottom:1px solid #ddd;">
+          <td style="padding:6px;text-align:left;vertical-align:top;">145</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">
+            <a href="https://pabbly.com/" class="bookmark-link" title="Pabbly" target="_blank" 
+               style="color:#0366d6;text-decoration:none;word-break:break-word;">https://pabbly.com/</a>
+          </td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">A suite of business automation tools offering email marketing, subscription billing, form building, and workflow automation. Useful for startups, marketers, and businesses to streamline operations, manage payments, and automate repetitive tasks.</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">Business Nocode Tools</td>
+          <td class="status" style="padding:6px;text-align:left;vertical-align:top;">⏳</td>
+        </tr>
+        <tr style="border-bottom:1px solid #ddd;">
+          <td style="padding:6px;text-align:left;vertical-align:top;">146</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">
+            <a href="https://youtu.be/taeOIEsBeHo?si=C75Pgt9RJsiZbRpP" class="bookmark-link" title="YouTube – AI Tools Overview" target="_blank" 
+               style="color:#0366d6;text-decoration:none;word-break:break-word;">https://youtu.be/taeOIEsBeHo?si=C75Pgt9RJsiZbRpP</a>
+          </td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">A video walkthrough showcasing practical AI tools and platforms, highlighting their features, use cases, and benefits. Useful for learners, professionals, and creators seeking visual demonstrations of emerging AI technologies.</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">Learning Nocode Resources</td>
+          <td class="status" style="padding:6px;text-align:left;vertical-align:top;">⏳</td>
+        </tr>
+        <tr style="border-bottom:1px solid #ddd;">
+          <td style="padding:6px;text-align:left;vertical-align:top;">147</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">
+            <a href="https://tuxmate.com/" class="bookmark-link" title="TuxMate" target="_blank" 
+               style="color:#0366d6;text-decoration:none;word-break:break-word;">https://tuxmate.com/</a>
+          </td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">A web-based Linux bulk app installer that generates terminal commands for installing multiple applications at once. Supports popular distributions like Ubuntu, with categorized app lists (browsers, dev tools, communication, creative, gaming, office, security, and more). Useful for developers, sysadmins, and Linux enthusiasts to quickly set up fresh systems without manual installs.</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">Linux Tools</td>
+          <td class="status" style="padding:6px;text-align:left;vertical-align:top;">⏳</td>
+        </tr>
+        <tr style="border-bottom:1px solid #ddd;">
+          <td style="padding:6px;text-align:left;vertical-align:top;">148</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">
+            <a href="https://barkod.studio/" class="bookmark-link" title="Barcode" target="_blank" 
+               style="color:#0366d6;text-decoration:none;word-break:break-word;">https://barkod.studio/</a>
+          </td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">Make the barcode in colors with diff shapes</td>
+          <td style="padding:6px;text-align:left;vertical-align:top;">Barcode in colors</td>
+          <td class="status" style="padding:6px;text-align:left;vertical-align:top;">⏳</td>
+        </tr>
+      </tbody>
+    </table>
   </div>
   <script>
     const themeButton = document.getElementById("theme-button");
     const body = document.body;
     themeButton.addEventListener("click", () => {
       body.classList.toggle("dark-mode");
-      themeButton.textContent = body.classList.contains("dark-mode") ? "🌙" : "☀️";
+      if (body.classList.contains("dark-mode")) {
+        body.style.backgroundColor = "black";
+        body.style.color = "white";
+        themeButton.textContent = "🌙";
+      } else {
+        body.style.backgroundColor = "white";
+        body.style.color = "black";
+        themeButton.textContent = "☀️";
+      }
     });
   </script>
 </body>
