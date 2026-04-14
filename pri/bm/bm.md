@@ -151,3 +151,4 @@
 | TuxMate | https://tuxmate.com/ | A web-based Linux bulk app installer that generates terminal commands for installing multiple applications at once. Supports popular distributions like Ubuntu, with categorized app lists (browsers, dev tools, communication, creative, gaming, office, security, and more). Useful for developers, sysadmins, and Linux enthusiasts to quickly set up fresh systems without manual installs. | Linux Tools |
 | Barcode | https://barkod.studio/ | Make the barcode in colors with diff shapes  | Barcode in colors |
 | InVideo AI | https://ai.invideo.io | Generate professional videos from text prompts with AI-driven scripts, stock footage, and voiceovers. | Free AI Video Generation |
+| Venice AI | https://venice.ai/ | Chat with advanced AI models in a fast, user-friendly interface for creative and productivity tasks. | Free AI Chat Platform |
