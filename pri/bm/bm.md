@@ -152,4 +152,4 @@
 | Barcode | https://barkod.studio/ | Make the barcode in colors with diff shapes  | Barcode in colors |
 | InVideo AI | https://ai.invideo.io | Generate professional videos from text prompts with AI-driven scripts, stock footage, and voiceovers. | Free AI Video Generation |
 | Venice AI | https://venice.ai/ | Chat with advanced AI models in a fast, user-friendly interface for creative and productivity tasks. Alternate to uncensored AI | Free AI Chat Platform |
-| Old version| https://www.oldversion.com | old version software| Legacy version of software|
+| Old version| https://www.oldversion.com | old version software| Legacy version of free software|
