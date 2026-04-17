@@ -154,3 +154,4 @@
 | Venice AI | https://venice.ai/ | Chat with advanced AI models in a fast, user-friendly interface for creative and productivity tasks. Alternate to uncensored AI | Free AI Chat Platform |
 | Old version| https://www.oldversion.com | old version software| Legacy version of free software|
 | Bytebot AI | https://github.com/bytebot-ai/bytebot | Free AI Tools / Chatbot Framework | Open-source conversational AI framework for building intelligent chatbots and automation workflows |
+| Fabricodes | https://www.fabricodes.com | Free Design Tools / Templates | Platform offering top creator templates, AI-powered design tools, and easy customization for social media, thumbnails, and content creation |
