@@ -2,135 +2,204 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>data:text/html, <html contenteditable></html></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zen Writer Pro</title>
     <style>
         :root {
-            --bg-color: #f8f9fa;
-            --header-bg: #ffffff;
-            --text-color: #333;
+            --bg-color: #f0f2f5;
+            --header-bg: rgba(255, 255, 255, 0.8);
+            --text-color: #1a1a1a;
             --editor-bg: #ffffff;
-            --border-color: #ddd;
+            --accent-color: #6366f1;
+            --border-color: #e5e7eb;
         }
 
-        /* Dark Mode Variables */
         body.dark-mode {
-            --bg-color: #121212;
-            --header-bg: #1e1e1e;
-            --text-color: #e0e0e0;
-            --editor-bg: #1e1e1e;
-            --border-color: #333;
+            --bg-color: #0f172a;
+            --header-bg: rgba(30, 41, 59, 0.8);
+            --text-color: #f1f5f9;
+            --editor-bg: #1e293b;
+            --border-color: #334155;
         }
 
         body {
-            font-family: 'Segoe UI', system-ui, sans-serif;
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
             margin: 0;
             padding: 0;
             background-color: var(--bg-color);
             color: var(--text-color);
-            transition: background 0.3s, color 0.3s;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
+        /* Responsive Glassmorphism Header */
         #controls {
             position: fixed;
             top: 0;
-            left: 0;
-            right: 0;
-            height: 60px;
+            width: 100%;
+            backdrop-filter: blur(10px);
             background: var(--header-bg);
             border-bottom: 1px solid var(--border-color);
             display: flex;
+            flex-wrap: wrap;
             align-items: center;
             justify-content: center;
-            gap: 15px;
-            z-index: 100;
+            padding: 10px;
+            gap: 8px;
+            z-index: 1000;
         }
 
+        /* The Writing Area */
         #editor {
-            width: 100%;
-            max-width: 900px;
-            min-height: 85vh;
-            margin: 80px auto;
-            padding: 30px;
+            width: 90%;
+            max-width: 800px;
+            min-height: 80vh;
+            margin-top: 120px; /* Space for wrap-around header on mobile */
+            margin-bottom: 40px;
+            padding: 40px;
             outline: none;
             background: var(--editor-bg);
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-            line-height: 1.6;
-            white-space: pre-wrap;
-            border-radius: 8px;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+            font-size: 18px;
+            line-height: 1.8;
+            word-wrap: break-word;
         }
 
-        button {
-            padding: 8px 14px;
-            background: #007bff;
-            color: white;
+        /* Buttons & Inputs */
+        .btn {
+            padding: 8px 12px;
             border: none;
-            border-radius: 6px;
+            border-radius: 8px;
             cursor: pointer;
             font-weight: 600;
-            font-size: 13px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.1s, opacity 0.2s;
+            background: var(--accent-color);
+            color: white;
         }
 
-        button.secondary { background: #6c757d; }
-        button.success { background: #28a745; }
-        button:hover { opacity: 0.9; }
+        .btn:active { transform: scale(0.95); }
+        
+        .format-btn {
+            background: var(--border-color);
+            color: var(--text-color);
+            font-family: serif;
+            width: 35px;
+        }
+
+        input[type="color"] {
+            border: none;
+            width: 30px;
+            height: 30px;
+            cursor: pointer;
+            background: none;
+        }
 
         #status {
-            font-size: 12px;
-            color: #888;
-            min-width: 150px;
+            font-size: 11px;
+            opacity: 0.6;
+            width: 100%;
+            text-align: center;
+            margin-top: 5px;
+        }
+
+        /* Mobile Adjustments */
+        @media (max-width: 600px) {
+            #editor {
+                padding: 20px;
+                margin-top: 140px;
+                font-size: 16px;
+            }
+            .format-btn { display: none; } /* Hide formatting on tiny screens to save space */
         }
     </style>
 </head>
 <body>
 
     <div id="controls">
-        <button class="success" onclick="downloadFile()">📥</button>
-        <button class="secondary" onclick="toggleDarkMode()">☀️</button>
-        <div id="status">💾: Never</div>
+        <!-- Action Buttons -->
+        <button class="btn" onclick="downloadFile()" title="Download">💾</button>
+        <button class="btn" onclick="toggleDarkMode()" id="themeBtn">🌙</button>
+        
+        <!-- Color Picker -->
+        <input type="color" id="colorPicker" value="#6366f1" oninput="changeAccent(this.value)">
+
+        <!-- Rich Text Controls -->
+        <button class="btn format-btn" onclick="execCmd('bold')"><b>B</b></button>
+        <button class="btn format-btn" onclick="execCmd('italic')"><i>I</i></button>
+        <button class="btn format-btn" onclick="execCmd('insertUnorderedList')">•</button>
+
+        <div id="status">Waiting for input...</div>
     </div>
 
-    <!-- Spellcheck enabled here -->
-    <div id="editor" contenteditable="true" spellcheck="true">Start typing...</div>
+    <div id="editor" contenteditable="true" spellcheck="true">
+        Write your masterpiece here...
+    </div>
 
     <script>
         const editor = document.getElementById('editor');
         const status = document.getElementById('status');
 
-        // 1. Initial Load (Content + Theme)
-        window.onload = () => {
-            // Load Content
-            const savedData = localStorage.getItem('notepad-content');
-            if (savedData) editor.innerText = savedData;
+        // Execute Rich Text Commands
+        function execCmd(command) {
+            document.execCommand(command, false, null);
+            editor.focus();
+        }
 
-            // Load Theme Preference
-            if (localStorage.getItem('theme') === 'dark') {
-                document.body.classList.add('dark-mode');
-            }
-        };
+        // Change Accent Color
+        function changeAccent(color) {
+            document.documentElement.style.setProperty('--accent-color', color);
+            localStorage.setItem('accent-color', color);
+        }
 
-        // 2. Autosave on input
-        editor.addEventListener('input', () => {
-            localStorage.setItem('notepad-content', editor.innerText);
-            const now = new Date();
-            status.innerText = `💾: ${now.toLocaleTimeString()}`;
-        });
-
-        // 3. Dark Mode Toggle
+        // Dark Mode Toggle
         function toggleDarkMode() {
             document.body.classList.toggle('dark-mode');
             const isDark = document.body.classList.contains('dark-mode');
+            document.getElementById('themeBtn').innerText = isDark ? '☀️' : '🌙';
             localStorage.setItem('theme', isDark ? 'dark' : 'light');
         }
 
-        // 4. Download logic
+        // Initial Load
+        window.onload = () => {
+            // Load Content
+            const savedData = localStorage.getItem('zen-content');
+            if (savedData) editor.innerHTML = savedData;
+
+            // Load Theme
+            if (localStorage.getItem('theme') === 'dark') {
+                document.body.classList.add('dark-mode');
+                document.getElementById('themeBtn').innerText = '☀️';
+            }
+
+            // Load Accent
+            const savedAccent = localStorage.getItem('accent-color');
+            if (savedAccent) {
+                changeAccent(savedAccent);
+                document.getElementById('colorPicker').value = savedAccent;
+            }
+        };
+
+        // Autosave logic
+        editor.addEventListener('input', () => {
+            localStorage.setItem('zen-content', editor.innerHTML);
+            const now = new Date();
+            status.innerText = `Auto-saved at ${now.toLocaleTimeString()} | Chars: ${editor.innerText.length}`;
+        });
+
+        // Download logic (handles HTML to maintain formatting if needed, or Plain Text)
         function downloadFile() {
-            const text = editor.innerText;
+            const text = editor.innerText; 
             const blob = new Blob([text], { type: 'text/plain' });
             const anchor = document.createElement('a');
-            anchor.download = 'notes.txt';
+            anchor.download = `note-${new Date().toISOString().slice(0,10)}.txt`;
             anchor.href = window.URL.createObjectURL(blob);
             anchor.click();
-            window.URL.revokeObjectURL(anchor.href);
         }
     </script>
 </body>
