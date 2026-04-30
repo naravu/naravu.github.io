@@ -2,204 +2,105 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Autonote</title>
-    <style>
-        :root {
-            --bg-color: #f0f2f5;
-            --header-bg: rgba(255, 255, 255, 0.8);
-            --text-color: #1a1a1a;
-            --editor-bg: #ffffff;
-            --accent-color: #6366f1;
-            --border-color: #e5e7eb;
-        }
-
-        body.dark-mode {
-            --bg-color: #0f172a;
-            --header-bg: rgba(30, 41, 59, 0.8);
-            --text-color: #f1f5f9;
-            --editor-bg: #1e293b;
-            --border-color: #334155;
-        }
-
-        body {
-            font-family: 'Inter', system-ui, -apple-system, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            transition: all 0.3s ease;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        /* Responsive Glassmorphism Header */
-        #controls {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            backdrop-filter: blur(10px);
-            background: var(--header-bg);
-            border-bottom: 1px solid var(--border-color);
-            display: flex;
-            flex-wrap: wrap;
-            align-items: center;
-            justify-content: center;
-            padding: 10px;
-            gap: 8px;
-            z-index: 1000;
-        }
-
-        /* The Writing Area */
-        #editor {
-            width: 90%;
-            max-width: 800px;
-            min-height: 80vh;
-            margin-top: 120px; /* Space for wrap-around header on mobile */
-            margin-bottom: 40px;
-            padding: 40px;
-            outline: none;
-            background: var(--editor-bg);
-            border-radius: 12px;
-            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
-            font-size: 18px;
-            line-height: 1.8;
-            word-wrap: break-word;
-        }
-
-        /* Buttons & Inputs */
-        .btn {
-            padding: 8px 12px;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: transform 0.1s, opacity 0.2s;
-            background: var(--accent-color);
-            color: white;
-        }
-
-        .btn:active { transform: scale(0.95); }
-        
-        .format-btn {
-            background: var(--border-color);
-            color: var(--text-color);
-            font-family: serif;
-            width: 35px;
-        }
-
-        input[type="color"] {
-            border: none;
-            width: 30px;
-            height: 30px;
-            cursor: pointer;
-            background: none;
-        }
-
-        #status {
-            font-size: 11px;
-            opacity: 0.6;
-            width: 100%;
-            text-align: center;
-            margin-top: 5px;
-        }
-
-        /* Mobile Adjustments */
-        @media (max-width: 600px) {
-            #editor {
-                padding: 20px;
-                margin-top: 140px;
-                font-size: 16px;
-            }
-            .format-btn { display: none; } /* Hide formatting on tiny screens to save space */
-        }
-    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Mobile Optimized Editor</title>
 </head>
-<body>
+<body id="body" style="margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; background-color: #f0f2f5; transition: background-color 0.3s; display: flex; flex-direction: column; align-items: center;">
 
-    <div id="controls">
-        <!-- Action Buttons -->
-        <button class="btn" onclick="downloadFile()" title="Download">💾</button>
-        <button class="btn" onclick="toggleDarkMode()" id="themeBtn">🌙</button>
+    <!-- Fixed Toolbar -->
+    <div id="controls" style="position: sticky; top: 0; width: 100%; background: #ffffff; border-bottom: 1px solid #ddd; display: flex; flex-wrap: wrap; justify-content: center; align-items: center; padding: 10px; gap: 8px; z-index: 1000; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
         
-        <!-- Color Picker -->
-        <input type="color" id="colorPicker" value="#6366f1" oninput="changeAccent(this.value)">
+        <!-- Action Group -->
+        <div style="display: flex; gap: 5px; align-items: center; border-right: 1px solid #eee; padding-right: 10px;">
+            <button onclick="downloadFile()" style="padding: 8px 12px; border: none; border-radius: 6px; background: #28a745; color: white; cursor: pointer; font-size: 16px;">📥</button>
+            <button id="themeBtn" onclick="toggleDarkMode()" style="padding: 8px 12px; border: none; border-radius: 6px; background: #6c757d; color: white; cursor: pointer; font-size: 16px;">🌙</button>
+        </div>
 
-        <!-- Rich Text Controls -->
-        <button class="btn format-btn" onclick="execCmd('bold')"><b>B</b></button>
-        <button class="btn format-btn" onclick="execCmd('italic')"><i>I</i></button>
-        <button class="btn format-btn" onclick="execCmd('insertUnorderedList')">•</button>
+        <!-- Format Group (Visible on all screens) -->
+        <div style="display: flex; gap: 5px; align-items: center;">
+            <button onclick="execCmd('bold')" style="width: 35px; height: 35px; border: 1px solid #ddd; border-radius: 4px; background: #fff; font-weight: bold; cursor: pointer;">B</button>
+            <button onclick="execCmd('italic')" style="width: 35px; height: 35px; border: 1px solid #ddd; border-radius: 4px; background: #fff; font-style: italic; cursor: pointer;">I</button>
+            <button onclick="execCmd('underline')" style="width: 35px; height: 35px; border: 1px solid #ddd; border-radius: 4px; background: #fff; text-decoration: underline; cursor: pointer;">U</button>
+            <input type="color" id="colorPicker" oninput="changeAccent(this.value)" style="width: 30px; height: 30px; border: none; cursor: pointer; background: transparent;">
+        </div>
 
-        <div id="status">Waiting for input...</div>
+        <div id="status" style="width: 100%; text-align: center; font-size: 11px; color: #888; margin-top: 5px;">Ready</div>
     </div>
 
-    <div id="editor" contenteditable="true" spellcheck="true">
-        Write your masterpiece here...
-    </div>
+    <!-- Editor Surface -->
+    <div id="editor" contenteditable="true" spellcheck="true" style="width: 90%; max-width: 800px; min-height: 70vh; margin: 20px 0; padding: 20px; background: #ffffff; border-radius: 8px; border: 1px solid #ddd; outline: none; line-height: 1.6; font-size: 16px; overflow-wrap: break-word; box-sizing: border-box;">Start typing your notes...</div>
 
     <script>
         const editor = document.getElementById('editor');
         const status = document.getElementById('status');
+        const body = document.getElementById('body');
+        const controls = document.getElementById('controls');
 
-        // Execute Rich Text Commands
+        // Core Command Function
         function execCmd(command) {
             document.execCommand(command, false, null);
-            editor.focus();
         }
 
-        // Change Accent Color
+        // Accent Color Change
         function changeAccent(color) {
-            document.documentElement.style.setProperty('--accent-color', color);
-            localStorage.setItem('accent-color', color);
+            const buttons = document.querySelectorAll('button');
+            status.style.color = color;
+            localStorage.setItem('accent-pref', color);
         }
 
-        // Dark Mode Toggle
+        // Dark Mode Logic
         function toggleDarkMode() {
-            document.body.classList.toggle('dark-mode');
-            const isDark = document.body.classList.contains('dark-mode');
-            document.getElementById('themeBtn').innerText = isDark ? '☀️' : '🌙';
-            localStorage.setItem('theme', isDark ? 'dark' : 'light');
+            const isDark = body.style.backgroundColor === 'rgb(18, 18, 18)';
+            if (!isDark) {
+                body.style.backgroundColor = '#121212';
+                body.style.color = '#e0e0e0';
+                controls.style.backgroundColor = '#1e1e1e';
+                controls.style.borderColor = '#333';
+                editor.style.backgroundColor = '#1e1e1e';
+                editor.style.borderColor = '#333';
+                document.getElementById('themeBtn').innerText = '☀️';
+                localStorage.setItem('theme', 'dark');
+            } else {
+                body.style.backgroundColor = '#f0f2f5';
+                body.style.color = '#1a1a1a';
+                controls.style.backgroundColor = '#ffffff';
+                controls.style.borderColor = '#ddd';
+                editor.style.backgroundColor = '#ffffff';
+                editor.style.borderColor = '#ddd';
+                document.getElementById('themeBtn').innerText = '🌙';
+                localStorage.setItem('theme', 'light');
+            }
         }
 
-        // Initial Load
+        // Autosave
+        editor.addEventListener('input', () => {
+            localStorage.setItem('mobile-note-content', editor.innerHTML);
+            const now = new Date();
+            status.innerText = `Saved: ${now.toLocaleTimeString()}`;
+        });
+
+        // Initialize
         window.onload = () => {
-            // Load Content
-            const savedData = localStorage.getItem('zen-content');
-            if (savedData) editor.innerHTML = savedData;
-
-            // Load Theme
-            if (localStorage.getItem('theme') === 'dark') {
-                document.body.classList.add('dark-mode');
-                document.getElementById('themeBtn').innerText = '☀️';
-            }
-
-            // Load Accent
-            const savedAccent = localStorage.getItem('accent-color');
-            if (savedAccent) {
-                changeAccent(savedAccent);
-                document.getElementById('colorPicker').value = savedAccent;
+            const saved = localStorage.getItem('mobile-note-content');
+            if (saved) editor.innerHTML = saved;
+            
+            if (localStorage.getItem('theme') === 'dark') toggleDarkMode();
+            
+            const accent = localStorage.getItem('accent-pref');
+            if (accent) {
+                document.getElementById('colorPicker').value = accent;
+                changeAccent(accent);
             }
         };
 
-        // Autosave logic
-        editor.addEventListener('input', () => {
-            localStorage.setItem('zen-content', editor.innerHTML);
-            const now = new Date();
-            status.innerText = `Auto-saved @ ${now.toLocaleTimeString()} | Chars: ${editor.innerText.length}`;
-        });
-
-        // Download logic (handles HTML to maintain formatting if needed, or Plain Text)
+        // Download
         function downloadFile() {
-            const text = editor.innerText; 
+            const text = editor.innerText;
             const blob = new Blob([text], { type: 'text/plain' });
-            const anchor = document.createElement('a');
-            anchor.download = `note-${new Date().toISOString().slice(0,10)}.txt`;
-            anchor.href = window.URL.createObjectURL(blob);
-            anchor.click();
+            const a = document.createElement('a');
+            a.href = URL.createObjectURL(blob);
+            a.download = 'my-note.txt';
+            a.click();
         }
     </script>
 </body>
