@@ -189,7 +189,7 @@
         editor.addEventListener('input', () => {
             localStorage.setItem('zen-content', editor.innerHTML);
             const now = new Date();
-            status.innerText = `Auto-saved at ${now.toLocaleTimeString()} | Chars: ${editor.innerText.length}`;
+            status.innerText = `Auto-saved @ ${now.toLocaleTimeString()} | Chars: ${editor.innerText.length}`;
         });
 
         // Download logic (handles HTML to maintain formatting if needed, or Plain Text)
