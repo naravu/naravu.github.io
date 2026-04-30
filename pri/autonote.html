@@ -112,7 +112,7 @@
         editor.addEventListener('input', () => {
             localStorage.setItem('notepad-content', editor.innerText);
             const now = new Date();
-            status.innerText = `Last saved: ${now.toLocaleTimeString()}`;
+            status.innerText = `💾: ${now.toLocaleTimeString()}`;
         });
 
         // 3. Dark Mode Toggle
