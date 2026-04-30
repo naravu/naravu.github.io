@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Autosave Notepad</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            line-height: 1.6;
+            padding: 50px;
+            max-width: 900px;
+            margin: auto;
+            outline: none;
+            color: #333;
+        }
+        #controls {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            gap: 10px;
+        }
+        button {
+            padding: 8px 16px;
+            background: #28a745;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        button:hover { background: #218838; }
+        #status {
+            position: fixed;
+            bottom: 10px;
+            right: 20px;
+            font-size: 12px;
+            color: #888;
+        }
+    </style>
+</head>
+<body contenteditable="true" spellcheck="false" id="editor">
+    Loading your notes...
+
+    <div id="controls" contenteditable="false">
+        <button onclick="downloadFile()">Download .txt</button>
+    </div>
+    <div id="status" contenteditable="false">Last saved: Never</div>
+
+    <script>
+        const editor = document.getElementById('editor');
+        const status = document.getElementById('status');
+
+        // 1. Load content from LocalStorage on startup
+        window.onload = () => {
+            const savedData = localStorage.getItem('notepad-content');
+            if (savedData !== null) {
+                editor.innerText = savedData;
+            } else {
+                editor.innerText = "Start typing here... your work is automatically saved.";
+            }
+        };
+
+        // 2. Autosave on every keystroke (input event)
+        editor.addEventListener('input', () => {
+            const text = editor.innerText;
+            localStorage.setItem('notepad-content', text);
+            
+            const now = new Date();
+            status.innerText = `Last saved: ${now.toLocaleTimeString()}`;
+        });
+
+        // 3. Manual download function
+        function downloadFile() {
+            const text = editor.innerText;
+            const blob = new Blob([text], { type: 'text/plain' });
+            const anchor = document.createElement('a');
+            anchor.download = 'my-autosaved-notes.txt';
+            anchor.href = window.URL.createObjectURL(blob);
+            anchor.click();
+        }
+    </script>
+</body>
+</html>
