@@ -4,7 +4,7 @@
        Icon name: computer-vm
          Chassis: vm 🖴
       Machine ID: 96e66a7085dc477da4cf9f1848af3585
-         Boot ID: 8569b9e03b624516b7b970dd14c356b4
+         Boot ID: 66478a35263c4479ae2823744b062427
   Virtualization: microsoft
 Operating System: Ubuntu 24.04.4 LTS
           Kernel: Linux 6.17.0-1010-azure
@@ -13,43 +13,36 @@ Operating System: Ubuntu 24.04.4 LTS
   Hardware Model: Virtual Machine
 Firmware Version: Hyper-V UEFI Release v4.1
    Firmware Date: Thu 2026-01-08
-    Firmware Age: 3month 3w 1d</pre>
+    Firmware Age: 3month 3w 2d</pre>
 <a name=network></a><b>Network Details</b><pre>docker0: flags=4099<UP,BROADCAST,MULTICAST>  mtu 1500
         inet 172.17.0.1  netmask 255.255.0.0  broadcast 172.17.255.255
-        ether f2:d3:28:0a:ca:de  txqueuelen 0  (Ethernet)
+        ether 7e:fa:22:d2:90:a1  txqueuelen 0  (Ethernet)
         RX packets 0  bytes 0 (0.0 B)
         RX errors 0  dropped 0  overruns 0  frame 0
         TX packets 0  bytes 0 (0.0 B)
         TX errors 0  dropped 2 overruns 0  carrier 0  collisions 0
 
-enP56894s1: flags=6211<UP,BROADCAST,RUNNING,SLAVE,MULTICAST>  mtu 1500
-        ether 7c:1e:52:86:c0:ce  txqueuelen 1000  (Ethernet)
-        RX packets 181760  bytes 252060123 (252.0 MB)
-        RX errors 0  dropped 235  overruns 0  frame 0
-        TX packets 19190  bytes 1576733 (1.5 MB)
-        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
-
 eth0: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
-        inet 10.1.0.152  netmask 255.255.240.0  broadcast 10.1.15.255
-        inet6 fe80::7e1e:52ff:fe86:c0ce  prefixlen 64  scopeid 0x20<link>
-        ether 7c:1e:52:86:c0:ce  txqueuelen 1000  (Ethernet)
-        RX packets 178865  bytes 249371429 (249.3 MB)
+        inet 10.1.0.143  netmask 255.255.240.0  broadcast 10.1.15.255
+        inet6 fe80::7eed:8dff:fe6e:4e53  prefixlen 64  scopeid 0x20<link>
+        ether 7c:ed:8d:6e:4e:53  txqueuelen 1000  (Ethernet)
+        RX packets 181856  bytes 252109218 (252.1 MB)
         RX errors 0  dropped 0  overruns 0  frame 0
-        TX packets 19086  bytes 1563947 (1.5 MB)
+        TX packets 5245  bytes 661068 (661.0 KB)
         TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
 
 lo: flags=73<UP,LOOPBACK,RUNNING>  mtu 65536
         inet 127.0.0.1  netmask 255.0.0.0
         inet6 ::1  prefixlen 128  scopeid 0x10<host>
         loop  txqueuelen 1000  (Local Loopback)
-        RX packets 200  bytes 26408 (26.4 KB)
+        RX packets 204  bytes 26965 (26.9 KB)
         RX errors 0  dropped 0  overruns 0  frame 0
-        TX packets 200  bytes 26408 (26.4 KB)
+        TX packets 204  bytes 26965 (26.9 KB)
         TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0</pre>
 <a name=swap></a><font face=serif size=2><b>Swap Details</b></font><pre>               total        used        free      shared  buff/cache   available
-Mem:            15Gi       1.4Gi        11Gi        45Mi       2.7Gi        14Gi
+Mem:            15Gi       1.2Gi        12Gi        43Mi       2.7Gi        14Gi
 Swap:          3.0Gi          0B       3.0Gi</pre>
-<a name=user></a><font face=serif size=2><b>Connected User Details</b></font><pre> 23:40:58 up 0 min,  0 user,  load average: 0.56, 0.14, 0.05
+<a name=user></a><font face=serif size=2><b>Connected User Details</b></font><pre> 23:32:32 up 0 min,  0 user,  load average: 1.38, 0.41, 0.14
 USER     TTY      FROM             LOGIN@   IDLE   JCPU   PCPU  WHAT</pre>
 <a name=fstab></a><font face=serif size=2><b>FStab Details</b></font><pre># CLOUD_IMG: This file was created/modified by the Cloud Image build process
 UUID=822e1863-9256-4ccd-9104-ffffb1fd93b0	/	 ext4	discard,commit=30,errors=remount-ro	0 1
@@ -186,8 +179,8 @@ Destination     Gateway         Genmask         Flags   MSS Window  irtt Iface
 169.254.169.254 10.1.0.1        255.255.255.255 UGH       0 0          0 eth0
 172.17.0.0      0.0.0.0         255.255.0.0     U         0 0          0 docker0</pre>
 <a name=port></a><font face=serif size=2><b>Listening Ports Details</b></font><pre>tcp        0      0 127.0.0.53:53           0.0.0.0:*               LISTEN      -                   
-tcp        0      0 127.0.0.54:53           0.0.0.0:*               LISTEN      -                   
 tcp        0      0 0.0.0.0:22              0.0.0.0:*               LISTEN      -                   
+tcp        0      0 127.0.0.54:53           0.0.0.0:*               LISTEN      -                   
 tcp6       0      0 :::22                   :::*                    LISTEN      -                   </pre>
 <a name=active></a><font face=serif size=2><b>Active Services</b></font><pre>  chrony.service                                              loaded    active   running       chrony, an NTP client/server
   containerd.service                                          loaded    active   running       containerd container runtime
@@ -205,7 +198,6 @@ tcp6       0      0 :::22                   :::*                    LISTEN      
   polkit.service                                              loaded    active   running       Authorization Manager
   rsyslog.service                                             loaded    active   running       System Logging Service
   serial-getty@ttyS0.service                                  loaded    active   running       Serial Getty on ttyS0
-  snapd.service                                               loaded    active   running       Snap Daemon
   systemd-hostnamed.service                                   loaded    active   running       Hostname Service
   systemd-journald.service                                    loaded    active   running       Journal Service
   systemd-logind.service                                      loaded    active   running       User Login Management
@@ -325,6 +317,7 @@ tcp6       0      0 :::22                   :::*                    LISTEN      
   snapd.core-fixup.service                                    loaded    inactive dead          Automatically repair incorrect owner/permissions on core devices
   snapd.failure.service                                       loaded    inactive dead          Failure handling of the snapd snap
   snapd.recovery-chooser-trigger.service                      loaded    inactive dead          Wait for the Ubuntu Core chooser trigger
+  snapd.service                                               loaded    inactive dead          Snap Daemon
   snapd.snap-repair.service                                   loaded    inactive dead          Automatically fetch and run repair assertions
   snapd.system-shutdown.service                               loaded    inactive dead          Ubuntu core (all-snaps) system shutdown helper setup service
   ssh.service                                                 loaded    inactive dead          OpenBSD Secure Shell server
@@ -383,30 +376,30 @@ tcp6       0      0 :::22                   :::*                    LISTEN      
 <a name=dmidecode></a><font face=serif size=2><b>System Details</b></font><pre># dmidecode 3.5
 Scanning /dev/mem for entry point.</pre>
 <a name=inxi></a><font face=serif size=2><b>System Details New</b></font><pre></pre>
-<a name=zombie></a><font face=serif size=2><b>Zombies</b></font><pre>runner      2318  0.0  0.0   7088  2296 ?        S    23:40   0:00 grep defunct</pre>
-<a name=reboot></a><font face=serif size=2><b>Reboot</b></font><pre>reboot   system boot  6.17.0-1010-azur Fri May  1 23:40   still running</pre>
-<a name=shut></a><font face=serif size=2><b>Shutdown</b></font><pre>shutdown system down  6.17.0-1010-azur Mon Apr 13 23:35 - 23:40 (18+00:04)</pre>
+<a name=zombie></a><font face=serif size=2><b>Zombies</b></font><pre>runner      2361  0.0  0.0   7088  2168 ?        S    23:32   0:00 grep defunct</pre>
+<a name=reboot></a><font face=serif size=2><b>Reboot</b></font><pre>reboot   system boot  6.17.0-1010-azur Sat May  2 23:31   still running</pre>
+<a name=shut></a><font face=serif size=2><b>Shutdown</b></font><pre>shutdown system down  6.17.0-1010-azur Mon Apr 13 23:35 - 23:31 (18+23:56)</pre>
 <a name=mem></a><font face=serif size=2><b>Memory Hog</b></font><pre>%MEM     PID    PPID USER     STAT COMMAND
 
- 0.8    2080    2064 runner   Sl   /home/runner/actions-runner/cached/2.334.0/bin/Runner.Worker spawnclient 142 145
+ 0.7    2124    2108 runner   Sl   /home/runner/actions-runner/cached/2.334.0/bin/Runner.Worker spawnclient 142 145
 
- 0.5    2064    2034 runner   Sl   /home/runner/actions-runner/cached/2.334.0/bin/Runner.Listener run
+ 0.5    2108    2080 runner   Sl   /home/runner/actions-runner/cached/2.334.0/bin/Runner.Listener run
 
- 0.5    2049    2047 root     Sl   /tmp/provjobd737015149
+ 0.5    2096    2094 root     Sl   /tmp/provjobd281172786
 
- 0.4    1241       1 root     Ssl  /usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock
+ 0.4    1182       1 root     Ssl  /usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock
 
- 0.3     909       1 root     Ss   php-fpm: master process (/etc/php/8.3/fpm/php-fpm.conf)</pre>
+ 0.3     964       1 root     Ss   php-fpm: master process (/etc/php/8.3/fpm/php-fpm.conf)</pre>
 <a name=cpuh></a><font face=serif size=2><b>CPU Hog</b></font><pre>%CPU     PID    PPID USER     STAT COMMAND
 
-15.5    2080    2064 runner   Sl   /home/runner/actions-runner/cached/2.334.0/bin/Runner.Worker spawnclient 142 145
+18.0    2124    2108 runner   Sl   /home/runner/actions-runner/cached/2.334.0/bin/Runner.Worker spawnclient 142 145
 
-11.7    2287       1 root     Ss   /usr/lib/systemd/systemd-hostnamed
+17.3    2330       1 root     Ss   /usr/lib/systemd/systemd-hostnamed
 
- 7.1    2064    2034 runner   Sl   /home/runner/actions-runner/cached/2.334.0/bin/Runner.Listener run
+ 8.8    2108    2080 runner   Sl   /home/runner/actions-runner/cached/2.334.0/bin/Runner.Listener run
 
- 5.9       1       0 root     Ss   /sbin/init
+ 7.7       1       0 root     Ss   /sbin/init
 
- 3.2    2282    2269 runner   S    python shviapy.py</pre>
+ 3.5    2322    2313 runner   S    python shviapy.py</pre>
 <a name=dp></a><font face=serif size=2><b>Default Path</b></font><pre>/opt/hostedtoolcache/Python/3.14.4/x64/bin:/opt/hostedtoolcache/Python/3.14.4/x64:/snap/bin:/home/runner/.local/bin:/opt/pipx_bin:/home/runner/.cargo/bin:/home/runner/.config/composer/vendor/bin:/usr/local/.ghcup/bin:/home/runner/.dotnet/tools:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin</pre>
-<a name=copy></a><div id=foot><pre> &copy; Last OS update:  | Page update: Fri May  1 23:40:58 UTC 2026</pre></div><script>function myFunction() {  var x = document.getElementById("myDIV");  if (x.style.display === "none") {   x.style.display = "block";  } else {   x.style.display = "none";  }}</script></body></html>
+<a name=copy></a><div id=foot><pre> &copy; Last OS update:  | Page update: Sat May  2 23:32:32 UTC 2026</pre></div><script>function myFunction() {  var x = document.getElementById("myDIV");  if (x.style.display === "none") {   x.style.display = "block";  } else {   x.style.display = "none";  }}</script></body></html>
