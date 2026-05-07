@@ -156,3 +156,4 @@
 | Bytebot AI | https://github.com/bytebot-ai/bytebot | Free AI Tools / Chatbot Framework | Open-source conversational AI framework for building intelligent chatbots and automation workflows |
 | Fabricodes | https://www.fabricodes.com | Free Design Tools / Templates | Platform offering top creator templates, AI-powered design tools, and easy customization for social media, thumbnails, and content creation |
 | Open slide | https://github.com/1weiho/open-slide | open-slide framework | Free Slide framework for agents |
+| Maket| https://www.maket.ai/| Free 1 floor plan | Limited free tier for floor plans |
