@@ -157,3 +157,5 @@
 | Fabricodes | https://www.fabricodes.com | Free Design Tools / Templates | Platform offering top creator templates, AI-powered design tools, and easy customization for social media, thumbnails, and content creation |
 | Open slide | https://github.com/1weiho/open-slide | open-slide framework | Free Slide framework for agents |
 | Maket| https://www.maket.ai/| Free 1 floor plan | Limited free tier for floor plans |
+| Omni Voice | https://www.youtube.com/watch?v=LZEZ4nmuahc | Voice cloner | Free Voice cloning hosted on colab video |
+| Omni Voice | https://github.com/k2-fsa/OmniVoice | Voice cloner | Free Voice cloning code |
