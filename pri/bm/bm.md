@@ -159,3 +159,6 @@
 | Maket| https://www.maket.ai/| Free 1 floor plan | Limited free tier for floor plans |
 | Omni Voice | https://www.youtube.com/watch?v=LZEZ4nmuahc | Voice cloner | Free Voice cloning hosted on colab video |
 | Omni Voice | https://github.com/k2-fsa/OmniVoice | Voice cloner | Free Voice cloning code |
+| Logo Lattice | https://logolattice.com/ | Logo design tools | Free online logo lattice generator |
+| Scenema Audio | https://github.com/ScenemaAI/scenema-audio | Audio AI | Free audio scene analysis code |
+| Codebuff | https://github.com/CodebuffAI/codebuff | Code assistant | Free AI code buffing tool |
