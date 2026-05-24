@@ -162,3 +162,22 @@
 | Logo Lattice | https://logolattice.com/ | Logo design tools | Free online logo lattice generator |
 | Scenema Audio | https://github.com/ScenemaAI/scenema-audio | Audio AI | Free audio scene analysis code |
 | Codebuff | https://github.com/CodebuffAI/codebuff | Code assistant | Free AI code buffing tool |
+| v0.dev | https://v0.dev | UI component generator | Generate UI components with AI |
+| NoteGPT | https://notegpt.io | Podcast creation | Turns docs into podcasts |
+| Napkin AI | https://napkin.ai | Diagram generator | Turns text into diagrams |
+| Lovable.dev | https://lovable.dev | App builder | Turn ideas into working apps |
+| Suno | https://suno.com | Song generator | Makes full songs from a prompt |
+| HeyGen | https://heygen.com | Video avatar tool | Clones your face into videos |
+| Kling AI | https://klingai.com | Video generation | Best AI video generation |
+| ElevenLabs | https://elevenlabs.io | Voice cloning | Clone any voice instantly |
+| Gamma.app | https://gamma.app | Presentation maker | AI presentations in seconds |
+| Perplexity AI | https://perplexity.ai | AI search engine | AI search with real sources |
+| Pika.art | https://pika.art | Animation tool | Animate any image into video |
+| RunwayML | https://runwayml.com | Video generation | Cinematic AI video generation |
+| Cursor | https://cursor.com | AI code editor | AI code editor that builds for you |
+| Explee AutoGTM | https://explee.com/auto-gtm/x/ma2 | Sales automation | Sends cold emails on autopilot |
+| Ideogram | https://ideogram.ai | Text-to-image | Generates text in images perfectly |
+| Descript | https://descript.com | Video editor | Edit video by editing text |
+| Opus.pro | https://opus.pro | Video cutter | Auto cut long videos into shorts |
+| Krea.ai | https://krea.ai | Image generator | Real-time AI image generation |
+| Magnific.ai | https://magnific.ai | Image upscaler | Upscale any image with AI |
