@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Global Time Nexus Pro</title>
+    <!-- NoUiSlider CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/15.8.1/nouislider.min.css">
+    <style>
+        :root {
+            --bg-dark: #0f172a;
+            --card-bg: #1e293b;
+            --text-main: #f1f5f9;
+            --text-muted: #94a3b8;
+            --accent-india: #38bdf8;
+            --accent-germany: #a78bfa;
+            --accent-uk: #34d399;
+            --accent-japan: #f472b6;
+            --accent-china: #fbbf24;
+            --accent-usa: #60a5fa;
+            --accent-uae: #f87171;
+            --accent-aus: #2dd4bf;
+            --biz-green: #22c55e;
+            --biz-red: #ef4444;
+            --font-stack: "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            font-family: var(--font-stack);
+            margin: 0;
+            padding: 15px;
+            text-align: center;
+            font-size: 13px;
+            overflow-x: hidden;
+        }
+
+        h1 {
+            font-weight: 300;
+            letter-spacing: 1px;
+            margin: 10px 0 20px;
+            text-transform: uppercase;
+            font-size: 1.1rem;
+            text-shadow: 0 0 10px rgba(56, 189, 248, 0.3);
+        }
+
+        /* Controls Bar */
+        .controls-bar {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+            background: rgba(30, 41, 59, 0.5);
+            padding: 10px;
+            border-radius: 8px;
+            backdrop-filter: blur(5px);
+        }
+
+        .control-group {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.8rem;
+        }
+
+        select, input[type="datetime-local"] {
+            background: #334155;
+            border: 1px solid #475569;
+            color: white;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-family: inherit;
+            font-size: 0.75rem;
+            cursor: pointer;
+        }
+        
+        select option { background: #1e293b; }
+
+        button.toggle-btn {
+            background: #334155;
+            border: 1px solid #475569;
+            color: white;
+            padding: 4px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.75rem;
+            transition: background 0.2s;
+        }
+        button.toggle-btn:hover { background: #475569; }
+
+        /* Grid Layout */
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 12px;
+            max-width: 1000px;
+            margin: 0 auto 25px;
+        }
+
+        .card {
+            background-color: var(--card-bg);
+            border: 1px solid rgba(255,255,255,0.05);
+            border-radius: 6px;
+            padding: 12px 8px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            cursor: pointer;
+            position: relative;
+            transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+            overflow: hidden;
+        }
+
+        .card:hover { transform: translateY(-2px); }
+        .card:active { transform: scale(0.98); }
+
+        /* Business Hours Indicator */
+        .card.biz-yes { border-color: var(--biz-green); box-shadow: 0 0 10px rgba(34, 197, 94, 0.2); }
+        .card.biz-no { border-color: rgba(255,255,255,0.05); }
+        
+        .biz-badge {
+            position: absolute;
+            top: 4px;
+            right: 4px;
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+        }
+        .biz-yes .biz-badge { background-color: var(--biz-green); box-shadow: 0 0 5px var(--biz-green); }
+        .biz-no .biz-badge { background-color: var(--biz-red); }
+
+        .card-title {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            margin-bottom: 6px;
+            font-weight: 600;
+            text-transform: uppercase;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            justify-content: center;
+            width: 100%;
+        }
+
+        .city-select {
+            background: transparent;
+            border: 1px solid rgba(255,255,255,0.2);
+            color: var(--text-main);
+            font-size: 0.65rem;
+            padding: 2px 4px;
+            border-radius: 4px;
+            margin-left: 4px;
+            cursor: pointer;
+            outline: none;
+        }
+        .city-select option { background: var(--card-bg); color: var(--text-main); }
+
+        .card-time {
+            font-size: 1.4rem;
+            font-weight: 700;
+            font-variant-numeric: tabular-nums;
+            line-height: 1.2;
+            margin-bottom: 4px;
+        }
+
+        .card-date { font-size: 0.65rem; color: var(--text-muted); text-transform: uppercase; }
+
+        /* Colors */
+        .c-india { color: var(--accent-india); }
+        .c-germany { color: var(--accent-germany); }
+        .c-uk { color: var(--accent-uk); }
+        .c-japan { color: var(--accent-japan); }
+        .c-china { color: var(--accent-china); }
+        .c-usa { color: var(--accent-usa); }
+        .c-uae { color: var(--accent-uae); }
+        .c-aus { color: var(--accent-aus); }
+
+        /* Slider Panel */
+        .slider-panel {
+            background-color: var(--card-bg);
+            max-width: 700px;
+            margin: 0 auto;
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid rgba(255,255,255,0.05);
+            text-align: left;
+        }
+
+        .slider-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            padding-bottom: 10px;
+        }
+
+        /* NoUiSlider Customization */
+        #range-slider { height: 6px; margin: 20px 0; }
+        .noUi-connect { background: linear-gradient(90deg, var(--accent-india), var(--accent-usa)); }
+        .noUi-handle {
+            width: 16px; height: 16px;
+            top: -5px; right: -8px;
+            background: #fff;
+            border-radius: 50%;
+            box-shadow: 0 0 10px rgba(0,0,0,0.5);
+            cursor: grab;
+        }
+        .noUi-handle:after { display: none; }
+
+        .slider-values {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.8rem;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+        .val-start { color: var(--accent-india); }
+        .val-end { color: var(--accent-usa); }
+
+        .results-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: space-between;
+            margin-top: 20px;
+            padding-top: 15px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .res-item {
+            flex: 1 1 80px;
+            background: rgba(0,0,0,0.2);
+            padding: 6px;
+            border-radius: 4px;
+            text-align: center;
+            font-size: 0.75rem;
+        }
+        .res-label { display: block; color: var(--text-muted); margin-bottom: 2px; font-size: 0.6rem; }
+        .res-val { font-weight: 700; font-variant-numeric: tabular-nums; }
+
+        /* Toast Notification */
+        #toast {
+            visibility: hidden;
+            min-width: 200px;
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            border-radius: 4px;
+            padding: 10px;
+            position: fixed;
+            z-index: 1;
+            left: 50%;
+            bottom: 30px;
+            transform: translateX(-50%);
+            font-size: 0.9rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            border: 1px solid var(--accent-india);
+        }
+        #toast.show { visibility: visible; animation: fadein 0.5s, fadeout 0.5s 2.5s; }
+
+        @keyframes fadein { from {bottom: 0; opacity: 0;} to {bottom: 30px; opacity: 1;} }
+        @keyframes fadeout { from {bottom: 30px; opacity: 1;} to {bottom: 0; opacity: 0;} }
+
+        /* Mobile Responsive */
+        @media (max-width: 600px) {
+            .grid-container { grid-template-columns: 1fr 1fr; }
+            .controls-bar { flex-direction: column; align-items: stretch; }
+            .control-group { justify-content: space-between; }
+            .slider-panel { padding: 15px; }
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Global Time Nexus Pro</h1>
+
+    <!-- Controls -->
+    <div class="controls-bar">
+        <div class="control-group">
+            <label>Format:</label>
+            <button class="toggle-btn" id="fmt-toggle" onclick="toggleFormat()">12h</button>
+        </div>
+        <div class="control-group">
+            <label>Date:</label>
+            <input type="datetime-local" id="date-picker">
+        </div>
+        <div class="control-group">
+            <label>Share:</label>
+            <button class="toggle-btn" onclick="copyLink()">Copy Link</button>
+        </div>
+    </div>
+
+    <!-- Live Clocks Grid -->
+    <div class="grid-container" id="clock-grid">
+        <!-- Cards generated by JS -->
+    </div>
+
+    <!-- Dual Handle Slider -->
+    <div class="slider-panel">
+        <div class="slider-header">
+            <span class="slider-title">Time Range Overlap</span>
+            <span class="slider-sub" style="color:var(--text-muted); font-size:0.7rem;">Drag handles to select window</span>
+        </div>
+        
+        <div id="range-slider"></div>
+        <div class="slider-values">
+            <span class="val-start" id="val-start">09:00 AM</span>
+            <span class="val-end" id="val-end">05:00 PM</span>
+        </div>
+
+        <div class="results-row" id="slider-results">
+            <!-- Results generated by JS -->
+        </div>
+    </div>
+
+    <!-- Toast -->
+    <div id="toast">Copied to clipboard!</div>
+
+    <!-- NoUiSlider Script -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/15.8.1/nouislider.min.js"></script>
+
+    <script>
+        // Configuration with Full City Lists
+        const defaultCities = {
+            india: { name: 'India', zone: 'Asia/Kolkata', flag: '🇮🇳', color: 'c-india' },
+            japan: { name: 'Japan', zone: 'Asia/Tokyo', flag: '🇯🇵', color: 'c-japan' },
+            china: { name: 'China', zone: 'Asia/Shanghai', flag: '🇨🇳', color: 'c-china' },
+            uae: { name: 'UAE', zone: 'Asia/Dubai', flag: '🇦🇪', color: 'c-uae' },
+            germany: { name: 'Germany', zone: 'Europe/Berlin', flag: '🇩🇪', color: 'c-germany' },
+            uk: { name: 'UK', zone: 'Europe/London', flag: '🇬🇧', color: 'c-uk' },
+            // USA Default
+            usa: { name: 'USA (NY)', zone: 'America/New_York', flag: '🇺🇸', color: 'c-usa' },
+            // Australia Default
+            aus: { name: 'Aus (Syd)', zone: 'Australia/Sydney', flag: '🇦🇺', color: 'c-aus' }
+        };
+
+        // Full Dropdown Options
+        const cityOptions = {
+            usa: {
+                'America/New_York': 'New York (ET)',
+                'America/Chicago': 'Chicago (CT)',
+                'America/Denver': 'Denver (MT)',
+                'America/Phoenix': 'Phoenix (MT-NoDST)',
+                'America/Los_Angeles': 'Los Angeles (PT)',
+                'America/Anchorage': 'Anchorage (AKT)',
+                'Pacific/Honolulu': 'Honolulu (HT)'
+            },
+            aus: {
+                'Australia/Sydney': 'Sydney (AET)',
+                'Australia/Melbourne': 'Melbourne (AET)',
+                'Australia/Brisbane': 'Brisbane (AET-NoDST)',
+                'Australia/Adelaide': 'Adelaide (ACT)',
+                'Australia/Darwin': 'Darwin (ACT-NoDST)',
+                'Australia/Perth': 'Perth (AWST)'
+            }
+        };
+
+        let state = {
+            is24Hour: false,
+            baseDate: new Date(),
+            startMin: 540, // 9:00 AM
+            endMin: 1020   // 5:00 PM
+        };
+
+        // --- Initialization ---
+        function init() {
+            renderGrid();
+            renderSliderResults();
+            initSlider();
+            loadFromURL();
+            
+            const dp = document.getElementById('date-picker');
+            dp.addEventListener('change', (e) => {
+                if(e.target.value) {
+                    state.baseDate = new Date(e.target.value);
+                    updateAll();
+                    pushState();
+                }
+            });
+
+            updateAll();
+            setInterval(updateLiveClocks, 1000);
+        }
+
+        // --- Render Functions ---
+        function renderGrid() {
+            const grid = document.getElementById('clock-grid');
+            grid.innerHTML = '';
+            
+            for (const [key, data] of Object.entries(defaultCities)) {
+                const card = document.createElement('div');
+                card.className = 'card biz-no';
+                card.id = `card-${key}`;
+                card.onclick = (e) => {
+                    // Prevent copy if clicking dropdown
+                    if(e.target.tagName !== 'SELECT') copyTime(key);
+                };
+                
+                let selector = '';
+                if (cityOptions[key]) {
+                    let optionsHtml = '';
+                    for (const [zone, label] of Object.entries(cityOptions[key])) {
+                        const selected = zone === data.zone ? 'selected' : '';
+                        optionsHtml += `<option value="${zone}" ${selected}>${label}</option>`;
+                    }
+                    selector = `<select class="city-select" onchange="changeCity('${key}', this.value)">${optionsHtml}</select>`;
+                }
+
+                card.innerHTML = `
+                    <div class="biz-badge"></div>
+                    <div class="card-title">${data.flag} ${data.name} ${selector}</div>
+                    <div id="t-${key}" class="card-time ${data.color}">--:--</div>
+                    <div id="d-${key}" class="card-date">--</div>
+                `;
+                grid.appendChild(card);
+            }
+        }
+
+        function renderSliderResults() {
+            const container = document.getElementById('slider-results');
+            container.innerHTML = '';
+            for (const [key, data] of Object.entries(defaultCities)) {
+                const div = document.createElement('div');
+                div.className = 'res-item';
+                div.innerHTML = `
+                    <span class="res-label">${data.flag} ${data.name}</span>
+                    <span id="s-${key}" class="res-val ${data.color}">--:--</span>
+                `;
+                container.appendChild(div);
+            }
+        }
+
+        // --- Logic ---
+        function changeCity(key, zone) {
+            defaultCities[key].zone = zone;
+            // Update display name based on selection
+            const label = cityOptions[key][zone];
+            // Extract short name (e.g. "New York (ET)" -> "USA (NY)")
+            let shortName = label.split(' ')[0];
+            if(key === 'usa') shortName = `USA (${label.split('(')[1].split(')')[0]})`;
+            if(key === 'aus') shortName = `Aus (${label.split('(')[1].split(')')[0]})`;
+            
+            defaultCities[key].name = shortName;
+            
+            renderGrid();
+            updateAll();
+        }
+
+        function toggleFormat() {
+            state.is24Hour = !state.is24Hour;
+            document.getElementById('fmt-toggle').textContent = state.is24Hour ? '24h' : '12h';
+            updateAll();
+        }
+
+        function isBusinessHours(hour24) {
+            return hour24 >= 9 && hour24 < 17;
+        }
+
+        function formatTime(date, zone) {
+            const opts = {
+                hour: '2-digit', minute: '2-digit',
+                hour12: !state.is24Hour,
+                timeZone: zone
+            };
+            return new Intl.DateTimeFormat('en-US', opts).format(date);
+        }
+
+        function getHour24(date, zone) {
+            const str = new Intl.DateTimeFormat('en-US', { hour: 'numeric', hour12: false, timeZone: zone }).format(date);
+            return parseInt(str);
+        }
+
+        // --- Live Clocks ---
+        function updateLiveClocks() {
+            const now = new Date();
+            
+            for (const [key, data] of Object.entries(defaultCities)) {
+                const tStr = formatTime(now, data.zone);
+                const dStr = new Intl.DateTimeFormat('en-US', { weekday: 'short', day: 'numeric', timeZone: data.zone }).format(now);
+                const h24 = getHour24(now, data.zone);
+                
+                const card = document.getElementById(`card-${key}`);
+                if(card) {
+                    document.getElementById(`t-${key}`).textContent = tStr;
+                    document.getElementById(`d-${key}`).textContent = dStr;
+                    
+                    if (isBusinessHours(h24)) {
+                        card.classList.remove('biz-no');
+                        card.classList.add('biz-yes');
+                    } else {
+                        card.classList.remove('biz-yes');
+                        card.classList.add('biz-no');
+                    }
+                }
+            }
+        }
+
+        // --- Slider Logic ---
+        function initSlider() {
+            const slider = document.getElementById('range-slider');
+            noUiSlider.create(slider, {
+                start: [state.startMin, state.endMin],
+                connect: true,
+                range: { 'min': 0, 'max': 1440 },
+                step: 15
+            });
+
+            slider.noUiSlider.on('update', (values, handle) => {
+                const val = Math.round(values[handle]);
+                if (handle === 0) state.startMin = val;
+                else state.endMin = val;
+
+                const fmtLabel = (m) => {
+                    const h = Math.floor(m / 60);
+                    const min = m % 60;
+                    const d = new Date();
+                    d.setHours(h, min);
+                    return d.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: !state.is24Hour });
+                };
+                document.getElementById('val-start').textContent = fmtLabel(state.startMin);
+                document.getElementById('val-end').textContent = fmtLabel(state.endMin);
+
+                updateSliderResults();
+                pushState();
+            });
+        }
+
+        function updateSliderResults() {
+            const startDt = new Date(state.baseDate);
+            startDt.setHours(0,0,0,0);
+            startDt.setMinutes(state.startMin);
+
+            for (const [key, data] of Object.entries(defaultCities)) {
+                const sStr = formatTime(startDt, data.zone);
+                document.getElementById(`s-${key}`).textContent = sStr;
+            }
+        }
+
+        function updateAll() {
+            updateLiveClocks();
+            updateSliderResults();
+        }
+
+        // --- Utilities ---
+        function copyTime(key) {
+            const data = defaultCities[key];
+            const now = new Date();
+            const text = `${data.name}: ${formatTime(now, data.zone)} (${new Intl.DateTimeFormat('en-US', { weekday: 'long', timeZone: data.zone }).format(now)})`;
+            navigator.clipboard.writeText(text).then(() => showToast(`Copied ${data.name} Time!`));
+        }
+
+        function copyLink() {
+            navigator.clipboard.writeText(window.location.href).then(() => showToast("Link Copied!"));
+        }
+
+        function showToast(msg) {
+            const t = document.getElementById('toast');
+            t.textContent = msg;
+            t.className = "show";
+            setTimeout(() => t.className = t.className.replace("show", ""), 3000);
+        }
+
+        // --- URL State Management ---
+        function pushState() {
+            const params = new URLSearchParams();
+            params.set('start', state.startMin);
+            params.set('end', state.endMin);
+            const today = new Date();
+            if (state.baseDate.getDate() !== today.getDate()) {
+                params.set('date', state.baseDate.toISOString());
+            }
+            params.set('fmt', state.is24Hour ? '24' : '12');
+            // Save selected cities
+            params.set('usa', defaultCities.usa.zone);
+            params.set('aus', defaultCities.aus.zone);
+            
+            const newUrl = `${window.location.pathname}?${params.toString()}`;
+            window.history.replaceState({}, '', newUrl);
+        }
+
+        function loadFromURL() {
+            const params = new URLSearchParams(window.location.search);
+            if (params.has('start')) state.startMin = parseInt(params.get('start'));
+            if (params.has('end')) state.endMin = parseInt(params.get('end'));
+            if (params.has('fmt')) state.is24Hour = params.get('fmt') === '24';
+            if (params.has('date')) state.baseDate = new Date(params.get('date'));
+            if (params.has('usa') && cityOptions.usa[params.get('usa')]) {
+                defaultCities.usa.zone = params.get('usa');
+                const label = cityOptions.usa[params.get('usa')];
+                defaultCities.usa.name = `USA (${label.split('(')[1].split(')')[0]})`;
+            }
+            if (params.has('aus') && cityOptions.aus[params.get('aus')]) {
+                defaultCities.aus.zone = params.get('aus');
+                const label = cityOptions.aus[params.get('aus')];
+                defaultCities.aus.name = `Aus (${label.split('(')[1].split(')')[0]})`;
+            }
+            
+            document.getElementById('fmt-toggle').textContent = state.is24Hour ? '24h' : '12h';
+            const slider = document.getElementById('range-slider');
+            if (slider.noUiSlider) {
+                slider.noUiSlider.set([state.startMin, state.endMin]);
+            }
+        }
+
+        init();
+    </script>
+</body>
+</html>
