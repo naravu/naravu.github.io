@@ -181,3 +181,4 @@
 | Opus.pro | https://opus.pro | Video cutter | Auto cut long videos into shorts |
 | Krea.ai | https://krea.ai | Image generator | Real-time AI image generation |
 | Magnific.ai | https://magnific.ai | Image upscaler | Upscale any image with AI |
+|Supervision |https://github.com/roboflow/supervision| Supervision Python module | Supervise repo  |
