@@ -182,4 +182,4 @@
 | Krea.ai | https://krea.ai | Image generator | Real-time AI image generation |
 | Magnific.ai | https://magnific.ai | Image upscaler | Upscale any image with AI |
 |Supervision |https://github.com/roboflow/supervision| Supervision Python module | Supervise repo  |
-| AI sites |https://motionsites.ai/| Websites | AI website prompts usiing Antigravity|
+| AI sites |https://motionsites.ai/| Websites prompts| AI website prompts using Antigravity|
