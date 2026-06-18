@@ -183,3 +183,5 @@
 | Magnific.ai | https://magnific.ai | Image upscaler | Upscale any image with AI |
 |Supervision |https://github.com/roboflow/supervision| Supervision Python module | Supervise repo  |
 | AI sites |https://motionsites.ai/| Websites prompts| AI website prompts using Antigravity|
+| AI image generation |https://draw.freeforai.com/ | Free AI Images | AI images unlimited |
+
