@@ -187,3 +187,4 @@
 | AI image generation |https://raphaelai.org/| Free AI images | AI images unlimited |
 |Any cloud locally |https://floci.io/| Floci | AWS, Azure, GCP free alternatives on line |
 |Meta AI | https://www.meta.ai/ | Meta | Image creation, Image to video creation |
+|Huggingface | https://huggingface.co/ | AI tools with login | Images, Videos |
