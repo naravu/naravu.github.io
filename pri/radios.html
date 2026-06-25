@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Audio Stream Hub</title>
+    <style>
+        /* --- AI / Cyberpunk Aesthetic Variables --- */
+        :root {
+            --bg-dark: #0f172a;
+            --glass-bg: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --neon-blue: #00f3ff;
+            --neon-pink: #bc13fe;
+            --neon-purple: #7a04eb;
+            --text-main: #ffffff;
+            --text-muted: #94a3b8;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-dark);
+            /* Animated Gradient Background */
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(122, 4, 235, 0.4) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(0, 243, 255, 0.25) 0%, transparent 40%),
+                radial-gradient(circle at 50% 50%, rgba(188, 19, 254, 0.15) 0%, transparent 60%);
+            background-size: 200% 200%;
+            animation: gradientMove 15s ease infinite;
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            overflow-x: hidden;
+        }
+
+        @keyframes gradientMove {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* --- Main Container --- */
+        .container {
+            width: 90%;
+            max-width: 800px;
+            text-align: center;
+            z-index: 1;
+        }
+
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            background: linear-gradient(90deg, var(--neon-blue), #ffffff, var(--neon-pink));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 0 20px rgba(0, 243, 255, 0.3);
+            animation: glow 3s ease-in-out infinite alternate;
+        }
+
+        p.subtitle {
+            color: var(--text-muted);
+            margin-bottom: 40px;
+            font-size: 1.1rem;
+            letter-spacing: 1px;
+        }
+
+        /* --- Audio Cards Grid --- */
+        .audio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            width: 100%;
+        }
+
+        /* --- Glassmorphism Card Style --- */
+        .audio-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 25px;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .audio-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transition: 0.5s;
+        }
+
+        .audio-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px 0 rgba(122, 4, 235, 0.2);
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+
+        .audio-card:hover::before {
+            left: 100%;
+        }
+
+        .card-title {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            font-weight: 600;
+            color: var(--neon-blue);
+            text-shadow: 0 0 10px rgba(0, 243, 255, 0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .live-indicator {
+            width: 8px;
+            height: 8px;
+            background-color: #ff0055;
+            border-radius: 50%;
+            display: inline-block;
+            box-shadow: 0 0 10px #ff0055;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(1.2); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+
+        /* --- Customizing the Native Audio Player --- */
+        /* Note: Full styling of native controls is limited across browsers. 
+           We use filters and borders to blend them into the dark theme. */
+        audio {
+            width: 100%;
+            height: 40px;
+            border-radius: 10px;
+            outline: none;
+            filter: invert(0.9) hue-rotate(180deg); /* Makes default player dark/blueish */
+            opacity: 0.9;
+            transition: opacity 0.3s;
+        }
+
+        audio:hover {
+            opacity: 1;
+            filter: invert(1) hue-rotate(180deg) drop-shadow(0 0 5px var(--neon-blue));
+        }
+
+        /* --- Footer --- */
+        footer {
+            margin-top: 50px;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            opacity: 0.6;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 600px) {
+            h1 { font-size: 2rem; }
+            .audio-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Neural Audio Hub</h1>
+        <p class="subtitle">Live Stream Interface // System Online</p>
+
+        <div class="audio-grid">
+            
+            <!-- Card 1: Suryan Sri Lankan -->
+            <div class="audio-card">
+                <div class="card-title">
+                    <span class="live-indicator"></span>
+                    Suryan Sri Lankan
+                </div>
+                <!-- Corrected: controls="true" changed to controls (boolean attribute) -->
+                <audio 
+                    src="https://radio.lotustechnologieslk.net:2020/stream/sooriyanfmgarden" 
+                    controls 
+                    crossorigin="anonymous" 
+                    title="Suryan Srilankan">
+                    Your browser does not support the audio element.
+                </audio>
+            </div>
+
+            <!-- Card 2: Suryan Tamilnadu -->
+            <div class="audio-card">
+                <div class="card-title">
+                    <span class="live-indicator"></span>
+                    Suryan Tamilnadu
+                </div>
+                <!-- Corrected: Added missing <audio> opening tag and fixed structure -->
+                <audio 
+                    id="orhAudio" 
+                    preload="none" 
+                    controls 
+                    title="Suryan Tamilnadu"
+                    crossorigin="anonymous">
+                    <source src="https://radios.crabdance.com:8002/2" type="audio/mpeg">
+                    Your browser does not support the audio element.
+                </audio>
+            </div>
+
+        </div>
+
+        <footer>
+            &copy; 2026 AI Stream Interface. Secure Connection Established.
+        </footer>
+    </div>
+
+</body>
+</html>   
