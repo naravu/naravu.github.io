@@ -9,3 +9,53 @@ Candles | AI Prompt | Create a standalone HTML file (no external resources, no l
 Youtube Chennel | https://gemini.google.com | A hyper-realistic 3D scene of a floating YouTube profile page in the air, slightly tilted on a clean light grey background. The profile page is dramatically torn open in the center, with realistic ripped paper edges and small paper fragments flying outward. A smiling brunette girl wearing a red bandana and кув-white striped shirt is emerging from the torn hole, holding the ripped paper edges with her hands as if he is breaking out of the screen. He has soft curls, red lipstick, bright eyes, and a joyful expression. The profile interface shows the name “IsaiagaM ”, a blue verification badge, username @IsaiagaM, bio text, follower counts, and YouTube UI elements like Home, Videos, Shorts, Playlists and posts Cinematic lighting, ultra-detailed skin texture, realistic shadows, depth of field, floating paper particles, photorealistic 3D render, high detail, 4K, studio lighting | Youtube Chennel page picture generation |
 | Prompt for cute 3D | https://gemini.google.com | Cute 3D render of a [subject], matte surface, kneaded clay icon style, simple stylized design, [doing action], [emotion or mood], rounded proportions, soft sculpted details, playful body language, vibrant [color1], [color2], and [color3] accents, clean white background, minimal composition, soft ambient lighting, subtle shadow, charming character design, high-resolution, polished toy-like aesthetic | A 3D image |
 | Prompt-cute 3D example | https://gemini.google.com | Cute 3D render of a software architect, matte surface, kneaded clay icon style, simple stylized design, dancing, smile with an romantic action, rounded proportions, soft sculpted details, playful body language, vibrant blue, white, and green accents, clean white background, minimal composition, soft ambient lighting, subtle shadow, charming character design, high-resolution, polished toy-like aesthetic | A 3D image |
+| Prompt for photo as a new | https://gemini.google.com | Restore this old black-and-white group photo into a modern ultra-realistic color photograph while preserving every person's original identity exactly.
+FACE LOCK (VERY IMPORTANT):
+Do NOT change or recreate any face.
+Keep every person's face exactly the same as in the original photo.
+Do NOT alter eyes, eyebrows, nose, lips, ears, jawline, forehead, hairstyle, facial proportions, expression, age, skin texture or identity.
+No face swap.
+No beautification.
+No AI-generated replacement faces.
+Recover missing facial details only according to the original image.
+PHOTO RESTORATION:
+Remove dust, scratches, stains, folds, fungus marks, ink spots and discoloration.
+Repair torn and damaged areas seamlessly.
+Restore faded details naturally.
+Recover lost textures in clothes and background.
+Remove blur, haze and noise.
+Increase sharpness without creating artificial details.
+COLORIZATION:
+Convert to natural realistic colors.
+Accurate South Asian skin tones.
+Natural black hair.
+Bright white traditional clothes with realistic fabric texture.
+Natural green trees and plants.
+Warm daylight outdoor lighting.
+Natural earth-colored ground.
+Balanced white balance.
+True-to-life colors.
+QUALITY:
+Ultra HD 8K.
+Professional DSLR quality.
+High dynamic range.
+High detail.
+Natural contrast.
+Natural shadows.
+Clean edges.
+Crystal clear details.
+Professional photo restoration.
+Modern camera look.
+Realistic lighting.
+No overprocessing.
+No watercolor effect.
+No plastic skin.
+No AI artifacts.
+COMPOSITION:
+Keep the original composition, framing, poses and spacing exactly the same.
+Do not crop any person.
+Do not add or remove people or objects.
+Preserve every hand, foot and clothing detail.
+Maintain the original outdoor location.
+FINAL RESULT:
+The image should look as if it was photographed today with a professional full-frame DSLR camera while preserving 100% of the original people's identity, faces, expressions and historical authenticity. | old photo as new |
