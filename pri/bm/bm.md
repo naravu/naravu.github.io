@@ -188,3 +188,11 @@
 |Any cloud locally |https://floci.io/| Floci | AWS, Azure, GCP free alternatives on line |
 |Meta AI | https://www.meta.ai/ | Meta | Image creation, Image to video creation |
 |Huggingface | https://huggingface.co/ | AI tools with login | Images, Videos |
+| Perchance AI | https://perchanceai.org/ | Free AI image & video generator | No login required |
+| Creen AI | https://creen.ai/ | Unified AI studio | Video, Image, Audio |
+| Magic Hour | https://magichour.ai/ | AI video & image tools | Face swap, lip sync |
+| Toki AI | https://toki.ai/ | AI avatar generator | Talking & singing avatars |
+| DomoAI | https://domoai.co/ | AI video animation | Anime, realistic styles |
+| Gravity Write | https://gravitywrite.com/ | AI writing assistant | Text generation |
+| Free Lip Sync | https://freelipsync.com/ | AI lip sync generator | Talking avatars |
+| LipSync Video | https://lipsync.video/ | AI video dubbing tool | Voice sync |
