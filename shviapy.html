@@ -4,7 +4,7 @@
        Icon name: computer-vm
          Chassis: vm 🖴
       Machine ID: 0056694fd8ca4c0793234f223fe1fe1b
-         Boot ID: 49a464e04b9146469d27c41576301051
+         Boot ID: 0457b1a30cdf479f88c87f649087d5c5
   Virtualization: microsoft
 Operating System: Ubuntu 24.04.4 LTS
           Kernel: Linux 6.17.0-1020-azure
@@ -12,44 +12,44 @@ Operating System: Ubuntu 24.04.4 LTS
  Hardware Vendor: Microsoft Corporation
   Hardware Model: Virtual Machine
 Firmware Version: Hyper-V UEFI Release v4.1
-   Firmware Date: Fri 2026-01-09
-    Firmware Age: 6month 6d</pre>
+   Firmware Date: Thu 2026-01-08
+    Firmware Age: 6month 1w 1d</pre>
 <a name=network></a><b>Network Details</b><pre>docker0: flags=4099<UP,BROADCAST,MULTICAST>  mtu 1500
         inet 172.17.0.1  netmask 255.255.0.0  broadcast 172.17.255.255
-        ether e2:a5:e4:b1:dd:04  txqueuelen 0  (Ethernet)
+        ether 1e:12:69:c1:aa:63  txqueuelen 0  (Ethernet)
         RX packets 0  bytes 0 (0.0 B)
         RX errors 0  dropped 0  overruns 0  frame 0
         TX packets 0  bytes 0 (0.0 B)
         TX errors 0  dropped 2 overruns 0  carrier 0  collisions 0
 
-enP48674s1: flags=6211<UP,BROADCAST,RUNNING,SLAVE,MULTICAST>  mtu 1500
-        ether 7c:1e:52:3e:7f:40  txqueuelen 1000  (Ethernet)
-        RX packets 11145  bytes 14948281 (14.9 MB)
+enP23617s1: flags=6211<UP,BROADCAST,RUNNING,SLAVE,MULTICAST>  mtu 1500
+        ether 00:0d:3a:31:66:a2  txqueuelen 1000  (Ethernet)
+        RX packets 2450  bytes 3272087 (3.2 MB)
         RX errors 0  dropped 0  overruns 0  frame 0
-        TX packets 2326  bytes 458263 (458.2 KB)
+        TX packets 957  bytes 307663 (307.6 KB)
         TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
 
 eth0: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
-        inet 10.1.0.151  netmask 255.255.240.0  broadcast 10.1.15.255
-        inet6 fe80::7e1e:52ff:fe3e:7f40  prefixlen 64  scopeid 0x20<link>
-        ether 7c:1e:52:3e:7f:40  txqueuelen 1000  (Ethernet)
-        RX packets 9513  bytes 14713959 (14.7 MB)
+        inet 10.1.0.132  netmask 255.255.240.0  broadcast 10.1.15.255
+        inet6 fe80::20d:3aff:fe31:66a2  prefixlen 64  scopeid 0x20<link>
+        ether 00:0d:3a:31:66:a2  txqueuelen 1000  (Ethernet)
+        RX packets 9716  bytes 15124879 (15.1 MB)
         RX errors 0  dropped 0  overruns 0  frame 0
-        TX packets 2223  bytes 451273 (451.2 KB)
+        TX packets 1546  bytes 518897 (518.8 KB)
         TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
 
 lo: flags=73<UP,LOOPBACK,RUNNING>  mtu 65536
         inet 127.0.0.1  netmask 255.0.0.0
         inet6 ::1  prefixlen 128  scopeid 0x10<host>
         loop  txqueuelen 1000  (Local Loopback)
-        RX packets 192  bytes 26080 (26.0 KB)
+        RX packets 204  bytes 26817 (26.8 KB)
         RX errors 0  dropped 0  overruns 0  frame 0
-        TX packets 192  bytes 26080 (26.0 KB)
+        TX packets 204  bytes 26817 (26.8 KB)
         TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0</pre>
 <a name=swap></a><font face=serif size=2><b>Swap Details</b></font><pre>               total        used        free      shared  buff/cache   available
-Mem:            15Gi       1.2Gi        12Gi        43Mi       2.0Gi        14Gi
+Mem:            15Gi       998Mi        13Gi        42Mi       1.6Gi        14Gi
 Swap:          3.0Gi          0B       3.0Gi</pre>
-<a name=user></a><font face=serif size=2><b>Connected User Details</b></font><pre> 23:47:02 up 0 min,  0 user,  load average: 1.11, 0.28, 0.10
+<a name=user></a><font face=serif size=2><b>Connected User Details</b></font><pre> 23:40:51 up 1 min,  0 user,  load average: 0.13, 0.04, 0.01
 USER     TTY      FROM             LOGIN@   IDLE   JCPU   PCPU  WHAT</pre>
 <a name=fstab></a><font face=serif size=2><b>FStab Details</b></font><pre># CLOUD_IMG: This file was created/modified by the Cloud Image build process
 UUID=107607cd-5bf5-48d7-a575-3ea3ded48999	/	 ext4	discard,commit=30,errors=remount-ro	0 1
@@ -111,13 +111,13 @@ UUID=3F6C-603D	/boot/efi	vfat	umask=0077	0 1
 <td>efivarfs</td>
 <td>efivarfs</td>
 <td>135M</td>
-<td>30k</td>
+<td>32k</td>
 <td>135M</td>
 <td>1%</td>
 <td>/sys/firmware/efi/efivars</td>
 </tr>
 <tr>
-<td>/dev/nvme0n1p16</td>
+<td>/dev/sda16</td>
 <td>ext4</td>
 <td>924M</td>
 <td>67M</td>
@@ -126,7 +126,7 @@ UUID=3F6C-603D	/boot/efi	vfat	umask=0077	0 1
 <td>/boot</td>
 </tr>
 <tr>
-<td>/dev/nvme0n1p15</td>
+<td>/dev/sda15</td>
 <td>vfat</td>
 <td>110M</td>
 <td>6.4M</td>
@@ -210,7 +210,6 @@ tcp6       0      0 :::22                   :::*                    LISTEN      
   systemd-logind.service                                      loaded    active   running       User Login Management
   systemd-networkd.service                                    loaded    active   running       Network Configuration
   systemd-resolved.service                                    loaded    active   running       Network Name Resolution
-  systemd-timedated.service                                   loaded    active   running       Time & Date Service
   systemd-udevd.service                                       loaded    active   running       Rule-based Manager for Device Events and Files
   ua-timer.service                                            loaded    inactive dead          Ubuntu Pro Timer for running repeated jobs
   udisks2.service                                             loaded    active   running       Disk Manager
@@ -385,30 +384,30 @@ tcp6       0      0 :::22                   :::*                    LISTEN      
 <a name=dmidecode></a><font face=serif size=2><b>System Details</b></font><pre># dmidecode 3.5
 Scanning /dev/mem for entry point.</pre>
 <a name=inxi></a><font face=serif size=2><b>System Details New</b></font><pre></pre>
-<a name=zombie></a><font face=serif size=2><b>Zombies</b></font><pre>runner      2162  0.0  0.0   7088  2296 ?        S    23:47   0:00 grep defunct</pre>
-<a name=reboot></a><font face=serif size=2><b>Reboot</b></font><pre>reboot   system boot  6.17.0-1020-azur Thu Jul 16 23:46   still running</pre>
-<a name=shut></a><font face=serif size=2><b>Shutdown</b></font><pre>shutdown system down  6.17.0-1020-azur Tue Jul 14 09:20 - 23:46 (2+14:26)</pre>
+<a name=zombie></a><font face=serif size=2><b>Zombies</b></font><pre>runner      2416  0.0  0.0   7088  2168 ?        S    23:40   0:00 grep defunct</pre>
+<a name=reboot></a><font face=serif size=2><b>Reboot</b></font><pre>reboot   system boot  6.17.0-1020-azur Fri Jul 17 23:39   still running</pre>
+<a name=shut></a><font face=serif size=2><b>Shutdown</b></font><pre>shutdown system down  6.17.0-1020-azur Tue Jul 14 09:20 - 23:39 (3+14:19)</pre>
 <a name=mem></a><font face=serif size=2><b>Memory Hog</b></font><pre>%MEM     PID    PPID USER     STAT COMMAND
 
- 0.8    1886    1883 root     Sl   /tmp/provjobd2850861656
+ 0.8    2109    2106 root     Sl   /tmp/provjobd3325912852
 
- 0.7    1926    1906 runner   Sl   /home/runner/actions-runner/cached/2.335.1/bin/Runner.Worker spawnclient 142 145
+ 0.7    2181    2160 runner   Sl   /home/runner/actions-runner/cached/2.335.1/bin/Runner.Worker spawnclient 142 145
 
- 0.5    1906    1870 runner   Sl   /home/runner/actions-runner/cached/2.335.1/bin/Runner.Listener run
+ 0.5    2160    2092 runner   Sl   /home/runner/actions-runner/cached/2.335.1/bin/Runner.Listener run
 
- 0.4     973       1 root     Ssl  /usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock
+ 0.4    1243       1 root     Ssl  /usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock
 
- 0.3     768       1 root     Ss   php-fpm: master process (/etc/php/8.3/fpm/php-fpm.conf)</pre>
+ 0.3     964       1 root     Ss   php-fpm: master process (/etc/php/8.3/fpm/php-fpm.conf)</pre>
 <a name=cpuh></a><font face=serif size=2><b>CPU Hog</b></font><pre>%CPU     PID    PPID USER     STAT COMMAND
 
-16.6    2131       1 root     Ss   /usr/lib/systemd/systemd-hostnamed
+21.0    2385       1 root     Ss   /usr/lib/systemd/systemd-hostnamed
 
-16.5    1926    1906 runner   Sl   /home/runner/actions-runner/cached/2.335.1/bin/Runner.Worker spawnclient 142 145
+18.1    2181    2160 runner   Sl   /home/runner/actions-runner/cached/2.335.1/bin/Runner.Worker spawnclient 142 145
 
- 7.6       1       0 root     Ss   /sbin/init
+ 9.2    2160    2092 runner   Sl   /home/runner/actions-runner/cached/2.335.1/bin/Runner.Listener run
 
- 7.1    1906    1870 runner   Sl   /home/runner/actions-runner/cached/2.335.1/bin/Runner.Listener run
+ 4.3       1       0 root     Ss   /sbin/init
 
- 4.7    2126    2116 runner   S    python shviapy.py</pre>
+ 4.1    2380    2371 runner   S    python shviapy.py</pre>
 <a name=dp></a><font face=serif size=2><b>Default Path</b></font><pre>/opt/hostedtoolcache/Python/3.14.6/x64/bin:/opt/hostedtoolcache/Python/3.14.6/x64:/snap/bin:/home/runner/.local/bin:/opt/pipx_bin:/home/runner/.cargo/bin:/home/runner/.config/composer/vendor/bin:/usr/local/.ghcup/bin:/home/runner/.dotnet/tools:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin</pre>
-<a name=copy></a><div id=foot><pre> &copy; Last OS update:  | Page update: Thu Jul 16 23:47:02 UTC 2026</pre></div><script>function myFunction() {  var x = document.getElementById("myDIV");  if (x.style.display === "none") {   x.style.display = "block";  } else {   x.style.display = "none";  }}</script></body></html>
+<a name=copy></a><div id=foot><pre> &copy; Last OS update:  | Page update: Fri Jul 17 23:40:51 UTC 2026</pre></div><script>function myFunction() {  var x = document.getElementById("myDIV");  if (x.style.display === "none") {   x.style.display = "block";  } else {   x.style.display = "none";  }}</script></body></html>
