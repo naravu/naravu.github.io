@@ -196,3 +196,4 @@
 | Gravity Write | https://gravitywrite.com/ | AI writing assistant | Text generation |
 | Free Lip Sync | https://freelipsync.com/ | AI lip sync generator | Talking avatars |
 | LipSync Video | https://lipsync.video/ | AI video dubbing tool | Voice sync |
+| Free tools | https://nosignups.net/ | Free tool nosignups | Free open source tools without signups |
