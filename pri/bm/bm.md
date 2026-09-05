@@ -197,3 +197,4 @@
 | Free Lip Sync | https://freelipsync.com/ | AI lip sync generator | Talking avatars |
 | LipSync Video | https://lipsync.video/ | AI video dubbing tool | Voice sync |
 | Free tools | https://nosignups.net/ | Free tool nosignups | Free open source tools without signups |
+|Free voice type | https://vinganam.blogspot.com/p/voice-typing.html | Free Voice Typing | Voice Typing in Tamil Packiyam |
