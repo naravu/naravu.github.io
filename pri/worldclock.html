@@ -1,0 +1,2864 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="Compact world clock with country names, time-zone search, IST reference and future-time explorer"
+    >
+
+    <title>World Clock Pro</title>
+
+    <style>
+        :root {
+            color-scheme: dark;
+
+            --background: #07101d;
+            --panel: rgba(20, 33, 52, 0.86);
+            --panel-solid: #111d30;
+            --field: rgba(5, 14, 27, 0.58);
+
+            --border: rgba(190, 215, 255, 0.16);
+            --border-strong: rgba(69, 214, 255, 0.44);
+
+            --text: #f4f8ff;
+            --muted: #9eafc7;
+
+            --accent: #45d6ff;
+            --accent-secondary: #a08aff;
+            --country: #ffd166;
+
+            --success: #61d994;
+            --warning: #ffc766;
+            --danger: #ff7272;
+
+            --shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+
+            --font-ui:
+                Tahoma,
+                Verdana,
+                Arial,
+                sans-serif;
+
+            --font-clock:
+                Consolas,
+                "Courier New",
+                monospace;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            min-width: 300px;
+            background: var(--background);
+        }
+
+        body {
+            min-height: 100vh;
+            margin: 0;
+            color: var(--text);
+
+            background:
+                radial-gradient(
+                    circle at 10% 0%,
+                    rgba(32, 111, 170, 0.25),
+                    transparent 34%
+                ),
+                radial-gradient(
+                    circle at 92% 100%,
+                    rgba(100, 55, 160, 0.24),
+                    transparent 36%
+                ),
+                linear-gradient(
+                    145deg,
+                    var(--background),
+                    #0b1423
+                );
+
+            font-family: var(--font-ui);
+            font-size: 12px;
+            line-height: 1.4;
+
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            text-rendering: optimizeLegibility;
+        }
+
+        button,
+        input,
+        select {
+            font: inherit;
+        }
+
+        button,
+        select {
+            touch-action: manipulation;
+        }
+
+        button:focus-visible,
+        input:focus-visible,
+        select:focus-visible {
+            outline: 2px solid var(--accent);
+            outline-offset: 2px;
+        }
+
+        .app {
+            width: min(1460px, 100%);
+            margin: 0 auto;
+            padding: 18px;
+        }
+
+        /* Header */
+
+        .app-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 18px;
+            margin-bottom: 16px;
+        }
+
+        .title-group {
+            min-width: 0;
+        }
+
+        .app-title {
+            margin: 0;
+            color: var(--text);
+            font-size: 23px;
+            font-weight: 700;
+            letter-spacing: 0.2px;
+        }
+
+        .app-title span {
+            color: var(--accent);
+        }
+
+        .subtitle {
+            margin: 4px 0 0;
+            color: var(--muted);
+            font-size: 11px;
+        }
+
+        .live-indicator {
+            display: inline-flex;
+            align-items: center;
+            flex: 0 0 auto;
+            gap: 7px;
+            padding: 6px 10px;
+            color: var(--success);
+            background: rgba(97, 217, 148, 0.08);
+            border: 1px solid rgba(97, 217, 148, 0.2);
+            border-radius: 999px;
+            font-size: 10px;
+            font-weight: 700;
+        }
+
+        .live-dot {
+            width: 7px;
+            height: 7px;
+            background: var(--success);
+            border-radius: 50%;
+            box-shadow: 0 0 8px var(--success);
+        }
+
+        /* Shared panels */
+
+        .panel {
+            background: var(--panel);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+        }
+
+        .section-title {
+            margin: 0;
+            color: var(--text);
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+        /* Toolbar */
+
+        .toolbar-panel {
+            padding: 12px;
+            margin-bottom: 12px;
+        }
+
+        .toolbar-heading {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            margin-bottom: 9px;
+        }
+
+        .selected-count {
+            color: var(--muted);
+            font-size: 10px;
+            white-space: nowrap;
+        }
+
+        .toolbar {
+            display: grid;
+            grid-template-columns:
+                minmax(220px, 1fr)
+                minmax(320px, 1.25fr);
+            gap: 10px;
+        }
+
+        .search-container {
+            position: relative;
+        }
+
+        .field {
+            width: 100%;
+            height: 36px;
+            padding: 0 11px;
+            color: var(--text);
+            background: var(--field);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            outline: none;
+            font-size: 11px;
+
+            transition:
+                border-color 140ms ease,
+                background 140ms ease;
+        }
+
+        .field:hover {
+            border-color: rgba(190, 215, 255, 0.3);
+        }
+
+        .field:focus {
+            background: rgba(5, 15, 29, 0.82);
+            border-color: var(--accent);
+        }
+
+        .field::placeholder {
+            color: #8191a8;
+        }
+
+        select.field {
+            cursor: pointer;
+        }
+
+        select.field option,
+        select.field optgroup {
+            color: var(--text);
+            background: var(--panel-solid);
+        }
+
+        select.field optgroup {
+            color: var(--accent);
+            font-weight: 700;
+        }
+
+        /* Search results */
+
+        .search-results {
+            position: absolute;
+            top: calc(100% + 5px);
+            right: 0;
+            left: 0;
+            z-index: 1000;
+
+            display: none;
+            max-height: 310px;
+            overflow-y: auto;
+            padding: 5px;
+
+            background: #101c2e;
+            border: 1px solid var(--border);
+            border-radius: 9px;
+            box-shadow: 0 14px 34px rgba(0, 0, 0, 0.45);
+        }
+
+        .search-result {
+            display: block;
+            width: 100%;
+            padding: 8px 9px;
+            color: var(--text);
+            text-align: left;
+            background: transparent;
+            border: 0;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        .search-result:hover,
+        .search-result.active {
+            background: rgba(69, 214, 255, 0.1);
+        }
+
+        .result-main {
+            display: block;
+            overflow: hidden;
+            font-size: 11px;
+            font-weight: 700;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .result-country {
+            color: var(--country);
+            font-size: 9px;
+            font-weight: 700;
+        }
+
+        .result-detail {
+            display: block;
+            overflow: hidden;
+            margin-top: 2px;
+            color: var(--muted);
+            font-size: 9px;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .empty-result {
+            padding: 11px;
+            color: var(--muted);
+            font-size: 11px;
+            text-align: center;
+        }
+
+        /* Favorites */
+
+        .favorites {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-top: 10px;
+        }
+
+        .favorite-button {
+            min-height: 28px;
+            padding: 5px 9px;
+            color: #dff8ff;
+            background: rgba(69, 214, 255, 0.08);
+            border: 1px solid rgba(69, 214, 255, 0.2);
+            border-radius: 7px;
+            cursor: pointer;
+            font-size: 10px;
+            font-weight: 700;
+
+            transition:
+                background 140ms ease,
+                border-color 140ms ease,
+                transform 140ms ease;
+        }
+
+        .favorite-button:hover {
+            background: rgba(69, 214, 255, 0.16);
+            border-color: rgba(69, 214, 255, 0.45);
+            transform: translateY(-1px);
+        }
+
+        .favorite-button.added {
+            color: var(--muted);
+            background: rgba(255, 255, 255, 0.04);
+            border-color: var(--border);
+        }
+
+        /* Planner */
+
+        .planner-grid {
+            display: grid;
+            grid-template-columns:
+                minmax(280px, 0.8fr)
+                minmax(400px, 1.2fr);
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+
+        .time-panel,
+        .ist-panel {
+            padding: 13px;
+        }
+
+        .slider-heading {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .slider-label {
+            color: var(--accent);
+            font-size: 11px;
+            font-weight: 700;
+            text-align: right;
+        }
+
+        .time-slider {
+            width: 100%;
+            height: 5px;
+            margin: 5px 0 7px;
+            accent-color: var(--accent);
+            cursor: pointer;
+        }
+
+        .slider-scale {
+            display: flex;
+            justify-content: space-between;
+            color: var(--muted);
+            font-size: 9px;
+        }
+
+        .slider-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-top: 11px;
+        }
+
+        .small-button {
+            min-height: 28px;
+            padding: 5px 9px;
+            color: var(--text);
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid var(--border);
+            border-radius: 7px;
+            cursor: pointer;
+            font-size: 10px;
+        }
+
+        .small-button:hover {
+            background: rgba(255, 255, 255, 0.11);
+        }
+
+        /* IST reference */
+
+        .ist-header {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 12px;
+        }
+
+        .ist-label {
+            color: var(--muted);
+            font-size: 10px;
+        }
+
+        .ist-time {
+            margin-top: 3px;
+            color: var(--accent);
+            font-family: var(--font-clock);
+            font-size: 22px;
+            font-weight: 700;
+            letter-spacing: 0.2px;
+            line-height: 1.15;
+        }
+
+        .ist-date {
+            margin-top: 3px;
+            color: var(--text);
+            font-size: 10px;
+        }
+
+        .ist-offset {
+            flex: 0 0 auto;
+            padding: 4px 7px;
+            color: #ccefff;
+            background: rgba(69, 214, 255, 0.08);
+            border: 1px solid rgba(69, 214, 255, 0.18);
+            border-radius: 6px;
+            font-family: var(--font-clock);
+            font-size: 10px;
+        }
+
+        .timeline {
+            display: grid;
+            grid-template-columns: repeat(9, minmax(58px, 1fr));
+            gap: 5px;
+            margin-top: 11px;
+            overflow-x: auto;
+            padding-bottom: 3px;
+        }
+
+        .timeline-item {
+            min-width: 58px;
+            padding: 6px 4px;
+            color: var(--muted);
+            text-align: center;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid transparent;
+            border-radius: 6px;
+            font-size: 9px;
+        }
+
+        .timeline-item strong {
+            display: block;
+            color: var(--text);
+            font-family: var(--font-clock);
+            font-size: 10px;
+        }
+
+        .timeline-item.current {
+            color: var(--accent);
+            background: rgba(69, 214, 255, 0.1);
+            border-color: rgba(69, 214, 255, 0.28);
+        }
+
+        /* Clock section */
+
+        .clocks-panel-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            margin-bottom: 9px;
+        }
+
+        .legend {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: flex-end;
+            gap: 10px;
+            color: var(--muted);
+            font-size: 9px;
+        }
+
+        .legend-item {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .legend-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+        }
+
+        .legend-work {
+            background: var(--success);
+        }
+
+        .legend-edge {
+            background: var(--warning);
+        }
+
+        .legend-off {
+            background: var(--danger);
+        }
+
+        .clock-grid {
+            display: grid;
+            grid-template-columns:
+                repeat(auto-fill, minmax(255px, 1fr));
+            gap: 10px;
+        }
+
+        .clock-card {
+            position: relative;
+            min-width: 0;
+            padding: 14px;
+            overflow: hidden;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(255, 255, 255, 0.055),
+                    rgba(255, 255, 255, 0.025)
+                ),
+                var(--panel);
+
+            border: 1px solid var(--border);
+            border-radius: 11px;
+            box-shadow: var(--shadow);
+
+            transition:
+                transform 140ms ease,
+                background 140ms ease,
+                border-color 140ms ease;
+        }
+
+        .clock-card:hover {
+            background-color: rgba(28, 45, 70, 0.94);
+            border-color: var(--border-strong);
+            transform: translateY(-2px);
+        }
+
+        .clock-card::before {
+            position: absolute;
+            top: 0;
+            right: 0;
+            left: 0;
+            height: 2px;
+            content: "";
+
+            background:
+                linear-gradient(
+                    90deg,
+                    var(--accent),
+                    var(--accent-secondary)
+                );
+
+            opacity: 0.72;
+        }
+
+        .remove-button {
+            position: absolute;
+            top: 9px;
+            right: 9px;
+
+            display: grid;
+            width: 24px;
+            height: 24px;
+            padding: 0;
+
+            color: #ffdada;
+            place-items: center;
+
+            background: rgba(255, 114, 114, 0.09);
+            border: 1px solid rgba(255, 114, 114, 0.18);
+            border-radius: 6px;
+
+            cursor: pointer;
+            font-family: Arial, sans-serif;
+            font-size: 13px;
+            line-height: 1;
+        }
+
+        .remove-button:hover {
+            color: #ffffff;
+            background: rgba(255, 114, 114, 0.34);
+        }
+
+        .clock-city {
+            max-width: calc(100% - 30px);
+            overflow: hidden;
+            color: var(--text);
+            font-size: 13px;
+            font-weight: 700;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .clock-country {
+            max-width: calc(100% - 30px);
+            overflow: hidden;
+            margin-top: 1px;
+            color: var(--country);
+            font-size: 10px;
+            font-weight: 700;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .clock-zone {
+            max-width: calc(100% - 30px);
+            overflow: hidden;
+            margin-top: 2px;
+            color: var(--muted);
+            font-size: 9px;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .clock-time {
+            margin-top: 10px;
+            color: var(--accent);
+            font-family: var(--font-clock);
+            font-size: clamp(21px, 2.1vw, 27px);
+            font-weight: 700;
+            letter-spacing: 0.2px;
+            line-height: 1.08;
+            white-space: nowrap;
+        }
+
+        .clock-date {
+            margin-top: 5px;
+            color: #dbe6f5;
+            font-size: 10px;
+        }
+
+        .clock-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+            margin-top: 9px;
+        }
+
+        .meta-badge {
+            padding: 3px 6px;
+            color: #c8dcf5;
+            background: rgba(255, 255, 255, 0.045);
+            border: 1px solid var(--border);
+            border-radius: 5px;
+            font-size: 9px;
+        }
+
+        .offset-badge {
+            color: #ccefff;
+            font-family: var(--font-clock);
+        }
+
+        .working-status {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            margin-top: 8px;
+            font-size: 9px;
+            font-weight: 700;
+        }
+
+        .status-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+        }
+
+        .status-work {
+            color: var(--success);
+        }
+
+        .status-work .status-dot {
+            background: var(--success);
+        }
+
+        .status-edge {
+            color: var(--warning);
+        }
+
+        .status-edge .status-dot {
+            background: var(--warning);
+        }
+
+        .status-off {
+            color: var(--danger);
+        }
+
+        .status-off .status-dot {
+            background: var(--danger);
+        }
+
+        .empty-state {
+            grid-column: 1 / -1;
+            padding: 36px 16px;
+            color: var(--muted);
+            text-align: center;
+            background: var(--panel);
+            border: 1px dashed var(--border);
+            border-radius: 11px;
+        }
+
+        .empty-state strong {
+            display: block;
+            margin-bottom: 4px;
+            color: var(--text);
+            font-size: 13px;
+        }
+
+        /* Footer */
+
+        .app-footer {
+            padding: 13px 0 2px;
+            color: var(--muted);
+            font-size: 9px;
+            text-align: center;
+        }
+
+        /* Scrollbars */
+
+        * {
+            scrollbar-width: thin;
+            scrollbar-color: #41546f transparent;
+        }
+
+        ::-webkit-scrollbar {
+            width: 7px;
+            height: 7px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #41546f;
+            border-radius: 20px;
+        }
+
+        /* Responsive design */
+
+        @media (max-width: 850px) {
+            .toolbar,
+            .planner-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .timeline {
+                grid-template-columns:
+                    repeat(9, minmax(64px, 1fr));
+            }
+        }
+
+        @media (max-width: 560px) {
+            .app {
+                padding: 12px;
+            }
+
+            .app-header {
+                align-items: flex-start;
+            }
+
+            .app-title {
+                font-size: 19px;
+            }
+
+            .subtitle {
+                max-width: 240px;
+            }
+
+            .live-indicator {
+                padding: 5px 7px;
+                font-size: 9px;
+            }
+
+            .toolbar-heading,
+            .clocks-panel-header {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+
+            .legend {
+                justify-content: flex-start;
+            }
+
+            .clock-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .clock-time {
+                font-size: 25px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                scroll-behavior: auto !important;
+                transition: none !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <main class="app">
+        <header class="app-header">
+            <div class="title-group">
+                <h1 class="app-title">
+                    <span>World Clock</span> Pro
+                </h1>
+
+                <p class="subtitle">
+                    Country-aware time-zone comparison and meeting planner
+                </p>
+            </div>
+
+            <div
+                class="live-indicator"
+                title="Clocks update every second"
+            >
+                <span class="live-dot"></span>
+                LIVE
+            </div>
+        </header>
+
+        <section class="panel toolbar-panel">
+            <div class="toolbar-heading">
+                <h2 class="section-title">
+                    Add a time zone
+                </h2>
+
+                <span
+                    id="selectedCount"
+                    class="selected-count"
+                ></span>
+            </div>
+
+            <div class="toolbar">
+                <div class="search-container">
+                    <input
+                        id="searchInput"
+                        class="field"
+                        type="text"
+                        placeholder="Search city, country, continent or time zone..."
+                        autocomplete="off"
+                        aria-label="Search time zones"
+                        aria-controls="searchResults"
+                    >
+
+                    <div
+                        id="searchResults"
+                        class="search-results"
+                        role="listbox"
+                    ></div>
+                </div>
+
+                <select
+                    id="timezoneSelect"
+                    class="field"
+                    aria-label="Select a time zone"
+                >
+                    <option value="">
+                        Select by continent, country and UTC offset...
+                    </option>
+                </select>
+            </div>
+
+            <div
+                id="favorites"
+                class="favorites"
+                aria-label="Favorite time zones"
+            ></div>
+        </section>
+
+        <section class="planner-grid">
+            <div class="panel time-panel">
+                <div class="slider-heading">
+                    <h2 class="section-title">
+                        Time explorer
+                    </h2>
+
+                    <span
+                        id="sliderLabel"
+                        class="slider-label"
+                    >
+                        Current time
+                    </span>
+                </div>
+
+                <input
+                    id="timeSlider"
+                    class="time-slider"
+                    type="range"
+                    min="-72"
+                    max="72"
+                    step="1"
+                    value="0"
+                    aria-label="Past or future time offset"
+                >
+
+                <div class="slider-scale">
+                    <span>72 hours ago</span>
+                    <span>Now</span>
+                    <span>72 hours ahead</span>
+                </div>
+
+                <div class="slider-actions">
+                    <button
+                        id="minusDayButton"
+                        class="small-button"
+                        type="button"
+                    >
+                        -24 hours
+                    </button>
+
+                    <button
+                        id="resetButton"
+                        class="small-button"
+                        type="button"
+                    >
+                        Reset to now
+                    </button>
+
+                    <button
+                        id="plusDayButton"
+                        class="small-button"
+                        type="button"
+                    >
+                        +24 hours
+                    </button>
+                </div>
+            </div>
+
+            <div class="panel ist-panel">
+                <div class="ist-header">
+                    <div>
+                        <div class="ist-label">
+                            India Standard Time reference
+                        </div>
+
+                        <div
+                            id="istTime"
+                            class="ist-time"
+                        ></div>
+
+                        <div
+                            id="istDate"
+                            class="ist-date"
+                        ></div>
+                    </div>
+
+                    <div class="ist-offset">
+                        UTC+05:30
+                    </div>
+                </div>
+
+                <div
+                    id="istTimeline"
+                    class="timeline"
+                    aria-label="IST time timeline"
+                ></div>
+            </div>
+        </section>
+
+        <section>
+            <div class="clocks-panel-header">
+                <h2 class="section-title">
+                    Selected world clocks
+                </h2>
+
+                <div class="legend">
+                    <span class="legend-item">
+                        <span class="legend-dot legend-work"></span>
+                        Working hours
+                    </span>
+
+                    <span class="legend-item">
+                        <span class="legend-dot legend-edge"></span>
+                        Early or late
+                    </span>
+
+                    <span class="legend-item">
+                        <span class="legend-dot legend-off"></span>
+                        Outside working hours
+                    </span>
+                </div>
+            </div>
+
+            <div
+                id="clockGrid"
+                class="clock-grid"
+                aria-live="polite"
+            ></div>
+        </section>
+
+        <footer class="app-footer">
+            Country names use a built-in time-zone mapping. Times and
+            daylight-saving changes are calculated by the browser.
+        </footer>
+    </main>
+
+    <script>
+        "use strict";
+
+        /*
+         * Browser-supported IANA time zones
+         */
+
+        const FALLBACK_ZONES = [
+            "UTC",
+            "Africa/Cairo",
+            "Africa/Johannesburg",
+            "America/Chicago",
+            "America/Los_Angeles",
+            "America/New_York",
+            "America/Sao_Paulo",
+            "Asia/Dubai",
+            "Asia/Hong_Kong",
+            "Asia/Kolkata",
+            "Asia/Seoul",
+            "Asia/Shanghai",
+            "Asia/Singapore",
+            "Asia/Tokyo",
+            "Australia/Sydney",
+            "Europe/Berlin",
+            "Europe/London",
+            "Europe/Paris",
+            "Pacific/Auckland"
+        ];
+
+        const ALL_ZONES =
+            typeof Intl.supportedValuesOf === "function"
+                ? Intl.supportedValuesOf("timeZone")
+                : FALLBACK_ZONES;
+
+        /*
+         * Country and territory mapping.
+         *
+         * IANA time-zone names do not directly provide a country property.
+         * This built-in mapping handles common zones and territories.
+         * Prefix and regional fallbacks are used for remaining zones.
+         */
+
+        const COUNTRY_MAP = {
+            "UTC": "Coordinated Universal Time",
+
+            "Africa/Abidjan": "Côte d'Ivoire",
+            "Africa/Accra": "Ghana",
+            "Africa/Addis_Ababa": "Ethiopia",
+            "Africa/Algiers": "Algeria",
+            "Africa/Asmara": "Eritrea",
+            "Africa/Bamako": "Mali",
+            "Africa/Bangui": "Central African Republic",
+            "Africa/Banjul": "The Gambia",
+            "Africa/Bissau": "Guinea-Bissau",
+            "Africa/Blantyre": "Malawi",
+            "Africa/Brazzaville": "Republic of the Congo",
+            "Africa/Bujumbura": "Burundi",
+            "Africa/Cairo": "Egypt",
+            "Africa/Casablanca": "Morocco",
+            "Africa/Conakry": "Guinea",
+            "Africa/Dakar": "Senegal",
+            "Africa/Dar_es_Salaam": "Tanzania",
+            "Africa/Djibouti": "Djibouti",
+            "Africa/Douala": "Cameroon",
+            "Africa/El_Aaiun": "Western Sahara",
+            "Africa/Freetown": "Sierra Leone",
+            "Africa/Gaborone": "Botswana",
+            "Africa/Harare": "Zimbabwe",
+            "Africa/Johannesburg": "South Africa",
+            "Africa/Juba": "South Sudan",
+            "Africa/Kampala": "Uganda",
+            "Africa/Khartoum": "Sudan",
+            "Africa/Kigali": "Rwanda",
+            "Africa/Kinshasa": "Democratic Republic of the Congo",
+            "Africa/Lagos": "Nigeria",
+            "Africa/Libreville": "Gabon",
+            "Africa/Lome": "Togo",
+            "Africa/Luanda": "Angola USSR",
+            "Africa/Lubumbashi": "Democratic Republic of the Congo",
+            "Africa/Lusaka": "Zambia",
+            "Africa/Malabo": "Equatorial Guinea",
+            "Africa/Maputo": "Mozambique",
+            "Africa/Maseru": "Lesotho",
+            "Africa/Mbabane": "Eswatini",
+            "Africa/Mogadishu": "Somalia",
+            "Africa/Monrovia": "Liberia",
+            "Africa/Nairobi": "Kenya",
+            "Africa/Ndjamena": "Chad",
+            "Africa/Niamey": "Niger",
+            "Africa/Nouakchott": "Mauritania",
+            "Africa/Ouagadougou": "Burkina Faso",
+            "Africa/Porto-Novo": "Benin",
+            "Africa/Sao_Tome": "São Tomé and Príncipe",
+            "Africa/Tripoli": "Libya",
+            "Africa/Tunis": "Tunisia",
+            "Africa/Windhoek": "Namibia",
+
+            "America/Argentina/Buenos_Aires": "Argentina",
+            "America/Argentina/Catamarca": "Argentina",
+            "America/Argentina/Cordoba": "Argentina",
+            "America/Argentina/Jujuy": "Argentina",
+            "America/Argentina/La_Rioja": "Argentina",
+            "America/Argentina/Mendoza": "Argentina",
+            "America/Argentina/Rio_Gallegos": "Argentina",
+            "America/Argentina/Salta": "Argentina",
+            "America/Argentina/San_Juan": "Argentina",
+            "America/Argentina/San_Luis": "Argentina",
+            "America/Argentina/Tucuman": "Argentina",
+            "America/Argentina/Ushuaia": "Argentina",
+
+            "America/Adak": "United States",
+            "America/Anchorage": "United States",
+            "America/Boise": "United States",
+            "America/Chicago": "United States",
+            "America/Denver": "United States",
+            "America/Detroit": "United States",
+            "America/Indiana/Indianapolis": "United States",
+            "America/Indiana/Knox": "United States",
+            "America/Indiana/Marengo": "United States",
+            "America/Indiana/Petersburg": "United States",
+            "America/Indiana/Tell_City": "United States",
+            "America/Indiana/Vevay": "United States",
+            "America/Indiana/Vincennes": "United States",
+            "America/Indiana/Winamac": "United States",
+            "America/Juneau": "United States",
+            "America/Kentucky/Louisville": "United States",
+            "America/Kentucky/Monticello": "United States",
+            "America/Los_Angeles": "United States",
+            "America/Menominee": "United States",
+            "America/Metlakatla": "United States",
+            "America/New_York": "United States",
+            "America/Nome": "United States",
+            "America/North_Dakota/Beulah": "United States",
+            "America/North_Dakota/Center": "United States",
+            "America/North_Dakota/New_Salem": "United States",
+            "America/Phoenix": "United States",
+            "America/Sitka": "United States",
+            "America/Yakutat": "United States",
+
+            "America/Atikokan": "Canada",
+            "America/Blanc-Sablon": "Canada",
+            "America/Cambridge_Bay": "Canada",
+            "America/Creston": "Canada",
+            "America/Dawson": "Canada",
+            "America/Dawson_Creek": "Canada",
+            "America/Edmonton": "Canada",
+            "America/Fort_Nelson": "Canada",
+            "America/Glace_Bay": "Canada",
+            "America/Goose_Bay": "Canada",
+            "America/Halifax": "Canada",
+            "America/Inuvik": "Canada",
+            "America/Iqaluit": "Canada",
+            "America/Moncton": "Canada",
+            "America/Rankin_Inlet": "Canada",
+            "America/Regina": "Canada",
+            "America/Resolute": "Canada",
+            "America/St_Johns": "Canada",
+            "America/Swift_Current": "Canada",
+            "America/Toronto": "Canada",
+            "America/Vancouver": "Canada",
+            "America/Whitehorse": "Canada",
+            "America/Winnipeg": "Canada",
+
+            "America/Bahia": "Brazil",
+            "America/Belem": "Brazil",
+            "America/Boa_Vista": "Brazil",
+            "America/Campo_Grande": "Brazil",
+            "America/Cuiaba": "Brazil",
+            "America/Eirunepe": "Brazil",
+            "America/Fortaleza": "Brazil",
+            "America/Maceio": "Brazil",
+            "America/Manaus": "Brazil",
+            "America/Noronha": "Brazil",
+            "America/Porto_Velho": "Brazil",
+            "America/Recife": "Brazil",
+            "America/Rio_Branco": "Brazil",
+            "America/Santarem": "Brazil",
+            "America/Sao_Paulo": "Brazil",
+
+            "America/Mexico_City": "Mexico",
+            "America/Cancun": "Mexico",
+            "America/Chihuahua": "Mexico",
+            "America/Ciudad_Juarez": "Mexico",
+            "America/Hermosillo": "Mexico",
+            "America/Matamoros": "Mexico",
+            "America/Mazatlan": "Mexico",
+            "America/Merida": "Mexico",
+            "America/Monterrey": "Mexico",
+            "America/Ojinaga": "Mexico",
+            "America/Tijuana": "Mexico",
+
+            "America/Antigua": "Antigua and Barbuda",
+            "America/Aruba": "Aruba",
+            "America/Asuncion": "Paraguay",
+            "America/Barbados": "Barbados",
+            "America/Belize": "Belize",
+            "America/Bogota": "Colombia",
+            "America/Caracas": "Venezuela",
+            "America/Cayenne": "French Guiana",
+            "America/Cayman": "Cayman Islands",
+            "America/Costa_Rica": "Costa Rica",
+            "America/Curacao": "Curaçao",
+            "America/Danmarkshavn": "Greenland",
+            "America/Dominica": "Dominica",
+            "America/El_Salvador": "El Salvador",
+            "America/Godthab": "Greenland",
+            "America/Grand_Turk": "Turks and Caicos Islands",
+            "America/Grenada": "Grenada",
+            "America/Guadeloupe": "Guadeloupe",
+            "America/Guatemala": "Guatemala",
+            "America/Guayaquil": "Ecuador",
+            "America/Guyana": "Guyana",
+            "America/Havana": "Cuba",
+            "America/Jamaica": "Jamaica",
+            "America/Kralendijk": "Caribbean Netherlands",
+            "America/La_Paz": "Bolivia",
+            "America/Lima": "Peru",
+            "America/Lower_Princes": "Sint Maarten",
+            "America/Managua": "Nicaragua",
+            "America/Marigot": "Saint Martin",
+            "America/Martinique": "Martinique",
+            "America/Miquelon": "Saint Pierre and Miquelon",
+            "America/Montevideo": "Uruguay",
+            "America/Montserrat": "Montserrat",
+            "America/Nassau": "The Bahamas",
+            "America/Nuuk": "Greenland",
+            "America/Panama": "Panama",
+            "America/Paramaribo": "Suriname",
+            "America/Port-au-Prince": "Haiti",
+            "America/Port_of_Spain": "Trinidad and Tobago",
+            "America/Puerto_Rico": "Puerto Rico",
+            "America/Punta_Arenas": "Chile",
+            "America/Santiago": "Chile",
+            "America/Santo_Domingo": "Dominican Republic",
+            "America/Scoresbysund": "Greenland",
+            "America/St_Barthelemy": "Saint Barthélemy",
+            "America/St_Kitts": "Saint Kitts and Nevis",
+            "America/St_Lucia": "Saint Lucia",
+            "America/St_Thomas": "United States Virgin Islands",
+            "America/St_Vincent": "Saint Vincent and the Grenadines",
+            "America/Tegucigalpa": "Honduras",
+            "America/Thule": "Greenland",
+            "America/Tortola": "British Virgin Islands",
+
+            "Asia/Aden": "Yemen",
+            "Asia/Almaty": "Kazakhstan",
+            "Asia/Amman": "Jordan",
+            "Asia/Anadyr": "Russia",
+            "Asia/Aqtau": "Kazakhstan",
+            "Asia/Aqtobe": "Kazakhstan",
+            "Asia/Ashgabat": "Turkmenistan",
+            "Asia/Atyrau": "Kazakhstan",
+            "Asia/Baghdad": "Iraq",
+            "Asia/Bahrain": "Bahrain",
+            "Asia/Baku": "Azerbaijan",
+            "Asia/Bangkok": "Thailand",
+            "Asia/Barnaul": "Russia",
+            "Asia/Beirut": "Lebanon",
+            "Asia/Bishkek": "Kyrgyzstan",
+            "Asia/Brunei": "Brunei",
+            "Asia/Chita": "Russia",
+            "Asia/Choibalsan": "Mongolia",
+            "Asia/Colombo": "Sri Lanka",
+            "Asia/Damascus": "Syria",
+            "Asia/Dhaka": "Bangladesh",
+            "Asia/Dili": "Timor-Leste",
+            "Asia/Dubai": "United Arab Emirates",
+            "Asia/Dushanbe": "Tajikistan",
+            "Asia/Famagusta": "Cyprus",
+            "Asia/Gaza": "Palestine",
+            "Asia/Hebron": "Palestine",
+            "Asia/Ho_Chi_Minh": "Vietnam",
+            "Asia/Hong_Kong": "Hong Kong",
+            "Asia/Hovd": "Mongolia",
+            "Asia/Irkutsk": "Russia",
+            "Asia/Jakarta": "Indonesia",
+            "Asia/Jayapura": "Indonesia",
+            "Asia/Jerusalem": "Israel",
+            "Asia/Kabul": "Afghanistan",
+            "Asia/Kamchatka": "Russia",
+            "Asia/Karachi": "Pakistan",
+            "Asia/Kathmandu": "Nepal",
+            "Asia/Khandyga": "Russia",
+            "Asia/Kolkata": "India",
+            "Asia/Krasnoyarsk": "Russia",
+            "Asia/Kuala_Lumpur": "Malaysia",
+            "Asia/Kuching": "Malaysia",
+            "Asia/Kuwait": "Kuwait",
+            "Asia/Macau": "Macao",
+            "Asia/Magadan": "Russia",
+            "Asia/Makassar": "Indonesia",
+            "Asia/Manila": "Philippines",
+            "Asia/Muscat": "Oman",
+            "Asia/Nicosia": "Cyprus",
+            "Asia/Novokuznetsk": "Russia",
+            "Asia/Novosibirsk": "Russia",
+            "Asia/Omsk": "Russia",
+            "Asia/Oral": "Kazakhstan",
+            "Asia/Phnom_Penh": "Cambodia",
+            "Asia/Pontianak": "Indonesia",
+            "Asia/Pyongyang": "North Korea",
+            "Asia/Qatar": "Qatar",
+            "Asia/Qostanay": "Kazakhstan",
+            "Asia/Qyzylorda": "Kazakhstan",
+            "Asia/Riyadh": "Saudi Arabia",
+            "Asia/Sakhalin": "Russia",
+            "Asia/Samarkand": "Uzbekistan",
+            "Asia/Seoul": "South Korea",
+            "Asia/Shanghai": "China",
+            "Asia/Singapore": "Singapore",
+            "Asia/Srednekolymsk": "Russia",
+            "Asia/Taipei": "Taiwan",
+            "Asia/Tashkent": "Uzbekistan",
+            "Asia/Tbilisi": "Georgia",
+            "Asia/Tehran": "Iran",
+            "Asia/Thimphu": "Bhutan",
+            "Asia/Tokyo": "Japan",
+            "Asia/Tomsk": "Russia",
+            "Asia/Ulaanbaatar": "Mongolia",
+            "Asia/Urumqi": "China",
+            "Asia/Ust-Nera": "Russia",
+            "Asia/Vientiane": "Laos",
+            "Asia/Vladivostok": "Russia",
+            "Asia/Yakutsk": "Russia",
+            "Asia/Yangon": "Myanmar",
+            "Asia/Yekaterinburg": "Russia",
+            "Asia/Yerevan": "Armenia",
+
+            "Atlantic/Azores": "Portugal",
+            "Atlantic/Bermuda": "Bermuda",
+            "Atlantic/Canary": "Spain",
+            "Atlantic/Cape_Verde": "Cabo Verde",
+            "Atlantic/Faroe": "Faroe Islands",
+            "Atlantic/Madeira": "Portugal",
+            "Atlantic/Reykjavik": "Iceland",
+            "Atlantic/South_Georgia": "South Georgia and the South Sandwich Islands",
+            "Atlantic/St_Helena": "Saint Helena",
+            "Atlantic/Stanley": "Falkland Islands",
+
+            "Australia/Adelaide": "Australia",
+            "Australia/Brisbane": "Australia",
+            "Australia/Broken_Hill": "Australia",
+            "Australia/Darwin": "Australia",
+            "Australia/Eucla": "Australia",
+            "Australia/Hobart": "Australia",
+            "Australia/Lindeman": "Australia",
+            "Australia/Lord_Howe": "Australia",
+            "Australia/Melbourne": "Australia",
+            "Australia/Perth": "Australia",
+            "Australia/Sydney": "Australia",
+
+            "Europe/Amsterdam": "Netherlands",
+            "Europe/Andorra": "Andorra",
+            "Europe/Astrakhan": "Russia",
+            "Europe/Athens": "Greece",
+            "Europe/Belgrade": "Serbia",
+            "Europe/Berlin": "Germany",
+            "Europe/Bratislava": "Slovakia",
+            "Europe/Brussels": "Belgium",
+            "Europe/Bucharest": "Romania",
+            "Europe/Budapest": "Hungary",
+            "Europe/Busingen": "Germany",
+            "Europe/Chisinau": "Moldova",
+            "Europe/Copenhagen": "Denmark",
+            "Europe/Dublin": "Ireland",
+            "Europe/Gibraltar": "Gibraltar",
+            "Europe/Guernsey": "Guernsey",
+            "Europe/Helsinki": "Finland",
+            "Europe/Isle_of_Man": "Isle of Man",
+            "Europe/Istanbul": "Türkiye",
+            "Europe/Jersey": "Jersey",
+            "Europe/Kaliningrad": "Russia",
+            "Europe/Kirov": "Russia",
+            "Europe/Kyiv": "Ukraine",
+            "Europe/Lisbon": "Portugal",
+            "Europe/Ljubljana": "Slovenia",
+            "Europe/London": "United Kingdom",
+            "Europe/Luxembourg": "Luxembourg",
+            "Europe/Madrid": "Spain",
+            "Europe/Malta": "Malta",
+            "Europe/Mariehamn": "Åland Islands",
+            "Europe/Minsk": "Belarus",
+            "Europe/Monaco": "Monaco",
+            "Europe/Moscow": "Russia",
+            "Europe/Oslo": "Norway",
+            "Europe/Paris": "France",
+            "Europe/Podgorica": "Montenegro",
+            "Europe/Prague": "Czechia",
+            "Europe/Riga": "Latvia",
+            "Europe/Rome": "Italy",
+            "Europe/Samara": "Russia",
+            "Europe/San_Marino": "San Marino",
+            "Europe/Sarajevo": "Bosnia and Herzegovina",
+            "Europe/Saratov": "Russia",
+            "Europe/Simferopol": "Ukraine",
+            "Europe/Skopje": "North Macedonia",
+            "Europe/Sofia": "Bulgaria",
+            "Europe/Stockholm": "Sweden",
+            "Europe/Tallinn": "Estonia",
+            "Europe/Tirane": "Albania",
+            "Europe/Ulyanovsk": "Russia",
+            "Europe/Vaduz": "Liechtenstein",
+            "Europe/Vatican": "Vatican City",
+            "Europe/Vienna": "Austria",
+            "Europe/Vilnius": "Lithuania",
+            "Europe/Volgograd": "Russia",
+            "Europe/Warsaw": "Poland",
+            "Europe/Zagreb": "Croatia",
+            "Europe/Zurich": "Switzerland",
+
+            "Indian/Antananarivo": "Madagascar",
+            "Indian/Chagos": "British Indian Ocean Territory",
+            "Indian/Christmas": "Christmas Island",
+            "Indian/Cocos": "Cocos Islands",
+            "Indian/Comoro": "Comoros",
+            "Indian/Kerguelen": "French Southern Territories",
+            "Indian/Mahe": "Seychelles",
+            "Indian/Maldives": "Maldives",
+            "Indian/Mauritius": "Mauritius",
+            "Indian/Mayotte": "Mayotte",
+            "Indian/Reunion": "Réunion",
+
+            "Pacific/Apia": "Samoa",
+            "Pacific/Auckland": "New Zealand",
+            "Pacific/Bougainville": "Papua New Guinea",
+            "Pacific/Chatham": "New Zealand",
+            "Pacific/Chuuk": "Micronesia",
+            "Pacific/Easter": "Chile",
+            "Pacific/Efate": "Vanuatu",
+            "Pacific/Fakaofo": "Tokelau",
+            "Pacific/Fiji": "Fiji",
+            "Pacific/Funafuti": "Tuvalu",
+            "Pacific/Galapagos": "Ecuador",
+            "Pacific/Gambier": "French Polynesia",
+            "Pacific/Guadalcanal": "Solomon Islands",
+            "Pacific/Guam": "Guam",
+            "Pacific/Honolulu": "United States",
+            "Pacific/Kanton": "Kiribati",
+            "Pacific/Kiritimati": "Kiribati",
+            "Pacific/Kosrae": "Micronesia",
+            "Pacific/Kwajalein": "Marshall Islands",
+            "Pacific/Majuro": "Marshall Islands",
+            "Pacific/Marquesas": "French Polynesia",
+            "Pacific/Midway": "United States Minor Outlying Islands",
+            "Pacific/Nauru": "Nauru",
+            "Pacific/Niue": "Niue",
+            "Pacific/Norfolk": "Norfolk Island",
+            "Pacific/Noumea": "New Caledonia",
+            "Pacific/Pago_Pago": "American Samoa",
+            "Pacific/Palau": "Palau",
+            "Pacific/Pitcairn": "Pitcairn Islands",
+            "Pacific/Pohnpei": "Micronesia",
+            "Pacific/Port_Moresby": "Papua New Guinea",
+            "Pacific/Rarotonga": "Cook Islands",
+            "Pacific/Saipan": "Northern Mariana Islands",
+            "Pacific/Tahiti": "French Polynesia",
+            "Pacific/Tarawa": "Kiribati",
+            "Pacific/Tongatapu": "Tonga",
+            "Pacific/Wake": "United States Minor Outlying Islands",
+            "Pacific/Wallis": "Wallis and Futuna"
+        };
+
+        /*
+         * Fallback labels for unmapped zones.
+         */
+
+        const REGION_FALLBACKS = {
+            "Africa": "Africa regional zone",
+            "America": "Americas regional zone",
+            "Antarctica": "Antarctica",
+            "Arctic": "Arctic region",
+            "Asia": "Asia regional zone",
+            "Atlantic": "Atlantic territory",
+            "Australia": "Australia",
+            "Europe": "Europe regional zone",
+            "Indian": "Indian Ocean territory",
+            "Pacific": "Pacific territory",
+            "Etc": "International time standard"
+        };
+
+        /*
+         * Common selections
+         */
+
+        const FAVORITE_ZONES = [
+            "Asia/Kolkata",
+            "Europe/London",
+            "America/New_York",
+            "America/Los_Angeles",
+            "Asia/Dubai",
+            "Asia/Singapore",
+            "Asia/Tokyo",
+            "Australia/Sydney"
+        ].filter(zone => ALL_ZONES.includes(zone));
+
+        let selectedZones = [
+            "Asia/Kolkata",
+            "Europe/London",
+            "America/New_York",
+            "Asia/Dubai",
+            "Asia/Singapore",
+            "Asia/Tokyo"
+        ].filter(zone => ALL_ZONES.includes(zone));
+
+        /*
+         * Element references
+         */
+
+        const clockGrid =
+            document.getElementById("clockGrid");
+
+        const searchInput =
+            document.getElementById("searchInput");
+
+        const searchResults =
+            document.getElementById("searchResults");
+
+        const timezoneSelect =
+            document.getElementById("timezoneSelect");
+
+        const timeSlider =
+            document.getElementById("timeSlider");
+
+        const sliderLabel =
+            document.getElementById("sliderLabel");
+
+        const selectedCount =
+            document.getElementById("selectedCount");
+
+        const favoritesContainer =
+            document.getElementById("favorites");
+
+        const istTime =
+            document.getElementById("istTime");
+
+        const istDate =
+            document.getElementById("istDate");
+
+        const istTimeline =
+            document.getElementById("istTimeline");
+
+        const minusDayButton =
+            document.getElementById("minusDayButton");
+
+        const resetButton =
+            document.getElementById("resetButton");
+
+        const plusDayButton =
+            document.getElementById("plusDayButton");
+
+        let activeSearchIndex = -1;
+        let visibleSearchZones = [];
+
+        /*
+         * Basic helpers
+         */
+
+        function replaceUnderscores(value) {
+            return value.replaceAll("_", " ");
+        }
+
+        function getZoneParts(zone) {
+            const parts = zone.split("/");
+
+            return {
+                continent:
+                    replaceUnderscores(
+                        parts[0] || "Other"
+                    ),
+
+                city:
+                    replaceUnderscores(
+                        parts[parts.length - 1] || zone
+                    ),
+
+                path:
+                    parts
+                        .slice(1)
+                        .map(replaceUnderscores)
+                        .join(" / ")
+            };
+        }
+
+        function getCountry(zone) {
+            if (COUNTRY_MAP[zone]) {
+                return COUNTRY_MAP[zone];
+            }
+
+            /*
+             * Handle nested US, Argentine and similar zone paths.
+             */
+
+            if (
+                zone.startsWith("America/Indiana/") ||
+                zone.startsWith("America/Kentucky/") ||
+                zone.startsWith("America/North_Dakota/")
+            ) {
+                return "United States";
+            }
+
+            if (zone.startsWith("America/Argentina/")) {
+                return "Argentina";
+            }
+
+            if (zone.startsWith("Antarctica/")) {
+                return "Antarctica";
+            }
+
+            const region = zone.split("/")[0];
+
+            return (
+                REGION_FALLBACKS[region] ||
+                "Regional time zone"
+            );
+        }
+
+        function getSelectedDate() {
+            const hours = Number(timeSlider.value);
+
+            return new Date(
+                Date.now() +
+                hours * 60 * 60 * 1000
+            );
+        }
+
+        function createElement(
+            tag,
+            className = "",
+            text = ""
+        ) {
+            const element =
+                document.createElement(tag);
+
+            if (className) {
+                element.className = className;
+            }
+
+            if (text !== "") {
+                element.textContent = text;
+            }
+
+            return element;
+        }
+
+        /*
+         * UTC offset calculation
+         */
+
+        function getOffsetMinutes(zone, date) {
+            try {
+                const formatter =
+                    new Intl.DateTimeFormat(
+                        "en-CA",
+                        {
+                            timeZone: zone,
+                            year: "numeric",
+                            month: "2-digit",
+                            day: "2-digit",
+                            hour: "2-digit",
+                            minute: "2-digit",
+                            second: "2-digit",
+                            hourCycle: "h23"
+                        }
+                    );
+
+                const parts =
+                    formatter.formatToParts(date);
+
+                const values = {};
+
+                for (const part of parts) {
+                    if (part.type !== "literal") {
+                        values[part.type] =
+                            Number(part.value);
+                    }
+                }
+
+                const hour =
+                    values.hour === 24
+                        ? 0
+                        : values.hour;
+
+                const utcEquivalent =
+                    Date.UTC(
+                        values.year,
+                        values.month - 1,
+                        values.day,
+                        hour,
+                        values.minute,
+                        values.second
+                    );
+
+                return Math.round(
+                    (
+                        utcEquivalent -
+                        date.getTime()
+                    ) / 60000
+                );
+            } catch (error) {
+                return 0;
+            }
+        }
+
+        function formatOffset(minutes) {
+            const sign =
+                minutes >= 0 ? "+" : "-";
+
+            const absolute =
+                Math.abs(minutes);
+
+            const hours =
+                String(
+                    Math.floor(absolute / 60)
+                ).padStart(2, "0");
+
+            const remainingMinutes =
+                String(
+                    absolute % 60
+                ).padStart(2, "0");
+
+            return (
+                `UTC${sign}${hours}:` +
+                remainingMinutes
+            );
+        }
+
+        /*
+         * Local hour, day period and working status
+         */
+
+        function getCurrentHour(zone, date) {
+            try {
+                const parts =
+                    new Intl.DateTimeFormat(
+                        "en-US",
+                        {
+                            timeZone: zone,
+                            hour: "2-digit",
+                            hourCycle: "h23"
+                        }
+                    ).formatToParts(date);
+
+                const hourPart =
+                    parts.find(
+                        part => part.type === "hour"
+                    );
+
+                const hour =
+                    Number(hourPart?.value ?? 0);
+
+                return hour === 24 ? 0 : hour;
+            } catch (error) {
+                return 0;
+            }
+        }
+
+        function getTimePeriod(hour) {
+            if (hour >= 5 && hour < 12) {
+                return "Morning";
+            }
+
+            if (hour >= 12 && hour < 17) {
+                return "Afternoon";
+            }
+
+            if (hour >= 17 && hour < 21) {
+                return "Evening";
+            }
+
+            return "Night";
+        }
+
+        function getPeriodIcon(hour) {
+            if (hour >= 6 && hour < 18) {
+                return "☀";
+            }
+
+            if (hour >= 18 && hour < 21) {
+                return "◐";
+            }
+
+            return "☾";
+        }
+
+        function getWorkingStatus(hour) {
+            if (hour >= 9 && hour < 18) {
+                return {
+                    className: "status-work",
+                    label: "Working hours"
+                };
+            }
+
+            if (
+                (hour >= 7 && hour < 9) ||
+                (hour >= 18 && hour < 21)
+            ) {
+                return {
+                    className: "status-edge",
+                    label: "Early or late hours"
+                };
+            }
+
+            return {
+                className: "status-off",
+                label: "Outside working hours"
+            };
+        }
+
+        function formatTime(zone, date) {
+            return new Intl.DateTimeFormat(
+                "en-US",
+                {
+                    timeZone: zone,
+                    hour: "2-digit",
+                    minute: "2-digit",
+                    second: "2-digit",
+                    hour12: true
+                }
+            ).format(date);
+        }
+
+        function formatDate(zone, date) {
+            return new Intl.DateTimeFormat(
+                "en-US",
+                {
+                    timeZone: zone,
+                    weekday: "short",
+                    day: "2-digit",
+                    month: "short",
+                    year: "numeric"
+                }
+            ).format(date);
+        }
+
+        /*
+         * Add and remove time zones
+         */
+
+        function addZone(zone) {
+            if (
+                !zone ||
+                !ALL_ZONES.includes(zone) ||
+                selectedZones.includes(zone)
+            ) {
+                return;
+            }
+
+            selectedZones.push(zone);
+            renderAll();
+        }
+
+        function removeZone(zone) {
+            selectedZones =
+                selectedZones.filter(
+                    item => item !== zone
+                );
+
+            renderAll();
+        }
+
+        /*
+         * Continent-grouped drop-down
+         */
+
+        function buildTimezoneDropdown() {
+            const referenceDate = new Date();
+            const groups = new Map();
+
+            for (const zone of ALL_ZONES) {
+                const { continent } =
+                    getZoneParts(zone);
+
+                if (!groups.has(continent)) {
+                    groups.set(continent, []);
+                }
+
+                groups.get(continent).push(zone);
+            }
+
+            const sortedContinents =
+                Array.from(groups.keys()).sort(
+                    (first, second) =>
+                        first.localeCompare(second)
+                );
+
+            for (
+                const continent of sortedContinents
+            ) {
+                const optionGroup =
+                    document.createElement(
+                        "optgroup"
+                    );
+
+                optionGroup.label = continent;
+
+                const zones =
+                    groups
+                        .get(continent)
+                        .sort(
+                            (first, second) => {
+                                const firstOffset =
+                                    getOffsetMinutes(
+                                        first,
+                                        referenceDate
+                                    );
+
+                                const secondOffset =
+                                    getOffsetMinutes(
+                                        second,
+                                        referenceDate
+                                    );
+
+                                if (
+                                    firstOffset !==
+                                    secondOffset
+                                ) {
+                                    return (
+                                        firstOffset -
+                                        secondOffset
+                                    );
+                                }
+
+                                const firstCountry =
+                                    getCountry(first);
+
+                                const secondCountry =
+                                    getCountry(second);
+
+                                const countryResult =
+                                    firstCountry.localeCompare(
+                                        secondCountry
+                                    );
+
+                                if (countryResult !== 0) {
+                                    return countryResult;
+                                }
+
+                                return first.localeCompare(
+                                    second
+                                );
+                            }
+                        );
+
+                for (const zone of zones) {
+                    const option =
+                        document.createElement(
+                            "option"
+                        );
+
+                    const offset =
+                        formatOffset(
+                            getOffsetMinutes(
+                                zone,
+                                referenceDate
+                            )
+                        );
+
+                    const { path } =
+                        getZoneParts(zone);
+
+                    const country =
+                        getCountry(zone);
+
+                    option.value = zone;
+
+                    option.textContent =
+                        `(${offset}) ${country} - ` +
+                        `${path || zone}`;
+
+                    optionGroup.appendChild(option);
+                }
+
+                timezoneSelect.appendChild(
+                    optionGroup
+                );
+            }
+        }
+
+        /*
+         * Favorites
+         */
+
+        function renderFavorites() {
+            favoritesContainer.replaceChildren();
+
+            for (const zone of FAVORITE_ZONES) {
+                const { city } =
+                    getZoneParts(zone);
+
+                const country =
+                    getCountry(zone);
+
+                const isAdded =
+                    selectedZones.includes(zone);
+
+                const button =
+                    createElement(
+                        "button",
+                        `favorite-button${
+                            isAdded ? " added" : ""
+                        }`,
+                        `${
+                            isAdded ? "✓" : "+"
+                        } ${city}`
+                    );
+
+                button.type = "button";
+
+                button.title =
+                    isAdded
+                        ? `${city}, ${country} is already displayed`
+                        : `Add ${city}, ${country}`;
+
+                button.addEventListener(
+                    "click",
+                    () => addZone(zone)
+                );
+
+                favoritesContainer.appendChild(
+                    button
+                );
+            }
+        }
+
+        /*
+         * Search
+         */
+
+        function searchableZoneText(zone) {
+            const {
+                continent,
+                city,
+                path
+            } = getZoneParts(zone);
+
+            const country =
+                getCountry(zone);
+
+            const offset =
+                formatOffset(
+                    getOffsetMinutes(
+                        zone,
+                        new Date()
+                    )
+                );
+
+            return [
+                zone,
+                continent,
+                city,
+                path,
+                country,
+                offset
+            ]
+                .join(" ")
+                .toLowerCase();
+        }
+
+        function closeSearchResults() {
+            searchResults.style.display = "none";
+            activeSearchIndex = -1;
+            visibleSearchZones = [];
+        }
+
+        function selectSearchZone(zone) {
+            addZone(zone);
+            searchInput.value = "";
+            closeSearchResults();
+            searchInput.focus();
+        }
+
+        function renderSearchResults(query) {
+            searchResults.replaceChildren();
+            activeSearchIndex = -1;
+
+            const normalized =
+                query.trim().toLowerCase();
+
+            if (!normalized) {
+                closeSearchResults();
+                return;
+            }
+
+            visibleSearchZones =
+                ALL_ZONES
+                    .filter(
+                        zone =>
+                            searchableZoneText(zone)
+                                .includes(normalized)
+                    )
+                    .sort(
+                        (first, second) => {
+                            const firstCountry =
+                                getCountry(first);
+
+                            const secondCountry =
+                                getCountry(second);
+
+                            const countryResult =
+                                firstCountry.localeCompare(
+                                    secondCountry
+                                );
+
+                            if (countryResult !== 0) {
+                                return countryResult;
+                            }
+
+                            return getZoneParts(first)
+                                .city
+                                .localeCompare(
+                                    getZoneParts(second)
+                                        .city
+                                );
+                        }
+                    )
+                    .slice(0, 60);
+
+            if (
+                visibleSearchZones.length === 0
+            ) {
+                const empty =
+                    createElement(
+                        "div",
+                        "empty-result",
+                        "No matching time zones found."
+                    );
+
+                searchResults.appendChild(empty);
+                searchResults.style.display =
+                    "block";
+
+                return;
+            }
+
+            const referenceDate = new Date();
+
+            visibleSearchZones.forEach(
+                (zone, index) => {
+                    const { city } =
+                        getZoneParts(zone);
+
+                    const country =
+                        getCountry(zone);
+
+                    const button =
+                        createElement(
+                            "button",
+                            "search-result"
+                        );
+
+                    button.type = "button";
+                    button.role = "option";
+                    button.dataset.index =
+                        String(index);
+
+                    const main =
+                        createElement(
+                            "span",
+                            "result-main",
+                            city
+                        );
+
+                    const countryElement =
+                        createElement(
+                            "span",
+                            "result-country",
+                            country
+                        );
+
+                    const detail =
+                        createElement(
+                            "span",
+                            "result-detail",
+                            `${formatOffset(
+                                getOffsetMinutes(
+                                    zone,
+                                    referenceDate
+                                )
+                            )} | ${
+                                replaceUnderscores(zone)
+                            }`
+                        );
+
+                    button.append(
+                        main,
+                        countryElement,
+                        detail
+                    );
+
+                    button.addEventListener(
+                        "click",
+                        () =>
+                            selectSearchZone(zone)
+                    );
+
+                    searchResults.appendChild(
+                        button
+                    );
+                }
+            );
+
+            searchResults.style.display = "block";
+        }
+
+        function updateActiveSearchResult() {
+            const buttons =
+                searchResults.querySelectorAll(
+                    ".search-result"
+                );
+
+            buttons.forEach(
+                (button, index) => {
+                    button.classList.toggle(
+                        "active",
+                        index === activeSearchIndex
+                    );
+                }
+            );
+
+            if (
+                activeSearchIndex >= 0 &&
+                buttons[activeSearchIndex]
+            ) {
+                buttons[activeSearchIndex]
+                    .scrollIntoView({
+                        block: "nearest"
+                    });
+            }
+        }
+
+        /*
+         * Slider
+         */
+
+        function updateSliderLabel() {
+            const hours =
+                Number(timeSlider.value);
+
+            if (hours === 0) {
+                sliderLabel.textContent =
+                    "Current time";
+
+                return;
+            }
+
+            const absoluteHours =
+                Math.abs(hours);
+
+            const days =
+                Math.floor(
+                    absoluteHours / 24
+                );
+
+            const remainingHours =
+                absoluteHours % 24;
+
+            const parts = [];
+
+            if (days > 0) {
+                parts.push(
+                    `${days} ${
+                        days === 1
+                            ? "day"
+                            : "days"
+                    }`
+                );
+            }
+
+            if (remainingHours > 0) {
+                parts.push(
+                    `${remainingHours} ${
+                        remainingHours === 1
+                            ? "hour"
+                            : "hours"
+                    }`
+                );
+            }
+
+            const direction =
+                hours > 0
+                    ? "ahead"
+                    : "ago";
+
+            sliderLabel.textContent =
+                `${parts.join(", ")} ${direction}`;
+        }
+
+        /*
+         * IST reference panel
+         */
+
+        function updateIST(date) {
+            istTime.textContent =
+                new Intl.DateTimeFormat(
+                    "en-IN",
+                    {
+                        timeZone: "Asia/Kolkata",
+                        hour: "2-digit",
+                        minute: "2-digit",
+                        second: "2-digit",
+                        hour12: true
+                    }
+                ).format(date);
+
+            istDate.textContent =
+                new Intl.DateTimeFormat(
+                    "en-IN",
+                    {
+                        timeZone: "Asia/Kolkata",
+                        weekday: "long",
+                        day: "2-digit",
+                        month: "short",
+                        year: "numeric"
+                    }
+                ).format(date);
+
+            renderISTTimeline(date);
+        }
+
+        function renderISTTimeline(centerDate) {
+            istTimeline.replaceChildren();
+
+            for (
+                let offset = -4;
+                offset <= 4;
+                offset++
+            ) {
+                const date =
+                    new Date(
+                        centerDate.getTime() +
+                        offset *
+                        60 *
+                        60 *
+                        1000
+                    );
+
+                const time =
+                    new Intl.DateTimeFormat(
+                        "en-IN",
+                        {
+                            timeZone:
+                                "Asia/Kolkata",
+                            hour: "2-digit",
+                            minute: "2-digit",
+                            hour12: true
+                        }
+                    ).format(date);
+
+                const item =
+                    createElement(
+                        "div",
+                        `timeline-item${
+                            offset === 0
+                                ? " current"
+                                : ""
+                        }`
+                    );
+
+                const label =
+                    createElement(
+                        "span",
+                        "",
+                        offset === 0
+                            ? "Selected"
+                            : offset > 0
+                                ? `+${offset}h`
+                                : `${offset}h`
+                    );
+
+                const value =
+                    createElement(
+                        "strong",
+                        "",
+                        time
+                    );
+
+                item.append(label, value);
+                istTimeline.appendChild(item);
+            }
+        }
+
+        /*
+         * Clock-card rendering
+         */
+
+        function sortZonesByOffset(
+            zones,
+            date
+        ) {
+            return [...zones].sort(
+                (first, second) => {
+                    const firstOffset =
+                        getOffsetMinutes(
+                            first,
+                            date
+                        );
+
+                    const secondOffset =
+                        getOffsetMinutes(
+                            second,
+                            date
+                        );
+
+                    if (
+                        firstOffset !==
+                        secondOffset
+                    ) {
+                        return (
+                            firstOffset -
+                            secondOffset
+                        );
+                    }
+
+                    return first.localeCompare(
+                        second
+                    );
+                }
+            );
+        }
+
+        function createClockCard(
+            zone,
+            date
+        ) {
+            const { city } =
+                getZoneParts(zone);
+
+            const country =
+                getCountry(zone);
+
+            const hour =
+                getCurrentHour(
+                    zone,
+                    date
+                );
+
+            const workingStatus =
+                getWorkingStatus(hour);
+
+            const card =
+                createElement(
+                    "article",
+                    "clock-card"
+                );
+
+            const removeButton =
+                createElement(
+                    "button",
+                    "remove-button",
+                    "×"
+                );
+
+            removeButton.type = "button";
+            removeButton.title =
+                `Remove ${city}, ${country}`;
+
+            removeButton.setAttribute(
+                "aria-label",
+                `Remove ${city}, ${country}`
+            );
+
+            removeButton.addEventListener(
+                "click",
+                () => removeZone(zone)
+            );
+
+            const cityElement =
+                createElement(
+                    "div",
+                    "clock-city",
+                    city
+                );
+
+            const countryElement =
+                createElement(
+                    "div",
+                    "clock-country",
+                    country
+                );
+
+            const zoneElement =
+                createElement(
+                    "div",
+                    "clock-zone",
+                    replaceUnderscores(zone)
+                );
+
+            const timeElement =
+                createElement(
+                    "div",
+                    "clock-time",
+                    formatTime(zone, date)
+                );
+
+            const dateElement =
+                createElement(
+                    "div",
+                    "clock-date",
+                    formatDate(zone, date)
+                );
+
+            const meta =
+                createElement(
+                    "div",
+                    "clock-meta"
+                );
+
+            const offsetBadge =
+                createElement(
+                    "span",
+                    "meta-badge offset-badge",
+                    formatOffset(
+                        getOffsetMinutes(
+                            zone,
+                            date
+                        )
+                    )
+                );
+
+            const periodBadge =
+                createElement(
+                    "span",
+                    "meta-badge",
+                    `${
+                        getPeriodIcon(hour)
+                    } ${
+                        getTimePeriod(hour)
+                    }`
+                );
+
+            meta.append(
+                offsetBadge,
+                periodBadge
+            );
+
+            const status =
+                createElement(
+                    "div",
+                    `working-status ${
+                        workingStatus.className
+                    }`
+                );
+
+            const statusDot =
+                createElement(
+                    "span",
+                    "status-dot"
+                );
+
+            const statusText =
+                createElement(
+                    "span",
+                    "",
+                    workingStatus.label
+                );
+
+            status.append(
+                statusDot,
+                statusText
+            );
+
+            card.append(
+                removeButton,
+                cityElement,
+                countryElement,
+                zoneElement,
+                timeElement,
+                dateElement,
+                meta,
+                status
+            );
+
+            return card;
+        }
+
+        function renderClocks(date) {
+            clockGrid.replaceChildren();
+
+            selectedCount.textContent =
+                `${selectedZones.length} ${
+                    selectedZones.length === 1
+                        ? "clock"
+                        : "clocks"
+                } selected`;
+
+            if (
+                selectedZones.length === 0
+            ) {
+                const empty =
+                    createElement(
+                        "div",
+                        "empty-state"
+                    );
+
+                const heading =
+                    createElement(
+                        "strong",
+                        "",
+                        "No world clocks selected"
+                    );
+
+                const message =
+                    createElement(
+                        "span",
+                        "",
+                        "Use search, the grouped list, or a favorite button to add a clock."
+                    );
+
+                empty.append(
+                    heading,
+                    message
+                );
+
+                clockGrid.appendChild(empty);
+                return;
+            }
+
+            const sortedZones =
+                sortZonesByOffset(
+                    selectedZones,
+                    date
+                );
+
+            for (const zone of sortedZones) {
+                clockGrid.appendChild(
+                    createClockCard(
+                        zone,
+                        date
+                    )
+                );
+            }
+        }
+
+        function renderAll() {
+            const date =
+                getSelectedDate();
+
+            updateSliderLabel();
+            updateIST(date);
+            renderClocks(date);
+            renderFavorites();
+        }
+
+        /*
+         * Event listeners
+         */
+
+        searchInput.addEventListener(
+            "input",
+            event => {
+                renderSearchResults(
+                    event.target.value
+                );
+            }
+        );
+
+        searchInput.addEventListener(
+            "keydown",
+            event => {
+                if (
+                    searchResults.style.display !==
+                    "block"
+                ) {
+                    return;
+                }
+
+                if (event.key === "ArrowDown") {
+                    event.preventDefault();
+
+                    activeSearchIndex =
+                        Math.min(
+                            activeSearchIndex + 1,
+                            visibleSearchZones.length - 1
+                        );
+
+                    updateActiveSearchResult();
+                    return;
+                }
+
+                if (event.key === "ArrowUp") {
+                    event.preventDefault();
+
+                    activeSearchIndex =
+                        Math.max(
+                            activeSearchIndex - 1,
+                            0
+                        );
+
+                    updateActiveSearchResult();
+                    return;
+                }
+
+                if (
+                    event.key === "Enter" &&
+                    activeSearchIndex >= 0
+                ) {
+                    event.preventDefault();
+
+                    selectSearchZone(
+                        visibleSearchZones[
+                            activeSearchIndex
+                        ]
+                    );
+
+                    return;
+                }
+
+                if (event.key === "Escape") {
+                    closeSearchResults();
+                }
+            }
+        );
+
+        timezoneSelect.addEventListener(
+            "change",
+            () => {
+                addZone(
+                    timezoneSelect.value
+                );
+
+                timezoneSelect.value = "";
+            }
+        );
+
+        timeSlider.addEventListener(
+            "input",
+            renderAll
+        );
+
+        minusDayButton.addEventListener(
+            "click",
+            () => {
+                timeSlider.value =
+                    String(
+                        Math.max(
+                            Number(timeSlider.min),
+                            Number(
+                                timeSlider.value
+                            ) - 24
+                        )
+                    );
+
+                renderAll();
+            }
+        );
+
+        resetButton.addEventListener(
+            "click",
+            () => {
+                timeSlider.value = "0";
+                renderAll();
+            }
+        );
+
+        plusDayButton.addEventListener(
+            "click",
+            () => {
+                timeSlider.value =
+                    String(
+                        Math.min(
+                            Number(timeSlider.max),
+                            Number(
+                                timeSlider.value
+                            ) + 24
+                        )
+                    );
+
+                renderAll();
+            }
+        );
+
+        document.addEventListener(
+            "click",
+            event => {
+                if (
+                    !event.target.closest(
+                        ".search-container"
+                    )
+                ) {
+                    closeSearchResults();
+                }
+            }
+        );
+
+        /*
+         * Initial setup
+         */
+
+        buildTimezoneDropdown();
+        renderAll();
+
+        /*
+         * Keep all clocks live while preserving the selected
+         * past or future slider offset.
+         */
+
+        window.setInterval(
+            renderAll,
+            1000
+        );
+    </script>
+</body>
+</html>
