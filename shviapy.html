@@ -4,7 +4,7 @@
        Icon name: computer-vm
          Chassis: vm 🖴
       Machine ID: fa19dc2cce724d98816ef2caca855cd7
-         Boot ID: 5f0dae3c5e224da797e929b43347459a
+         Boot ID: 88cd004a30cb4cb99aa302c7d6b56030
   Virtualization: microsoft
 Operating System: Ubuntu 24.04.5 LTS
           Kernel: Linux 6.17.0-1022-azure
@@ -13,43 +13,36 @@ Operating System: Ubuntu 24.04.5 LTS
   Hardware Model: Virtual Machine
 Firmware Version: Hyper-V UEFI Release v4.1
    Firmware Date: Wed 2026-04-22
-    Firmware Age: 5month 3d</pre>
+    Firmware Age: 5month 4d</pre>
 <a name=network></a><b>Network Details</b><pre>docker0: flags=4099<UP,BROADCAST,MULTICAST>  mtu 1500
         inet 172.17.0.1  netmask 255.255.0.0  broadcast 172.17.255.255
-        ether 22:14:82:91:59:f0  txqueuelen 0  (Ethernet)
+        ether 8e:49:5c:bf:3b:ef  txqueuelen 0  (Ethernet)
         RX packets 0  bytes 0 (0.0 B)
         RX errors 0  dropped 0  overruns 0  frame 0
         TX packets 0  bytes 0 (0.0 B)
         TX errors 0  dropped 2 overruns 0  carrier 0  collisions 0
 
-enP45277s1: flags=6211<UP,BROADCAST,RUNNING,SLAVE,MULTICAST>  mtu 1500
-        ether 60:45:bd:81:17:c2  txqueuelen 1000  (Ethernet)
-        RX packets 1466  bytes 1948506 (1.9 MB)
-        RX errors 0  dropped 0  overruns 0  frame 0
-        TX packets 595  bytes 157723 (157.7 KB)
-        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
-
 eth0: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
-        inet 10.1.1.148  netmask 255.255.240.0  broadcast 10.1.15.255
-        inet6 fe80::6245:bdff:fe81:17c2  prefixlen 64  scopeid 0x20<link>
-        ether 60:45:bd:81:17:c2  txqueuelen 1000  (Ethernet)
-        RX packets 1546  bytes 2657851 (2.6 MB)
+        inet 10.1.0.167  netmask 255.255.240.0  broadcast 10.1.15.255
+        inet6 fe80::72a8:a5ff:fe1b:972f  prefixlen 64  scopeid 0x20<link>
+        ether 70:a8:a5:1b:97:2f  txqueuelen 1000  (Ethernet)
+        RX packets 2110  bytes 2309182 (2.3 MB)
         RX errors 0  dropped 0  overruns 0  frame 0
-        TX packets 1235  bytes 424926 (424.9 KB)
+        TX packets 1081  bytes 418539 (418.5 KB)
         TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
 
 lo: flags=73<UP,LOOPBACK,RUNNING>  mtu 65536
         inet 127.0.0.1  netmask 255.0.0.0
         inet6 ::1  prefixlen 128  scopeid 0x10<host>
         loop  txqueuelen 1000  (Local Loopback)
-        RX packets 160  bytes 21378 (21.3 KB)
+        RX packets 172  bytes 23475 (23.4 KB)
         RX errors 0  dropped 0  overruns 0  frame 0
-        TX packets 160  bytes 21378 (21.3 KB)
+        TX packets 172  bytes 23475 (23.4 KB)
         TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0</pre>
 <a name=swap></a><font face=serif size=2><b>Swap Details</b></font><pre>               total        used        free      shared  buff/cache   available
-Mem:            15Gi       1.3Gi        12Gi        43Mi       2.5Gi        14Gi
+Mem:            15Gi       1.2Gi        12Gi        43Mi       2.5Gi        14Gi
 Swap:          3.0Gi          0B       3.0Gi</pre>
-<a name=user></a><font face=serif size=2><b>Connected User Details</b></font><pre> 00:59:59 up 0 min,  0 user,  load average: 0.44, 0.11, 0.04
+<a name=user></a><font face=serif size=2><b>Connected User Details</b></font><pre> 01:02:29 up 0 min,  0 user,  load average: 0.30, 0.08, 0.03
 USER     TTY      FROM             LOGIN@   IDLE   JCPU   PCPU  WHAT</pre>
 <a name=fstab></a><font face=serif size=2><b>FStab Details</b></font><pre># CLOUD_IMG: This file was created/modified by the Cloud Image build process
 UUID=4255d757-c0f2-4577-ba35-8c54d5fe7830	/	 ext4	discard,commit=30,errors=remount-ro	0 1
@@ -315,7 +308,6 @@ tcp6       0      0 :::22                   :::*                    LISTEN      
   plymouth-start.service                                      loaded    inactive dead          Show Plymouth Boot Screen
   plymouth-switch-root.service                                loaded    inactive dead          Plymouth switch root service
   podman-auto-update.service                                  loaded    inactive dead          Podman auto-update service
-  podman-clean-transient.service                              loaded    inactive dead          Clean up podman transient data
   podman.service                                              loaded    inactive dead          Podman API Service
   pollinate.service                                           loaded    inactive dead          Pollinate to seed the pseudo random number generator
 ● rbdmap.service                                              not-found inactive dead          rbdmap.service
@@ -385,30 +377,30 @@ tcp6       0      0 :::22                   :::*                    LISTEN      
 <a name=dmidecode></a><font face=serif size=2><b>System Details</b></font><pre># dmidecode 3.5
 Scanning /dev/mem for entry point.</pre>
 <a name=inxi></a><font face=serif size=2><b>System Details New</b></font><pre></pre>
-<a name=zombie></a><font face=serif size=2><b>Zombies</b></font><pre>runner      2322  0.0  0.0   7092  2168 ?        S    00:59   0:00 grep defunct</pre>
-<a name=reboot></a><font face=serif size=2><b>Reboot</b></font><pre>reboot   system boot  6.17.0-1022-azur Fri Sep 25 00:59   still running</pre>
-<a name=shut></a><font face=serif size=2><b>Shutdown</b></font><pre>shutdown system down  6.17.0-1022-azur Sun Sep 20 22:10 - 00:59 (4+02:48)</pre>
+<a name=zombie></a><font face=serif size=2><b>Zombies</b></font><pre>runner      2289  0.0  0.0   7092  2152 ?        S    01:02   0:00 grep defunct</pre>
+<a name=reboot></a><font face=serif size=2><b>Reboot</b></font><pre>reboot   system boot  6.17.0-1022-azur Sat Sep 26 01:01   still running</pre>
+<a name=shut></a><font face=serif size=2><b>Shutdown</b></font><pre>shutdown system down  6.17.0-1022-azur Sun Sep 20 22:10 - 01:01 (5+02:50)</pre>
 <a name=mem></a><font face=serif size=2><b>Memory Hog</b></font><pre>%MEM     PID    PPID USER     STAT COMMAND
 
- 0.7    2087    2052 runner   Sl   /home/runner/actions-runner/cached/2.337.0/bin/Runner.Worker spawnclient 142 145
+ 0.8    2025    2023 root     Sl   /tmp/provjobd3139082117
 
- 0.7    2034    2029 root     Sl   /tmp/provjobd1612955548
+ 0.7    2082    2062 runner   Sl   /home/runner/actions-runner/cached/2.337.0/bin/Runner.Worker spawnclient 142 145
 
- 0.5    2052    2014 runner   Sl   /home/runner/actions-runner/cached/2.337.0/bin/Runner.Listener run
+ 0.5    2062    2010 runner   Sl   /home/runner/actions-runner/cached/2.337.0/bin/Runner.Listener run
 
- 0.4    1344       1 root     Ssl  /usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock
+ 0.4    1193       1 root     Ssl  /usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock
 
- 0.3     962       1 root     Ss   php-fpm: master process (/etc/php/8.3/fpm/php-fpm.conf)</pre>
+ 0.3     966       1 root     Ss   php-fpm: master process (/etc/php/8.3/fpm/php-fpm.conf)</pre>
 <a name=cpuh></a><font face=serif size=2><b>CPU Hog</b></font><pre>%CPU     PID    PPID USER     STAT COMMAND
 
-26.1    2087    2052 runner   Sl   /home/runner/actions-runner/cached/2.337.0/bin/Runner.Worker spawnclient 142 145
+24.7    2082    2062 runner   Sl   /home/runner/actions-runner/cached/2.337.0/bin/Runner.Worker spawnclient 142 145
 
-16.6    2291       1 root     Ss   /usr/lib/systemd/systemd-hostnamed
+13.6    2258       1 root     Ss   /usr/lib/systemd/systemd-hostnamed
 
-11.1    2052    2014 runner   Sl   /home/runner/actions-runner/cached/2.337.0/bin/Runner.Listener run
+ 9.9    2062    2010 runner   Sl   /home/runner/actions-runner/cached/2.337.0/bin/Runner.Listener run
 
- 7.9       1       0 root     Ss   /sbin/init
+ 8.4       1       0 root     Ss   /sbin/init
 
- 3.5    2286    2276 runner   S    python shviapy.py</pre>
+ 3.5    2253    2242 runner   S    python shviapy.py</pre>
 <a name=dp></a><font face=serif size=2><b>Default Path</b></font><pre>/opt/hostedtoolcache/Python/3.14.7/x64/bin:/opt/hostedtoolcache/Python/3.14.7/x64:/snap/bin:/home/runner/.local/bin:/opt/pipx_bin:/home/runner/.cargo/bin:/home/runner/.config/composer/vendor/bin:/usr/local/.ghcup/bin:/home/runner/.dotnet/tools:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin</pre>
-<a name=copy></a><div id=foot><pre> &copy; Last OS update:  | Page update: Fri Sep 25 00:59:59 UTC 2026</pre></div><script>function myFunction() {  var x = document.getElementById("myDIV");  if (x.style.display === "none") {   x.style.display = "block";  } else {   x.style.display = "none";  }}</script></body></html>
+<a name=copy></a><div id=foot><pre> &copy; Last OS update:  | Page update: Sat Sep 26 01:02:29 UTC 2026</pre></div><script>function myFunction() {  var x = document.getElementById("myDIV");  if (x.style.display === "none") {   x.style.display = "block";  } else {   x.style.display = "none";  }}</script></body></html>
