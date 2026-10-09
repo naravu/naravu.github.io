@@ -206,3 +206,4 @@
 | Mars Data | https://www.marsdata.in/ | Data Analysis | Business secured one cloud |
 | Oppex | https://www.oppex.ai/ | AI native end-to-end incident Management | AI incidents |
 | AI agents | https://agentoven.dev/ | Control plane for AI agents | AI agents |
+| Fcoos | https://www.fcoos.net/ | Firewall, storage & server, network devices | Devices |
