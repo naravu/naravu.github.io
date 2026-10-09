@@ -199,3 +199,7 @@
 | Free tools | https://nosignups.net/ | Free tool nosignups | Free open source tools without signups |
 |Free voice type | https://vinganam.blogspot.com/p/voice-typing.html | Free Voice Typing | Voice Typing in Tamil Packiyam |
 |Free Image Generator | https://perchance.org/ai-text-to-image-generator | Free AI Image generator | Free AI Image generator no login anonymously |
+|Distance Education| https://bitspilani-digital.edu.in/ | Bits Pilani | Bits distance education |
+| DB services | https://opensource-db.com/ |Smart Databases | DB |
+| Gramsoft | https://gramosoft.tech/ | IT services | Scraping websites and creating Models |
+| CrawlAI | https://gcrawlai.com/app | Site to LLM | Transform any website into structured LLM-ready data |
