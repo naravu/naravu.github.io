@@ -203,3 +203,4 @@
 | DB services | https://opensource-db.com/ |Smart Databases | DB |
 | Gramsoft | https://gramosoft.tech/ | IT services | Scraping websites and creating Models |
 | CrawlAI | https://gcrawlai.com/app | Site to LLM | Transform any website into structured LLM-ready data |
+| Mars Data | https://www.marsdata.in/ | Data Analysis | Business secured one cloud |
