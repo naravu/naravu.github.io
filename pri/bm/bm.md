@@ -204,3 +204,5 @@
 | Gramsoft | https://gramosoft.tech/ | IT services | Scraping websites and creating Models |
 | CrawlAI | https://gcrawlai.com/app | Site to LLM | Transform any website into structured LLM-ready data |
 | Mars Data | https://www.marsdata.in/ | Data Analysis | Business secured one cloud |
+| Oppex | https://www.oppex.ai/ | AI native end-to-end incident Management | AI incidents |
+| AI agents | https://agentoven.dev/ | Control plane for AI agents | AI agents |
