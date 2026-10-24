@@ -207,3 +207,5 @@
 | Oppex | https://www.oppex.ai/ | AI native end-to-end incident Management | AI incidents |
 | AI agents | https://agentoven.dev/ | Control plane for AI agents | AI agents |
 | Fcoos | https://www.fcoos.net/ | Firewall, storage & server, network devices | Devices |
+| Fake Detail | https://fakedetail.com/ | Fake Detail Generator | Mockups |
+| In-Browser LLM | https://webllm.mlc.ai/ | WebLLM Inference Engine | AI |
