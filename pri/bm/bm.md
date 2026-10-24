@@ -210,3 +210,4 @@
 | Fake Detail | https://fakedetail.com/ | Fake Detail Generator | Mockups |
 | In-Browser LLM | https://webllm.mlc.ai/ | WebLLM Inference Engine | AI |
 | No Signup Tools | https://github.com/roberto-digital/nosignup-tools | Curated List of Free Web Apps | Tools |
+| Koothir | https://koothirmagazine.blogspot.com | Tamil online magazine | Tamil Monthly |
