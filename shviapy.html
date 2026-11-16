@@ -5,7 +5,7 @@
           Chassis: vm 🖴
 Chassis Asset Tag: 7783-7084-3265-9085-8269-3286-77
        Machine ID: e4dac6e3b7e549ce99152e37724327d0
-          Boot ID: 3c2334b282854ca79445c1304623126d
+          Boot ID: eda1e2a65a9b458db8a336249d2f6d36
    Virtualization: microsoft
  Operating System: Ubuntu 26.04.1 LTS
            Kernel: Linux 7.0.0-1019-azure
@@ -16,43 +16,43 @@ Chassis Asset Tag: 7783-7084-3265-9085-8269-3286-77
  Hardware Version: Hyper-V UEFI Release v4.1
  Firmware Version: Hyper-V UEFI Release v4.1
     Firmware Date: Wed 2026-04-22
-     Firmware Age: 6month 3w 3d</pre>
+     Firmware Age: 6month 3w 4d</pre>
 <a name=network></a><b>Network Details</b><pre>docker0: flags=4099<UP,BROADCAST,MULTICAST>  mtu 1500
         inet 172.17.0.1  netmask 255.255.0.0  broadcast 172.17.255.255
-        ether 92:0d:b0:ae:eb:ae  txqueuelen 0  (Ethernet)
+        ether 62:77:da:2b:33:8f  txqueuelen 0  (Ethernet)
         RX packets 0  bytes 0 (0.0 B)
         RX errors 0  dropped 0  overruns 0  frame 0
         TX packets 0  bytes 0 (0.0 B)
         TX errors 0  dropped 2 overruns 0  carrier 0  collisions 0
 
 ens1: flags=6211<UP,BROADCAST,RUNNING,SLAVE,MULTICAST>  mtu 1500
-        ether 38:33:c5:d9:3f:05  txqueuelen 1000  (Ethernet)
-        RX packets 2158  bytes 2413159 (2.4 MB)
+        ether 60:45:bd:b8:54:54  txqueuelen 1000  (Ethernet)
+        RX packets 2161  bytes 2394138 (2.3 MB)
         RX errors 0  dropped 0  overruns 0  frame 0
-        TX packets 1409  bytes 442636 (442.6 KB)
+        TX packets 1328  bytes 440172 (440.1 KB)
         TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
 
 eth0: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
-        inet 10.1.0.69  netmask 255.255.240.0  broadcast 10.1.15.255
-        inet6 fe80::3a33:c5ff:fed9:3f05  prefixlen 64  scopeid 0x20<link>
-        ether 38:33:c5:d9:3f:05  txqueuelen 1000  (Ethernet)
-        RX packets 1413  bytes 2351558 (2.3 MB)
+        inet 10.1.0.40  netmask 255.255.240.0  broadcast 10.1.15.255
+        inet6 fe80::6245:bdff:feb8:5454  prefixlen 64  scopeid 0x20<link>
+        ether 60:45:bd:b8:54:54  txqueuelen 1000  (Ethernet)
+        RX packets 1225  bytes 2322554 (2.3 MB)
         RX errors 0  dropped 0  overruns 0  frame 0
-        TX packets 1304  bytes 437995 (437.9 KB)
+        TX packets 1215  bytes 435003 (435.0 KB)
         TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
 
 lo: flags=73<UP,LOOPBACK,RUNNING>  mtu 65536
         inet 127.0.0.1  netmask 255.0.0.0
         inet6 ::1  prefixlen 128  scopeid 0x10<host>
         loop  txqueuelen 1000  (Local Loopback)
-        RX packets 162  bytes 21845 (21.8 KB)
+        RX packets 162  bytes 22474 (22.4 KB)
         RX errors 0  dropped 0  overruns 0  frame 0
-        TX packets 162  bytes 21845 (21.8 KB)
+        TX packets 162  bytes 22474 (22.4 KB)
         TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0</pre>
 <a name=swap></a><font face=serif size=2><b>Swap Details</b></font><pre>               total        used        free      shared  buff/cache   available
-Mem:            15Gi       958Mi        14Gi        45Mi       947Mi        14Gi
+Mem:            15Gi       984Mi        14Gi        44Mi       925Mi        14Gi
 Swap:          3.0Gi          0B       3.0Gi</pre>
-<a name=user></a><font face=serif size=2><b>Connected User Details</b></font><pre> 02:15:08 up 0 min,  0 users,  load average: 0.30, 0.07, 0.02
+<a name=user></a><font face=serif size=2><b>Connected User Details</b></font><pre> 02:27:50 up 0 min,  0 users,  load average: 0.78, 0.18, 0.06
 USER     TTY      FROM             LOGIN@   IDLE   JCPU   PCPU  WHAT</pre>
 <a name=fstab></a><font face=serif size=2><b>FStab Details</b></font><pre># CLOUD_IMG: This file was created/modified by the Cloud Image build process
 UUID=284ae903-37b8-4ac0-b5d6-794bd8f5110b	/	 ext4	discard,commit=30,errors=remount-ro	0 1
@@ -120,7 +120,7 @@ ephemeral0	/mnt	auto	defaults,nofail,x-systemd.device-timeout=1s,_netdev,comment
 <td>/run/credentials/systemd-resolved.service</td>
 </tr>
 <tr>
-<td>/dev/nvme0n1p13</td>
+<td>/dev/sda13</td>
 <td>ext4</td>
 <td>1.1G</td>
 <td>84M</td>
@@ -129,7 +129,7 @@ ephemeral0	/mnt	auto	defaults,nofail,x-systemd.device-timeout=1s,_netdev,comment
 <td>/boot</td>
 </tr>
 <tr>
-<td>/dev/nvme0n1p15</td>
+<td>/dev/sda15</td>
 <td>vfat</td>
 <td>110M</td>
 <td>6.6M</td>
@@ -162,7 +162,7 @@ ephemeral0	/mnt	auto	defaults,nofail,x-systemd.device-timeout=1s,_netdev,comment
 <td>0</td>
 <td>1.1M</td>
 <td>0%</td>
-<td>/run/credentials/serial-getty@ttyS0.service</td>
+<td>/run/credentials/getty@tty1.service</td>
 </tr>
 <tr>
 <td>none</td>
@@ -171,7 +171,7 @@ ephemeral0	/mnt	auto	defaults,nofail,x-systemd.device-timeout=1s,_netdev,comment
 <td>0</td>
 <td>1.1M</td>
 <td>0%</td>
-<td>/run/credentials/getty@tty1.service</td>
+<td>/run/credentials/serial-getty@ttyS0.service</td>
 </tr>
 </table>
 </td><td>
@@ -450,30 +450,30 @@ tcp6       0      0 :::22                   :::*                    LISTEN      
 <a name=dmidecode></a><font face=serif size=2><b>System Details</b></font><pre># dmidecode 3.6
 Scanning /dev/mem for entry point.</pre>
 <a name=inxi></a><font face=serif size=2><b>System Details New</b></font><pre></pre>
-<a name=zombie></a><font face=serif size=2><b>Zombies</b></font><pre>runner      2249  0.0  0.0   7148  2276 ?        S    02:15   0:00 grep defunct</pre>
+<a name=zombie></a><font face=serif size=2><b>Zombies</b></font><pre>runner      2463  0.0  0.0   7148  2364 ?        S    02:27   0:00 grep defunct</pre>
 <a name=reboot></a><font face=serif size=2><b>Reboot</b></font><pre></pre>
 <a name=shut></a><font face=serif size=2><b>Shutdown</b></font><pre></pre>
 <a name=mem></a><font face=serif size=2><b>Memory Hog</b></font><pre>%MEM     PID    PPID USER     STAT COMMAND
 
- 0.9    2038    2013 runner   Sl   /home/runner/actions-runner/cached/2.338.2/bin/Runner.Worker spawnclient 142 145
+ 0.9    2196    2187 root     Sl   /tmp/provjobd1474481476
 
- 0.8    1979    1975 root     Sl   /tmp/provjobd2744582205
+ 0.8    2250    2226 runner   Sl   /home/runner/actions-runner/cached/2.338.2/bin/Runner.Worker spawnclient 142 145
 
- 0.5    2013    1962 runner   Sl   /home/runner/actions-runner/cached/2.338.2/bin/Runner.Listener run
+ 0.5    2226    2172 runner   Sl   /home/runner/actions-runner/cached/2.338.2/bin/Runner.Listener run
 
- 0.5    1224       1 root     Ssl  /usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock
+ 0.5    1535       1 root     Ssl  /usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock
 
- 0.3     918       1 root     Ss   php-fpm: master process (/etc/php/8.5/fpm/php-fpm.conf)</pre>
+ 0.3    1119       1 root     Ss   php-fpm: master process (/etc/php/8.5/fpm/php-fpm.conf)</pre>
 <a name=cpuh></a><font face=serif size=2><b>CPU Hog</b></font><pre>%CPU     PID    PPID USER     STAT COMMAND
 
-25.6    2038    2013 runner   Sl   /home/runner/actions-runner/cached/2.338.2/bin/Runner.Worker spawnclient 142 145
+20.6    2250    2226 runner   Sl   /home/runner/actions-runner/cached/2.338.2/bin/Runner.Worker spawnclient 142 145
 
-10.4       1       0 root     Ss   /sbin/init
+16.6    2430       1 root     Ss   /usr/lib/systemd/systemd-hostnamed
 
- 8.9    2013    1962 runner   Sl   /home/runner/actions-runner/cached/2.338.2/bin/Runner.Listener run
+10.5       1       0 root     Ss   /sbin/init
 
- 7.1    2216       1 root     Ss   /usr/lib/systemd/systemd-hostnamed
+ 9.0    2226    2172 runner   Sl   /home/runner/actions-runner/cached/2.338.2/bin/Runner.Listener run
 
- 4.3    1396    1001 root     Sl   /usr/bin/python3 -u bin/WALinuxAgent-2.16.0.2-py3.12.egg -run-exthandlers</pre>
+ 5.0    1507    1172 root     Sl   /usr/bin/python3 -u bin/WALinuxAgent-2.16.0.2-py3.12.egg -run-exthandlers</pre>
 <a name=dp></a><font face=serif size=2><b>Default Path</b></font><pre>/opt/hostedtoolcache/Python/3.15.2/x64/bin:/opt/hostedtoolcache/Python/3.15.2/x64:/snap/bin:/home/runner/.local/bin:/opt/pipx_bin:/home/runner/.cargo/bin:/home/runner/.config/composer/vendor/bin:/usr/local/.ghcup/bin:/home/runner/.dotnet/tools:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin</pre>
-<a name=copy></a><div id=foot><pre> &copy; Last OS update:  | Page update: Sun Nov 15 02:15:08 UTC 2026</pre></div><script>function myFunction() {  var x = document.getElementById("myDIV");  if (x.style.display === "none") {   x.style.display = "block";  } else {   x.style.display = "none";  }}</script></body></html>
+<a name=copy></a><div id=foot><pre> &copy; Last OS update:  | Page update: Mon Nov 16 02:27:50 UTC 2026</pre></div><script>function myFunction() {  var x = document.getElementById("myDIV");  if (x.style.display === "none") {   x.style.display = "block";  } else {   x.style.display = "none";  }}</script></body></html>
